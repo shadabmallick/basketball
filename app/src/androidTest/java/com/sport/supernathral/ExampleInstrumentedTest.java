@@ -1,4 +1,4 @@
-package com.sketch.basketball;
+package com.sport.supernathral;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
