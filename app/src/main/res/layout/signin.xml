@@ -26,102 +26,121 @@
 
     </android.support.v7.widget.Toolbar>
 
-<ImageView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:src="@mipmap/icon0"
-
-    android:background="@android:color/white"
-    android:paddingTop="20dp"/>
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/white"
-        android:paddingTop="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        >
+        android:layout_height="wrap_content">
 
-
-        <EditText
-            android:id="@+id/edt_email"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/black"
-            android:backgroundTint="@color/dark_gray"
-            android:padding="15dp"
-            android:layout_marginTop="30dp"
-            android:hint="Email"
-            />
-
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:orientation="vertical"
             >
 
-            <EditText
-                android:id="@+id/edt_password"
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/black"
-                android:backgroundTint="@color/dark_gray"
-                android:padding="15dp"
-                android:layout_centerVertical="true"
-                android:paddingRight="30dp"
-                android:hint="Password"
-                />
+                android:src="@mipmap/icon0"
 
-            <ImageView
-                android:id="@+id/iv_eye"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/eye"
-                android:padding="10dp"
-                />
+                android:background="@android:color/white"
+                android:paddingTop="20dp"/>
 
-        </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    android:paddingTop="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    >
 
 
+                    <EditText
+                        android:id="@+id/edt_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/black"
+                        android:backgroundTint="@color/dark_gray"
+                        android:padding="15dp"
+                        android:layout_marginTop="30dp"
+                        android:hint="Email"
+                        />
 
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        >
+
+                        <EditText
+                            android:id="@+id/edt_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColorHint="@color/black"
+                            android:backgroundTint="@color/dark_gray"
+                            android:padding="15dp"
+                            android:layout_centerVertical="true"
+                            android:paddingRight="30dp"
+                            android:hint="Password"
+                            />
+
+                        <ImageView
+                            android:id="@+id/iv_eye"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/eye"
+                            android:padding="10dp"
+                            />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="50dp">
+
+                        <ImageView
+                            android:id="@+id/btn_login"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@mipmap/button"
+                            android:scaleType="fitXY"
+
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/login"
+                            android:layout_centerInParent="true"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            />
+
+                    </RelativeLayout>
+
+             </LinearLayout>
 
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="50dp">
-
-                <ImageView
-                    android:id="@+id/btn_login"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@mipmap/button"
-                    android:scaleType="fitXY"
-
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/login"
-                    android:layout_centerInParent="true"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    />
+                android:layout_height="50dp">
 
             </RelativeLayout>
 
 
+        </LinearLayout>
 
 
 
-    </LinearLayout>
+    </ScrollView>
+
 
 
 </LinearLayout>
