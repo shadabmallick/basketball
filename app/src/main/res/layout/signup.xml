@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
@@ -14,14 +15,24 @@
         >
 
         <TextView
+            android:id="@+id/tv_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login"
+            android:text="@string/signup"
             android:layout_gravity="end"
             android:padding="5dp"
+            android:textColor="@color/dark_gray"
             />
 
     </android.support.v7.widget.Toolbar>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon0"
+
+        android:background="@android:color/white"
+        android:paddingTop="20dp"/>
+
 
 
     <LinearLayout
@@ -71,6 +82,7 @@
                 android:backgroundTint="@color/dark_gray"
                 android:padding="15dp"
                 android:layout_centerVertical="true"
+                android:paddingRight="30dp"
                 android:hint="Password"
                 />
 
@@ -81,16 +93,44 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:src="@mipmap/eye"
-                android:padding="8dp"
-                />6
+                android:padding="10dp"
+                />
 
         </RelativeLayout>
 
 
+
+        <RelativeLayout
+            android:id="@+id/rl_login"
+            android:layout_marginTop="25dp"
+            android:layout_height="45dp"
+            android:layout_width="match_parent"
+            >
+
+            <ImageView
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/button"
+                android:scaleType="fitXY"
+
+                />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/signup"
+                android:layout_centerInParent="true"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                />
+
+        </RelativeLayout>
+
+
+
     </LinearLayout>
-
-
-
 
 
 </LinearLayout>
