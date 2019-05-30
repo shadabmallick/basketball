@@ -1,5 +1,6 @@
 package com.sport.supernathral.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,6 +11,7 @@ import com.sport.supernathral.R;
 public class Splash2 extends AppCompatActivity {
 
     Button btn_sign_up;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,8 @@ public class Splash2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
+                Intent intent = new Intent(Splash2.this, SignUp.class);
+                startActivity(intent);
 
             }
         });
