@@ -1,5 +1,6 @@
 package com.sport.supernathral.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -55,6 +56,12 @@ public class SignUp extends AppCompatActivity {
 
         edt_password.setInputType(InputType.TYPE_CLASS_TEXT
                 | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        tv_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),LoginScreen.class));
+            }
+        });
 
         iv_eye.setOnClickListener(new View.OnClickListener() {
             @Override
