@@ -15,7 +15,7 @@
         >
 
         <TextView
-            android:id="@+id/tv_login"
+            android:id="@+id/tv_signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/signup"
@@ -62,7 +62,7 @@
                     android:backgroundTint="@color/dark_gray"
                     android:padding="15dp"
                     android:layout_marginTop="30dp"
-                    android:hint="Email"
+                    android:hint="@string/hint_email"
                     />
 
 
@@ -82,7 +82,7 @@
                         android:padding="15dp"
                         android:layout_centerVertical="true"
                         android:paddingRight="30dp"
-                        android:hint="Password"
+                        android:hint="@string/hint_password"
                         />
 
                     <ImageView
@@ -97,13 +97,26 @@
 
                 </RelativeLayout>
 
+                <TextView
+                    android:id="@+id/tv_forgetPass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:gravity="right"
+                    android:textStyle="bold"
+                    android:padding="10dp"
+                    android:layout_gravity="end"
+                    android:text="@string/forget_password"/>
+
+
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="50dp">
 
                     <ImageView
-                        android:id="@+id/btn_login"
+                        android:id="@+id/iv_login"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@mipmap/button"

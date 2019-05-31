@@ -51,6 +51,14 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.ForgotPassword"
+            android:theme="@style/MyTheme"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+            </intent-filter>
+        </activity>
 
 
 
