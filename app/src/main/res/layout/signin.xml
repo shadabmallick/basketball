@@ -87,6 +87,15 @@
 
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/tv_forgetPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:gravity="right"
+            android:textStyle="bold"
+            android:layout_marginRight="10dp"
+            android:text="@string/forget_password"/>
 
 
 
