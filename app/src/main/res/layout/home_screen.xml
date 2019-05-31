@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <RelativeLayout
+        android:id="@+id/rl_main"
+        android:layout_width="match_parent"
+        android:background="@mipmap/button_bg"
+        android:gravity="center_vertical"
+        android:layout_height="100dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:text="@string/news"
+
+            android:layout_marginLeft="20dp"
+            android:id="@+id/tv_title"
+            android:textSize="16dp"
+            android:textColor="@android:color/black"/>
+
+        <ImageView
+            android:id="@+id/img_home"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/icon_search"
+
+            android:layout_marginRight="10dp"
+            />
+    </RelativeLayout>
+
+
+<RelativeLayout
+    android:id="@+id/rl_search"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+     android:layout_marginTop="65dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+
+
+
+    >
+
+    <EditText
+        android:id="@+id/edt_search"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+         android:background="@mipmap/shadow_"
+        android:paddingLeft="30dp"
+
+        android:maxLines="1"
+        android:hint="Enter the name of city you are travelling to"
+        />
+
+</RelativeLayout>
+    <ScrollView
+        android:layout_below="@+id/rl_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/rl_homescreen"
+                android:layout_width="match_parent"
+                android:layout_margin="15dp"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/dialog_holo_light_frame">
+                <ImageView
+                    android:id="@+id/img_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/icon1"/>
+                <TextView
+                    android:id="@+id/tv_home_text"
+                    android:gravity="left"
+                    android:paddingTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_below="@+id/img_top"
+                    android:layout_width="match_parent"
+                    android:text="@string/text_title"
+                    android:layout_height="wrap_content" />
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:padding="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/light_grey"
+                    android:layout_below="@+id/tv_home_text"></View>
+
+
+                <LinearLayout
+                    android:layout_below="@+id/view1"
+                    android:id="@+id/ll_like_section"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/heart"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/colorAccent"
+                        android:text="@string/heart_text"/>
+
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:src="@mipmap/chat"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorAccent"
+                        android:text="@string/chat_text"/>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:layout_marginRight="10dp">
+
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:tint="@android:color/darker_gray"
+                            android:layout_height="20dp"
+                            android:layout_marginLeft="10dp"
+                            android:src="@mipmap/bookmark"/>
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_below="@+id/rl_homescreen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:background="@drawable/border_red">
+
+                <LinearLayout
+                    android:id="@+id/ll_team1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:padding="5dp"
+                        android:background="@drawable/circle_border"
+                        android:src="@mipmap/icon0"/>
+
+
+        <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_marginTop="10dp"
+    android:layout_gravity="center"
+    android:text="@string/team1"/>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_team2"
+                    android:layout_toRightOf="@+id/ll_team1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    >
+
+                   <LinearLayout
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:orientation="horizontal"
+
+                       >
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:gravity="center"
+                           android:textStyle="bold"
+                           android:layout_marginBottom="5dp"
+                           android:textColor="@android:color/black"
+                           android:layout_marginTop="10dp"
+                           android:layout_gravity="center"
+                           android:text="104   :"/>
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:gravity="center"
+                           android:textColor="@android:color/black"
+                           android:layout_marginLeft="10dp"
+                           android:layout_marginBottom="5dp"
+                           android:textStyle="bold"
+                           android:layout_marginTop="10dp"
+                           android:layout_gravity="center"
+                           android:text="116"/>
+
+
+
+
+
+                   </LinearLayout>
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CHAMPIONSHIP"/>
+
+
+
+                </LinearLayout>
+
+
+
+
+                <LinearLayout
+                    android:layout_toRightOf="@+id/ll_team2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:padding="5dp"
+                        android:background="@drawable/circle_border"
+                        android:src="@mipmap/chat"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center"
+                        android:text="@string/team1"/>
+
+
+                </LinearLayout>
+
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

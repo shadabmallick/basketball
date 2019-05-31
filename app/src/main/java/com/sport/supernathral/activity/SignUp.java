@@ -21,7 +21,7 @@ public class SignUp extends AppCompatActivity {
     ImageView iv_eye;
 
 
-    boolean password_visible = false;
+    boolean password_visible = true;
 
 
     @Override
@@ -55,6 +55,14 @@ public class SignUp extends AppCompatActivity {
 
         edt_password.setInputType(InputType.TYPE_CLASS_TEXT
                 | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
+
+        buttonClick();
+
+    }
+
+    private void buttonClick(){
+
         tv_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

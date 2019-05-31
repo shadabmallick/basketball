@@ -1,8 +1,28 @@
 <resources>
-    <string name="app_name">Basketball</string>
+    <string name="app_name">Super Nahtral Sports</string>
     <string name="signup">Sign up</string>
     <string name="login">Log in</string>
+
     <string name="forget_password">Forget Password ?</string>
+    <string name="news">News</string>
+    <string name="heart_text">609</string>
+    <string name="chat_text">120</string>
+    <string name="team1">Team 1</string>
+
+
+
+    <string name="send_email">Forgot Password</string>
+    <string name="text_title">On the trip to America,looking for someone to join me on this epic journey</string>
+
+
+    <string name="hint_email">Email</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_forgot_email">Enter your register email</string>
+    <string name="submit">Submit</string>
+    <string name="otp">OTP</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="save">Save</string>
 
 
 
