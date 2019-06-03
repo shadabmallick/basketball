@@ -5,23 +5,31 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.sport.supernathral.AdapterClass.CustomAdapter;
 import com.sport.supernathral.R;
 
 public class SignUp extends AppCompatActivity {
-
+     String TAG="Signup";
     Toolbar toolbar;
     TextView tv_login;
     EditText edt_name, edt_email, edt_password;
     ImageView iv_eye;
+    Spinner spin;
 
-
+    String[] person={"Player","Trainer","Parent"};
+    int images[] = {R.mipmap.icon_athlete,R.mipmap.iconcoach, R.mipmap.icon_parents };
     boolean password_visible = true;
+    String player;
 
 
     @Override
@@ -42,7 +50,7 @@ public class SignUp extends AppCompatActivity {
         edt_email = findViewById(R.id.edt_email);
         edt_password = findViewById(R.id.edt_password);
         iv_eye = findViewById(R.id.iv_eye);
-
+         spin = (Spinner) findViewById(R.id.spinner);
 
         setSupportActionBar(toolbar);
 
@@ -97,8 +105,28 @@ public class SignUp extends AppCompatActivity {
             }
         });
 
+        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+              //  Toast.makeText(SignUp.this, "You Select Position: "+position+" "+person[position], Toast.LENGTH_SHORT).show();
+                player=person[position];
+                Log.d(TAG, "onItemSelected: "+player);
 
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        CustomAdapter customAdapter=new CustomAdapter(getApplicationContext(),images,person);
+        spin.setAdapter(customAdapter);
     }
+
+
+
 
 
     @Override

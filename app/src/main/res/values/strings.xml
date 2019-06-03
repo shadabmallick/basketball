@@ -8,12 +8,11 @@
     <string name="heart_text">609</string>
     <string name="chat_text">120</string>
     <string name="team1">Team 1</string>
-
-
-
+    <string name="password_empty">Empty Password </string>
+    <string name="empty_email_name">Empty Email ID</string>
+    <string name="check_network">Check Your Network Connection  </string>
     <string name="send_email">Forgot Password</string>
     <string name="text_title">On the trip to America,looking for someone to join me on this epic journey</string>
-
 
     <string name="hint_email">Email</string>
     <string name="hint_name">Name</string>
