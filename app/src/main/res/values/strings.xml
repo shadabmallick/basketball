@@ -2,6 +2,7 @@
     <string name="app_name">Super Nahtral Sports</string>
     <string name="signup">Sign up</string>
     <string name="login">Log in</string>
+    <string name="name">Alex</string>
 
     <string name="forget_password">Forget Password ?</string>
     <string name="news">News</string>
@@ -13,7 +14,7 @@
     <string name="check_network">Check Your Network Connection  </string>
     <string name="send_email">Forgot Password</string>
     <string name="text_title">On the trip to America,looking for someone to join me on this epic journey</string>
-
+    <string name="text_sub_title">Hey lets schedule a call for next week </string>
     <string name="hint_email">Email</string>
     <string name="hint_name">Name</string>
     <string name="hint_password">Password</string>
@@ -22,6 +23,8 @@
     <string name="otp">OTP</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="save">Save</string>
+    <string name="proper_email">Enter Proper Email</string>
+    <string name="enter_name">Enter Name</string>
 
 
 

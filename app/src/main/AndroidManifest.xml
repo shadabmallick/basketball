@@ -70,6 +70,12 @@
         </activity>
 <activity android:name=".activity.HomePage"
     android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+    android:windowSoftInputMode="adjustPan|stateHidden"
+   />
+
+        <activity android:name=".activity.ChatScreen"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+    android:windowSoftInputMode="adjustPan|stateHidden"
    />
 
 
