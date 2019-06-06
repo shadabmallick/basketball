@@ -44,9 +44,6 @@
      android:layout_marginTop="65dp"
     android:layout_marginRight="5dp"
     android:layout_marginLeft="5dp"
-
-
-
     >
 
     <EditText
@@ -55,7 +52,6 @@
         android:layout_height="70dp"
          android:background="@mipmap/shadow_"
         android:paddingLeft="30dp"
-
         android:maxLines="1"
         android:hint="Enter the name of city you are travelling to"
         />
@@ -248,7 +244,7 @@
 
 
         <LinearLayout
-            android:id="@+id/llblog"
+            android:id="@+id/ll_games"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -288,7 +284,7 @@
 
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/ll"
+            android:id="@+id/ll_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"

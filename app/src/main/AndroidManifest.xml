@@ -68,15 +68,22 @@
 
             </intent-filter>
         </activity>
-<activity android:name=".activity.HomePage"
-    android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
-    android:windowSoftInputMode="adjustPan|stateHidden"
-   />
+
+
+        <activity android:name=".activity.HomePage"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            />
 
         <activity android:name=".activity.ChatScreen"
-    android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
-    android:windowSoftInputMode="adjustPan|stateHidden"
-   />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+             />
+
+        <activity android:name=".activity.GamesMain"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            />
 
 
     </application>

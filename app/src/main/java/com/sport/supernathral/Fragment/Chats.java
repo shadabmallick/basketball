@@ -1,34 +1,15 @@
 package com.sport.supernathral.Fragment;
 
-import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.shashank.sony.fancytoastlib.FancyToast;
 import com.sport.supernathral.AdapterClass.AdapterChat;
-import com.sport.supernathral.AdapterClass.GameAdapter;
 import com.sport.supernathral.R;
 
 import java.util.ArrayList;
@@ -47,7 +28,7 @@ public class Chats extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.chats, container, false);
+        View view = inflater.inflate(R.layout.frag_chats, container, false);
 
         initialisation(view);
         function();

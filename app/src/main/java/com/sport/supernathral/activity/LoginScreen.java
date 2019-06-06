@@ -154,6 +154,12 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
             }
         });
 
+
+
+
+        edt_password.setInputType(InputType.TYPE_CLASS_TEXT
+                | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
         iv_eye.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

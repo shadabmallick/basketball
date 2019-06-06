@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/nav_header_height"
+    android:orientation="vertical"
+    android:theme="@style/ThemeOverlay.AppCompat.Light">
+
+
+    <RelativeLayout
+        android:id="@+id/rel_profile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:background="@color/light_grey2"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/iv_user"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@mipmap/icon_parents"
+            app:civ_border_width="4dp"
+            app:civ_border_color="@color/deep_yellow"
+            android:layout_centerVertical="true"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/iv_user"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dp"
+            android:gravity="center_horizontal"
+            >
+
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/dark_gray"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="Alex"
+                />
+
+
+            <TextView
+                android:id="@+id/tv_designation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/dark_gray"
+                android:layout_marginTop="10dp"
+                android:text="Student"
+                />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>
