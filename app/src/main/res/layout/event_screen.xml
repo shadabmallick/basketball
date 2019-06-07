@@ -22,7 +22,7 @@
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/games"
+                android:text="@string/events"
                 android:layout_gravity="end"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -33,19 +33,54 @@
 
         </android.support.v7.widget.Toolbar>
 
-
     </android.support.design.widget.AppBarLayout>
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycle_game"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_below="@+id/appbarLayout"
-        android:layout_above="@+id/footer"
         >
 
-    </android.support.v7.widget.RecyclerView>
+        <TextView
+            android:id="@+id/tv_moments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/moments"
+            android:layout_gravity="end"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:padding="15dp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/dark_gray"
+            />
+
+        <TextView
+            android:id="@+id/tv_sponsors"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sponsors"
+            android:layout_gravity="end"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:padding="15dp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/dark_gray"
+            />
+
+    </LinearLayout>
+
 
 
     <LinearLayout
@@ -96,7 +131,9 @@
                 android:src="@mipmap/chat_black"
                 />
 
+
         </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/ll_games"
@@ -112,10 +149,12 @@
                 android:id="@+id/info_blog"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@mipmap/game_yellow"
+                android:src="@mipmap/game_black"
                 />
 
+
         </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/ll_event"
@@ -131,11 +170,11 @@
                 android:id="@+id/enquiry"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@mipmap/event_black"
+                android:src="@mipmap/event_yellow"
                 />
 
-        </LinearLayout>
 
+        </LinearLayout>
         <LinearLayout
             android:id="@+id/ll_profile"
             android:layout_width="wrap_content"
@@ -152,6 +191,7 @@
                 android:layout_height="50dp"
                 android:src="@mipmap/profile_black"
                 />
+
 
         </LinearLayout>
 

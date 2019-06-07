@@ -10,11 +10,14 @@
 
 
 
-    <style name="MyTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowNoTitle">true</item>
+    <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
         <item name="android:windowActionBar">false</item>
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="windowNoTitle">true</item>
+
+
 
         <item name="colorPrimary">@color/deep_yellow</item>
         <item name="colorPrimaryDark">@color/deep_yellow</item>
@@ -22,16 +25,32 @@
 
 
     </style>
+
+
     <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowActionBar">false</item>
+
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
         <item name="android:windowFullscreen">false</item>
 
-        <item name="android:windowContentOverlay">@null</item>
+        <!--<item name="android:windowContentOverlay">@null</item>-->
     </style>
 
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+
+    <style name="SCBSwitch" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/deep_yellow</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">#808080</item>
+
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">#42221f1f</item>
+    </style>
+
+0
 
 </resources>

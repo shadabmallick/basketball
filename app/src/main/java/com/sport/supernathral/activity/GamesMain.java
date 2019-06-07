@@ -28,7 +28,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.shashank.sony.fancytoastlib.FancyToast;
 import com.sport.supernathral.AdapterClass.DrawerListAdapter;
 import com.sport.supernathral.AdapterClass.GameListAdapter;
 import com.sport.supernathral.DataModel.DrawerItem;
@@ -219,69 +218,30 @@ public class GamesMain extends AppCompatActivity
 
     public void initNavigationItems(){
 
+        String[] some_array = getResources().getStringArray(R.array.game_drawer_items);
+
+        ArrayList<Integer> myImageList = new ArrayList<>();
+        myImageList.add(R.mipmap.game_gray);
+        myImageList.add(R.mipmap.event_gray);
+        myImageList.add(R.mipmap.schedule_gray);
+        myImageList.add(R.mipmap.attendance_gray);
+        myImageList.add(R.mipmap.skill_gray);
+        myImageList.add(R.mipmap.profile_info_gray);
+        myImageList.add(R.mipmap.statistics_gray);
+        myImageList.add(R.mipmap.sponsor_gray);
+        myImageList.add(R.mipmap.notes_gray);
+
         drawerItemArrayList = new ArrayList<>();
+        DrawerItem drawerItem;
 
-        DrawerItem drawerItem = new DrawerItem();
+        for (int i = 0; i < some_array.length; i++){
+            drawerItem = new DrawerItem();
 
-        drawerItem.setImgResID(R.mipmap.game_gray);
-        drawerItem.setTitle("Games");
-        drawerItemArrayList.add(drawerItem);
+            drawerItem.setImgResID(myImageList.get(i));
+            drawerItem.setTitle(some_array[i]);
+            drawerItemArrayList.add(drawerItem);
 
-        drawerItem = new DrawerItem();
-
-        drawerItem.setImgResID(R.mipmap.event_gray);
-        drawerItem.setTitle("Events");
-        drawerItemArrayList.add(drawerItem);
-
-
-        drawerItem = new DrawerItem();
-
-        drawerItem.setImgResID(R.mipmap.schedule_gray);
-        drawerItem.setTitle("Schedule");
-        drawerItemArrayList.add(drawerItem);
-
-
-        drawerItem = new DrawerItem();
-
-        drawerItem.setImgResID(R.mipmap.attendance_gray);
-        drawerItem.setTitle("Attendance");
-        drawerItemArrayList.add(drawerItem);
-
-
-
-        drawerItem = new DrawerItem();
-
-        drawerItem.setImgResID(R.mipmap.skill_gray);
-        drawerItem.setTitle("Skill");
-        drawerItemArrayList.add(drawerItem);
-
-
-        drawerItem = new DrawerItem();
-
-        drawerItem.setImgResID(R.mipmap.profile_info_gray);
-        drawerItem.setTitle("Player Info");
-        drawerItemArrayList.add(drawerItem);
-
-
-        drawerItem = new DrawerItem();
-
-        drawerItem.setImgResID(R.mipmap.statistics_gray);
-        drawerItem.setTitle("Statistics");
-        drawerItemArrayList.add(drawerItem);
-
-
-        drawerItem = new DrawerItem();
-
-        drawerItem.setImgResID(R.mipmap.sponsor_gray);
-        drawerItem.setTitle("Sponsor");
-        drawerItemArrayList.add(drawerItem);
-
-
-        drawerItem = new DrawerItem();
-
-        drawerItem.setImgResID(R.mipmap.notes_gray);
-        drawerItem.setTitle("Notes");
-        drawerItemArrayList.add(drawerItem);
+        }
 
 
         DrawerListAdapter drawerListAdapter =
@@ -424,7 +384,7 @@ public class GamesMain extends AppCompatActivity
         LinearLayout llnews = findViewById(R.id.llnews);
         LinearLayout llchat = findViewById(R.id.llchat);
         LinearLayout ll_games = findViewById(R.id.ll_games);
-        LinearLayout llenquiry = findViewById(R.id.llenquiry);
+        LinearLayout ll_event = findViewById(R.id.ll_event);
         LinearLayout ll_profile = findViewById(R.id.ll_profile);
 
 
@@ -445,10 +405,11 @@ public class GamesMain extends AppCompatActivity
         });
 
 
-        llenquiry.setOnClickListener(new View.OnClickListener() {
+        ll_event.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                startActivity(new Intent(getApplicationContext(), EventScreen.class));
 
             }
         });
@@ -457,6 +418,7 @@ public class GamesMain extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
+                startActivity(new Intent(getApplicationContext(), ProfileScreen.class));
 
             }
         });
@@ -464,33 +426,6 @@ public class GamesMain extends AppCompatActivity
 
     }
 
-
-    public void dialogLogout(){
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(GamesMain.this);
-        builder.setTitle(getResources().getString(R.string.app_name));
-        builder.setMessage("Are you sure you want to logout?");
-        builder.setPositiveButton("LOGOUT",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                  startActivity(new Intent(getApplicationContext(), GamesMain.class));
-
-                    }
-                });
-
-        builder.setNegativeButton("CANCEL",
-                new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int id)
-                    {
-                        dialog.cancel();
-                    }
-                });
-
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-
-    }
 
 
 

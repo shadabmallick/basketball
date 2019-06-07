@@ -77,7 +77,7 @@ public class HomePage extends AppCompatActivity {
         LinearLayout llnews = findViewById(R.id.llnews);
         LinearLayout llchat = findViewById(R.id.llchat);
         LinearLayout ll_games = findViewById(R.id.ll_games);
-        LinearLayout llenquiry = findViewById(R.id.llenquiry);
+        LinearLayout ll_event = findViewById(R.id.ll_event);
         LinearLayout ll_profile = findViewById(R.id.ll_profile);
 
 
@@ -106,11 +106,11 @@ public class HomePage extends AppCompatActivity {
         });
 
 
-        llenquiry.setOnClickListener(new View.OnClickListener() {
+        ll_event.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
+                startActivity(new Intent(getApplicationContext(), EventScreen.class));
             }
         });
 
@@ -118,7 +118,7 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
+                startActivity(new Intent(getApplicationContext(), ProfileScreen.class));
             }
         });
 

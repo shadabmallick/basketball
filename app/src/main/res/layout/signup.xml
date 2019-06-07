@@ -2,30 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
+    <RelativeLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
         android:background="@color/white"
         >
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/back_black"
+            android:padding="10dp"
+            android:tint="@color/black"
+            />
 
         <TextView
             android:id="@+id/tv_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login"
-            android:layout_gravity="end"
-            android:padding="5dp"
+            android:padding="15dp"
             android:textSize="15dp"
+            android:layout_alignParentRight="true"
             android:textColor="@color/dark_gray"
             />
 
-    </android.support.v7.widget.Toolbar>
+    </RelativeLayout>
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

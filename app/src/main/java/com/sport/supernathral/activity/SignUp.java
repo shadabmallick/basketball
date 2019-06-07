@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
@@ -40,10 +39,9 @@ import static com.sport.supernathral.NetworkConstant.AppConfig.REGISTER;
 
 public class SignUp extends AppCompatActivity {
     String TAG="Signup";
-    Toolbar toolbar;
     TextView tv_login;
     EditText edt_name, edt_email, edt_password;
-    ImageView iv_eye;
+    ImageView iv_eye, iv_back;
     Spinner spin;
     RelativeLayout rl_register;
     GlobalClass globalClass;
@@ -74,22 +72,17 @@ public class SignUp extends AppCompatActivity {
 
     private void initViews(){
 
-        toolbar = findViewById(R.id.toolbar);
+        //toolbar = findViewById(R.id.toolbar);
         tv_login = findViewById(R.id.tv_login);
         edt_name = findViewById(R.id.edt_name);
         edt_email = findViewById(R.id.edt_email);
         edt_password = findViewById(R.id.edt_password);
         iv_eye = findViewById(R.id.iv_eye);
-         spin =  findViewById(R.id.spinner);
-         rl_register =  findViewById(R.id.rl_register);
+        spin =  findViewById(R.id.spinner);
+        rl_register =  findViewById(R.id.rl_register);
+        iv_back =  findViewById(R.id.iv_back);
 
-        setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.mipmap.back_black);
         device_id = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
 
 
@@ -102,6 +95,13 @@ public class SignUp extends AppCompatActivity {
     }
 
     private void buttonClick(){
+
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         tv_login.setOnClickListener(new View.OnClickListener() {
             @Override

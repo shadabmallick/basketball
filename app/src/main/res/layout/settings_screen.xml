@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@mipmap/button_bg"
+      >
+
+        <RelativeLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/back_black"
+                android:padding="10dp"
+                />
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings"
+                android:layout_gravity="end"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:paddingRight="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                />
+
+        </RelativeLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="10dp"
+        card_view:cardUseCompatPadding="true"
+        app:cardElevation="10dp"
+        android:layout_margin="10dp"
+        app:cardPreventCornerOverlap="false"
+        android:dividerHeight="0dp"
+        android:layout_centerInParent="true"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/tv_change_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/change_password"
+                android:layout_gravity="end"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:padding="20dp"
+                android:drawableRight="@mipmap/right_arrow"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_general"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/notification"
+                    android:layout_gravity="end"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:padding="20dp"
+                    />
+
+                <Switch
+                    android:id="@+id/switch_noti"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:buttonTint="@color/deep_yellow"
+                    android:backgroundTint="@color/colorAccent"
+                    android:drawableTint="@color/deep_yellow"
+                    android:checked="true"
+                    android:layout_marginRight="20dp"
+                    android:theme="@style/SCBSwitch"
+                    />
+
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tv_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/about"
+                android:layout_gravity="end"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:padding="20dp"
+                android:drawableRight="@mipmap/right_arrow"
+                />
+
+            <TextView
+                android:id="@+id/tv_sign_out"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_out"
+                android:layout_gravity="end"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:padding="20dp"
+                android:drawableRight="@mipmap/right_arrow"
+                />
+
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+
+
+</RelativeLayout>
