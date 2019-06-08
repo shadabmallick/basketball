@@ -73,5 +73,11 @@
     </string-array>
 
 
+    <string name="trainer">Trainer</string>
+    <string name="player">Player</string>
+    <string name="parent">Parent</string>
+
+
+
 
 </resources>

@@ -42,6 +42,10 @@ public class HomePage extends AppCompatActivity {
 
         recycle_game.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recycle_news.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recycle_game.setNestedScrollingEnabled(false);
+        recycle_news.setNestedScrollingEnabled(false);
+
+
 
         ArrayList<String> gamelist = new ArrayList<>();
         gamelist.add("A");

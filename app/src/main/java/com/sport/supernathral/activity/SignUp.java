@@ -39,11 +39,14 @@ import static com.sport.supernathral.NetworkConstant.AppConfig.REGISTER;
 
 public class SignUp extends AppCompatActivity {
     String TAG="Signup";
-    TextView tv_login;
+    TextView tv_login, tv_selected;
     EditText edt_name, edt_email, edt_password;
     ImageView iv_eye, iv_back;
-    Spinner spin;
     RelativeLayout rl_register;
+    RelativeLayout rel_drop, rel_popup, rel_player, rel_trainer, rel_parent;
+
+
+
     GlobalClass globalClass;
     Shared_Preference shared_preference;
     ProgressDialog pd;
@@ -78,7 +81,6 @@ public class SignUp extends AppCompatActivity {
         edt_email = findViewById(R.id.edt_email);
         edt_password = findViewById(R.id.edt_password);
         iv_eye = findViewById(R.id.iv_eye);
-        spin =  findViewById(R.id.spinner);
         rl_register =  findViewById(R.id.rl_register);
         iv_back =  findViewById(R.id.iv_back);
 
@@ -88,6 +90,16 @@ public class SignUp extends AppCompatActivity {
 
         edt_password.setInputType(InputType.TYPE_CLASS_TEXT
                 | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
+
+        tv_selected = findViewById(R.id.tv_selected);
+        rel_drop = findViewById(R.id.rel_drop);
+        rel_popup = findViewById(R.id.rel_popup);
+        rel_player = findViewById(R.id.rel_player);
+        rel_trainer = findViewById(R.id.rel_trainer);
+        rel_parent = findViewById(R.id.rel_parent);
+        rel_popup.setVisibility(View.GONE);
+        tv_selected.setText(getResources().getString(R.string.player));
 
 
         buttonClick();
@@ -172,24 +184,67 @@ public class SignUp extends AppCompatActivity {
         });
 
 
-        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        rel_drop.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-              //  Toast.makeText(SignUp.this, "You Select Position: "+position+" "+person[position], Toast.LENGTH_SHORT).show();
-                player=person[position];
-                Log.d(TAG, "onItemSelected: "+player);
+            public void onClick(View v) {
 
+                if (rel_popup.getVisibility() == View.VISIBLE){
 
-            }
+                    rel_popup.setVisibility(View.GONE);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                }else {
+
+                    rel_popup.setVisibility(View.VISIBLE);
+                }
 
             }
         });
 
-        CustomAdapter customAdapter=new CustomAdapter(getApplicationContext(),images,person);
-        spin.setAdapter(customAdapter);
+
+
+        rel_player.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv_selected.setText(getResources().getString(R.string.player));
+
+                if (rel_popup.getVisibility() == View.VISIBLE){
+                    rel_popup.setVisibility(View.GONE);
+                }else {
+                    rel_popup.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        rel_trainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tv_selected.setText(getResources().getString(R.string.trainer));
+
+                if (rel_popup.getVisibility() == View.VISIBLE){
+                    rel_popup.setVisibility(View.GONE);
+                }else {
+                    rel_popup.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        rel_parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                tv_selected.setText(getResources().getString(R.string.parent));
+
+
+                if (rel_popup.getVisibility() == View.VISIBLE){
+                    rel_popup.setVisibility(View.GONE);
+                }else {
+                    rel_popup.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+
+
     }
 
     private void CheckRegister(final String username, final String user_email, final String password) {
