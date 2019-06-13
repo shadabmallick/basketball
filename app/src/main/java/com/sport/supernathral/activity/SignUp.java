@@ -157,9 +157,9 @@ public class SignUp extends AppCompatActivity {
                 if (globalClass.isNetworkAvailable()) {
                     if (!edt_name.getText().toString().isEmpty()) {
                         if (!edt_email.getText().toString().isEmpty()) {
-                            if (isValidEmail(edt_name.getText().toString())) {
+                            if (isValidEmail(edt_email.getText().toString())) {
                                 if (!edt_password.getText().toString().isEmpty()) {
-                              //      CheckRegister(username, email, password);
+                                    CheckRegister(username, email, password);
                                 } else {
                                     FancyToast.makeText(getApplicationContext(), getResources().getString(R.string.password_empty), FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
                                 }
@@ -276,17 +276,16 @@ public class SignUp extends AppCompatActivity {
                         JsonObject data = jobj.getAsJsonObject("data");
                         String user_id =data.get("id").toString().replaceAll("\"", "");
                         String email=data.get("email").toString().replaceAll("\"", "");
-                        String username=data.get("username").toString().replaceAll("\"", "");
-                        String phone=data.get("phone").toString().replaceAll("\"", "");
+                        String name=data.get("name").toString().replaceAll("\"", "");
                         String device_type=data.get("device_type").toString().replaceAll("\"", "");
                         String device_id=data.get("device_id").toString().replaceAll("\"", "");
-                        String fcm_token=data.get("fcm_token").toString().replaceAll("\"", "");
+                        String user_type=data.get("user_type").toString().replaceAll("\"", "");
 
                         globalClass.setId(user_id);
                         globalClass.setEmail(email);
-                        globalClass.setFname(username);
+                        globalClass.setFname(name);
                         globalClass.setDeviceid(device_id);
-                        globalClass.setPhone_number(phone);
+                           globalClass.setType(user_type);
                         globalClass.setLogin_status(true);
 
                         shared_preference.savePrefrence();
@@ -332,13 +331,13 @@ public class SignUp extends AppCompatActivity {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<>();
 
-                params.put("username", username);
+                params.put("name", username);
                 params.put("password", password);
-                params.put("email_id", user_email);
+                params.put("email", user_email);
                 params.put("device_type", "android");
                 params.put("device_id", device_id);
 
-                //  params.put("user_zip", user_pin);
+                  params.put("user_type", tv_selected.getText().toString().trim());
 
 
                 Log.d(TAG, "Register: "+params);

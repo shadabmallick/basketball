@@ -13,10 +13,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.sport.supernathral.R;
+import com.sport.supernathral.Utils.GlobalClass;
+import com.sport.supernathral.Utils.Shared_Preference;
 
 public class Splash extends AppCompatActivity {
 
     ViewPager viewPager;
+    GlobalClass globalClass;
+    Shared_Preference prefrence;
 
     int[] mResources = {
             R.mipmap.slider1,
@@ -28,6 +32,9 @@ public class Splash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
+        globalClass=(GlobalClass)getApplicationContext();
+        prefrence = new Shared_Preference(Splash.this);
+        prefrence.loadPrefrence();
         initViews();
 
 
@@ -53,8 +60,15 @@ public class Splash extends AppCompatActivity {
 
                 if (i == 2){
 
-                    Intent intent = new Intent(Splash.this, Splash2.class);
-                    startActivity(intent);
+                    if(globalClass.getLogin_status().equals(true)){
+                        Intent intent = new Intent(Splash.this, HomePage.class);
+                        startActivity(intent);
+                        finish();
+                    }else {
+                        Intent intent = new Intent(Splash.this, Splash2.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
 
             }

@@ -6,7 +6,8 @@ package com.sport.supernathral.NetworkConstant;
 
 public class AppConfig
 {
-    public static String URL_DEV = "http://www.supernahtralsports.com/api/";
+    public static String URL_DEV = "http://lab-3.sketchdemos.com/P1159_Basketball/api/";
+    public static String URL_LIVE = "https://www.supernahtralsports.com/api/";
     public static String REGISTER = "registration";
     public static String LOGIN = "login";
 

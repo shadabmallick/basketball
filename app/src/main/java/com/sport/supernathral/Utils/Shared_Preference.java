@@ -49,6 +49,7 @@ public class Shared_Preference {
     private  String location;
 
 
+
     private String remote_user_id;
 
     private String fcm;

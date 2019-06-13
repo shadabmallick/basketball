@@ -15,12 +15,16 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.sport.supernathral.R;
+import com.sport.supernathral.Utils.GlobalClass;
+import com.sport.supernathral.Utils.Shared_Preference;
 
 public class SettingsScreen extends AppCompatActivity {
 
     TextView tv_change_password, tv_about, tv_sign_out;
     Switch switch_noti;
     ImageView iv_back;
+    GlobalClass globalClass;
+    Shared_Preference prefManager;
 
 
     @Override
@@ -36,6 +40,9 @@ public class SettingsScreen extends AppCompatActivity {
         }
 
 
+        prefManager = new Shared_Preference(this);
+        globalClass = (GlobalClass) getApplicationContext();
+        prefManager.loadPrefrence();
 
         tv_change_password = findViewById(R.id.tv_change_password);
         tv_about = findViewById(R.id.tv_about);
@@ -89,8 +96,10 @@ public class SettingsScreen extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(SettingsScreen.this, LoginScreen.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                prefManager.clearPrefrence();
+                globalClass.setLogin_status(false);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
                 startActivity(intent);
                 finish();
 
