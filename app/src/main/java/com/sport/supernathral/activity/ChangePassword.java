@@ -1,6 +1,5 @@
 package com.sport.supernathral.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -16,13 +15,13 @@ import android.widget.TextView;
 
 import com.sport.supernathral.R;
 
-public class ForgotPassword extends AppCompatActivity {
+public class ChangePassword extends AppCompatActivity {
     TextView tv_forgetPass;
     Toolbar toolbar;
     LinearLayout linear_entry_email, linear_otp;
     RelativeLayout rl_submit, rl_save;
-    ImageView iv_eye, iv_eye_confirm;
-    EditText edt_password, edt_confirm_password;
+    ImageView iv_eye, iv_eye_confirm,iv_eye_oldpass;
+    EditText edt_password, edt_confirm_password,edt_old_pass;
 
     boolean password_visible = true;
     boolean password_visible2 = true;
@@ -30,7 +29,7 @@ public class ForgotPassword extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.forgot_password);
+        setContentView(R.layout.change_password);
         initViews();
 
     }
@@ -51,20 +50,24 @@ public class ForgotPassword extends AppCompatActivity {
         rl_submit = findViewById(R.id.rl_submit);
         rl_save = findViewById(R.id.rl_save);
 
-        linear_entry_email.setVisibility(View.VISIBLE);
-        linear_otp.setVisibility(View.GONE);
+       // linear_entry_email.setVisibility(View.VISIBLE);
+       // linear_otp.setVisibility(View.GONE);
 
         tv_forgetPass=findViewById(R.id.tv_forgetPass);
         iv_eye=findViewById(R.id.iv_eye);
         iv_eye_confirm=findViewById(R.id.iv_eye_confirm);
+        iv_eye_oldpass=findViewById(R.id.iv_eye_oldpass);
         edt_password=findViewById(R.id.edt_password);
         edt_confirm_password=findViewById(R.id.edt_confirm_password);
+        edt_old_pass=findViewById(R.id.edt_old_pass);
 
 
         edt_password.setInputType(InputType.TYPE_CLASS_TEXT
                 | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
         edt_confirm_password.setInputType(InputType.TYPE_CLASS_TEXT
+                | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        edt_old_pass.setInputType(InputType.TYPE_CLASS_TEXT
                 | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
 
@@ -145,6 +148,32 @@ public class ForgotPassword extends AppCompatActivity {
                 }
 
                 edt_confirm_password.setSelection(edt_confirm_password.length());
+            }
+        });
+        iv_eye_oldpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (!password_visible){
+
+                    edt_old_pass.setInputType(InputType.TYPE_CLASS_TEXT
+                            | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    iv_eye_oldpass.setImageResource(R.mipmap.invisible);
+
+                    password_visible = true;
+
+                }else {
+
+                    edt_old_pass.setInputType(InputType.TYPE_CLASS_TEXT
+                            | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    iv_eye_oldpass.setImageResource(R.mipmap.eye);
+
+                    password_visible = false;
+
+                }
+
+                edt_password.setSelection(edt_password.length());
+
             }
         });
 

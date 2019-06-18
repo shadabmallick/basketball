@@ -50,6 +50,7 @@
     <string name="games">Games</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
+    <string name="old_password">Old Password</string>
 
     <string name="schedule">Schedule</string>
     <string name="attendance">Attendance</string>

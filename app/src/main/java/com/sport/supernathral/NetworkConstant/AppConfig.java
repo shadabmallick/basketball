@@ -11,5 +11,7 @@ public class AppConfig
     public static String REGISTER = "registration";
     public static String LOGIN = "login";
 
+    public static String ABOUT_US = "about";
+
 
 }

@@ -50,7 +50,21 @@ public class SettingsScreen extends AppCompatActivity {
         switch_noti = findViewById(R.id.switch_noti);
         iv_back = findViewById(R.id.iv_back);
 
+        tv_change_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingsScreen.this, ChangePassword.class);
+                startActivity(intent);
+            }
+        });
 
+        tv_about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingsScreen.this, Aboutus.class);
+                startActivity(intent);
+            }
+        });
 
         tv_sign_out.setOnClickListener(new View.OnClickListener() {
             @Override
