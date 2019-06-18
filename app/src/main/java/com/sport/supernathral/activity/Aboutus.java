@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -34,6 +36,7 @@ public class Aboutus extends AppCompatActivity {
     Shared_Preference preference;
     ProgressDialog pd;
     TextView tv_about;
+    Toolbar toolbar;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +51,14 @@ public class Aboutus extends AppCompatActivity {
 
     }
     public void initView(){
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.mipmap.back_black);
         tv_about=findViewById(R.id.about_us);
         About();
 
@@ -81,9 +92,6 @@ public class Aboutus extends AppCompatActivity {
 
                         if (status == 1){
 
-                            FancyToast.makeText(getApplicationContext(), message,
-                                    FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false)
-                                    .show();
 
                         //    JSONObject data = main_object.getJSONObject("data");
                             String about = main_object.optString("about");
@@ -133,6 +141,15 @@ public class Aboutus extends AppCompatActivity {
         GlobalClass.getInstance().addToRequestQueue(strReq, tag_string_req);
         strReq.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 10, 1.0f));
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
     }
 
 }

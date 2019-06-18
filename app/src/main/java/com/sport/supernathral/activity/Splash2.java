@@ -31,7 +31,6 @@ public class Splash2 extends AppCompatActivity {
         rl_login=findViewById(R.id.rl_login);
 
 
-
         btn_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
