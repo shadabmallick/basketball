@@ -183,7 +183,7 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
 
                     edt_password.setInputType(InputType.TYPE_CLASS_TEXT
                             | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    iv_eye.setImageResource(R.mipmap.eye);
+                    iv_eye.setImageResource(R.mipmap.invisible);
 
                     password_visible = true;
 
@@ -191,7 +191,7 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
 
                     edt_password.setInputType(InputType.TYPE_CLASS_TEXT
                             | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                    iv_eye.setImageResource(R.mipmap.invisible);
+                    iv_eye.setImageResource(R.mipmap.eye);
 
                     password_visible = false;
 

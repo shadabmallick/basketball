@@ -160,7 +160,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="0dp"
-                    android:src="@mipmap/eye"
+                    android:src="@mipmap/invisible"
                     android:padding="10dp"
                     />
 
