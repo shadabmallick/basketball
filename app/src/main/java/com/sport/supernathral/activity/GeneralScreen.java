@@ -10,20 +10,22 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sport.supernathral.R;
 
-public class ProfileScreen extends AppCompatActivity {
+public class GeneralScreen extends AppCompatActivity {
 
-    TextView tv_general, tv_settings;
+    TextView tv_name, tv_designation, tv_email, tv_post, tv_full_name, tv_country;
     ImageView profile_image;
+    RelativeLayout rel_edit_profile;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profile_screen);
+        setContentView(R.layout.profile_general);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -33,33 +35,26 @@ public class ProfileScreen extends AppCompatActivity {
         }
 
 
-        tv_general = findViewById(R.id.tv_general);
-        tv_settings = findViewById(R.id.tv_settings);
+        tv_name = findViewById(R.id.tv_name);
+        tv_designation = findViewById(R.id.tv_designation);
+        tv_email = findViewById(R.id.tv_email);
+        tv_post = findViewById(R.id.tv_post);
+        tv_full_name = findViewById(R.id.tv_full_name);
+        tv_country = findViewById(R.id.tv_country);
         profile_image = findViewById(R.id.profile_image);
-
-        tv_general.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(ProfileScreen.this, GeneralScreen.class);
-                startActivity(intent);
-            }
-        });
-
-        tv_settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(ProfileScreen.this, SettingsScreen.class);
-                startActivity(intent);
-
-            }
-        });
-
-
+        rel_edit_profile = findViewById(R.id.rel_edit_profile);
 
 
         initFooterItems();
+
+        rel_edit_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+            }
+        });
 
 
     }

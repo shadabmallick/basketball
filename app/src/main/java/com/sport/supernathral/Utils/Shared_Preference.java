@@ -106,8 +106,9 @@ public class Shared_Preference {
     }
 
     public void savePrefrence() {
+
         if (globalclass.getLogin_status()) {
-           // remote_user_id=globalclass.getRemote_user_id();
+
             editor.putString(remote,remote_user_id);
             pref_logInStatus = globalclass.getLogin_status();
             editor.putBoolean(PREF_logInStatus, pref_logInStatus);
@@ -228,7 +229,7 @@ public class Shared_Preference {
         Log.d("TV", globalclass.getLogin_status() + "");
         if (globalclass.getLogin_status()) {
             remote_user_id=sharedPreferences.getString(remote,"");
-          //  globalclass.setRemote_user_id(remote_user_id);
+
             pref_name = sharedPreferences.getString(PREF_name, "");
             globalclass.setName(pref_name);
 
@@ -251,23 +252,13 @@ public class Shared_Preference {
             globalclass.setEmail(pref_email);
 
             pref_organisation=sharedPreferences.getString(PREF_organisation,"");
-          //  globalclass.setOrganization(pref_organisation);
 
             pref_cart_no=sharedPreferences.getString(PREF_cart_no,"");
             globalclass.setCart_no(pref_cart_no);
 
             pref_order_id=sharedPreferences.getString(PREF_order_id,"");
-           // globalclass.setOrder_id(pref_order_id);
 
             pref_order_type=sharedPreferences.getString(PREF_order_type,"");
-          //  globalclass.setType(pref_order_type);
-
-            /*pref_ship_address_id=sharedPreferences.getString(PREF_ship_address_id,"");
-            globalclass.setShipping_id(pref_ship_address_id);
-
-            pref_ship_full_address=sharedPreferences.getString(PREF_ship_full_address,"");
-            globalclass.setShipping_full_address(pref_ship_full_address);
-*/
 
 
             pref_profile_img=sharedPreferences.getString(PREF_profile_img,"");
@@ -309,7 +300,6 @@ public class Shared_Preference {
             globalclass.setNotification(notification);
 
 
-
             latitude=sharedPreferences.getString(PREF_latitude,"");
             globalclass.setLatitude(latitude);
 
@@ -321,9 +311,6 @@ public class Shared_Preference {
 
             location=sharedPreferences.getString(PREF_location,"");
             globalclass.setLocation(location);
-
-
-
 
         }
     }

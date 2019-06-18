@@ -38,6 +38,13 @@ public class Splash extends AppCompatActivity {
         initViews();
 
 
+        if (globalClass.getLogin_status()){
+            Intent intent = new Intent(Splash.this, HomePage.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
+        }
+
     }
 
 

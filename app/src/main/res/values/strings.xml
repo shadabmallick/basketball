@@ -50,6 +50,10 @@
     <string name="games">Games</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
+    <string name="full_name">Full Name</string>
+    <string name="country">Country</string>
+    <string name="email">Email</string>
+    <string name="post">Post</string>
 
     <string name="schedule">Schedule</string>
     <string name="attendance">Attendance</string>
