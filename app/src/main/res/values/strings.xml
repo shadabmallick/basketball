@@ -5,14 +5,11 @@
     <string name="name">Alex</string>
 
 
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-
-
 
 
     <string name="forget_password">Forget Password ?</string>
@@ -51,6 +48,13 @@
     <string name="yes">YES</string>
     <string name="no">NO</string>
     <string name="edit_profile">Edit Profile </string>
+    <string name="search">Search </string>
+    <string name="search_for">What are you searching for ? </string>
+    <string name="basketball">BASKETBALL </string>
+    <string name="search_caps">SEARCH</string>
+    <string name="write_message">Write a message</string>
+    <string name="report">Report</string>
+
 
     <string name="old_password">Old Password</string>
 
@@ -85,8 +89,6 @@
     <string name="trainer">Trainer</string>
     <string name="player">Player</string>
     <string name="parent">Parent</string>
-
-
 
 
 </resources>

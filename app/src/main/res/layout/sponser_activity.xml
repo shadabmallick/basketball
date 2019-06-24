@@ -22,7 +22,7 @@
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/about"
+                android:text="@string/sponsor"
                 android:layout_gravity="end"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -36,31 +36,24 @@
     </android.support.design.widget.AppBarLayout>
 
 
-    <LinearLayout
-        android:id="@+id/ll_txt_about"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@+id/appbarLayout"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/appbarLayout"
+            >
+<android.support.v7.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:id="@+id/recycler_sponsor"
+    android:layout_height="wrap_content">
 
-        >
-
-         <TextView
-             android:id="@+id/about_us"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_margin="20dp"
-             android:padding="30dp"
-
-             android:background="@drawable/shadow_rec"
-
-             />
+</android.support.v7.widget.RecyclerView>
 
 
 
 
+        </LinearLayout>
 
-    </LinearLayout>
 
 
 

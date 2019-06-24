@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -37,6 +39,7 @@ public class Aboutus extends AppCompatActivity {
     ProgressDialog pd;
     TextView tv_about;
     Toolbar toolbar;
+    LinearLayout ll_txt_about;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +55,7 @@ public class Aboutus extends AppCompatActivity {
     }
     public void initView(){
         toolbar = findViewById(R.id.toolbar);
+        ll_txt_about = findViewById(R.id.ll_txt_about);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -92,7 +96,7 @@ public class Aboutus extends AppCompatActivity {
 
                         if (status == 1){
 
-
+                            ll_txt_about.setVisibility(View.VISIBLE);
                         //    JSONObject data = main_object.getJSONObject("data");
                             String about = main_object.optString("about");
 

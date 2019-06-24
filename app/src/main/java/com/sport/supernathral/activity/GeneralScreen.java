@@ -1,17 +1,20 @@
 package com.sport.supernathral.activity;
 
-import android.content.Intent;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+  import android.content.Intent;
+  import android.os.Build;
+  import android.os.Bundle;
+  import android.support.v4.content.ContextCompat;
+  import android.support.v7.app.AppCompatActivity;
+  import android.support.v7.widget.Toolbar;
+  import android.view.MenuItem;
+  import android.view.View;
+  import android.view.Window;
+  import android.view.WindowManager;
+  import android.widget.ImageView;
+  import android.widget.LinearLayout;
+  import android.widget.RelativeLayout;
+  import android.widget.TextView;
+
 
 import com.sport.supernathral.R;
 
@@ -20,12 +23,21 @@ public class GeneralScreen extends AppCompatActivity {
     TextView tv_name, tv_designation, tv_email, tv_post, tv_full_name, tv_country;
     ImageView profile_image,img_edit;
     RelativeLayout rel_edit_profile;
+    Toolbar toolbar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_general);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.mipmap.back_black);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -52,7 +64,8 @@ public class GeneralScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
+                Intent editProfile=new Intent(getApplicationContext(),EditProfile.class);
+                startActivity(editProfile);
 
             }
         });
@@ -117,4 +130,14 @@ public class GeneralScreen extends AppCompatActivity {
         });
 
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
+    }
+
 }

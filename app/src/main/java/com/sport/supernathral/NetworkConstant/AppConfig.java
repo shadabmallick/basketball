@@ -12,6 +12,7 @@ public class AppConfig
     public static String LOGIN = "login";
 
     public static String ABOUT_US = "about";
+    public static String NEWSDETAILS = "news_details";
 
 
 }

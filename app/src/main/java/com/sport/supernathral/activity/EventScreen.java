@@ -1,6 +1,6 @@
 package com.sport.supernathral.activity;
 
-import android.content.Intent;
+ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -10,7 +10,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.sport.supernathral.R;
 
 public class EventScreen extends AppCompatActivity {
@@ -37,7 +36,7 @@ public class EventScreen extends AppCompatActivity {
         tv_moments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+            // Intent
 
             }
         });
@@ -45,7 +44,8 @@ public class EventScreen extends AppCompatActivity {
         tv_sponsors.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+              Intent intent=new Intent(getApplicationContext(),Sponsor.class);
+              startActivity(intent);
 
             }
         });

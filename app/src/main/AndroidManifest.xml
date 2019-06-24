@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sport.supernathral">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION" />
@@ -15,113 +16,111 @@
         android:allowBackup="true"
         android:icon="@mipmap/icon0"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/icon0"
         android:supportsRtl="true"
-        android:largeHeap="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
 
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
-        <activity android:name=".activity.Splash"
-            android:theme="@style/MyTheme"
-            >
+        <activity
+            android:name=".activity.Splash"
+            android:theme="@style/MyTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-        <activity android:name=".activity.Splash2"
-            android:theme="@style/MyTheme"
-            >
+        <activity
+            android:name=".activity.Splash2"
+            android:theme="@style/MyTheme">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
             </intent-filter>
         </activity>
-
-
-        <activity android:name=".activity.SignUp"
-            android:theme="@style/MyTheme"
-            >
+        <activity
+            android:name=".activity.SignUp"
+            android:theme="@style/MyTheme">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
             </intent-filter>
         </activity>
-
-        <activity android:name=".activity.LoginScreen"
-            android:theme="@style/MyTheme"
-            >
+        <activity
+            android:name=".activity.LoginScreen"
+            android:theme="@style/MyTheme">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
             </intent-filter>
         </activity>
-
-        <activity android:name=".activity.ForgotPassword"
-            android:theme="@style/MyTheme"
-            >
+        <activity
+            android:name=".activity.ForgotPassword"
+            android:theme="@style/MyTheme">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
             </intent-filter>
         </activity>
-
-
-        <activity android:name=".activity.HomePage"
+        <activity
+            android:name=".activity.HomePage"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            />
-
-        <activity android:name=".activity.ChatScreen"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.ChatScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-             />
-
-        <activity android:name=".activity.GamesMain"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.GamesMain"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            />
-
-        <activity android:name=".activity.EventScreen"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.EventScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            />
-
-        <activity android:name=".activity.ProfileScreen"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.ProfileScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            />
-
-        <activity android:name=".activity.SettingsScreen"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.SettingsScreen"
             android:theme="@style/MyTheme"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            />
-
-        <activity android:name=".activity.ChangePassword"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.ChangePassword"
             android:theme="@style/MyTheme"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            />
-        <activity android:name=".activity.Aboutus"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.Aboutus"
             android:theme="@style/MyTheme"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            />
-
-        <activity android:name=".activity.GeneralScreen"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.GeneralScreen"
             android:theme="@style/MyTheme"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            />
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.EditProfile"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.MomentsActivity"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.Sponsor"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.SearchPlayer"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.NewsSublist"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
 
-
-
-        <service android:name=".Utils.GPSTracker"/>
-
-
-
+        <service android:name=".Utils.GPSTracker" />
     </application>
 
 </manifest>
