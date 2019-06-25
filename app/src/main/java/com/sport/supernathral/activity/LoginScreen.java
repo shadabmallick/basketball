@@ -152,8 +152,12 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
                     if (!edt_email.getText().toString().isEmpty()) {
 
                         if (!edt_password.getText().toString().isEmpty()) {
+                            Intent intent = new Intent(LoginScreen.this, HomePage.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
 
-                            login(email_new, password_new);
+
+                            //   login(email_new, password_new);
 
                         } else {
 

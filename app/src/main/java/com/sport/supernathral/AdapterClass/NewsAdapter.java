@@ -65,6 +65,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemViewHolder
             @Override
             public void onClick(View v) {
                 Intent NewsSublist=new Intent(context, NewsSublist.class);
+                NewsSublist.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 /*blogSingle.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 blogSingle.putExtra("file_name", dataArrayList.get(i).getFile_name());
                 blogSingle.putExtra("heading", dataArrayList.get(i).getHeading());

@@ -49,6 +49,14 @@ public class EventScreen extends AppCompatActivity {
 
             }
         });
+        tv_moments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              Intent intent=new Intent(getApplicationContext(),MomentsActivity.class);
+              startActivity(intent);
+
+            }
+        });
 
 
 

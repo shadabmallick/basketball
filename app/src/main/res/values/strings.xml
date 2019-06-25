@@ -54,6 +54,8 @@
     <string name="search_caps">SEARCH</string>
     <string name="write_message">Write a message</string>
     <string name="report">Report</string>
+    <string name="send">Send</string>
+    <string name="write_message_hint">+&#160;&#160;&#160;Write a message </string>
 
 
     <string name="old_password">Old Password</string>
