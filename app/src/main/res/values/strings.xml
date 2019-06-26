@@ -19,7 +19,7 @@
     <string name="team1">Team 1</string>
     <string name="password_empty">Empty Password </string>
     <string name="empty_email_name">Empty Email ID</string>
-    <string name="check_network">Check Your Network Connection  </string>
+    <string name="check_network">Check Your Network Connection</string>
     <string name="send_email">Forgot Password</string>
     <string name="text_title">On the trip to America,looking for someone to join me on this epic journey</string>
     <string name="text_sub_title">Hey lets schedule a call for next week </string>
@@ -59,6 +59,7 @@
 
 
     <string name="old_password">Old Password</string>
+    <string name="loading">Loading...</string>
 
     <string name="full_name">Full Name</string>
     <string name="country">Country</string>
@@ -91,6 +92,8 @@
     <string name="trainer">Trainer</string>
     <string name="player">Player</string>
     <string name="parent">Parent</string>
+    <string name="create_group">Create Group >>></string>
+    <string name="typemessage">Write a message</string>
 
 
 </resources>

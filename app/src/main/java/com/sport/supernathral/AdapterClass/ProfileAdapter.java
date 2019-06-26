@@ -1,7 +1,6 @@
 package com.sport.supernathral.AdapterClass;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AdapterChat extends RecyclerView.Adapter<AdapterChat.ItemViewHolder> {
+public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ItemViewHolder> {
 
     private Context context;
     private ArrayList<ChatListData> arrayList;
@@ -50,14 +49,13 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.ItemViewHolder
     }
 
 
-    public AdapterChat(Context context, ArrayList<ChatListData> itemList,
-                       onItemClickListner mListner){
+    public ProfileAdapter(Context context, ArrayList<ChatListData> itemList,
+                          onItemClickListner mListner){
         this.context = context;
         this.arrayList=itemList;
         this.mListner=mListner;
     }
 
-    @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
@@ -72,7 +70,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.ItemViewHolder
 
         // user type = Coach/Teachers  ,  Students/Players
 
-        final ChatListData chatListData = arrayList.get(position);
+        ChatListData chatListData = arrayList.get(position);
 
 
         if (!chatListData.getUser_image().isEmpty()){
@@ -86,10 +84,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.ItemViewHolder
         holder.tv_user_name.setText(chatListData.getUser_name());
 
 
-        if (chatListData.getMessage_type().isEmpty()){
-            holder.tv_last_image.setVisibility(View.GONE);
-            holder.tv_last_message.setVisibility(View.GONE);
-        }else if (chatListData.getMessage_type().equals("3")){
+        if (chatListData.getMessage_type().equals("image")){
             holder.tv_last_image.setVisibility(View.VISIBLE);
             holder.tv_last_message.setVisibility(View.GONE);
         }else {
@@ -101,14 +96,6 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.ItemViewHolder
         holder.tv_last_seen.setText(chatListData.getDatetime());
 
 
-
-        holder.rel_main.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                mListner.onItemClick(chatListData);
-            }
-        });
     }
 
     @Override

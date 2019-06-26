@@ -51,7 +51,6 @@
              android:layout_height="wrap_content"
              android:layout_margin="20dp"
              android:padding="30dp"
-
              android:background="@drawable/shadow_rec"
 
              />

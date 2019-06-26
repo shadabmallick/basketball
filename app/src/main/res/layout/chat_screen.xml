@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         android:background="@mipmap/button_bg"
-      >
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -23,6 +23,8 @@
                 app:tabSelectedTextColor="@android:color/white"
                 app:tabIndicatorColor="@android:color/white"
                 android:layout_alignParentBottom="true"
+                app:tabMode="fixed"
+                app:tabGravity="fill"
                 />
 
         </RelativeLayout>
@@ -36,6 +38,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/appbarLayout"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
+
     <LinearLayout
         android:id="@+id/footer"
         android:layout_width="match_parent"
@@ -63,9 +66,7 @@
                 android:src="@mipmap/home_black"
                 />
 
-
         </LinearLayout>
-
 
         <LinearLayout
             android:id="@+id/llchat"
@@ -84,9 +85,7 @@
                 android:src="@mipmap/chat_yellow"
                 />
 
-
         </LinearLayout>
-
 
         <LinearLayout
             android:id="@+id/ll_games"
@@ -104,10 +103,7 @@
                 android:layout_height="50dp"
                 android:src="@mipmap/game_black"
                 />
-
-
         </LinearLayout>
-
 
         <LinearLayout
             android:id="@+id/ll_event"
@@ -125,8 +121,6 @@
                 android:layout_height="50dp"
                 android:src="@mipmap/event_black"
                 />
-
-
         </LinearLayout>
         <LinearLayout
             android:id="@+id/ll_profile"
@@ -144,7 +138,6 @@
                 android:layout_height="50dp"
                 android:src="@mipmap/profile_black"
                 />
-
 
         </LinearLayout>
 

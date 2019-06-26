@@ -54,6 +54,9 @@ import java.util.Map;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLEngine;
 
+import me.pushy.sdk.Pushy;
+import me.pushy.sdk.util.exceptions.PushyException;
+
 import static com.sport.supernathral.NetworkConstant.AppConfig.LOGIN;
 
 
@@ -77,6 +80,7 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
 
     Toolbar toolbar;
     boolean password_visible = true;
+    String deviceToken;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,6 +96,14 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.setMessage("Loading...");
         initViews();
+
+
+
+        try {
+            deviceToken = Pushy.register(getApplicationContext());
+        }catch (PushyException e){
+            e.printStackTrace();
+        }
 
 
     }
@@ -152,12 +164,13 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
                     if (!edt_email.getText().toString().isEmpty()) {
 
                         if (!edt_password.getText().toString().isEmpty()) {
-                            Intent intent = new Intent(LoginScreen.this, HomePage.class);
+
+                            /*Intent intent = new Intent(LoginScreen.this, HomePage.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
+                            startActivity(intent);*/
 
 
-                            //   login(email_new, password_new);
+                            login(email_new, password_new);
 
                         } else {
 
@@ -254,10 +267,11 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
         final String device_id = Settings.Secure.getString(getContentResolver(),
                 Settings.Secure.ANDROID_ID);
 
+
         pd.show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_DEV+LOGIN, new Response.Listener<String>() {
+                LOGIN, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -367,7 +381,7 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
                 params.put("email", user_email);
                 params.put("password", password);
                 params.put("device_type", "android");
-                params.put("device_id", device_id);
+                params.put("device_id", deviceToken);
                 params.put("latitude", String.valueOf(lati));
                 params.put("longitude", String.valueOf(longi));
                 params.put("location", newAddress);
