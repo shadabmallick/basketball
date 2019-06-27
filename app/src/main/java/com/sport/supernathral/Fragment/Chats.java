@@ -28,6 +28,7 @@ import com.sport.supernathral.R;
 import com.sport.supernathral.Utils.GlobalClass;
 import com.sport.supernathral.Utils.Shared_Preference;
 import com.sport.supernathral.activity.ChatSingle;
+import com.sport.supernathral.activity.GroupUserSelection;
 import com.sport.supernathral.activity.LoginScreen;
 import com.sport.supernathral.activity.SignUp;
 
@@ -81,6 +82,17 @@ public class Chats extends Fragment implements AdapterChat.onItemClickListner{
         globalClass = (GlobalClass) getActivity().getApplicationContext();
 
         getChatUserList(globalClass.getId());
+
+
+        rel_create_group.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(), GroupUserSelection.class);
+                startActivity(intent);
+
+            }
+        });
 
     }
 

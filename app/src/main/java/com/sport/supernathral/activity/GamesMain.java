@@ -83,8 +83,6 @@ public class GamesMain extends AppCompatActivity
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-        //getSupportActionBar().setTitle("Home");
         toolbar_title = toolbar.findViewById(R.id.toolbar_title);
         toolbar_title.setText("Games");
 

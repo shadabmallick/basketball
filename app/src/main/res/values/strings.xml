@@ -94,6 +94,9 @@
     <string name="parent">Parent</string>
     <string name="create_group">Create Group >>></string>
     <string name="typemessage">Write a message</string>
+    <string name="new_group">New Group</string>
+    <string name="add_member">Add Members</string>
+    <string name="messsage">Message</string>
 
 
 </resources>

@@ -1,6 +1,7 @@
 package com.sport.supernathral.AdapterClass;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -21,6 +22,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.sport.supernathral.DataModel.ChatData;
 import com.sport.supernathral.DataModel.ChatListData;
 import com.sport.supernathral.R;
+import com.sport.supernathral.activity.ChatImageFull;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -102,7 +104,7 @@ public class ChatSingleAdapter extends RecyclerView.Adapter<ChatSingleAdapter.It
     @Override
     public void onBindViewHolder(final ItemViewHolder viewHolder, final int position) {
 
-        ChatData chatData = arrayList.get(position);
+        final ChatData chatData = arrayList.get(position);
 
 
         //Log.d("TAG" ,"msg- " + chatData.getMessage());
@@ -266,6 +268,37 @@ public class ChatSingleAdapter extends RecyclerView.Adapter<ChatSingleAdapter.It
             }
 
         }
+
+
+        viewHolder.imageView11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (chatData.getMessage_type().matches("3")) {
+
+                    Intent intent = new Intent(context, ChatImageFull.class);
+                    intent.putExtra("img", chatData.getMessage());
+                    intent.putExtra("key", chatData.getImage_from());
+                    context.startActivity(intent);
+                }
+
+            }
+        });
+
+        viewHolder.imageView22.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (chatData.getMessage_type().matches("3")) {
+
+                    Intent intent = new Intent(context, ChatImageFull.class);
+                    intent.putExtra("img", chatData.getMessage());
+                    intent.putExtra("key", chatData.getImage_from());
+                    context.startActivity(intent);
+                }
+
+            }
+        });
 
     }
 

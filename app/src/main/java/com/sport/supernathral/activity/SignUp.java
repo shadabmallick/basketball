@@ -346,7 +346,7 @@ public class SignUp extends AppCompatActivity {
                 params.put("password", password);
                 params.put("email", user_email);
                 params.put("device_type", "android");
-                params.put("device_id", deviceToken);
+                params.put("device_id", device_id);
 
                 params.put("user_type", tv_selected.getText().toString().trim());
 
