@@ -2,53 +2,85 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:padding="10dp"
-    android:layout_marginBottom="10dp">
-    <LinearLayout
-        android:id="@+id/ll_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:layout_marginLeft="90dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/name"
-            android:textSize="16dp"/>
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/darker_gray"
-            android:text="@string/text_sub_title"/>
-
-
-    </LinearLayout>
+    android:id="@+id/rel_main"
+    >
 
     <RelativeLayout
-
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="20dp">
+        android:padding="8dp"
+        >
+        <TextView
+            android:id="@+id/tv_last_seen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="2 hours ago"/>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@mipmap/chat"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_last_seen"
+            >
 
-            />
+            <RelativeLayout
+                android:id="@+id/rel_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/avatar_gray"
+
+                    />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_toRightOf="@+id/rel_image"
+                android:paddingLeft="15dp"
+                android:layout_centerVertical="true"
+                >
+                <TextView
+                    android:id="@+id/tv_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name"
+                    android:textSize="16dp"/>
+
+                <TextView
+                    android:id="@+id/tv_last_message"
+                    android:layout_marginTop="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/darker_gray"
+                    android:text="@string/text_sub_title"/>
+
+                <ImageView
+                    android:id="@+id/tv_last_image"
+                    android:layout_marginTop="3dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/camera_grey"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
     </RelativeLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:text="2 hours ago"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/light_grey"
+        android:layout_alignParentBottom="true"
+        />
 
 </RelativeLayout>

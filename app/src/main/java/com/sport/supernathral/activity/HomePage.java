@@ -13,6 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.sport.supernathral.AdapterClass.GameAdapter;
 import com.sport.supernathral.AdapterClass.NewsAdapter;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 public class HomePage extends AppCompatActivity {
     RecyclerView recycle_game,recycle_news;
     ImageView img_search;
+    RelativeLayout rl_homescreen;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class HomePage extends AppCompatActivity {
         recycle_game = findViewById(R.id.recycle_game);
         recycle_news = findViewById(R.id.recycle_news);
         img_search = findViewById(R.id.img_search);
+        rl_homescreen = findViewById(R.id.rl_homescreen);
 
 
         recycle_game.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -77,7 +80,13 @@ public class HomePage extends AppCompatActivity {
 
             }
         });
-
+        rl_homescreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newsPage=new Intent(getApplicationContext(),NewsSublist.class);
+                startActivity(newsPage);
+            }
+        });
 
         initFooterItems();
 

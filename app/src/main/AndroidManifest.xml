@@ -21,9 +21,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.MomentMessage"
+        <activity
+            android:name=".activity.MomentMessage"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
-            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+            android:windowSoftInputMode="adjustPan|stateHidden" />
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -120,6 +121,18 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activity.NewsSublist"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.ChatSingle"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.GameListActivity"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.InfoActivity"
             android:theme="@style/MyTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 

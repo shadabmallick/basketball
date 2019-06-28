@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.sport.supernathral.AdapterClass.GameAdapter;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 public class SearchPlayer extends AppCompatActivity {
     RecyclerView recycleList;
     LinearLayout ll_search,ll_main;
+    ImageView img_search;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +33,7 @@ public class SearchPlayer extends AppCompatActivity {
 
     private void initViews() {
         recycleList=findViewById(R.id.recycleList);
+        img_search=findViewById(R.id.img_search);
         ll_search=findViewById(R.id.ll_search);
         ll_main=findViewById(R.id.ll_main);
         ll_search.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +50,15 @@ public class SearchPlayer extends AppCompatActivity {
                 PlayerAdapter notificationListAdapter
                         = new PlayerAdapter(getApplicationContext(), newsList);
                 recycleList.setAdapter(notificationListAdapter);
+            }
+        });
+
+
+
+        img_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

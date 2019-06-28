@@ -4,19 +4,28 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+   <RelativeLayout
+       android:id="@+id/rel_create_group"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:padding="15dp"
+       android:background="@color/light_grey"
+       >
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textColor="@color/black"
+          android:text="@string/create_group"
+          />
+
+   </RelativeLayout>
+
    <android.support.v7.widget.RecyclerView
        android:id="@+id/recycler_chat"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
       >
-
-
-
    </android.support.v7.widget.RecyclerView>
-
-
-
-
-
 
 </LinearLayout>

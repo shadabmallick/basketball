@@ -1,7 +1,5 @@
 package com.sport.supernathral.activity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -29,16 +27,19 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sport.supernathral.AdapterClass.DrawerListAdapter;
-import com.sport.supernathral.AdapterClass.GameListAdapter;
 import com.sport.supernathral.DataModel.DrawerItem;
-import com.sport.supernathral.DataModel.GameData;
+import com.sport.supernathral.Fragment.Attendence;
+import com.sport.supernathral.Fragment.Event;
+import com.sport.supernathral.Fragment.Games;
+import com.sport.supernathral.Fragment.Info;
+import com.sport.supernathral.Fragment.Notes;
+import com.sport.supernathral.Fragment.Schedule;
+import com.sport.supernathral.Fragment.SkillSet;
+import com.sport.supernathral.Fragment.Sponsor;
+import com.sport.supernathral.Fragment.Statistics;
 import com.sport.supernathral.R;
-import com.sport.supernathral.Utils.GameItem;
-import com.sport.supernathral.Utils.HeaderItem;
-import com.sport.supernathral.Utils.ListItem;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -49,14 +50,12 @@ public class GamesMain extends AppCompatActivity
     DrawerLayout drawer;
     RecyclerView nav_drawer_recycler_view;
     TextView toolbar_title;
-    ImageView iv_add_complain;
     CircleImageView iv_user;
     RelativeLayout rel_profile;
-    RecyclerView recycle_game;
 
 
     private FragmentManager mFragmentManager;
-
+    Toolbar toolbar;
 
     ArrayList<DrawerItem> drawerItemArrayList;
 
@@ -64,6 +63,14 @@ public class GamesMain extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_screen);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(),
+                    R.color.deep_yellow));
+        }
+
 
 
         initViews();
@@ -74,22 +81,7 @@ public class GamesMain extends AppCompatActivity
 
     private void initViews(){
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(),
-                    R.color.deep_yellow));
-        }
-
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-        //getSupportActionBar().setTitle("Home");
-        toolbar_title = toolbar.findViewById(R.id.toolbar_title);
-        toolbar_title.setText("Games");
-
-
-
+        toolbar  = findViewById(R.id.toolbar);
 
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -122,9 +114,6 @@ public class GamesMain extends AppCompatActivity
         nav_drawer_recycler_view = findViewById(R.id.nav_drawer_recycler_view);
         nav_drawer_recycler_view.setLayoutManager(new LinearLayoutManager(this));
 
-        recycle_game = findViewById(R.id.recycle_game);
-        recycle_game.setLayoutManager(new LinearLayoutManager(this));
-
 
         mFragmentManager = getSupportFragmentManager();
 
@@ -136,6 +125,11 @@ public class GamesMain extends AppCompatActivity
 
 
 
+        toolbar_title = toolbar.findViewById(R.id.toolbar_title);
+        toolbar_title.setText("Games");
+
+        transactFragment(new Games());
+
 
 
 
@@ -143,7 +137,7 @@ public class GamesMain extends AppCompatActivity
 
         /// recycler view data
 
-        ArrayList<GameData> gameDataArrayList = new ArrayList<>();
+       /* ArrayList<GameData> gameDataArrayList = new ArrayList<>();
         GameData gameData = new GameData();
         gameDataArrayList.add(gameData);
         gameDataArrayList.add(gameData);
@@ -188,7 +182,7 @@ public class GamesMain extends AppCompatActivity
         GameListAdapter gameListAdapter = new GameListAdapter(GamesMain.this,
                 mItems);
         recycle_game.setAdapter(gameListAdapter);
-
+*/
 
 
     }
@@ -259,60 +253,79 @@ public class GamesMain extends AppCompatActivity
         switch (position){
 
             case 0:
+                toolbar_title.setText(getResources().getString(R.string.games));
 
+                //transaction=getSupportFragmentManager().beginTransaction();
+               // transaction.replace(R.id.flContent,new Games());
+                //changeActivity(intent);
 
-                changeActivity(intent);
+                transactFragment(new Games());
 
                 break;
 
 
             case 1:
 
+                toolbar_title.setText(getResources().getString(R.string.events));
 
-                changeActivity(intent);
+                //transaction=getSupportFragmentManager().beginTransaction();
+                //transaction.replace(R.id.flContent,new Event());
+
+                transactFragment(new Event());
 
                 break;
 
             case 2:
+                toolbar_title.setText(getResources().getString(R.string.schedule));
 
-
-                changeActivity(intent);
+                transactFragment(new Schedule());
 
                 break;
 
             case 3:
+                toolbar_title.setText(getResources().getString(R.string.attendance));
 
-                changeActivity(intent);
+                transactFragment(new Attendence());
 
                 break;
 
             case 4:
 
-                changeActivity(intent);
+                toolbar_title.setText(getResources().getString(R.string.skill_set));
+
+                transactFragment(new SkillSet());
 
                 break;
 
             case 5:
 
-                changeActivity(intent);
+                toolbar_title.setText(getResources().getString(R.string.info));
+
+                transactFragment(new Info());
 
                 break;
 
             case 6:
 
-                changeActivity(intent);
+                toolbar_title.setText(getResources().getString(R.string.statistics));
+
+                transactFragment(new Statistics());
 
                 break;
 
             case 7:
 
-                changeActivity(intent);
+                toolbar_title.setText(getResources().getString(R.string.sponsor));
+
+                transactFragment(new Sponsor());
 
                 break;
 
             case 8:
 
-                changeActivity(intent);
+                toolbar_title.setText(getResources().getString(R.string.notes));
+
+                transactFragment(new Notes());
 
                 break;
 
@@ -362,7 +375,7 @@ public class GamesMain extends AppCompatActivity
                 public void run() {
 
                     FragmentTransaction ft = mFragmentManager.beginTransaction();
-                    ft.replace(R.id.container, fragment);
+                    ft.replace(R.id.flContent, fragment);
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                     ft.commit();
 
@@ -373,7 +386,6 @@ public class GamesMain extends AppCompatActivity
 
         drawer.closeDrawer(GravityCompat.START);
 
-        iv_add_complain.setVisibility(View.GONE);
     }
 
 

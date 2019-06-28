@@ -26,11 +26,9 @@ import com.sport.supernathral.Utils.Shared_Preference;
 
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.sport.supernathral.NetworkConstant.AppConfig.ABOUT_US;
-import static com.sport.supernathral.NetworkConstant.AppConfig.LOGIN;
+
 
 public class Aboutus extends AppCompatActivity {
     String TAG=" About";
@@ -77,7 +75,7 @@ public class Aboutus extends AppCompatActivity {
         pd.show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_DEV+ABOUT_US, new Response.Listener<String>() {
+                ABOUT_US, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {

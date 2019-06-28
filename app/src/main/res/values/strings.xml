@@ -19,7 +19,7 @@
     <string name="team1">Team 1</string>
     <string name="password_empty">Empty Password </string>
     <string name="empty_email_name">Empty Email ID</string>
-    <string name="check_network">Check Your Network Connection  </string>
+    <string name="check_network">Check Your Network Connection</string>
     <string name="send_email">Forgot Password</string>
     <string name="text_title">On the trip to America,looking for someone to join me on this epic journey</string>
     <string name="text_sub_title">Hey lets schedule a call for next week </string>
@@ -56,23 +56,52 @@
     <string name="report">Report</string>
     <string name="send">Send</string>
     <string name="write_message_hint">+&#160;&#160;&#160;Write a message </string>
+    <string name="live_score">Live Score</string>
+    <string name="info">Info</string>
+    <string name="phone">Phone</string>
+    <string name="birth">Birth</string>
+    <string name="description">Description</string>
 
 
     <string name="old_password">Old Password</string>
+    <string name="loading">Loading...</string>
+    <string name="team">Teams</string>
+    <string name="first">1st</string>
+    <string name="second">2nd</string>
+    <string name="third">3rd</string>
+    <string name="fourth">4th</string>
+    <string name="final_r">final</string>
 
     <string name="full_name">Full Name</string>
     <string name="country">Country</string>
     <string name="email">Email</string>
     <string name="post">Post</string>
+    <string name="resume">Resume</string>
 
 
     <string name="schedule">Schedule</string>
     <string name="attendance">Attendance</string>
     <string name="skill">Skill</string>
+    <string name="skill_set">Skill Set</string>
     <string name="player_info">Player Info</string>
     <string name="statistics">Statistics</string>
     <string name="sponsor">Sponsor</string>
     <string name="notes">Notes</string>
+    <string name="primary_contact">Primary Contact</string>
+    <string name="completed">Completed</string>
+    <string name="saturday">SATURDAY TEAM PRACTICE</string>
+    <string name="starting_day">Start Day :</string>
+    <string name="end_day">End Day :</string>
+    <string name="venue">Venue :</string>
+    <string name="from">From</string>
+    <string name="start_date">Start Date</string>
+    <string name="to">To</string>
+    <string name="find_schedule">Find Your Schedule</string>
+    <string name="end_date">End Date</string>
+    <string name="present">Present</string>
+    <string name="late">Late</string>
+    <string name="absent">Absent</string>
+    <string name="excuse">Excuse</string>
 
 
     <string-array name="game_drawer_items">
@@ -91,6 +120,11 @@
     <string name="trainer">Trainer</string>
     <string name="player">Player</string>
     <string name="parent">Parent</string>
+    <string name="create_group">Create Group >>></string>
+    <string name="typemessage">Write a message</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

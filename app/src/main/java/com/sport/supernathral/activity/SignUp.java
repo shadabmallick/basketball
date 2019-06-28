@@ -35,6 +35,9 @@ import com.sport.supernathral.Utils.Shared_Preference;
 import java.util.HashMap;
 import java.util.Map;
 
+import me.pushy.sdk.Pushy;
+import me.pushy.sdk.util.exceptions.PushyException;
+
 import static com.sport.supernathral.NetworkConstant.AppConfig.REGISTER;
 
 public class SignUp extends AppCompatActivity {
@@ -46,7 +49,6 @@ public class SignUp extends AppCompatActivity {
     RelativeLayout rel_drop, rel_popup, rel_player, rel_trainer, rel_parent;
 
 
-
     GlobalClass globalClass;
     Shared_Preference shared_preference;
     ProgressDialog pd;
@@ -56,6 +58,7 @@ public class SignUp extends AppCompatActivity {
     String player;
     String device_id;
 
+    String deviceToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,12 +73,19 @@ public class SignUp extends AppCompatActivity {
         initViews();
 
 
+        try {
+            deviceToken = Pushy.register(getApplicationContext());
+        }catch (PushyException e){
+            e.printStackTrace();
+        }
+
+
+
     }
 
 
     private void initViews(){
 
-        //toolbar = findViewById(R.id.toolbar);
         tv_login = findViewById(R.id.tv_login);
         edt_name = findViewById(R.id.edt_name);
         edt_email = findViewById(R.id.edt_email);
@@ -247,14 +257,15 @@ public class SignUp extends AppCompatActivity {
 
     }
 
-    private void CheckRegister(final String username, final String user_email, final String password) {
+    private void CheckRegister(final String username, final String user_email,
+                               final String password) {
         // Tag used to cancel the request
         String tag_string_req = "req_login";
 
         pd.show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_DEV+REGISTER, new Response.Listener<String>() {
+                REGISTER, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -337,7 +348,7 @@ public class SignUp extends AppCompatActivity {
                 params.put("device_type", "android");
                 params.put("device_id", device_id);
 
-                  params.put("user_type", tv_selected.getText().toString().trim());
+                params.put("user_type", tv_selected.getText().toString().trim());
 
 
                 Log.d(TAG, "Register: "+params);
