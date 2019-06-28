@@ -73,7 +73,13 @@ public class GamesMain extends AppCompatActivity
 
 
 
+
         initViews();
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar_title = toolbar.findViewById(R.id.toolbar_title);
+        toolbar_title.setText("Games");
+
 
 
     }

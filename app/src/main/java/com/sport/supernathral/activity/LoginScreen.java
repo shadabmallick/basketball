@@ -5,7 +5,6 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -15,10 +14,7 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-
-import android.provider.SyncStateContract;
 import android.support.annotation.Nullable;
-
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
@@ -36,10 +32,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.shashank.sony.fancytoastlib.FancyToast;
-import com.sport.supernathral.NetworkConstant.AppConfig;
 import com.sport.supernathral.R;
 import com.sport.supernathral.Utils.GlobalClass;
 import com.sport.supernathral.Utils.Shared_Preference;
@@ -50,9 +43,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLEngine;
 
 import me.pushy.sdk.Pushy;
 import me.pushy.sdk.util.exceptions.PushyException;

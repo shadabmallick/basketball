@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+   <android.support.design.widget.AppBarLayout
+       android:id="@+id/appbarLayout"
+       android:layout_width="match_parent"
+       android:layout_height="?android:attr/actionBarSize"
+       android:background="@mipmap/button_bg"
+       >
+
+      <android.support.v7.widget.Toolbar
+          android:id="@+id/toolbar"
+          android:layout_width="match_parent"
+          android:layout_height="?attr/actionBarSize"
+          app:popupTheme="@style/AppTheme.PopupOverlay">
+
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_goto_group"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/right_arrow_fill"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                />
+
+         </RelativeLayout>
+
+      </android.support.v7.widget.Toolbar>
+
+   </android.support.design.widget.AppBarLayout>
+
+   <LinearLayout
+       android:id="@+id/rel_create_group"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:padding="15dp"
+       android:orientation="vertical"
+       android:background="@color/light_grey"
+       >
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textColor="@color/black"
+          android:text="@string/new_group"
+          android:textSize="16sp"
+          />
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/add_member"
+          />
+
+   </LinearLayout>
+
+   <android.support.v7.widget.RecyclerView
+       android:id="@+id/recycler_user"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+      >
+   </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>
