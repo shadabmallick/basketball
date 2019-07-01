@@ -160,5 +160,11 @@ public class Profiles extends Fragment implements ProfileAdapter.onItemClickList
     @Override
     public void onItemClick(ChatListData chatListData) {
 
+        if (chatListData.getChat_type().equals("User")){
+
+        }else {
+
+        }
+
     }
 }

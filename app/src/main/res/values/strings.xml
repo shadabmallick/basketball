@@ -125,6 +125,15 @@
     <string name="new_group">New Group</string>
     <string name="add_member">Add Members</string>
     <string name="messsage">Message</string>
+    <string name="create_group_2">Create Group</string>
+    <string name="type_group_name">Type group name here&#8230;</string>
+    <string name="msg_group_create">Provide a group subject and optional group icon</string>
+    <string name="msg_blank_group">Please enter group name</string>
+    <string name="details">Detail</string>
+
+
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

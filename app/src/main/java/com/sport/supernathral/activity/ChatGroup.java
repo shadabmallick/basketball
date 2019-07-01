@@ -11,6 +11,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.shashank.sony.fancytoastlib.FancyToast;
+import com.sport.supernathral.AdapterClass.ChatGroupAdapter;
 import com.sport.supernathral.AdapterClass.ChatSingleAdapter;
 import com.sport.supernathral.DataModel.ChatData;
 import com.sport.supernathral.DataModel.ChatListData;
@@ -56,6 +58,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -70,12 +73,12 @@ import java.util.Map;
 import cz.msebera.android.httpclient.Header;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ChatSingle extends AppCompatActivity
-        implements ChatSingleAdapter.onItemClickListner {
+public class ChatGroup extends AppCompatActivity
+        implements ChatGroupAdapter.onItemClickListner {
 
     ImageView iv_back, imgAttachment, imgSend;
     CircleImageView profile_image;
-    TextView tv_name;
+    TextView tv_name, tv_details;
     RecyclerView recycler_chat;
     EditText edt_message;
 
@@ -85,7 +88,7 @@ public class ChatSingle extends AppCompatActivity
 
     GlobalClass globalClass;
     Shared_Preference preference;
-    ChatSingleAdapter chatSingleAdapter;
+    ChatGroupAdapter chatGroupAdapter;
 
     Bitmap resized_bitmap;
     File p_image1;
@@ -100,11 +103,11 @@ public class ChatSingle extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.chat_single_screen);
+        setContentView(R.layout.chat_group_screen);
         intViews();
 
         this.registerReceiver(mMessageReceiver,
-                new IntentFilter(Common.Key_SingleChatNoti));
+                new IntentFilter(Common.Key_GroupNoti));
 
     }
 
@@ -134,6 +137,7 @@ public class ChatSingle extends AppCompatActivity
         profile_image = findViewById(R.id.profile_image);
         tv_name = findViewById(R.id.tv_name);
         recycler_chat = findViewById(R.id.recycler_chat);
+        tv_details = findViewById(R.id.tv_details);
 
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(getApplicationContext(),
@@ -142,28 +146,62 @@ public class ChatSingle extends AppCompatActivity
         recycler_chat.setLayoutManager(layoutManager);
 
         chatListDataArrayList = new ArrayList<>();
-        chatSingleAdapter = new ChatSingleAdapter(ChatSingle.this,
+        chatGroupAdapter = new ChatGroupAdapter(ChatGroup.this,
                 chatListDataArrayList, this);
-        recycler_chat.setAdapter(chatSingleAdapter);
+        recycler_chat.setAdapter(chatGroupAdapter);
+
+
 
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
 
-            chatListData = (ChatListData) bundle.getSerializable("info");
+            if (bundle.getString("from", "").equals("create")){
 
-            tv_name.setText(chatListData.getUser_name());
+                tv_name.setText(bundle.getString("name"));
 
-            if (!chatListData.getUser_image().isEmpty()) {
-                Picasso.with(getApplicationContext())
-                        .load(chatListData.getUser_image())
-                        .placeholder(R.mipmap.avatar_gray)
-                        .into(profile_image);
+                try {
+
+                    InputStream inputStream = getContentResolver()
+                            .openInputStream(Uri.fromFile(new File(bundle.getString("photo"))));
+                    Bitmap bmp = BitmapFactory.decodeStream(inputStream);
+                    if (inputStream != null) inputStream.close();
+
+                    profile_image.setImageBitmap(bmp);
+
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+
+                getChatList(globalClass.getId(), bundle.getString("id"),
+                        "Group");
+
+
+                chatListData = new ChatListData();
+                chatListData.setReceiver_id(bundle.getString("id"));
+                chatListData.setChat_type("Group");
+
+
+            }else {
+
+                chatListData = (ChatListData) bundle.getSerializable("info");
+
+                tv_name.setText(chatListData.getUser_name());
+
+                if (!chatListData.getUser_image().isEmpty()) {
+                    Picasso.with(getApplicationContext())
+                            .load(chatListData.getUser_image())
+                            .placeholder(R.mipmap.avatar_gray)
+                            .into(profile_image);
+                }
+
+
+                getChatList(globalClass.getId(), chatListData.getReceiver_id(),
+                        chatListData.getChat_type());
             }
 
-
-            getChatList(globalClass.getId(), chatListData.getReceiver_id(),
-                    chatListData.getChat_type());
         }
 
 
@@ -178,7 +216,6 @@ public class ChatSingle extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
-
                 if (!ConnectivityReceiver.isConnected()){
                     FancyToast.makeText(getApplicationContext(),
                             getResources().getString(R.string.check_network),
@@ -186,7 +223,6 @@ public class ChatSingle extends AppCompatActivity
                             FancyToast.INFO, false).show();
                     return;
                 }
-
 
                 checkPermission();
 
@@ -253,6 +289,15 @@ public class ChatSingle extends AppCompatActivity
                         String receiver_name = receiver.optString("receiver_name");
                         String receiver_image = receiver.optString("receiver_image");
 
+                        tv_name.setText(receiver_name);
+
+                        if (!receiver_image.isEmpty()) {
+                            Picasso.with(getApplicationContext())
+                                    .load(receiver_image)
+                                    .placeholder(R.mipmap.avatar_gray)
+                                    .into(profile_image);
+                        }
+
 
 
                         JSONArray data = main_object.getJSONArray("data");
@@ -298,10 +343,10 @@ public class ChatSingle extends AppCompatActivity
 
                     }
 
-                    chatSingleAdapter = new ChatSingleAdapter(ChatSingle.this,
-                            chatListDataArrayList, ChatSingle.this);
-                    recycler_chat.setAdapter(chatSingleAdapter);
-                    chatSingleAdapter.notifyDataSetChanged();
+                    chatGroupAdapter = new ChatGroupAdapter(ChatGroup.this,
+                            chatListDataArrayList, ChatGroup.this);
+                    recycler_chat.setAdapter(chatGroupAdapter);
+                    chatGroupAdapter.notifyDataSetChanged();
 
                     pd.dismiss();
 
@@ -375,7 +420,7 @@ public class ChatSingle extends AppCompatActivity
 
             edt_message.setText("");
             chatListDataArrayList.add(chatData);
-            chatSingleAdapter.notifyDataSetChanged();
+            chatGroupAdapter.notifyDataSetChanged();
 
             recycler_chat.smoothScrollToPosition(chatListDataArrayList.size() - 1);
            // Log.d(TAG ,"array- " + chatListDataArrayList.size());
@@ -390,18 +435,18 @@ public class ChatSingle extends AppCompatActivity
 
         List<String> permissionsList = new ArrayList<String>();
 
-        if (ContextCompat.checkSelfPermission(ChatSingle.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(ChatGroup.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             permissionsList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
         }
-        if (ContextCompat.checkSelfPermission(ChatSingle.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(ChatGroup.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             permissionsList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
-        if (ContextCompat.checkSelfPermission(ChatSingle.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(ChatGroup.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             permissionsList.add(Manifest.permission.CAMERA);
         }
 
         if (permissionsList.size() > 0) {
-            ActivityCompat.requestPermissions((Activity) ChatSingle.this, permissionsList.toArray(new String[permissionsList.size()]),
+            ActivityCompat.requestPermissions((Activity) ChatGroup.this, permissionsList.toArray(new String[permissionsList.size()]),
                     REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
 
             return false;
@@ -436,7 +481,7 @@ public class ChatSingle extends AppCompatActivity
 
     public void selectImage() {
 
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChatSingle.this);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ChatGroup.this);
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_picture_select, null);
         dialogBuilder.setView(dialogView);
@@ -451,7 +496,7 @@ public class ChatSingle extends AppCompatActivity
             public void onClick(View view) {
 
                 startActivityForResult(new Intent(Intent.ACTION_PICK,
-                                android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI),
+                                MediaStore.Images.Media.INTERNAL_CONTENT_URI),
                         PICK_IMAGE_REQUEST);
 
                 alertDialog.dismiss();
@@ -582,7 +627,7 @@ public class ChatSingle extends AppCompatActivity
 
         edt_message.setText("");
         chatListDataArrayList.add(chatData);
-        chatSingleAdapter.notifyDataSetChanged();
+        chatGroupAdapter.notifyDataSetChanged();
 
         recycler_chat.smoothScrollToPosition(chatListDataArrayList.size() - 1);
 
@@ -614,13 +659,10 @@ public class ChatSingle extends AppCompatActivity
             return Bitmap.createScaledBitmap(image, width, height, true);
         }
 
-
     }
 
 
     private void postChat(final ChatData chatData) {
-
-        String tag_string_req = "CHAT_MSG_LIST";
 
         String url = AppConfig.POST_USER_CHAT;
 
@@ -675,8 +717,8 @@ public class ChatSingle extends AppCompatActivity
                 Log.d(TAG, "onFailure- " + res);
 
 
-                android.app.AlertDialog alert =
-                        new android.app.AlertDialog.Builder(ChatSingle.this).create();
+                AlertDialog alert =
+                        new AlertDialog.Builder(ChatGroup.this).create();
                 alert.setMessage("Server Error");
                 alert.show();
             }

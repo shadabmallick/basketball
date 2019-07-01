@@ -1,5 +1,6 @@
 package com.sport.supernathral.activity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -23,6 +24,8 @@ public class GroupUserSelection extends AppCompatActivity {
     Toolbar toolbar;
     ImageView iv_goto_group;
     RecyclerView recycler_user;
+
+    UserSelectionAdapter adapter;
 
 
     @Override
@@ -55,7 +58,17 @@ public class GroupUserSelection extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                if (adapter != null && adapter.getSelectedUsers().size() > 0){
 
+                    Intent intent =
+                            new Intent(getApplicationContext(), GroupCreate.class);
+                    intent.putExtra("data", adapter.getSelectedUsers());
+                    startActivity(intent);
+
+                }else {
+
+
+                }
             }
         });
 
@@ -77,7 +90,7 @@ public class GroupUserSelection extends AppCompatActivity {
         arrayList.add("A");
         arrayList.add("A");
 
-        UserSelectionAdapter adapter = new UserSelectionAdapter(GroupUserSelection.this,
+        adapter = new UserSelectionAdapter(GroupUserSelection.this,
                 arrayList);
         recycler_user.setAdapter(adapter);
 
