@@ -11,7 +11,8 @@ import com.sport.supernathral.R;
 
 import java.util.ArrayList;
 
-public class AdapterAttendence extends RecyclerView.Adapter<AdapterAttendence.ItemViewHolder> {
+public class AdapterAttendence extends
+        RecyclerView.Adapter<AdapterAttendence.ItemViewHolder> {
 
 private Context context;
 private ArrayList<String> arrayList;

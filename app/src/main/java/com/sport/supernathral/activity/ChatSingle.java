@@ -161,7 +161,6 @@ public class ChatSingle extends AppCompatActivity
                         .into(profile_image);
             }
 
-
             getChatList(globalClass.getId(), chatListData.getReceiver_id(),
                     chatListData.getChat_type());
         }
@@ -253,6 +252,14 @@ public class ChatSingle extends AppCompatActivity
                         String receiver_name = receiver.optString("receiver_name");
                         String receiver_image = receiver.optString("receiver_image");
 
+                        tv_name.setText(receiver_name);
+
+                        if (!receiver_image.isEmpty()) {
+                            Picasso.with(getApplicationContext())
+                                    .load(receiver_image)
+                                    .placeholder(R.mipmap.avatar_gray)
+                                    .into(profile_image);
+                        }
 
 
                         JSONArray data = main_object.getJSONArray("data");

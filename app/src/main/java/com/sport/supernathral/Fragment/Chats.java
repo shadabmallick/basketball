@@ -193,19 +193,15 @@ public class Chats extends Fragment implements AdapterChat.onItemClickListner{
     public void onItemClick(ChatListData chatListData) {
 
         if (chatListData.getChat_type().equals("User")){
-
             Intent intent = new Intent(getActivity(), ChatSingle.class);
             intent.putExtra("info", chatListData);
             startActivity(intent);
-
         }else {
-
             Intent intent = new Intent(getActivity(), ChatGroup.class);
             intent.putExtra("info", chatListData);
+            intent.putExtra("from", "listing");
             startActivity(intent);
         }
-
-
 
     }
 }

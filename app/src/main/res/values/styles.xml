@@ -53,4 +53,8 @@
 
 
 
+    <style name="MyDialog" parent="@android:style/Theme.Holo.Light.Dialog">
+        <item name="android:background">@color/white</item>
+    </style>
+
 </resources>

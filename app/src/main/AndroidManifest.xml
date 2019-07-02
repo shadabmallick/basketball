@@ -170,7 +170,7 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
         <activity
-            android:name=".activity.ProfileInfo"
+            android:name=".activity.SingleProfileInfo"
             android:theme="@style/MyTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
@@ -185,7 +185,10 @@
             android:theme="@style/MyTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
-
+        <activity
+            android:name=".activity.GroupProfileInfo"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
 
 
 

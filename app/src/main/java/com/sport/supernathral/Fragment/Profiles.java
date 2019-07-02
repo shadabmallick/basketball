@@ -1,6 +1,7 @@
 package com.sport.supernathral.Fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +25,10 @@ import com.sport.supernathral.NetworkConstant.AppConfig;
 import com.sport.supernathral.R;
 import com.sport.supernathral.Utils.GlobalClass;
 import com.sport.supernathral.Utils.Shared_Preference;
+import com.sport.supernathral.activity.ChatGroup;
+import com.sport.supernathral.activity.ChatSingle;
+import com.sport.supernathral.activity.GroupProfileInfo;
+import com.sport.supernathral.activity.SingleProfileInfo;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,7 +41,7 @@ public class Profiles extends Fragment implements ProfileAdapter.onItemClickList
 
     RecyclerView recycler_profile;
 
-    String TAG="product";
+    String TAG="Profile";
 
     ArrayList<ChatListData> chatListDataArrayList;
     ProfileAdapter profileAdapter;
@@ -106,8 +111,8 @@ public class Profiles extends Fragment implements ProfileAdapter.onItemClickList
                             chatListData.setUser_type(object.optString("user_type"));
                             chatListData.setMessage(object.optString("message"));
                             chatListData.setMessage_type(object.optString("message_type"));
-                            chatListData.setReceiver_id(object.optString("datetime"));
-                            chatListData.setReceiver_id(object.optString("chat_type"));
+                            chatListData.setDatetime(object.optString("datetime"));
+                            chatListData.setChat_type(object.optString("chat_type"));
 
                             chatListDataArrayList.add(chatListData);
 
@@ -152,7 +157,8 @@ public class Profiles extends Fragment implements ProfileAdapter.onItemClickList
 
         // Adding request to request queue
         GlobalClass.getInstance().addToRequestQueue(strReq, tag_string_req);
-        strReq.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 10, 1.0f));
+        strReq.setRetryPolicy(new DefaultRetryPolicy(20 * 1000,
+                10, 1.0f));
 
     }
 
@@ -160,10 +166,17 @@ public class Profiles extends Fragment implements ProfileAdapter.onItemClickList
     @Override
     public void onItemClick(ChatListData chatListData) {
 
+        Log.e(TAG, "Chat_type(): " +chatListData.getChat_type());
+
         if (chatListData.getChat_type().equals("User")){
-
+            Intent intent = new Intent(getActivity(), SingleProfileInfo.class);
+            intent.putExtra("info", chatListData);
+            startActivity(intent);
         }else {
-
+            Intent intent = new Intent(getActivity(), GroupProfileInfo.class);
+            intent.putExtra("info", chatListData);
+            intent.putExtra("from", "listing");
+            startActivity(intent);
         }
 
     }

@@ -130,6 +130,11 @@
     <string name="msg_group_create">Provide a group subject and optional group icon</string>
     <string name="msg_blank_group">Please enter group name</string>
     <string name="details">Detail</string>
+    <string name="update">Update</string>
+    <string name="add_participant">Add participant</string>
+    <string name="delete_group">Delete Group</string>
+    <string name="remove">Remove</string>
+    <string name="add_member_in_group">Add Member In Group</string>
 
 
 
