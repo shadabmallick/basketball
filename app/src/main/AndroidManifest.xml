@@ -127,7 +127,6 @@
             android:name=".activity.ChatSingle"
             android:theme="@style/MyTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-<<<<<<< HEAD
         <activity
             android:name=".activity.GameListActivity"
             android:theme="@style/MyTheme"
@@ -136,7 +135,6 @@
             android:name=".activity.InfoActivity"
             android:theme="@style/MyTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-=======
 
 
         <activity
@@ -156,8 +154,6 @@
 
 
 
-
->>>>>>> refs/remotes/origin/master
 
         <service android:name=".Utils.GPSTracker" />
     </application>
