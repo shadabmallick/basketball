@@ -12,8 +12,7 @@ import android.widget.TextView;
 
 import com.sport.supernathral.DataModel.ChatListData;
 import com.sport.supernathral.R;
-import com.sport.supernathral.activity.ChatImageFull;
-import com.sport.supernathral.activity.ProfileInfo;
+import com.sport.supernathral.activity.SingleProfileInfo;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -71,7 +70,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ItemView
     @Override
     public void onBindViewHolder(ItemViewHolder holder, final int position) {
 
-        // user type = Coach/Teachers  ,  Students/Players
+        // user type = Coach/Teachers,  Students/Players,  Parents
 
         final ChatListData chatListData = arrayList.get(position);
 
@@ -96,15 +95,15 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ItemView
             holder.tv_last_message.setVisibility(View.VISIBLE);
         }
 
-        holder.tv_last_seen.setText(chatListData.getDatetime());
+
+        holder.tv_last_seen.setVisibility(View.GONE);
 
 
         holder.rel_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(context, ProfileInfo.class);
-                context.startActivity(intent);
+                mListner.onItemClick(chatListData);
 
             }
         });

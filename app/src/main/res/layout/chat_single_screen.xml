@@ -80,7 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:padding="8dp">
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/imgAttachment"
@@ -89,7 +89,7 @@
             android:layout_centerVertical="true"
             android:contentDescription="@string/app_name"
             android:padding="5dp"
-            android:src="@mipmap/add_black" />
+            android:src="@mipmap/plus_grey" />
 
         <EditText
             android:id="@+id/edt_message"
@@ -103,6 +103,7 @@
             android:hint="@string/typemessage"
             android:maxLines="3"
             android:padding="8dp"
+            android:layout_centerVertical="true"
             android:scrollbars="vertical" />
 
         <ImageView

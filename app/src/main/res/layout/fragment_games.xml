@@ -9,8 +9,119 @@
         android:id="@+id/recycle_game"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/footer"
         >
 
     </android.support.v7.widget.RecyclerView>
+    <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/layout_top"
+        >
+
+        <LinearLayout
+            android:id="@+id/llnews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:padding="5dp"
+            >
+
+            <ImageView
+                android:id="@+id/img_news"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/home_black"
+                />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/llchat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:padding="5dp"
+            >
+
+            <ImageView
+                android:id="@+id/info_graphic"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/chat_black"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_games"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:padding="5dp"
+            >
+
+            <ImageView
+                android:id="@+id/info_blog"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/game_yellow"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:padding="5dp"
+            >
+
+            <ImageView
+                android:id="@+id/enquiry"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/event_black"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1"
+
+            android:padding="5dp"
+            >
+
+            <ImageView
+                android:id="@+id/profile"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/profile_black"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 </RelativeLayout>

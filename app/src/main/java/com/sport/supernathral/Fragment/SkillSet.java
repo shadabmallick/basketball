@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.sport.supernathral.AdapterClass.AdapterSkill;
 import com.sport.supernathral.R;
 import com.sport.supernathral.Utils.GlobalClass;
@@ -26,6 +28,7 @@ public class SkillSet  extends Fragment {
     ImageView img_header;
     RecyclerView recycle_skill;
     AdapterSkill adapterEvent;
+    TextView toolbar_title;
 
     ProgressDialog pd;
 
@@ -47,7 +50,8 @@ public class SkillSet  extends Fragment {
     }
 
     private void initialisation(View view) {
-
+        toolbar_title=getActivity().findViewById(R.id.toolbar_title);
+        toolbar_title.setText(getResources().getString(R.string.skill_set));
         img_header = view.findViewById(R.id.img_header);
         recycle_skill = view.findViewById(R.id.recycle_skill);
 

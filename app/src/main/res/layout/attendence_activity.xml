@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:padding="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="@android:drawable/dialog_holo_light_frame">
+    <LinearLayout
+        android:id="@+id/ll_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical"
+        android:paddingTop="20dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginLeft="100dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/name"
+            android:textSize="16dp"/>
+
+
+    </LinearLayout>
+
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@mipmap/avatar_gray"
+        app:civ_border_width="2dp"
+        android:background="@color/shadow"
+        app:civ_border_color="@color/deep_yellow"
+
+
+        />
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="4px"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/profile_image"
+        android:background="@color/light_grey"/>
+    <LinearLayout
+        android:layout_below="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/checked"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circular_shadow"/>
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:textSize="14dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@android:color/black"
+            android:layout_height="wrap_content"
+            android:text="1"/>
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/late"
+            android:padding="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circular_shadow"/>
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:textSize="14dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@android:color/black"
+            android:layout_height="wrap_content"
+            android:text="0"/>
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/absent"
+            android:padding="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circular_shadow"/>
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:textSize="14dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@android:color/black"
+            android:layout_height="wrap_content"
+            android:text="0"/>
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/excuse"
+            android:padding="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circular_shadow"/>
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:textSize="14dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@android:color/black"
+            android:layout_height="wrap_content"
+            android:text="0"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

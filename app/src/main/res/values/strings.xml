@@ -65,7 +65,7 @@
 
     <string name="old_password">Old Password</string>
     <string name="loading">Loading...</string>
-    <string name="team">Teams</string>
+    <string name="team">Team</string>
     <string name="first">1st</string>
     <string name="second">2nd</string>
     <string name="third">3rd</string>
@@ -88,6 +88,7 @@
     <string name="sponsor">Sponsor</string>
     <string name="notes">Notes</string>
     <string name="primary_contact">Primary Contact</string>
+    <string name="secondary_contact">Secondary Contact</string>
     <string name="completed">Completed</string>
     <string name="saturday">SATURDAY TEAM PRACTICE</string>
     <string name="starting_day">Start Day :</string>
@@ -102,6 +103,7 @@
     <string name="late">Late</string>
     <string name="absent">Absent</string>
     <string name="excuse">Excuse</string>
+    <string name="student_list">Student List</string>
 
 
     <string-array name="game_drawer_items">
@@ -125,6 +127,20 @@
     <string name="new_group">New Group</string>
     <string name="add_member">Add Members</string>
     <string name="messsage">Message</string>
+    <string name="create_group_2">Create Group</string>
+    <string name="type_group_name">Type group name here&#8230;</string>
+    <string name="msg_group_create">Provide a group subject and optional group icon</string>
+    <string name="msg_blank_group">Please enter group name</string>
+    <string name="details">Detail</string>
+    <string name="update">Update</string>
+    <string name="add_participant">Add participant</string>
+    <string name="delete_group">Delete Group</string>
+    <string name="remove">Remove</string>
+    <string name="add_member_in_group">Add Member In Group</string>
+
+
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -27,6 +27,7 @@ import com.sport.supernathral.NetworkConstant.AppConfig;
 import com.sport.supernathral.R;
 import com.sport.supernathral.Utils.GlobalClass;
 import com.sport.supernathral.Utils.Shared_Preference;
+import com.sport.supernathral.activity.ChatGroup;
 import com.sport.supernathral.activity.ChatSingle;
 import com.sport.supernathral.activity.GroupUserSelection;
 import com.sport.supernathral.activity.LoginScreen;
@@ -175,6 +176,8 @@ public class Chats extends Fragment implements AdapterChat.onItemClickListner{
                 Map<String, String> params = new HashMap<>();
                 params.put("user_id", user_id);
 
+                Log.e(TAG, "params: " +params);
+
                 return params;
             }
 
@@ -189,9 +192,16 @@ public class Chats extends Fragment implements AdapterChat.onItemClickListner{
     @Override
     public void onItemClick(ChatListData chatListData) {
 
-        Intent intent = new Intent(getActivity(), ChatSingle.class);
-        intent.putExtra("info", chatListData);
-        startActivity(intent);
+        if (chatListData.getChat_type().equals("User")){
+            Intent intent = new Intent(getActivity(), ChatSingle.class);
+            intent.putExtra("info", chatListData);
+            startActivity(intent);
+        }else {
+            Intent intent = new Intent(getActivity(), ChatGroup.class);
+            intent.putExtra("info", chatListData);
+            intent.putExtra("from", "listing");
+            startActivity(intent);
+        }
 
     }
 }

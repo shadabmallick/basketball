@@ -331,6 +331,32 @@
 
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="100dp"
+                android:background="@mipmap/button_bg"
+                android:padding="15dp"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:textColor="@android:color/white"
+                    android:text="@string/secondary_contact"/>
+
+
+
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+
+                android:textColor="@android:color/white"
+                android:text="@string/primary_contact"/>
+
 
         </LinearLayout>
 

@@ -19,12 +19,12 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class UserSelectionAdapter extends RecyclerView.Adapter<UserSelectionAdapter.ItemViewHolder> {
+public class UserSelectionAdapter extends
+        RecyclerView.Adapter<UserSelectionAdapter.ItemViewHolder> {
 
     private Context context;
     private ArrayList<String> arrayList;
     private ArrayList<Boolean> arr_selection;
-
 
 
     public class ItemViewHolder extends RecyclerView.ViewHolder{

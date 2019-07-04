@@ -34,9 +34,13 @@ import com.sport.supernathral.Fragment.Games;
 import com.sport.supernathral.Fragment.Info;
 import com.sport.supernathral.Fragment.Notes;
 import com.sport.supernathral.Fragment.Schedule;
+import com.sport.supernathral.Fragment.ScheduleUserwise;
 import com.sport.supernathral.Fragment.SkillSet;
 import com.sport.supernathral.Fragment.Sponsor;
 import com.sport.supernathral.Fragment.Statistics;
+import com.sport.supernathral.Fragment.StudentList;
+import com.sport.supernathral.Fragment.Team;
+import com.sport.supernathral.Fragment.Team_All;
 import com.sport.supernathral.R;
 
 import java.util.ArrayList;
@@ -127,7 +131,7 @@ public class GamesMain extends AppCompatActivity
 
         initNavigationItems();
 
-        initFooterItems();
+       // initFooterItems();
 
 
 
@@ -284,22 +288,22 @@ public class GamesMain extends AppCompatActivity
             case 2:
                 toolbar_title.setText(getResources().getString(R.string.schedule));
 
-                transactFragment(new Schedule());
+                transactFragment(new ScheduleUserwise());
 
                 break;
 
             case 3:
                 toolbar_title.setText(getResources().getString(R.string.attendance));
 
-                transactFragment(new Attendence());
+                transactFragment(new Team());
 
                 break;
 
             case 4:
 
-                toolbar_title.setText(getResources().getString(R.string.skill_set));
+                toolbar_title.setText(getResources().getString(R.string.student_list));
 
-                transactFragment(new SkillSet());
+                transactFragment(new StudentList());
 
                 break;
 
@@ -323,15 +327,24 @@ public class GamesMain extends AppCompatActivity
 
                 toolbar_title.setText(getResources().getString(R.string.sponsor));
 
-                transactFragment(new Sponsor());
+                Bundle bundle = new Bundle();
+                bundle.putString("from", getResources().getString(R.string.sponsor));
+                Team_All team_all = new Team_All();
+                team_all.setArguments(bundle);
+
+                transactFragment(team_all);
 
                 break;
 
             case 8:
 
                 toolbar_title.setText(getResources().getString(R.string.notes));
+                Bundle bundle_notes = new Bundle();
+                bundle_notes.putString("from", getResources().getString(R.string.notes));
+                Team_All team_all_notes = new Team_All();
+                team_all_notes.setArguments(bundle_notes);
 
-                transactFragment(new Notes());
+                transactFragment(new Team_All());
 
                 break;
 
@@ -396,53 +409,6 @@ public class GamesMain extends AppCompatActivity
 
 
 
-
-    private void initFooterItems(){
-
-        LinearLayout llnews = findViewById(R.id.llnews);
-        LinearLayout llchat = findViewById(R.id.llchat);
-        LinearLayout ll_games = findViewById(R.id.ll_games);
-        LinearLayout ll_event = findViewById(R.id.ll_event);
-        LinearLayout ll_profile = findViewById(R.id.ll_profile);
-
-
-        llnews.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),HomePage.class));
-            }
-        });
-
-
-        llchat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(getApplicationContext(),ChatScreen.class));
-            }
-        });
-
-
-        ll_event.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(getApplicationContext(), EventScreen.class));
-
-            }
-        });
-
-        ll_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(getApplicationContext(), ProfileScreen.class));
-
-            }
-        });
-
-
-    }
 
 
 

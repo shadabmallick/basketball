@@ -11,7 +11,6 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,9 +28,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -42,11 +39,9 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.shashank.sony.fancytoastlib.FancyToast;
-import com.sport.supernathral.AdapterClass.AdapterChat;
 import com.sport.supernathral.AdapterClass.ChatSingleAdapter;
 import com.sport.supernathral.DataModel.ChatData;
 import com.sport.supernathral.DataModel.ChatListData;
-import com.sport.supernathral.Fragment.Chats;
 import com.sport.supernathral.NetworkConstant.AppConfig;
 import com.sport.supernathral.R;
 import com.sport.supernathral.Utils.Common;
@@ -59,10 +54,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -107,7 +100,7 @@ public class ChatSingle extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.single_chat_screen);
+        setContentView(R.layout.chat_single_screen);
         intViews();
 
         this.registerReceiver(mMessageReceiver,
@@ -167,7 +160,6 @@ public class ChatSingle extends AppCompatActivity
                         .placeholder(R.mipmap.avatar_gray)
                         .into(profile_image);
             }
-
 
             getChatList(globalClass.getId(), chatListData.getReceiver_id(),
                     chatListData.getChat_type());
@@ -260,6 +252,14 @@ public class ChatSingle extends AppCompatActivity
                         String receiver_name = receiver.optString("receiver_name");
                         String receiver_image = receiver.optString("receiver_image");
 
+                        tv_name.setText(receiver_name);
+
+                        if (!receiver_image.isEmpty()) {
+                            Picasso.with(getApplicationContext())
+                                    .load(receiver_image)
+                                    .placeholder(R.mipmap.avatar_gray)
+                                    .into(profile_image);
+                        }
 
 
                         JSONArray data = main_object.getJSONArray("data");
