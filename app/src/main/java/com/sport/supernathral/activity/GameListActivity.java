@@ -14,8 +14,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.sport.supernathral.Fragment.CommentsActivity;
-import com.sport.supernathral.Fragment.ResumeActivity;
+import com.sport.supernathral.Fragment.Comments;
 import com.sport.supernathral.Fragment.ScoreGame;
 import com.sport.supernathral.R;
 
@@ -25,8 +24,8 @@ import java.util.List;
 public class GameListActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
+    TabLayout tabLayout;
+    ViewPager viewPager;
 
 
     @Override
@@ -50,10 +49,10 @@ public class GameListActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.mipmap.back_black);
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
 
@@ -65,7 +64,7 @@ public class GameListActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         GameListActivity.ViewPagerAdapter adapter = new GameListActivity.ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new ScoreGame(), "Score");
-        adapter.addFragment(new CommentsActivity(), "Comments");
+        adapter.addFragment(new Comments(), "Comments");
 
         viewPager.setAdapter(adapter);
     }

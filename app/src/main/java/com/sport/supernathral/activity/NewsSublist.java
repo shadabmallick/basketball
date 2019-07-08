@@ -17,9 +17,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 
-import com.sport.supernathral.Fragment.Chats;
-import com.sport.supernathral.Fragment.CommentsActivity;
-import com.sport.supernathral.Fragment.Profiles;
+import com.sport.supernathral.Fragment.Comments;
 import com.sport.supernathral.Fragment.ResumeActivity;
 import com.sport.supernathral.R;
 
@@ -69,7 +67,7 @@ public class NewsSublist extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         NewsSublist.ViewPagerAdapter adapter = new NewsSublist.ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new ResumeActivity(), "Resume");
-        adapter.addFragment(new CommentsActivity(), "Comments");
+        adapter.addFragment(new Comments(), "Comments");
 
         viewPager.setAdapter(adapter);
     }

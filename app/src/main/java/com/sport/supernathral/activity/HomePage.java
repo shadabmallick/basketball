@@ -63,19 +63,19 @@ public class HomePage extends AppCompatActivity {
         newsList.add("A");
         newsList.add("A");
         newsList.add("A");
-        GameAdapter notificationListAdapter
-                = new GameAdapter(getApplicationContext(), gamelist);
+
+
+        GameAdapter notificationListAdapter = new GameAdapter(HomePage.this, gamelist);
         recycle_game.setAdapter(notificationListAdapter);
 
 
-        NewsAdapter newsAdapter
-                = new NewsAdapter(getApplicationContext(), newsList);
+        NewsAdapter newsAdapter = new NewsAdapter(HomePage.this, newsList);
         recycle_news.setAdapter(newsAdapter);
 
         img_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent searchPLayer=new Intent(getApplicationContext(),SearchPlayer.class);
+                Intent searchPLayer=new Intent(HomePage.this,SearchPlayer.class);
                 startActivity(searchPLayer);
 
             }
@@ -83,7 +83,7 @@ public class HomePage extends AppCompatActivity {
         rl_homescreen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent newsPage=new Intent(getApplicationContext(),NewsSublist.class);
+                Intent newsPage=new Intent(HomePage.this,NewsSublist.class);
                 startActivity(newsPage);
             }
         });

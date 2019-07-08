@@ -16,9 +16,9 @@ import com.sport.supernathral.R;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CommentsActivity extends Fragment {
+public class Comments extends Fragment {
 
-    RecyclerView rv_category,subCommnet;
+    RecyclerView rv_category;
 
     String TAG="product";
     AdapterComment adapterChat;
@@ -28,12 +28,11 @@ public class CommentsActivity extends Fragment {
     ProgressDialog pd;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_comment, container, false);
 
         initialisation(view);
-        function();
-        Subcommnet();
 
 
 
@@ -43,8 +42,9 @@ public class CommentsActivity extends Fragment {
     private void initialisation(View view) {
 
         rv_category = view.findViewById(R.id.recycler_comment);
-        subCommnet = view.findViewById(R.id.recycler_subcomment);
 
+
+        function();
     }
 
     private void function() {
@@ -53,35 +53,16 @@ public class CommentsActivity extends Fragment {
         newsList.add("A");
         newsList.add("A");
         newsList.add("A");
+        newsList.add("A");
 
         rv_category.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapterChat
-                = new AdapterComment(getActivity(), newsList,subCommnet);
+        adapterChat = new AdapterComment(getActivity(), newsList);
         rv_category.setAdapter(adapterChat);
 
-
-
-
-
-
     }
-    private void Subcommnet() {
-        newsList = new ArrayList<>();
-        newsList.add("A");
-        newsList.add("A");
-
-
-        subCommnet.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapterChat
-                = new AdapterComment(getActivity(), newsList,subCommnet);
-        subCommnet.setAdapter(adapterChat);
 
 
 
-
-
-
-    }
 
 
 

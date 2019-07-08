@@ -71,7 +71,7 @@ public class StudentListActivity extends AppCompatActivity {
 
         recycle_student_list.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         adpterStudentList
-                = new AdpterStudentList(getApplicationContext(), newsList,from);
+                = new AdpterStudentList(StudentListActivity.this, newsList,from);
         recycle_student_list.setAdapter(adpterStudentList);
 
 
