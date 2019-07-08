@@ -7,9 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.sport.supernathral.AdapterClass.AdpterStudentList;
 import com.sport.supernathral.R;
@@ -27,6 +26,8 @@ public class StudentListActivity extends AppCompatActivity {
     AdpterStudentList adpterStudentList;
     ArrayList<String> newsList;
     RecyclerView recycle_student_list;
+    String from;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +38,8 @@ public class StudentListActivity extends AppCompatActivity {
         pd = new ProgressDialog(StudentListActivity.this);
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.setMessage("Loading...");
+        from =  getIntent().getStringExtra("from");
+        Log.d(TAG, "onCreate: "+from);
         initView();
         initialisation();
 
@@ -68,7 +71,7 @@ public class StudentListActivity extends AppCompatActivity {
 
         recycle_student_list.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         adpterStudentList
-                = new AdpterStudentList(getApplicationContext(), newsList);
+                = new AdpterStudentList(getApplicationContext(), newsList,from);
         recycle_student_list.setAdapter(adpterStudentList);
 
 

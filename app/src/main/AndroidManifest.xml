@@ -215,6 +215,26 @@
             android:name=".activity.NotesDetails"
             android:theme="@style/MyTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.SponsorActivity"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.StatisticsActivity"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.PlayerInfo"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.SkillActivity"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.ScheduleActvity"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
 
 
 

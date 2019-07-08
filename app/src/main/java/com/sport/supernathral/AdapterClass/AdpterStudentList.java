@@ -10,6 +10,11 @@ import android.widget.TextView;
 
 import com.sport.supernathral.R;
 import com.sport.supernathral.activity.NotesActivity;
+import com.sport.supernathral.activity.PlayerInfo;
+import com.sport.supernathral.activity.ScheduleActvity;
+import com.sport.supernathral.activity.SkillActivity;
+import com.sport.supernathral.activity.SponsorActivity;
+import com.sport.supernathral.activity.StatisticsActivity;
 
 import java.util.ArrayList;
 
@@ -18,7 +23,7 @@ public class AdpterStudentList extends
 
     private Context context;
     private ArrayList<String> arrayList;
-
+    private String from;
 
 
     AdpterStudentList.onItemClickListner mListner;
@@ -41,10 +46,11 @@ public class AdpterStudentList extends
     }
 
 
-    public AdpterStudentList(Context context, ArrayList<String> itemList){
+    public AdpterStudentList(Context context, ArrayList<String> itemList,String from){
 
         this.context = context;
         this.arrayList=itemList;
+        this.from=from;
 
 
 
@@ -65,8 +71,41 @@ public class AdpterStudentList extends
      holder.itemView.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
-             Intent intent = new Intent(context, NotesActivity.class);
-             context.startActivity(intent);
+             if(from.equals("Notes")) {
+                 Intent intent = new Intent(context, NotesActivity.class);
+                 context.startActivity(intent);
+             }
+             else if(from.equals("Sponsor")){
+                 Intent intent = new Intent(context, SponsorActivity.class);
+                 context.startActivity(intent);
+
+             }
+             else if(from.equals("Statistics")){
+                 Intent intent = new Intent(context, StatisticsActivity.class);
+                 context.startActivity(intent);
+
+
+             }
+
+             else if(from.equals("Info")){
+                 Intent intent = new Intent(context, PlayerInfo.class);
+                 context.startActivity(intent);
+
+
+             }
+             else if(from.equals("Student List")){
+                 Intent intent = new Intent(context, SkillActivity.class);
+                 context.startActivity(intent);
+
+
+             }
+             else if(from.equals("Schedule")){
+                 Intent intent = new Intent(context, ScheduleActvity.class);
+                 context.startActivity(intent);
+
+
+             }
+
          }
      });
 

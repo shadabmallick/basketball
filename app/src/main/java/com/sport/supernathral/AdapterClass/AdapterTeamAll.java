@@ -18,7 +18,7 @@ public class AdapterTeamAll extends
 
     private Context context;
     private ArrayList<String> arrayList;
-
+    private String from;
 
 
     AdapterTeamAll.onItemClickListner mListner;
@@ -41,10 +41,11 @@ public class AdapterTeamAll extends
     }
 
 
-    public AdapterTeamAll(Context context, ArrayList<String> itemList){
+    public AdapterTeamAll(Context context, ArrayList<String> itemList,String from){
 
         this.context = context;
         this.arrayList=itemList;
+        this.from=from;
 
 
 
@@ -67,6 +68,7 @@ public class AdapterTeamAll extends
             @Override
             public void onClick(View v) {
                 Intent attendance=new Intent(context, StudentListActivity.class);
+                attendance.putExtra("from", from);
                 context.startActivity(attendance);
             }
         });

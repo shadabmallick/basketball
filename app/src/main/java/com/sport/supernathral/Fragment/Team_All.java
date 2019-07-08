@@ -37,7 +37,7 @@ public class Team_All extends Fragment {
     RecyclerView recycle_notes;
     TextView toolbar_title,tv_date_select;
     ProgressDialog pd;
-
+    String sponsor,notes;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.team_all, container, false);
@@ -56,8 +56,9 @@ public class Team_All extends Fragment {
 
     private void initialisation(View view) {
 
-        String strtext = getArguments().getString("from");
-        Log.d(TAG, "From: "+strtext);
+         sponsor = getArguments().getString("from");
+
+        Log.d(TAG, "From: "+sponsor);
 
 
 
@@ -71,8 +72,7 @@ public class Team_All extends Fragment {
 
         img_header = view.findViewById(R.id.img_header);
         recycle_notes = view.findViewById(R.id.recycle_date);
-       // tv_date_select.setText(date);
-        //rv_category = view.findViewById(R.id.recycler_chat);
+
         newsList = new ArrayList<>();
         newsList.add("A");
         newsList.add("A");
@@ -82,7 +82,7 @@ public class Team_All extends Fragment {
         int numberOfColumns = 2;
         recycle_notes.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
         adapterNotes
-                = new AdapterTeamAll(getActivity(), newsList);
+                = new AdapterTeamAll(getActivity(), newsList,sponsor);
         recycle_notes.setAdapter(adapterNotes);
 
 

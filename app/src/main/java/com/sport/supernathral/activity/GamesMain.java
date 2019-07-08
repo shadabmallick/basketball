@@ -287,8 +287,13 @@ public class GamesMain extends AppCompatActivity
 
             case 2:
                 toolbar_title.setText(getResources().getString(R.string.schedule));
+                Bundle bundle_schedule = new Bundle();
+                bundle_schedule.putString("from", getResources().getString(R.string.schedule));
+                ScheduleUserwise scchedule_list = new ScheduleUserwise();
+                scchedule_list.setArguments( bundle_schedule);
 
-                transactFragment(new ScheduleUserwise());
+                transactFragment(scchedule_list);
+
 
                 break;
 
@@ -303,7 +308,12 @@ public class GamesMain extends AppCompatActivity
 
                 toolbar_title.setText(getResources().getString(R.string.student_list));
 
-                transactFragment(new StudentList());
+                Bundle bundle_student_list = new Bundle();
+                bundle_student_list.putString("from", getResources().getString(R.string.student_list));
+                Team_All student_list = new Team_All();
+                student_list.setArguments( bundle_student_list);
+
+                transactFragment(student_list);
 
                 break;
 
@@ -311,7 +321,12 @@ public class GamesMain extends AppCompatActivity
 
                 toolbar_title.setText(getResources().getString(R.string.info));
 
-                transactFragment(new Info());
+                Bundle bundle_info = new Bundle();
+                bundle_info.putString("from", getResources().getString(R.string.info));
+                Team_All info = new Team_All();
+                info.setArguments(bundle_info);
+
+                transactFragment(info);
 
                 break;
 
@@ -319,7 +334,12 @@ public class GamesMain extends AppCompatActivity
 
                 toolbar_title.setText(getResources().getString(R.string.statistics));
 
-                transactFragment(new Statistics());
+                Bundle bundle_statistics = new Bundle();
+                bundle_statistics.putString("from", getResources().getString(R.string.statistics));
+                Team_All statistics = new Team_All();
+                statistics.setArguments(bundle_statistics);
+
+                transactFragment(statistics);
 
                 break;
 
@@ -344,7 +364,7 @@ public class GamesMain extends AppCompatActivity
                 Team_All team_all_notes = new Team_All();
                 team_all_notes.setArguments(bundle_notes);
 
-                transactFragment(new Team_All());
+                transactFragment(team_all_notes);
 
                 break;
 

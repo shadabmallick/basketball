@@ -8,8 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.sport.supernathral.Fragment.StudentList;
 import com.sport.supernathral.R;
 import com.sport.supernathral.activity.AttendanceActivity;
+import com.sport.supernathral.activity.StudentListActivity;
 
 import java.util.ArrayList;
 
@@ -18,7 +20,7 @@ public class AdapterTeam extends
 
     private Context context;
     private ArrayList<String> arrayList;
-
+    private String from;
 
 
     AdapterTeam.onItemClickListner mListner;
@@ -41,10 +43,11 @@ public class AdapterTeam extends
     }
 
 
-    public AdapterTeam(Context context, ArrayList<String> itemList){
+    public AdapterTeam(Context context, ArrayList<String> itemList,String from){
 
         this.context = context;
         this.arrayList=itemList;
+        this.from=from;
 
 
 
@@ -66,7 +69,8 @@ public class AdapterTeam extends
          holder.itemView.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 Intent attendance=new Intent(context, AttendanceActivity.class);
+                 Intent attendance=new Intent(context, StudentListActivity.class);
+                 attendance.putExtra("from",from);
                  context.startActivity(attendance);
              }
          });

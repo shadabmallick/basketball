@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public class ScheduleUserwise extends Fragment {
     ImageView img_header;
     RelativeLayout rl_own,rl_players;
     ProgressDialog pd;
+    String sponsor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,7 +48,8 @@ public class ScheduleUserwise extends Fragment {
     }
 
     private void initialisation(View view) {
-
+        sponsor = getArguments().getString("from");
+        Log.d(TAG, "initialisation: "+sponsor);
         img_header = view.findViewById(R.id.img_header);
         rl_own=view.findViewById(R.id.rl_own);
         rl_players=view.findViewById(R.id.rl_player);
@@ -64,6 +67,7 @@ public class ScheduleUserwise extends Fragment {
             @Override
             public void onClick(View v) {
                Intent team=new Intent(getActivity(), TeamActivity.class);
+                team.putExtra("from", sponsor);
                startActivity(team);
             }
         });

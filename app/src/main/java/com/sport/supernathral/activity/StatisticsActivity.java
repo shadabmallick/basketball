@@ -4,24 +4,24 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.sport.supernathral.AdapterClass.AdapterTeam;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.sport.supernathral.R;
 import com.sport.supernathral.Utils.GlobalClass;
 import com.sport.supernathral.Utils.Shared_Preference;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class TeamActivity
-        extends AppCompatActivity {
+public class StatisticsActivity extends AppCompatActivity {
     String TAG=" About";
     GlobalClass globalClass;
     Shared_Preference preference;
@@ -29,18 +29,14 @@ public class TeamActivity
     TextView tv_about;
     Toolbar toolbar;
     LinearLayout ll_txt_about;
-    AdapterTeam adapterNotes;
-    ArrayList<String> newsList;
-    RecyclerView recycle_notes;
-    String from;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.team);
+        setContentView(R.layout.statistics);
         globalClass=(GlobalClass)getApplicationContext();
-        preference = new Shared_Preference(TeamActivity.this);
+        preference = new Shared_Preference(StatisticsActivity.this);
         preference.loadPrefrence();
-        pd = new ProgressDialog(TeamActivity.this);
+        pd = new ProgressDialog(StatisticsActivity.this);
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.setMessage("Loading...");
         initView();
@@ -48,8 +44,6 @@ public class TeamActivity
 
     }
     public void initView(){
-        from =  getIntent().getStringExtra("from");
-        Log.d(TAG, "initView: "+from);
         toolbar = findViewById(R.id.toolbar);
         ll_txt_about = findViewById(R.id.ll_txt_about);
         setSupportActionBar(toolbar);
@@ -61,25 +55,40 @@ public class TeamActivity
         getSupportActionBar().setHomeAsUpIndicator(R.mipmap.back_black);
         tv_about=findViewById(R.id.about_us);
 
+
     }
+
 
     private void initialisation() {
 
-        recycle_notes = findViewById(R.id.recycler_team);
-
-        newsList = new ArrayList<>();
-        newsList.add("A");
-        newsList.add("A");
-        newsList.add("A");
-        newsList.add("A");
-
-        int numberOfColumns = 2;
-        recycle_notes.setLayoutManager(new GridLayoutManager(getApplicationContext(), numberOfColumns));
-        adapterNotes
-                = new AdapterTeam(getApplicationContext(), newsList,from);
-        recycle_notes.setAdapter(adapterNotes);
 
 
+
+        BarChart barChart = (BarChart) findViewById(R.id.chart);
+
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        entries.add(new BarEntry(8f, 0));
+        entries.add(new BarEntry(10f, 1));
+
+
+        BarDataSet bardataset = new BarDataSet(entries, "");
+
+        ArrayList<String> labels = new ArrayList<String>();
+        labels.add("");
+        labels.add("");
+        labels.add("");
+        labels.add("");
+        labels.add("");
+        labels.add("");
+
+        BarData data = new BarData(labels, bardataset);
+        barChart.setData(data); // set the data and list of lables into chart
+
+        barChart.setDescription("");  // set the description
+
+        bardataset.setColors(Collections.singletonList(getResources().getColor(R.color.deep_yellow)));
+
+        barChart.animateY(5000);
     }
 
     @Override

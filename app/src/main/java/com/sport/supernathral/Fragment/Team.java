@@ -36,6 +36,7 @@ public class Team  extends Fragment {
     RecyclerView recycle_notes;
     TextView toolbar_title,tv_date_select;
     ProgressDialog pd;
+    String value;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -75,7 +76,7 @@ public class Team  extends Fragment {
         int numberOfColumns = 2;
         recycle_notes.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
         adapterNotes
-                = new AdapterTeam(getActivity(), newsList);
+                = new AdapterTeam(getActivity(), newsList,value);
         recycle_notes.setAdapter(adapterNotes);
 
 
