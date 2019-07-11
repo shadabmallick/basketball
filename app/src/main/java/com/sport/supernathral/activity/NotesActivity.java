@@ -72,7 +72,7 @@ public class NotesActivity  extends AppCompatActivity {
 
         recyle_notes.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         adapterNotesDetails
-                = new AdapterNotesDetails(getApplicationContext(), newsList);
+                = new AdapterNotesDetails(NotesActivity.this, newsList);
         recyle_notes.setAdapter(adapterNotesDetails);
 
 

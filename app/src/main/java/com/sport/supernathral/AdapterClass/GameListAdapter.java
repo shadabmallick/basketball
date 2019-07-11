@@ -1,11 +1,13 @@
 package com.sport.supernathral.AdapterClass;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -15,6 +17,7 @@ import com.sport.supernathral.R;
 import com.sport.supernathral.Utils.GameItem;
 import com.sport.supernathral.Utils.HeaderItem;
 import com.sport.supernathral.Utils.ListItem;
+import com.sport.supernathral.activity.GameListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,13 +43,13 @@ public class GameListAdapter extends
     public class GameViewHolder extends RecyclerView.ViewHolder{
         TextView menu_item_title;
         ImageView menu_item_icon;
-        RelativeLayout rel_main;
+        LinearLayout linear_main;
 
         public GameViewHolder(View itemView) {
             super(itemView);
             menu_item_title = itemView.findViewById(R.id.menu_item_title);
             menu_item_icon = itemView.findViewById(R.id.menu_item_icon);
-            rel_main = itemView.findViewById(R.id.rel_main);
+            linear_main = itemView.findViewById(R.id.linear_main);
         }
     }
 
@@ -102,6 +105,14 @@ public class GameListAdapter extends
             GameViewHolder holder = (GameViewHolder) viewHolder;
 
 
+            holder.linear_main.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent intent = new Intent(context, GameListActivity.class);
+                    context.startActivity(intent);
+                }
+            });
 
 
         }

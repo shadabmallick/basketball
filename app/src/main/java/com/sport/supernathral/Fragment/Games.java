@@ -119,7 +119,7 @@ public class Games extends Fragment {
         }
 
 
-        GameListAdapter gameListAdapter = new GameListAdapter(getContext(),
+        GameListAdapter gameListAdapter = new GameListAdapter(getActivity(),
                 mItems);
         recycle_game.setAdapter(gameListAdapter);
 

@@ -2,9 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="5dp"
     android:padding="10dp"
-    android:layout_marginBottom="10dp">
+    android:layout_marginBottom="5dp">
+
+
     <LinearLayout
         android:id="@+id/ll_text"
         android:layout_width="match_parent"
@@ -13,23 +15,25 @@
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        android:layout_marginLeft="100dp">
+        android:paddingStart="15dp"
+        android:layout_toRightOf="@+id/profile_image"
+        >
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="@string/name"
-            android:textSize="16dp"/>
+            android:textSize="16sp"/>
+
         <TextView
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/darker_gray"
             android:text="@string/player"/>
 
-
     </LinearLayout>
-
-
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -37,80 +41,76 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:src="@mipmap/avatar_gray"
-
-
         />
 
     <LinearLayout
         android:id="@+id/llmenu"
         android:layout_below="@+id/profile_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:orientation="horizontal"
-        android:weightSum="100"
         android:gravity="center"
-        android:layout_marginTop="10dp"
-
+        android:layout_marginTop="5dp"
         >
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="30"
+            android:layout_weight="8"
             android:text="2019-04-91"
             android:gravity="center_horizontal"
             android:singleLine="true" />
 
-        <ImageButton
-            android:layout_width="0dp"
+        <ImageView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="6"
+            android:layout_weight="10"
             android:gravity="center"
-            android:background="@mipmap/delete"
-
-
+            android:src="@mipmap/delete"
             />
 
-        <ImageButton
-            android:layout_width="0dp"
+        <ImageView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:background="@mipmap/like_holo"
-
-            android:layout_marginLeft="20dp"
+            android:layout_weight="10"
+            android:src="@mipmap/like_holo"
             android:gravity="center"
+            android:tint="@color/light_grey"
             />
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="15"
+            android:layout_weight="10"
             android:text="0"
             android:gravity="center"
             android:singleLine="true" />
-        <ImageButton
+
+        <ImageView
             android:id="@+id/img_comment"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:background="@mipmap/chat_white2"
+            android:layout_weight="10"
+            android:src="@mipmap/chat_black"
+            android:tint="@color/light_grey"
             android:gravity="center"
             />
+
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="15"
+            android:layout_weight="10"
             android:text="0"
             android:gravity="center"
             android:singleLine="true" />
+
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="15"
+            android:layout_weight="9"
             android:text="@string/report"
             android:gravity="center"
             android:singleLine="true" />
-
 
 
     </LinearLayout>
@@ -118,56 +118,36 @@
     <View
         android:id="@+id/view1"
         android:layout_width="match_parent"
-        android:layout_height="4px"
-        android:layout_marginTop="10dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
         android:layout_below="@+id/llmenu"
-
         android:background="@color/light_grey"/>
 
     <RelativeLayout
         android:id="@+id/rl_sublist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
-        android:layout_below="@+id/view1"
-        android:layout_marginBottom="10dp">
-        <LinearLayout
-            android:id="@+id/ll_tex"
+        android:layout_below="@+id/view1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_sub_comments"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/tv_show_more"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-
-            android:paddingRight="10dp"
-
-            android:layout_marginLeft="80dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/name"
-                android:textSize="16dp"/>
-            <TextView
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/darker_gray"
-                android:text="test1"/>
-
-
-        </LinearLayout>
-
-
-
-        <de.hdodenhof.circleimageview.CircleImageView
-
-            android:id="@+id/profile_image1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@mipmap/avatar_gray"
-
-
+            android:text="@string/show_more"
+            android:layout_below="@+id/recycler_sub_comments"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
             />
+
 
     </RelativeLayout>
 
