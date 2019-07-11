@@ -69,8 +69,8 @@ public class AdapterTeam extends
          holder.itemView.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 Intent attendance=new Intent(context, StudentListActivity.class);
-                 attendance.putExtra("from",from);
+                 Intent attendance=new Intent(context, AttendanceActivity.class);
+              //   attendance.putExtra("from",from);
                  context.startActivity(attendance);
              }
          });

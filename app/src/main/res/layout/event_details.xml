@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@mipmap/button_bg"
+        >
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/event_details"
+                android:layout_gravity="end"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:paddingRight="10dp"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                />
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+
+    <ScrollView
+        android:layout_below="@+id/appbarLayout"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@android:drawable/dialog_holo_light_frame">
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                   android:layout_height="150dp"
+                    android:src="@mipmap/icon4"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/completed"
+                    android:layout_marginBottom="20dp"/>
+
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/dialog_holo_light_frame">
+
+                <TextView
+                    android:id="@+id/tv_title_text"
+                    android:text="@string/title"
+                    android:textStyle="bold"
+                    android:paddingLeft="10dp"
+                    android:textColor="@android:color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                  />
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_below="@+id/tv_title_text"
+                    android:layout_width="match_parent"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_height="match_parent"
+                    android:text="Test Event"
+                    />
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:background="@android:drawable/dialog_holo_light_frame"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+
+
+                    <TextView
+                        android:id="@+id/tv_start_date_text"
+                        android:text="@string/start_date"
+                        android:textStyle="bold"
+                        android:paddingLeft="10dp"
+                        android:textColor="@android:color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        />
+                    <TextView
+                        android:id="@+id/tv_date_start"
+                        android:layout_width="match_parent"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:layout_height="match_parent"
+                        android:text="2019-04-30"
+                        />
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginRight="50dp"
+                    android:layout_gravity="right">
+
+
+
+                    <TextView
+                        android:id="@+id/tv_end_date_text"
+                        android:text="@string/start_date"
+                        android:textStyle="bold"
+                        android:gravity="right"
+                        android:paddingLeft="10dp"
+                        android:textColor="@android:color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        />
+                    <TextView
+                        android:id="@+id/tv_date_end"
+                        android:layout_width="match_parent"
+                        android:paddingLeft="10dp"
+                        android:gravity="right"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:layout_height="match_parent"
+                        android:text="2019-04-30"
+                        />
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/dialog_holo_light_frame">
+
+                <TextView
+                    android:id="@+id/tv_time_text"
+                    android:text="@string/time"
+                    android:textStyle="bold"
+                    android:paddingLeft="10dp"
+                    android:textColor="@android:color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_below="@+id/tv_time_text"
+                    android:layout_width="match_parent"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_height="match_parent"
+                    android:text="16:40"
+                    />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/dialog_holo_light_frame">
+
+                <TextView
+                    android:id="@+id/tv_venue_text"
+                    android:text="@string/venue1"
+                    android:textStyle="bold"
+                    android:paddingLeft="10dp"
+                    android:textColor="@android:color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+                <TextView
+                    android:id="@+id/tv_venue"
+                    android:layout_below="@+id/tv_venue_text"
+                    android:layout_width="match_parent"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_height="match_parent"
+                    android:text="bejing"
+                    />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/dialog_holo_light_frame">
+
+                <TextView
+                    android:id="@+id/tv_address_text"
+                    android:text="@string/address1"
+                    android:textStyle="bold"
+                    android:paddingLeft="10dp"
+                    android:textColor="@android:color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_below="@+id/tv_address_text"
+                    android:layout_width="match_parent"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_height="match_parent"
+                    android:text="bejing"
+                    />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@android:drawable/dialog_holo_light_frame">
+
+                <TextView
+                    android:id="@+id/tv_desc_text"
+                    android:text="@string/description"
+                    android:textStyle="bold"
+                    android:paddingLeft="10dp"
+                    android:textColor="@android:color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+                <TextView
+                    android:id="@+id/tv_description"
+                    android:layout_below="@+id/tv_desc_text"
+                    android:layout_width="match_parent"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_height="match_parent"
+                    android:text="bejing"
+                    />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/dialog_holo_light_frame">
+
+                <TextView
+                    android:id="@+id/tv_contact_text"
+                    android:text="@string/contact_person"
+                    android:textStyle="bold"
+                    android:paddingLeft="10dp"
+                    android:textColor="@android:color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+                <TextView
+                    android:id="@+id/tv_contact_person"
+                    android:layout_below="@+id/tv_contact_text"
+                    android:layout_width="match_parent"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_height="match_parent"
+                    android:text="test"
+                    />
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:background="@android:drawable/dialog_holo_light_frame"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+
+
+                    <TextView
+                        android:id="@+id/tv_contact_email_text"
+                        android:text="@string/contact_email"
+                        android:textStyle="bold"
+                        android:paddingLeft="10dp"
+                        android:textColor="@android:color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        />
+                    <TextView
+                        android:id="@+id/tv_contact_email"
+                        android:layout_width="match_parent"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:layout_height="match_parent"
+                        android:text="test@yopmail.com"
+                        />
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginRight="50dp"
+                    android:layout_gravity="right">
+
+
+
+                    <TextView
+                        android:id="@+id/tv_phone_text"
+                        android:text="@string/contact_ph_no"
+                        android:textStyle="bold"
+                        android:gravity="right"
+                        android:paddingLeft="10dp"
+                        android:textColor="@android:color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        />
+                    <TextView
+                        android:id="@+id/tv_phone_end"
+                        android:layout_width="match_parent"
+                        android:paddingLeft="10dp"
+                        android:gravity="right"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:layout_height="match_parent"
+                        android:text="3354354646"
+                        />
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+
+</RelativeLayout>

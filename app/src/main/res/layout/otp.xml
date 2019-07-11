@@ -87,6 +87,7 @@
         android:background="@color/white"
         android:paddingTop="20dp"
         android:paddingLeft="20dp"
+
         android:paddingRight="20dp"
         >
 

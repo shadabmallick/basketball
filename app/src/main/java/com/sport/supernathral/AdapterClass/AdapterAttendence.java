@@ -51,7 +51,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder{
     @Override
     public AdapterAttendence.ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.single_attendence, parent,false);
+                .inflate(R.layout.attendence_activity, parent,false);
         AdapterAttendence.ItemViewHolder dvh = new AdapterAttendence.ItemViewHolder(v, mListner);
         return dvh;
     }

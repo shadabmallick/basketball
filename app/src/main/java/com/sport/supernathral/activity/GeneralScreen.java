@@ -1,11 +1,13 @@
 package com.sport.supernathral.activity;
 
+  import android.app.ProgressDialog;
   import android.content.Intent;
   import android.os.Build;
   import android.os.Bundle;
   import android.support.v4.content.ContextCompat;
   import android.support.v7.app.AppCompatActivity;
   import android.support.v7.widget.Toolbar;
+  import android.util.Log;
   import android.view.MenuItem;
   import android.view.View;
   import android.view.Window;
@@ -16,15 +18,33 @@ package com.sport.supernathral.activity;
   import android.widget.TextView;
 
 
-import com.sport.supernathral.R;
+  import com.android.volley.DefaultRetryPolicy;
+  import com.android.volley.Request;
+  import com.android.volley.Response;
+  import com.android.volley.VolleyError;
+  import com.android.volley.toolbox.StringRequest;
+  import com.shashank.sony.fancytoastlib.FancyToast;
+  import com.sport.supernathral.R;
+  import com.sport.supernathral.Utils.GlobalClass;
+  import com.sport.supernathral.Utils.Shared_Preference;
+
+  import org.json.JSONObject;
+
+  import java.util.HashMap;
+  import java.util.Map;
+
+  import static com.sport.supernathral.NetworkConstant.AppConfig.USER_PROFILE;
 
 public class GeneralScreen extends AppCompatActivity {
-
+    String TAG="General Setting";
     TextView tv_name, tv_designation, tv_email, tv_post, tv_full_name, tv_country;
     ImageView profile_image,img_edit;
     RelativeLayout rel_edit_profile;
     Toolbar toolbar;
-
+    GlobalClass globalClass;
+    Shared_Preference preference;
+    ProgressDialog pd;
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +65,13 @@ public class GeneralScreen extends AppCompatActivity {
             window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(),
                     R.color.deep_yellow));
         }
-
-
+        preference = new Shared_Preference(GeneralScreen.this);
+        preference.loadPrefrence();
+        pd = new ProgressDialog(GeneralScreen.this);
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setMessage("Loading...");
+        id =  getIntent().getStringExtra("id");
+        Log.d(TAG, "onCreate: "+id);
         tv_name = findViewById(R.id.tv_name);
         tv_designation = findViewById(R.id.tv_designation);
         tv_email = findViewById(R.id.tv_email);
@@ -59,6 +84,7 @@ public class GeneralScreen extends AppCompatActivity {
 
 
         initFooterItems();
+      //  Profile();
 
         rel_edit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,6 +156,10 @@ public class GeneralScreen extends AppCompatActivity {
         });
 
     }
+
+
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

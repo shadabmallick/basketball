@@ -65,14 +65,6 @@
         </activity>
 
         <activity
-            android:name=".activity.ForgotPassword"
-            android:theme="@style/MyTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-            </intent-filter>
-        </activity>
-
-        <activity
             android:name=".activity.HomePage"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:windowSoftInputMode="adjustPan|stateHidden" />
@@ -233,6 +225,14 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activity.ScheduleActvity"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.EventDetails"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.OtpActivity"
             android:theme="@style/MyTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
