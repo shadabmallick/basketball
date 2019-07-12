@@ -140,8 +140,6 @@ public class MomentMessage extends AppCompatActivity {
             Log.d(TAG, "PICK_IMAGE_REQUEST - " + uri);
 
 
-        } else if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
-
             Bitmap photo = (Bitmap) data.getExtras().get("data");
          //   profile_image.setImageBitmap(photo);
             Log.d(TAG, "CAMERA_REQUEST bitmap - " + photo);
