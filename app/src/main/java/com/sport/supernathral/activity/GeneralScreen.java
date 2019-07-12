@@ -158,6 +158,46 @@ public class GeneralScreen extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent editProfile=new Intent(getApplicationContext(),EditProfile.class);
+                editProfile.putExtra("id", id);
+                editProfile.putExtra("unique_id", unique_id);
+                editProfile.putExtra("main_access_group_id", main_access_group_id);
+                editProfile.putExtra("sub_access_group_id", sub_access_group_id);
+                editProfile.putExtra("image", image);
+                editProfile.putExtra("type", type);
+                editProfile.putExtra("name", name);
+                editProfile.putExtra("emailid", emailid);
+                editProfile.putExtra("password", password);
+                editProfile.putExtra("contact_no", contact_no);
+                editProfile.putExtra("skill", skill);
+                editProfile.putExtra("fax", fax);
+                editProfile.putExtra("dob", dob);
+                editProfile.putExtra("description", description);
+                editProfile.putExtra("notes", notes);
+                editProfile.putExtra("primary_contact_name", primary_contact_name);
+                editProfile.putExtra("primary_contact_email", primary_contact_email);
+                editProfile.putExtra("primary_contact_phone", primary_contact_phone);
+                editProfile.putExtra("secondary_contact_name", secondary_contact_name);
+                editProfile.putExtra("secondary_contact_email", secondary_contact_email);
+                editProfile.putExtra("secondary_contact_phone", secondary_contact_phone);
+                editProfile.putExtra("added_by", added_by);
+                editProfile.putExtra("child_ids", child_ids);
+                editProfile.putExtra("sponsor_ids", sponsor_ids);
+                editProfile.putExtra("device_type", device_type);
+                editProfile.putExtra("device_id", device_id);
+                editProfile.putExtra("activation_token", activation_token);
+                editProfile.putExtra("first_login", first_login);
+                editProfile.putExtra("otp_code", otp_code);
+                editProfile.putExtra("latitude", latitude);
+                editProfile.putExtra("longitude", longitude);
+                editProfile.putExtra("location", location);
+                editProfile.putExtra("admin_approved", admin_approved);
+                editProfile.putExtra("qa", qa);
+                editProfile.putExtra("notification", notification);
+                editProfile.putExtra("delete_flag", delete_flag);
+                editProfile.putExtra("is_active", is_active);
+                editProfile.putExtra("report_block", report_block);
+                editProfile.putExtra("entry_date", entry_date);
+                editProfile.putExtra("modified_date", modified_date);
                 startActivity(editProfile);
 
             }

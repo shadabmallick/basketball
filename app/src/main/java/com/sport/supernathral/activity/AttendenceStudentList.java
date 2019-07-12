@@ -68,8 +68,6 @@ public class AttendenceStudentList extends AppCompatActivity {
         newsList.add("A");
         newsList.add("A");
         newsList.add("A");
-
-
         recycle_student_list.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         adapterNotes
                 = new AdapterAttendence(AttendenceStudentList.this, newsList);
