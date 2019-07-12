@@ -15,13 +15,16 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.VideoView;
 
 import com.sport.supernathral.R;
 
@@ -38,6 +41,9 @@ public class MomentMessage extends AppCompatActivity {
     String TAG = "MomentMessage";
     Toolbar toolbar;
     ImageView img_back, img_add_image;
+    RecyclerView recycler_images;
+    VideoView videoView;
+
     public static final int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 222;
     private int PICK_IMAGE_REQUEST = 111;
     private static final int CAMERA_REQUEST = 1888;
@@ -56,9 +62,10 @@ public class MomentMessage extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         img_back = findViewById(R.id.img_back);
         img_add_image = findViewById(R.id.img_add_image);
-        //    recycler_moment = findViewById(R.id.recycler_moment);
-        setSupportActionBar(toolbar);
+        recycler_images = findViewById(R.id.recycler_images);
+        videoView = findViewById(R.id.videoView);
 
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -76,6 +83,17 @@ public class MomentMessage extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
+    }
+
+
     private boolean checkPermission() {
 
         List<String> permissionsList = new ArrayList<String>();
@@ -91,7 +109,8 @@ public class MomentMessage extends AppCompatActivity {
         }
 
         if (permissionsList.size() > 0) {
-            ActivityCompat.requestPermissions((Activity) getApplicationContext(), permissionsList.toArray(new String[permissionsList.size()]),
+            ActivityCompat.requestPermissions((Activity) getApplicationContext(),
+                    permissionsList.toArray(new String[permissionsList.size()]),
                     REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
 
             return false;
@@ -110,8 +129,6 @@ public class MomentMessage extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //  IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-
         // p_image = null;
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
@@ -122,21 +139,8 @@ public class MomentMessage extends AppCompatActivity {
 
             Log.d(TAG, "PICK_IMAGE_REQUEST - " + uri);
 
-/*
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(
-                        //           getActivity().getContentResolver(), uri);
-                        Log.d(TAG, "PICK_IMAGE bitmap - " + bitmap);
-                    profile_image.setImageBitmap(bitmap);
 
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-*/
-
-        } else if (requestCode == CAMERA_REQUEST
-                && resultCode == Activity.RESULT_OK) {
+        } else if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
 
             Bitmap photo = (Bitmap) data.getExtras().get("data");
          //   profile_image.setImageBitmap(photo);

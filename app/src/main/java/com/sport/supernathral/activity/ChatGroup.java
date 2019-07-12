@@ -98,7 +98,7 @@ public class ChatGroup extends AppCompatActivity
     public static final int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 333;
 
 
-    String TAG = "chat list";
+    String TAG = "group chat list";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

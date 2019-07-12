@@ -60,9 +60,6 @@ public class AdapterMoments extends RecyclerView.Adapter<AdapterMoments.ItemView
     public void onBindViewHolder(AdapterMoments.ItemViewHolder holder, final int position) {
 
 
-
-
-
     }
 
     @Override

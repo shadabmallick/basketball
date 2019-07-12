@@ -104,7 +104,6 @@ public class ChatGroupAdapter extends RecyclerView.Adapter<ChatGroupAdapter.Item
 
         final ChatData chatData = arrayList.get(position);
 
-
         //Log.d("TAG" ,"msg- " + chatData.getMessage());
         //Log.d("TAG" ,"msg type- " + chatData.getMessage_type());
 

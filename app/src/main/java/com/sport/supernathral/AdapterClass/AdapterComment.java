@@ -54,7 +54,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder{
     public AdapterComment(Context context, ArrayList<String> itemList){
 
         this.context = context;
-        this.arrayList=itemList;
+        this.arrayList = itemList;
 
     }
 
@@ -115,7 +115,6 @@ public class ItemViewHolder extends RecyclerView.ViewHolder{
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         AdapterSubComment adapterChat = new AdapterSubComment(context, list);
         recyclerView.setAdapter(adapterChat);
-
 
     }
 

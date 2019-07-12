@@ -38,6 +38,12 @@ public class MomentsActivity extends AppCompatActivity {
                     R.color.deep_yellow));
         }
 
+        initViews();
+
+    }
+
+    private void initViews(){
+
         toolbar = findViewById(R.id.toolbar);
         img_add = findViewById(R.id.img_add);
         recycler_moment = findViewById(R.id.recycler_moment);
@@ -45,15 +51,14 @@ public class MomentsActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-       // getSupportActionBar().setHomeButtonEnabled(true);
-     //   getSupportActionBar().setHomeAsUpIndicator(R.mipmap.add_white);
+
         initFooterItems();
         function();
+
         img_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent addMessage= new Intent(getApplicationContext(),MomentMessage.class);
+                Intent addMessage= new Intent(getApplicationContext(), MomentMessage.class);
                 startActivity(addMessage);
             }
         });
@@ -117,16 +122,13 @@ public class MomentsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
             }
         });
 
         ll_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 startActivity(new Intent(getApplicationContext(), ProfileScreen.class));
-
             }
         });
 
