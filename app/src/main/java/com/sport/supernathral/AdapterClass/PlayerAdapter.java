@@ -11,13 +11,17 @@ import android.widget.TextView;
 import com.sport.supernathral.R;
 import com.sport.supernathral.activity.GameListActivity;
 import com.sport.supernathral.activity.InfoActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ItemViewHolder> {
 
 private Context context;
-private ArrayList<String> arrayList;
+    ArrayList<HashMap<String,String>> arrayList;
 
 
 
@@ -27,21 +31,24 @@ public interface onItemClickListner{
 }
 
 public class ItemViewHolder extends RecyclerView.ViewHolder{
-    TextView action, desc,dismiss;
+    TextView name,type, desc,dismiss;
     //  ImageView iv_track, iv_complain;
+    CircleImageView profile_image;
     PlayerAdapter.onItemClickListner listner;
 
     public ItemViewHolder(View itemView, PlayerAdapter.onItemClickListner listner) {
         super(itemView);
 
-
+        name=  itemView.findViewById(R.id.name);
+        type=  itemView.findViewById(R.id.type);
+        profile_image=  itemView.findViewById(R.id.profile_image);
 
         this.listner = listner;
     }
 }
 
 
-    public PlayerAdapter(Context context, ArrayList<String> itemList){
+    public PlayerAdapter(Context context, ArrayList<HashMap<String,String>>itemList){
 
         this.context = context;
         this.arrayList=itemList;
@@ -61,6 +68,20 @@ public class ItemViewHolder extends RecyclerView.ViewHolder{
 
     @Override
     public void onBindViewHolder(PlayerAdapter.ItemViewHolder holder, final int position) {
+
+        String type_str=arrayList.get(position).get("user_type");
+        if((type_str.equals("Students/Players"))){
+           holder.type.setText("Player");
+        }
+        else if((type_str.equals("Coach/Teachers"))){
+            holder.type.setText("Trainer");
+        }
+        holder.name.setText(arrayList.get(position).get("user_name"));
+        Picasso.with(context).load(arrayList.get(position).get("user_image")).into(holder.profile_image);
+
+
+
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

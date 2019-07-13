@@ -34,7 +34,7 @@ package com.sport.supernathral.activity;
   import java.util.HashMap;
   import java.util.Map;
 
-  import static com.sport.supernathral.NetworkConstant.AppConfig.USER_PROFILE;
+
 
 public class GeneralScreen extends AppCompatActivity {
     String TAG="General Setting";

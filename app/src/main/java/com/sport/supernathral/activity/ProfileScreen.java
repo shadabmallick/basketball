@@ -30,7 +30,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.sport.supernathral.NetworkConstant.AppConfig.FORGOT_PASSWORD;
+
 import static com.sport.supernathral.NetworkConstant.AppConfig.USER_PROFILE;
 
 public class ProfileScreen extends AppCompatActivity {
@@ -184,9 +184,11 @@ public class ProfileScreen extends AppCompatActivity {
 
                         if (status == 1){
 
+/*
                             FancyToast.makeText(getApplicationContext(), message,
                                     FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false)
                                     .show();
+*/
 
                             JSONObject data = main_object.getJSONObject("data");
 

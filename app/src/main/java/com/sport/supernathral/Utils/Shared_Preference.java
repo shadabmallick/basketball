@@ -47,6 +47,7 @@ public class Shared_Preference {
     private String latitude;
     private  String longitude;
     private  String location;
+    private  String switch_notify;
 
 
 
@@ -87,6 +88,7 @@ public class Shared_Preference {
     private static final String PREF_latitude = "latitude";
     private static final String PREF_longitude = "longitude";
     private static final String PREF_location = "location";
+    private static final String PREF_NOTIFY = "notify";
 
 
 
@@ -143,6 +145,9 @@ public class Shared_Preference {
 
             type= globalclass.getType();
             editor.putString(PREF_type,type);
+
+            switch_notify= globalclass.getNotify();
+            editor.putString(PREF_NOTIFY,switch_notify);
 
 
             first_login= globalclass.getFirst_login();
@@ -238,6 +243,10 @@ public class Shared_Preference {
 
             pref_lname = sharedPreferences.getString(PREF_lname, "");
             globalclass.setLname(pref_lname);
+
+
+            switch_notify = sharedPreferences.getString(PREF_NOTIFY, "");
+            globalclass.setNotify(switch_notify);
 
             pref_id= sharedPreferences.getString(PREF_id,"");
             globalclass.setId(pref_id);

@@ -16,7 +16,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-
             android:text="@string/news"
 
             android:layout_marginLeft="20dp"
@@ -70,6 +69,7 @@
                 android:id="@+id/rl_homescreen"
                 android:layout_width="match_parent"
                 android:layout_margin="10dp"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/dialog_holo_light_frame">
                 <ImageView
@@ -116,6 +116,7 @@
                         android:layout_height="20dp"
                         android:src="@mipmap/heart"/>
                     <TextView
+                        android:id="@+id/tv_like"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
@@ -130,6 +131,7 @@
                         android:layout_marginLeft="10dp"
                         android:src="@mipmap/chat"/>
                     <TextView
+                        android:id="@+id/tv_comment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -183,7 +185,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="-2dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="50dp">
 
 
             </android.support.v7.widget.RecyclerView>

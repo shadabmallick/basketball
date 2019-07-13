@@ -13,11 +13,13 @@
         android:paddingBottom="10dp"
         android:layout_marginRight="100dp">
         <TextView
+            android:id="@+id/heading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/text_title"
             android:textSize="16dp"/>
         <TextView
+            android:id="@+id/short_content"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

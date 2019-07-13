@@ -220,6 +220,16 @@ public class GlobalClass extends Application {
     String discount_amount = "";
     String slot_to_deliver = "";
 
+    public String getNotify() {
+        return notify;
+    }
+
+    public void setNotify(String notify) {
+        this.notify = notify;
+    }
+
+    String notify="";
+
     String shipping_id, shipping_fname, shipping_lname, shipping_address, shipping_city, shipping_state,
             shipping_country, shipping_zip, shipping_mobile,shipping_full_address ;
 
