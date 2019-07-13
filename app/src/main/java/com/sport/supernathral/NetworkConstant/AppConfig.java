@@ -26,9 +26,10 @@ public class AppConfig
     public static final String CHAT_USER_LIST     = BASE_URL + "chat_list";
     public static final String CHAT_MSG_LIST      = BASE_URL + "get_user_chat";
     public static final String POST_USER_CHAT     = BASE_URL + "post_user_chat";
-    public static final String FORGOT_PASSWORD     = BASE_URL + "forgotPassword";
+    public static final String FORGOT_PASSWORD    = BASE_URL + "forgotPassword";
     public static final String RESET_PASSWORD     = BASE_URL + "resetPassword";
-    public static final String USER_PROFILE     = BASE_URL + "user_profile";
+    public static final String USER_PROFILE       = BASE_URL + "user_profile";
+    public static final String MOMENT             = BASE_URL + "moment";
 
 
 }

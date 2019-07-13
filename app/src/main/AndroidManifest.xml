@@ -236,6 +236,11 @@
             android:theme="@style/MyTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
+        <activity
+            android:name=".trimmer.TrimmerActivity"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
 
 
         <service android:name=".Utils.GPSTracker" />

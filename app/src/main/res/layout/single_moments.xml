@@ -2,42 +2,44 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="10dp"
     android:layout_marginBottom="10dp">
 
-    <LinearLayout
-        android:id="@+id/ll_text"
+    <RelativeLayout
+        android:id="@+id/rel_top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:layout_marginLeft="100dp">
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@mipmap/avatar_gray"/>
+
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/name"
             android:textSize="18dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:paddingStart="15dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/profile_image"
+            />
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:src="@mipmap/avatar_gray"
-        />
     <LinearLayout
         android:id="@+id/ll_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginLeft="100dp"
-
-        android:layout_below="@+id/profile_image"
+        android:layout_below="@+id/rel_top"
         >
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,25 +56,78 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/img_image"
-        android:layout_below="@+id/ll_message"
+
+    <RelativeLayout
+        android:id="@+id/rel_middle"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_marginTop="20dp"
-        android:src="@mipmap/icon"/>
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/ll_message"
+        >
+
+        <RelativeLayout
+            android:id="@+id/rel_videoview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:background="@color/dark_gray"
+            >
+            <VideoView
+                android:id="@+id/videoView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rel_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            >
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabBackground="@drawable/tab_selector"
+                app:tabGravity="center"
+                app:tabIndicatorHeight="0dp"
+                android:layout_alignParentBottom="true"
+                />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/llmenu"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_marginTop="5dp"
-        android:layout_below="@+id/img_image"
+        android:layout_below="@+id/rel_middle"
         >
 
         <TextView
+            android:id="@+id/tv_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="8"
@@ -81,6 +136,7 @@
             android:singleLine="true" />
 
         <ImageView
+            android:id="@+id/iv_delete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="10"
@@ -89,6 +145,7 @@
             />
 
         <ImageView
+            android:id="@+id/iv_like"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="10"
@@ -98,6 +155,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_like_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="10"
@@ -116,6 +174,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_comment_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="10"
@@ -124,6 +183,7 @@
             android:singleLine="true" />
 
         <TextView
+            android:id="@+id/tv_report"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="9"
@@ -133,7 +193,6 @@
 
 
     </LinearLayout>
-
 
 
 </RelativeLayout>
