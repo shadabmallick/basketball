@@ -76,7 +76,7 @@
                     android:id="@+id/img_top"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@mipmap/icon1"/>
+                    />
                 <TextView
                     android:id="@+id/tv_home_text"
                     android:gravity="left"
@@ -85,7 +85,6 @@
                     android:layout_marginRight="50dp"
                     android:layout_below="@+id/img_top"
                     android:layout_width="match_parent"
-                    android:text="@string/text_title"
                     android:layout_height="wrap_content" />
                 <View
                     android:id="@+id/view1"

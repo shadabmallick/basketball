@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
     android:id="@+id/llItemStudents"
     android:layout_margin="8dp"
     >
@@ -10,8 +12,8 @@
 
     <ImageView
         android:id="@+id/tvStudentName"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_margin="8dp"
         android:src="@mipmap/icon2"
         android:layout_gravity="center"

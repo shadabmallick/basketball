@@ -11,13 +11,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sport.supernathral.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SponsorAdapter extends RecyclerView.Adapter<SponsorAdapter.ItemViewHolder> {
 
     private Context context;
-    private ArrayList<String> arrayList;
+    ArrayList<HashMap<String,String>> arrayList;
 
 
 
@@ -28,12 +30,13 @@ public class SponsorAdapter extends RecyclerView.Adapter<SponsorAdapter.ItemView
 
     public class ItemViewHolder extends RecyclerView.ViewHolder{
         TextView action, desc,dismiss;
-        //  ImageView iv_track, iv_complain;
+          ImageView img_StudentName;
+
         SponsorAdapter.onItemClickListner listner;
 
         public ItemViewHolder(View itemView, SponsorAdapter.onItemClickListner listner) {
             super(itemView);
-
+            img_StudentName=itemView.findViewById(R.id.tvStudentName);
 
 
             this.listner = listner;
@@ -41,7 +44,7 @@ public class SponsorAdapter extends RecyclerView.Adapter<SponsorAdapter.ItemView
     }
 
 
-    public SponsorAdapter(Context context, ArrayList<String> itemList){
+    public SponsorAdapter(Context context,ArrayList<HashMap<String,String>>itemList){
 
         this.context = context;
         this.arrayList=itemList;
@@ -63,6 +66,7 @@ public class SponsorAdapter extends RecyclerView.Adapter<SponsorAdapter.ItemView
     public void onBindViewHolder(SponsorAdapter.ItemViewHolder holder, final int position) {
 
 
+        Picasso.with(context).load(arrayList.get(position).get("image")).into(holder.img_StudentName);
 
 
 

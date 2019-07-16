@@ -86,6 +86,12 @@ public class SearchPlayer extends AppCompatActivity {
                 NewsSearch(edt_search.getText().toString().trim());
             }
         });
+        img_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void NewsSearch(final String location) {
@@ -135,11 +141,6 @@ public class SearchPlayer extends AppCompatActivity {
                                     hashMap.put("user_name", user_name);
                                     hashMap.put("user_image", user_image);
                                     hashMap.put("user_type", user_type);
-
-
-
-                                    //  globalClass.setFolderanme(folder_name);
-
                                     newsdata_search.add(hashMap);
                                     Log.d(TAG, "Hashmap " + hashMap);
 

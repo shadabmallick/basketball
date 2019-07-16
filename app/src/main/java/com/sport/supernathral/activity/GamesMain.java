@@ -30,6 +30,7 @@ import com.sport.supernathral.AdapterClass.DrawerListAdapter;
 import com.sport.supernathral.DataModel.DrawerItem;
 import com.sport.supernathral.Fragment.Attendence;
 import com.sport.supernathral.Fragment.Event;
+import com.sport.supernathral.Fragment.GameFragment;
 import com.sport.supernathral.Fragment.Games;
 import com.sport.supernathral.Fragment.Info;
 import com.sport.supernathral.Fragment.Notes;
@@ -138,7 +139,7 @@ public class GamesMain extends AppCompatActivity
         toolbar_title = toolbar.findViewById(R.id.toolbar_title);
         toolbar_title.setText("Games");
 
-        transactFragment(new Games());
+        transactFragment(new GameFragment());
 
 
 
@@ -269,7 +270,7 @@ public class GamesMain extends AppCompatActivity
                // transaction.replace(R.id.flContent,new Games());
                 //changeActivity(intent);
 
-                transactFragment(new Games());
+                transactFragment(new GameFragment());
 
                 break;
 

@@ -88,6 +88,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder{
             public void onClick(View v) {
                 Intent NewsSublist=new Intent(context, InfoActivity.class);
                 NewsSublist.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                NewsSublist.putExtra("player_id", arrayList.get(position).get("user_id"));
                 /*blogSingle.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 blogSingle.putExtra("file_name", dataArrayList.get(i).getFile_name());
                 blogSingle.putExtra("heading", dataArrayList.get(i).getHeading());

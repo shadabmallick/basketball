@@ -22,6 +22,7 @@ public class AppConfig
 
 
 
+
     public static final String CHAT_USER_LIST     = LIVE_URL + "chat_list";
     public static final String CHAT_MSG_LIST      = LIVE_URL + "get_user_chat";
     public static final String POST_USER_CHAT     = LIVE_URL + "post_user_chat";
@@ -36,6 +37,18 @@ public class AppConfig
     public static final String NEWS_DETAIlS     = LIVE_URL + "news_details";
     public static final String GET_PLAYER_INFO     = LIVE_URL + "get_player_info";
     public static final String SEARCH_USER     = LIVE_URL + "search_user";
+    public static final String SPONSOR     = LIVE_URL + "sponsor";
+    public static final String GAMELIST     = LIVE_URL + "game_list";
+
+
+  /*  public static final String CHAT_USER_LIST     = BASE_URL + "chat_list";
+    public static final String CHAT_MSG_LIST      = BASE_URL + "get_user_chat";
+    public static final String POST_USER_CHAT     = BASE_URL + "post_user_chat";
+    public static final String FORGOT_PASSWORD    = BASE_URL + "forgotPassword";
+    public static final String RESET_PASSWORD     = BASE_URL + "resetPassword";
+    public static final String USER_PROFILE       = BASE_URL + "user_profile";*/
+    public static final String MOMENT             = BASE_URL + "moment";
+    public static final String NEWS_COMMENT             = BASE_URL + "news_comment";
 
 
 

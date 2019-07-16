@@ -240,7 +240,7 @@ public class HomePage extends AppCompatActivity {
                 Log.d(TAG, "Login Response: " + response.toString());
 
                 if (response != null){
-                    pd.dismiss();
+                   // pd.dismiss();
                     try {
 
                         JSONObject main_object = new JSONObject(response);
@@ -292,7 +292,7 @@ public class HomePage extends AppCompatActivity {
                             final String otp_code = data.get("otp_code").toString().replaceAll("\"", "");
                             final String latitude = data.get("latitude").toString().replaceAll("\"", "");
                             final String longitude = data.get("longitude").toString().replaceAll("\"", "");
-                          location = data.get("location").toString().replaceAll("\"", "");
+                            location = data.get("location").toString().replaceAll("\"", "");
                             final String admin_approved = data.get("admin_approved").toString().replaceAll("\"", "");
                             final String qa = data.get("qa").toString().replaceAll("\"", "");
                             final String notification = data.get("notification").toString().replaceAll("\"", "");
@@ -370,7 +370,7 @@ public class HomePage extends AppCompatActivity {
     private void getPlayerInfo() {
         String tag_string_req = "forget_password";
 
-        pd.show();
+       // pd.show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 GET_PLAYER_INFO, new Response.Listener<String>() {
@@ -380,7 +380,7 @@ public class HomePage extends AppCompatActivity {
                 Log.d(TAG, "Login Response: " + response.toString());
 
                 if (response != null){
-                    pd.dismiss();
+                   // pd.dismiss();
                     try {
 
                         JSONObject main_object = new JSONObject(response);
@@ -506,7 +506,7 @@ public class HomePage extends AppCompatActivity {
 
         String tag_string_req = "forget_password";
 
-        pd.show();
+      //  pd.show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 NEWS, new Response.Listener<String>() {
