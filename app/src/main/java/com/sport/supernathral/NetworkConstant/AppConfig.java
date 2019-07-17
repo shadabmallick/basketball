@@ -32,13 +32,17 @@ public class AppConfig
     public static final String USER_PROFILE_UPDATE     = LIVE_URL + "user_profile_update";
     public static final String CHANGE_PASSWORD     = LIVE_URL + "changePassword";
     public static final String UPDATE_NOTIFICATION     = LIVE_URL + "update_user_notification";
-    public static final String NEWS     = LIVE_URL + "news";
+    public static final String NEWS     =    LIVE_URL + "news";
     public static final String NEWS_SEARCH     = LIVE_URL + "news_search";
     public static final String NEWS_DETAIlS     = LIVE_URL + "news_details";
     public static final String GET_PLAYER_INFO     = LIVE_URL + "get_player_info";
     public static final String SEARCH_USER     = LIVE_URL + "search_user";
     public static final String SPONSOR     = LIVE_URL + "sponsor";
     public static final String GAMELIST     = LIVE_URL + "game_list";
+
+    public static final String post_news_comment                = LIVE_URL + "post_news_comment";
+    public static final String post_news_comment_on_comment     = LIVE_URL + "post_news_comment_on_comment";
+    public static final String post_news_like_on_comment     = LIVE_URL + "post_news_like_on_comment";
 
 
   /*  public static final String CHAT_USER_LIST     = BASE_URL + "chat_list";
@@ -47,8 +51,10 @@ public class AppConfig
     public static final String FORGOT_PASSWORD    = BASE_URL + "forgotPassword";
     public static final String RESET_PASSWORD     = BASE_URL + "resetPassword";
     public static final String USER_PROFILE       = BASE_URL + "user_profile";*/
-    public static final String MOMENT             = BASE_URL + "moment";
-    public static final String NEWS_COMMENT             = BASE_URL + "news_comment";
+
+
+    public static final String MOMENT             = LIVE_URL + "moment";
+    public static final String NEWS_COMMENT       = LIVE_URL + "news_comment";
 
 
 

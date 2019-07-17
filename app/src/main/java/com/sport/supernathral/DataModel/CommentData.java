@@ -17,6 +17,7 @@ public class CommentData {
     private String user_image;
     private String moment_comment_like_count;
     private String moment_comment_sub_count;
+    private String news_id;
     private ArrayList<SubCommentData> list_sub_comment;
 
     public String getId() {
@@ -129,5 +130,13 @@ public class CommentData {
 
     public void setList_sub_comment(ArrayList<SubCommentData> list_sub_comment) {
         this.list_sub_comment = list_sub_comment;
+    }
+
+    public String getNews_id() {
+        return news_id;
+    }
+
+    public void setNews_id(String news_id) {
+        this.news_id = news_id;
     }
 }

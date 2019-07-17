@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import com.sport.supernathral.Fragment.Comments;
 import com.sport.supernathral.Fragment.ResumeActivity;
 import com.sport.supernathral.R;
+import com.sport.supernathral.Utils.GlobalClass;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +30,14 @@ public class NewsSublist extends AppCompatActivity {
     Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-
+    GlobalClass globalClass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newsublist);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -51,6 +54,18 @@ public class NewsSublist extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.mipmap.back_black);
+
+        globalClass = (GlobalClass) getApplicationContext();
+        globalClass.setSingle_top_news_id("");
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null){
+            String single_top_news_id = bundle.getString("id");
+            globalClass.setSingle_top_news_id(single_top_news_id);
+        }
+
+
+
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);

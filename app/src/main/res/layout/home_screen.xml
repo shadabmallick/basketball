@@ -15,9 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:text="@string/news"
-
             android:layout_marginLeft="20dp"
             android:id="@+id/tv_title"
             android:textSize="16dp"
@@ -75,7 +73,7 @@
                 <ImageView
                     android:id="@+id/img_top"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="150dp"
                     />
                 <TextView
                     android:id="@+id/tv_home_text"
@@ -158,9 +156,6 @@
                     </RelativeLayout>
 
                 </LinearLayout>
-
-
-
 
             </RelativeLayout>
 

@@ -63,6 +63,7 @@ public class HomePage extends AppCompatActivity {
     NewsAdapter newsAdapter;
     TextView heading_text,comment,like;
     EditText edt_search;
+    String single_top_news_id;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,7 +153,7 @@ public class HomePage extends AppCompatActivity {
         img_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent searchPLayer=new Intent(HomePage.this,SearchPlayer.class);
+                Intent searchPLayer = new Intent(HomePage.this,SearchPlayer.class);
                 startActivity(searchPLayer);
 
             }
@@ -160,7 +161,8 @@ public class HomePage extends AppCompatActivity {
         img_top.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent newsPage=new Intent(HomePage.this,NewsSublist.class);
+                Intent newsPage = new Intent(HomePage.this,NewsSublist.class);
+                newsPage.putExtra("id", single_top_news_id);
                 startActivity(newsPage);
             }
         });
@@ -532,7 +534,7 @@ public class HomePage extends AppCompatActivity {
 
                         if (status == 1){
 
-                                 rl_homescreen.setVisibility(View.VISIBLE);
+                            rl_homescreen.setVisibility(View.VISIBLE);
 
                             JSONObject news_one = main_object.getJSONObject("news_one");
 
@@ -552,7 +554,11 @@ public class HomePage extends AppCompatActivity {
                             final String modified_date = news_one.get("modified_date").toString().replaceAll("\"", "");
                             final String news_like = news_one.get("news_like").toString().replaceAll("\"", "");
                             final String news_comment = news_one.get("news_comment").toString().replaceAll("\"", "");
-                            Picasso.with(getApplicationContext()).load(file_name).into(img_top);
+
+                            single_top_news_id = id;
+                            Picasso.with(getApplicationContext())
+                                    .load(file_name)
+                                    .into(img_top);
                              heading_text.setText(short_content);
                              like.setText(news_like);
                              comment.setText(news_comment);
@@ -678,7 +684,8 @@ public class HomePage extends AppCompatActivity {
         strReq.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 10, 1.0f));
 
     }
-    private void NewsSearch(final String location) {
+
+    private void NewsSearch(final String search_text) {
 
 
         String tag_string_req = "forget_password";
@@ -729,17 +736,21 @@ public class HomePage extends AppCompatActivity {
                             final String modified_date = news_one.get("modified_date").toString().replaceAll("\"", "");
                             final String news_like = news_one.get("news_like").toString().replaceAll("\"", "");
                             final String news_comment = news_one.get("news_comment").toString().replaceAll("\"", "");
-                            Picasso.with(getApplicationContext()).load(file_name).into(img_top);
+
+                            single_top_news_id = id;
+
+                            Picasso.with(getApplicationContext())
+                                    .load(file_name)
+                                    .into(img_top);
                             heading_text.setText(short_content);
                             like.setText(news_like);
                             comment.setText(news_comment);
-                            JSONArray product=main_object.getJSONArray("ongoing_game");
+                            JSONArray ongoing_game=main_object.getJSONArray("ongoing_game");
 
-                            if(product.length()==0){
+                            if(ongoing_game.length()==0){
                                 recycle_game.removeAllViews();
-                            }
-                            else {
-                                for (int i = 0; i < product.length(); i++) {
+                            } else {
+                                for (int i = 0; i < ongoing_game.length(); i++) {
 
                                 }
                             }
@@ -747,8 +758,7 @@ public class HomePage extends AppCompatActivity {
                             JSONArray news_data=main_object.getJSONArray("news_data");
                             if(news_data.length()==0){
                                 recycle_news.removeAllViews();
-                            }
-                            else {
+                            } else {
                                 for (int i = 0; i < news_data.length(); i++) {
                                     JSONObject item = news_data.getJSONObject(i);
                                     String news_id = item.get("id").toString().replaceAll("\"", "");
@@ -794,7 +804,7 @@ public class HomePage extends AppCompatActivity {
                                     Log.d(TAG, "Hashmap " + hashMap);
 
                                 }
-                                newsAdapter = new NewsAdapter(HomePage.this,newsdata_search);
+                                newsAdapter = new NewsAdapter(HomePage.this, newsdata_search);
                                 recycle_news.setAdapter(newsAdapter);
                                 newsAdapter.notifyDataSetChanged();
                             }
@@ -839,9 +849,9 @@ public class HomePage extends AppCompatActivity {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<>();
 
-                params.put("location",location);
-                params.put("main_access_group_id","0");
-                params.put("sub_access_group_id","0");
+                params.put("location", search_text);
+                params.put("main_access_group_id", "0");
+                params.put("sub_access_group_id", "0");
 
 
                 Log.d(TAG, " param3: "+params);
