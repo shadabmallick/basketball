@@ -320,7 +320,7 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
 
                             globalClass.setProfil_pic(profile_pic);
 
-
+                            Log.d(TAG, "onResponse: "+globalClass.getMain_access_group_id());
 
 
                             globalClass.setLogin_status(true);

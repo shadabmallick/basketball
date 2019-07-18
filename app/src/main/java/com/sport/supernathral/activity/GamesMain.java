@@ -1,5 +1,6 @@
 package com.sport.supernathral.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -18,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -43,6 +45,9 @@ import com.sport.supernathral.Fragment.StudentList;
 import com.sport.supernathral.Fragment.Team;
 import com.sport.supernathral.Fragment.Team_All;
 import com.sport.supernathral.R;
+import com.sport.supernathral.Utils.GlobalClass;
+import com.sport.supernathral.Utils.Shared_Preference;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -51,14 +56,17 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class GamesMain extends AppCompatActivity
         implements DrawerListAdapter.onItemClickListner {
-
+     String TAG="";
     DrawerLayout drawer;
     RecyclerView nav_drawer_recycler_view;
     TextView toolbar_title;
     CircleImageView iv_user;
     RelativeLayout rel_profile;
-
-
+    GlobalClass globalClass;
+    Shared_Preference shared_preference;
+    ProgressDialog pd;
+    TextView tv_name,tv_designation;
+    String main_access_group_id,sub_access_group_id;
     private FragmentManager mFragmentManager;
     Toolbar toolbar;
 
@@ -76,7 +84,17 @@ public class GamesMain extends AppCompatActivity
                     R.color.deep_yellow));
         }
 
-
+        globalClass = (GlobalClass) getApplicationContext();
+        shared_preference = new Shared_Preference(GamesMain.this);
+        shared_preference.loadPrefrence();
+        pd = new ProgressDialog(GamesMain.this);
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setMessage("Loading...");
+        main_access_group_id=getIntent().getStringExtra("main_access_group_id");
+        sub_access_group_id=getIntent().getStringExtra("sub_access_group_id");
+        Log.d(TAG, "onCreate: "+main_access_group_id);
+        Log.d(TAG, "onCreate: "+sub_access_group_id);
+        initViews();
 
 
         initViews();
@@ -84,6 +102,16 @@ public class GamesMain extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar_title = toolbar.findViewById(R.id.toolbar_title);
         toolbar_title.setText("Games");
+        Picasso.with(getApplicationContext()).load(globalClass.getProfil_pic()).into(iv_user);
+        tv_name.setText(globalClass.getFname());
+        if(globalClass.getType().equals("Students/Players")){
+            tv_designation.setText("Players");
+
+        }
+        else if(globalClass.getType().equals("Coach/Teachers")){
+            tv_designation.setText("Trainer");
+        }
+
 
 
 
@@ -93,6 +121,9 @@ public class GamesMain extends AppCompatActivity
     private void initViews(){
 
         toolbar  = findViewById(R.id.toolbar);
+        iv_user=findViewById(R.id.iv_user);
+        tv_name=findViewById(R.id.tv_name);
+        tv_designation=findViewById(R.id.tv_designation);
 
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -281,8 +312,15 @@ public class GamesMain extends AppCompatActivity
 
                 //transaction=getSupportFragmentManager().beginTransaction();
                 //transaction.replace(R.id.flContent,new Event());
+                Bundle bundle_event = new Bundle();
+                bundle_event.putString("from", getResources().getString(R.string.schedule));
+                bundle_event.putString("main_access_group_id", main_access_group_id);
+                bundle_event.putString("sub_access_group_id", sub_access_group_id);
+                Event event_list = new Event();
+                event_list.setArguments( bundle_event);
 
-                transactFragment(new Event());
+                transactFragment(event_list);
+              //  transactFragment(new Event());
 
                 break;
 
@@ -290,6 +328,8 @@ public class GamesMain extends AppCompatActivity
                 toolbar_title.setText(getResources().getString(R.string.schedule));
                 Bundle bundle_schedule = new Bundle();
                 bundle_schedule.putString("from", getResources().getString(R.string.schedule));
+                bundle_schedule.putString("main_access_group_id", main_access_group_id);
+                bundle_schedule.putString("sub_access_group_id", sub_access_group_id);
                 ScheduleUserwise scchedule_list = new ScheduleUserwise();
                 scchedule_list.setArguments( bundle_schedule);
 
@@ -307,28 +347,45 @@ public class GamesMain extends AppCompatActivity
 
             case 4:
 
-                toolbar_title.setText(getResources().getString(R.string.student_list));
+                if(globalClass.getType().equals("Students/Players")){
 
-                Bundle bundle_student_list = new Bundle();
-                bundle_student_list.putString("from", getResources().getString(R.string.student_list));
-                Team_All student_list = new Team_All();
-                student_list.setArguments( bundle_student_list);
+                    Intent skill=new Intent(GamesMain.this,SkillActivity.class);
+                    startActivity(skill);
 
-                transactFragment(student_list);
+
+                }
+                else {
+                    toolbar_title.setText(getResources().getString(R.string.student_list));
+
+                    Bundle bundle_student_list = new Bundle();
+                    bundle_student_list.putString("from", getResources().getString(R.string.student_list));
+                    Team_All student_list = new Team_All();
+                    student_list.setArguments(bundle_student_list);
+
+                    transactFragment(student_list);
+                }
 
                 break;
 
             case 5:
+                if(globalClass.getType().equals("Students/Players")){
 
-                toolbar_title.setText(getResources().getString(R.string.info));
+                    Intent skill=new Intent(GamesMain.this,SkillActivity.class);
+                    startActivity(skill);
 
-                Bundle bundle_info = new Bundle();
-                bundle_info.putString("from", getResources().getString(R.string.info));
-                Team_All info = new Team_All();
-                info.setArguments(bundle_info);
 
-                transactFragment(info);
+                }
+                else {
 
+                    toolbar_title.setText(getResources().getString(R.string.info));
+
+                    Bundle bundle_info = new Bundle();
+                    bundle_info.putString("from", getResources().getString(R.string.info));
+                    Team_All info = new Team_All();
+                    info.setArguments(bundle_info);
+
+                    transactFragment(info);
+                }
                 break;
 
             case 6:

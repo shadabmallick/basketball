@@ -65,9 +65,9 @@ public class Attendence   extends Fragment {
         newsList.add("A");
 
         recycle_attendence.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapterEvent
+       /* adapterEvent
                 = new AdapterAttendence(getActivity(), newsList);
-        recycle_attendence.setAdapter(adapterEvent);
+        recycle_attendence.setAdapter(adapterEvent);*/
 
     }
 }

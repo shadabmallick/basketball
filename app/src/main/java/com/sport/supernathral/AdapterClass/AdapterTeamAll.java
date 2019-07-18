@@ -12,12 +12,13 @@ import com.sport.supernathral.R;
 import com.sport.supernathral.activity.StudentListActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AdapterTeamAll extends
         RecyclerView.Adapter<AdapterTeamAll.ItemViewHolder> {
 
     private Context context;
-    private ArrayList<String> arrayList;
+    ArrayList<HashMap<String,String>> arrayList;
     private String from;
 
 
@@ -27,21 +28,21 @@ public class AdapterTeamAll extends
     }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder{
-        TextView action, desc,dismiss;
+        TextView action, desc,dismiss,tv_name;
         //  ImageView iv_track, iv_complain;
         AdapterTeamAll.onItemClickListner listner;
 
         public ItemViewHolder(View itemView, AdapterTeamAll.onItemClickListner listner) {
             super(itemView);
 
-
+            tv_name=itemView.findViewById(R.id.tv_name);
 
             this.listner = listner;
         }
     }
 
 
-    public AdapterTeamAll(Context context, ArrayList<String> itemList,String from){
+    public AdapterTeamAll(Context context, ArrayList<HashMap<String,String>>itemList, String from){
 
         this.context = context;
         this.arrayList=itemList;
@@ -63,11 +64,14 @@ public class AdapterTeamAll extends
     @Override
     public void onBindViewHolder(AdapterTeamAll.ItemViewHolder holder, final int position) {
 
+        holder.tv_name.setText(arrayList.get(position).get("user_name"));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent attendance=new Intent(context, StudentListActivity.class);
+
+                attendance.putExtra("id",arrayList.get(position).get("user_id"));
                 attendance.putExtra("from", from);
                 context.startActivity(attendance);
             }

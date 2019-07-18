@@ -240,6 +240,10 @@
             android:name=".trimmer.TrimmerActivity"
             android:theme="@style/MyTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.AttendenceStudentList"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
 
 
 

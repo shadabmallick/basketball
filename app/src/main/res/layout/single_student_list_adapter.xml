@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
     android:padding="10dp"
+    android:id="@+id/rel_main"
     android:layout_marginBottom="10dp">
     <LinearLayout
         android:id="@+id/ll_text"
@@ -16,6 +17,7 @@
         android:paddingBottom="10dp"
         android:layout_marginLeft="100dp">
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/name"

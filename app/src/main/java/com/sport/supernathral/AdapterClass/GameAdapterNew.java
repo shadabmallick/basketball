@@ -82,24 +82,17 @@ public class GameAdapterNew extends RecyclerView.Adapter<GameAdapterNew.ItemView
         Picasso.with(context).load(arrayList.get(position).get("team2_image")).into(holder.iv_team2);
 
 
-/*
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent NewsSublist=new Intent(context, GameListActivity.class);
+                NewsSublist.putExtra("game_id",arrayList.get(position).get("game_id"));
                 NewsSublist.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                */
-/*blogSingle.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                blogSingle.putExtra("file_name", dataArrayList.get(i).getFile_name());
-                blogSingle.putExtra("heading", dataArrayList.get(i).getHeading());
-                blogSingle.putExtra("content", dataArrayList.get(i).getContent());
-                blogSingle.putExtra("short_content", dataArrayList.get(i).getShort_content());
-                blogSingle.putExtra("date", dataArrayList.get(i).getDate());*//*
+
 
                 context.startActivity(NewsSublist);
             }
         });
-*/
 
 
 

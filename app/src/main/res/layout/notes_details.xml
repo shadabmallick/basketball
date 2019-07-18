@@ -48,6 +48,7 @@
             android:textSize="18dp"
             android:text="General"/>
         <TextView
+            android:id="@+id/tv_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
@@ -66,6 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="5dp"></View>
     <TextView
+        android:id="@+id/tv_notes"
         android:layout_below="@+id/view1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

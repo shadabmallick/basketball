@@ -67,6 +67,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_name"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
@@ -90,6 +91,7 @@
                         android:background="@drawable/circular_shadow"/>
 
                       <TextView
+                          android:id="@+id/tv_present"
                           android:layout_gravity="center"
                           android:layout_width="wrap_content"
                           android:textSize="14dp"
@@ -107,6 +109,7 @@
                         android:background="@drawable/circular_shadow"/>
 
                     <TextView
+                        android:id="@+id/tv_late"
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:textSize="14dp"
@@ -124,6 +127,7 @@
                         android:background="@drawable/circular_shadow"/>
 
                     <TextView
+                        android:id="@+id/tv_absent"
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:textSize="14dp"
@@ -141,6 +145,7 @@
                         android:background="@drawable/circular_shadow"/>
 
                     <TextView
+                        android:id="@+id/tv_excuse"
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:textSize="14dp"
@@ -184,6 +189,7 @@
         android:layout_marginTop="20dp">
 
         <LinearLayout
+            android:id="@+id/ll_present"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -214,6 +220,7 @@
 
 
         <LinearLayout
+            android:id="@+id/ll_late"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -243,6 +250,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_absent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -272,6 +280,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_excuse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -315,9 +324,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/view2"
-        android:layout_marginLeft="20dp"
-        android:padding="20dp"
-        android:layout_marginRight="20dp">
+
+
+       >
 
 
     </android.support.v7.widget.RecyclerView>

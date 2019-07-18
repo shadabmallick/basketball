@@ -54,14 +54,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="GPA"
+            android:text="Rank"
             android:layout_marginLeft="40dp"
              android:textSize="14dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rank"
-            android:layout_marginLeft="20dp"
+            android:text="GPA"
+            android:layout_marginLeft="60dp"
             android:textSize="14dp"/>
 
 
@@ -100,9 +100,9 @@
                     android:textSize="18dp"
                     android:text="Average"/>
                 <TextView
+                    android:id="@+id/tv_average"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="26"
                     android:textSize="18dp"
                     android:gravity="right"/>
 
@@ -124,9 +124,9 @@
                     android:textSize="18dp"
                     android:text="Goal"/>
                 <TextView
+                    android:id="@+id/tv_goal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="35"
                     android:textSize="18dp"
 
                     android:gravity="right"/>
@@ -151,9 +151,9 @@
                     android:layout_height="wrap_content"
                     android:text="Goal Average"/>
                 <TextView
+                    android:id="@+id/tv_goal_average"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="35"
                     android:textSize="18dp"
 
                     android:gravity="right"/>
@@ -179,9 +179,9 @@
                     android:layout_height="wrap_content"
                     android:text="Number of Activities"/>
                 <TextView
+                    android:id="@+id/tv_no_activity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="35"
                     android:textSize="18dp"
 
                     android:gravity="right"/>
@@ -206,9 +206,9 @@
                     android:layout_height="wrap_content"
                     android:text="Presence"/>
                 <TextView
+                    android:id="@+id/tv_presence"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="35"
                     android:textSize="18dp"
 
                     android:gravity="right"/>
@@ -234,9 +234,9 @@
                     android:layout_height="wrap_content"
                     android:text="Tardies"/>
                 <TextView
+                    android:id="@+id/tv_tardies"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="35"
                     android:textSize="18dp"
 
                     android:gravity="right"/>
@@ -261,9 +261,9 @@
                     android:layout_height="wrap_content"
                     android:text="Absent"/>
                 <TextView
+                    android:id="@+id/tv_absent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="35"
                     android:textSize="18dp"
 
                     android:gravity="right"/>
@@ -288,9 +288,9 @@
                     android:layout_height="wrap_content"
                     android:text="Practice"/>
                 <TextView
+                    android:id="@+id/tv_practice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="35"
                     android:textSize="18dp"
 
                     android:gravity="right"/>
@@ -315,9 +315,9 @@
                     android:layout_height="wrap_content"
                     android:text="Skill Set"/>
                 <TextView
+                    android:id="@+id/tv_skill"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="35"
                     android:textSize="18dp"
 
                     android:gravity="right"/>

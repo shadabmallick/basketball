@@ -29,7 +29,7 @@ public class ScheduleUserwise extends Fragment {
     ImageView img_header;
     RelativeLayout rl_own,rl_players;
     ProgressDialog pd;
-    String sponsor;
+    String sponsor,main_access_group_id,sub_access_group_id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,6 +49,8 @@ public class ScheduleUserwise extends Fragment {
 
     private void initialisation(View view) {
         sponsor = getArguments().getString("from");
+        main_access_group_id=getArguments().getString("main_access_group_id");
+        sub_access_group_id=getArguments().getString("sub_access_group_id");
         Log.d(TAG, "initialisation: "+sponsor);
         img_header = view.findViewById(R.id.img_header);
         rl_own=view.findViewById(R.id.rl_own);
@@ -58,6 +60,8 @@ public class ScheduleUserwise extends Fragment {
             @Override
             public void onClick(View v) {
                Intent own=new Intent(getActivity(), Activity_Schedule.class);
+               own.putExtra("main_access_group_id",main_access_group_id);
+               own.putExtra("sub_access_group_id",sub_access_group_id);
                startActivity(own);
             }
         });

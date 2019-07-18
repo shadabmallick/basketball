@@ -12,11 +12,13 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shadow_yellow">
         <TextView
+            android:id="@+id/tv_name"
             android:padding="10dp"
-            android:layout_width="wrap_content"
+            android:layout_width="180dp"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
-            android:text="U19 WILDCRAFTS"/>
+            android:text="DEVELOPMENT TEAM"/>
 
 
     </RelativeLayout>
@@ -28,7 +30,8 @@
 
        >
     <TextView
-
+        android:id="@+id/tv_time"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="08:00"

@@ -77,7 +77,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder{
             holder.type.setText("Trainer");
         }
         holder.name.setText(arrayList.get(position).get("user_name"));
-        Picasso.with(context).load(arrayList.get(position).get("user_image")).into(holder.profile_image);
+        Picasso.with(context).load(arrayList.get(position).get("user_image")).placeholder(R.mipmap.avatar_gray).into(holder.profile_image);
 
 
 

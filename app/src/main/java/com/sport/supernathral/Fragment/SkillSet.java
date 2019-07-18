@@ -66,10 +66,10 @@ public class SkillSet  extends Fragment {
         newsList.add("A");
         newsList.add("A");
 
-        recycle_skill.setLayoutManager(new LinearLayoutManager(getActivity()));
+       /* recycle_skill.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapterEvent
                 = new AdapterSkill(getActivity(), newsList);
-        recycle_skill.setAdapter(adapterEvent);
+        recycle_skill.setAdapter(adapterEvent);*/
 
     }
 }

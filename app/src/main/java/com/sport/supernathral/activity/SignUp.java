@@ -296,7 +296,7 @@ public class SignUp extends AppCompatActivity {
                         globalClass.setEmail(email);
                         globalClass.setFname(name);
                         globalClass.setDeviceid(device_id);
-                           globalClass.setType(user_type);
+                        globalClass.setType(user_type);
                         globalClass.setLogin_status(true);
 
                         shared_preference.savePrefrence();

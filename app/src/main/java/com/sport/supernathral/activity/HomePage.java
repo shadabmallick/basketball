@@ -184,7 +184,7 @@ public class HomePage extends AppCompatActivity {
         llnews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),HomePage.class));
+                startActivity(new Intent(HomePage.this,HomePage.class));
             }
         });
 
@@ -193,15 +193,18 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(getApplicationContext(),ChatScreen.class));
+                startActivity(new Intent(HomePage.this,ChatScreen.class));
             }
         });
 
         ll_games.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                startActivity(new Intent(getApplicationContext(), GamesMain.class));
+                Intent event=new Intent(HomePage.this,GamesMain.class);
+                event.putExtra("main_access_group_id",main_access_group_id);
+                event.putExtra("sub_access_group_id",sub_access_group_id);
+                Log.d(TAG, "onClick: "+main_access_group_id+ " "+sub_access_group_id);
+                startActivity(event);
             }
         });
 
@@ -210,7 +213,10 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(getApplicationContext(), EventScreen.class));
+               Intent event=new Intent(HomePage.this,EventScreen.class);
+               event.putExtra("main_access_group_id",main_access_group_id);
+               event.putExtra("sub_access_group_id",sub_access_group_id);
+               startActivity(event);
             }
         });
 
@@ -218,7 +224,7 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(getApplicationContext(), ProfileScreen.class));
+                startActivity(new Intent(HomePage.this, ProfileScreen.class));
             }
         });
 

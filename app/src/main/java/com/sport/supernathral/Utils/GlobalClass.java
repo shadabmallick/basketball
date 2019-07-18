@@ -83,6 +83,16 @@ public class GlobalClass extends Application {
     String longitude;
     String location;
 
+    public int getGpa() {
+        return gpa;
+    }
+
+    public void setGpa(int gpa) {
+        this.gpa = gpa;
+    }
+
+    int gpa;
+
     public String getUnique_name() {
         return unique_name;
     }

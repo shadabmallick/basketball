@@ -26,6 +26,7 @@ public class GameListActivity extends AppCompatActivity {
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
+    String game_id;
 
 
     @Override
@@ -48,7 +49,7 @@ public class GameListActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.mipmap.back_black);
-
+        game_id=getIntent().getStringExtra("game_id");
         viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 

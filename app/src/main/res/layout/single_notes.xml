@@ -27,12 +27,14 @@
 
 
             <TextView
+                android:id="@+id/tv_notes"
                 android:textSize="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Lorem Ipsum is Simple"/>
 
 <TextView
+    android:id="@+id/tv_date"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="2019-04-04"
