@@ -136,6 +136,7 @@
     <string name="parent">Parent</string>
     <string name="create_group">Create Group >>></string>
     <string name="typemessage">Write a message</string>
+    <string name="typemessage_oncomment">Write a message on comment</string>
     <string name="new_group">New Group</string>
     <string name="add_member">Add Members</string>
     <string name="messsage">Message</string>
@@ -153,6 +154,9 @@
     <string name="image">Image</string>
     <string name="video">Video</string>
     <string name="enter_comment">Enter comment</string>
+    <string name="alert">Alert</string>
+    <string name="comments">Comments</string>
+    <string name="report_msg">If you find any objectionable content in this Moment, please submit a request to Admin for remove the Moment &amp; block the user. After checking if we will found any glitches from your side, your account will be blocked.</string>
 
 
 

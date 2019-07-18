@@ -1,15 +1,17 @@
-package com.sport.supernathral.Fragment;
+package com.sport.supernathral.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,7 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.shashank.sony.fancytoastlib.FancyToast;
-import com.sport.supernathral.AdapterClass.AdapterComment;
+import com.sport.supernathral.AdapterClass.AdapterMainComment;
 import com.sport.supernathral.DataModel.CommentData;
 import com.sport.supernathral.DataModel.SubCommentData;
 import com.sport.supernathral.R;
@@ -41,20 +43,20 @@ import static com.sport.supernathral.NetworkConstant.AppConfig.post_news_comment
 import static com.sport.supernathral.NetworkConstant.AppConfig.post_news_comment_on_comment;
 import static com.sport.supernathral.NetworkConstant.AppConfig.post_news_like_on_comment;
 
-public class Comments extends Fragment implements
-        AdapterComment.onItemClickListnerLike,
-        AdapterComment.onItemClickListnerComment,
-        AdapterComment.onItemClickListnerDelete,
-        AdapterComment.onItemClickListnerReport{
+public class CommentsScreen extends AppCompatActivity implements
+        AdapterMainComment.onItemClickListnerLike,
+        AdapterMainComment.onItemClickListnerComment,
+        AdapterMainComment.onItemClickListnerDelete,
+        AdapterMainComment.onItemClickListnerReport{
 
 
     RecyclerView rv_category;
     EditText message_text;
     ImageView send_button;
-
+    Toolbar toolbar;
 
     String TAG="product";
-    AdapterComment adapterComment;
+    AdapterMainComment adapterComment;
     ArrayList<String> newsList;
     Shared_Preference preference;
     GlobalClass globalClass;
@@ -64,31 +66,37 @@ public class Comments extends Fragment implements
 
     String comment_type = "", comment_id;
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frag_comment, container, false);
-
-        initialisation(view);
-
-
-
-        return view;
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_comment);
+        initialisation();
     }
 
-    private void initialisation(View view) {
 
-        pd = new ProgressDialog(getActivity());
+    private void initialisation() {
+
+        pd = new ProgressDialog(this);
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pd.setMessage(getActivity().getResources().getString(R.string.loading));
-        rv_category = view.findViewById(R.id.recycler_comment);
-        message_text = view.findViewById(R.id.message_text);
-        send_button = view.findViewById(R.id.send_button);
+        pd.setMessage(getResources().getString(R.string.loading));
 
-        preference = new Shared_Preference(getActivity());
-        globalClass = (GlobalClass) getActivity().getApplicationContext();
+        rv_category = findViewById(R.id.recycler_comment);
+        message_text = findViewById(R.id.message_text);
+        send_button = findViewById(R.id.send_button);
+        toolbar = findViewById(R.id.toolbar);
 
-        rv_category.setLayoutManager(new LinearLayoutManager(getActivity()));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.mipmap.back_black);
+
+        preference = new Shared_Preference(this);
+        globalClass = (GlobalClass) getApplicationContext();
+
+        function();
 
 
 
@@ -96,10 +104,10 @@ public class Comments extends Fragment implements
             @Override
             public void onClick(View v) {
 
-                String message = getActivity().getResources().getString(R.string.typemessage);
+                String message = getResources().getString(R.string.typemessage);
 
                 if (message_text.getText().toString().trim().isEmpty()){
-                    FancyToast.makeText(getActivity(), message,
+                    FancyToast.makeText(getApplicationContext(), message,
                             FancyToast.LENGTH_LONG, FancyToast.ERROR, false)
                             .show();
                 }else {
@@ -121,13 +129,17 @@ public class Comments extends Fragment implements
 
 
     @Override
-    public void onResume() {
-        function();
-        super.onResume();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
     }
 
     private void function() {
-
+        rv_category.setLayoutManager(new LinearLayoutManager(this));
         CommentList();
 
     }
@@ -246,7 +258,7 @@ public class Comments extends Fragment implements
 
                         }else {
 
-                            FancyToast.makeText(getActivity(), message,
+                            FancyToast.makeText(getApplicationContext(), message,
                                     FancyToast.LENGTH_LONG, FancyToast.ERROR, false)
                                     .show();
                         }
@@ -254,7 +266,7 @@ public class Comments extends Fragment implements
 
                     } catch (Exception e) {
 
-                        FancyToast.makeText(getActivity(), "Connection error",
+                        FancyToast.makeText(getApplicationContext(), "Connection error",
                                 FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
                         e.printStackTrace();
 
@@ -297,7 +309,7 @@ public class Comments extends Fragment implements
 
     private void setAdapterComment(){
 
-        adapterComment   = new AdapterComment(getActivity(), listComment);
+        adapterComment   = new AdapterMainComment(CommentsScreen.this, listComment);
         rv_category.setAdapter(adapterComment);
         adapterComment.notifyDataSetChanged();
         adapterComment.setmListnerLike(this);
@@ -322,8 +334,8 @@ public class Comments extends Fragment implements
 
         if (comment_type.equals("sub_comment")){
             message_text.requestFocus();
-            Common.showSoftKeyboard(message_text, getActivity());
-            message_text.setHint(getActivity().getResources().getString(R.string.typemessage_oncomment));
+            Common.showSoftKeyboard(message_text, CommentsScreen.this);
+            message_text.setHint(getResources().getString(R.string.typemessage_oncomment));
         }
 
     }
@@ -369,7 +381,7 @@ public class Comments extends Fragment implements
 
                         }else {
 
-                            FancyToast.makeText(getActivity(), message,
+                            FancyToast.makeText(getApplicationContext(), message,
                                     FancyToast.LENGTH_LONG, FancyToast.ERROR, false)
                                     .show();
                         }
@@ -377,7 +389,7 @@ public class Comments extends Fragment implements
 
                     } catch (Exception e) {
 
-                        FancyToast.makeText(getActivity(), "Connection error",
+                        FancyToast.makeText(getApplicationContext(), "Connection error",
                                 FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
                         e.printStackTrace();
 
@@ -449,7 +461,7 @@ public class Comments extends Fragment implements
 
                         }else {
 
-                            FancyToast.makeText(getActivity(), message,
+                            FancyToast.makeText(getApplicationContext(), message,
                                     FancyToast.LENGTH_LONG, FancyToast.ERROR, false)
                                     .show();
                         }
@@ -457,7 +469,7 @@ public class Comments extends Fragment implements
 
                     } catch (Exception e) {
 
-                        FancyToast.makeText(getActivity(), "Connection error",
+                        FancyToast.makeText(getApplicationContext(), "Connection error",
                                 FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
                         e.printStackTrace();
 
@@ -529,7 +541,7 @@ public class Comments extends Fragment implements
 
                         }else {
 
-                            FancyToast.makeText(getActivity(), message,
+                            FancyToast.makeText(getApplicationContext(), message,
                                     FancyToast.LENGTH_LONG, FancyToast.ERROR, false)
                                     .show();
                         }
@@ -537,7 +549,7 @@ public class Comments extends Fragment implements
 
                     } catch (Exception e) {
 
-                        FancyToast.makeText(getActivity(), "Connection error",
+                        FancyToast.makeText(getApplicationContext(), "Connection error",
                                 FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
                         e.printStackTrace();
 
@@ -608,7 +620,7 @@ public class Comments extends Fragment implements
 
                         }else {
 
-                            FancyToast.makeText(getActivity(), message,
+                            FancyToast.makeText(getApplicationContext(), message,
                                     FancyToast.LENGTH_LONG, FancyToast.ERROR, false)
                                     .show();
                         }
@@ -616,7 +628,7 @@ public class Comments extends Fragment implements
 
                     } catch (Exception e) {
 
-                        FancyToast.makeText(getActivity(), "Connection error",
+                        FancyToast.makeText(getApplicationContext(), "Connection error",
                                 FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
                         e.printStackTrace();
 
@@ -661,7 +673,7 @@ public class Comments extends Fragment implements
 
 
     private void reportDialog(String comm_id){
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CommentsScreen.this);
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_news_report, null);
         dialogBuilder.setView(dialogView);

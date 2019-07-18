@@ -2,47 +2,29 @@ package com.sport.supernathral.AdapterClass;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.shashank.sony.fancytoastlib.FancyToast;
 import com.sport.supernathral.DataModel.CommentData;
 import com.sport.supernathral.DataModel.SubCommentData;
 import com.sport.supernathral.R;
 import com.sport.supernathral.Utils.GlobalClass;
 import com.sport.supernathral.Utils.Shared_Preference;
-import com.sport.supernathral.activity.CommentsScreen;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static com.sport.supernathral.NetworkConstant.AppConfig.NEWS_COMMENT;
-
-public class AdapterComment extends
-        RecyclerView.Adapter<AdapterComment.ItemViewHolder> {
+public class AdapterMainComment extends
+        RecyclerView.Adapter<AdapterMainComment.ItemViewHolder> {
 
     private String TAG="Comment";
     private Context context;
@@ -130,7 +112,7 @@ public class AdapterComment extends
     }
 
 
-    public AdapterComment(Context context, ArrayList<CommentData> listComment){
+    public AdapterMainComment(Context context, ArrayList<CommentData> listComment){
 
         this.context = context;
         this.listComment = listComment;
@@ -226,39 +208,16 @@ public class AdapterComment extends
         });
 
 
-        holder.tv_show_more.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View v) {
+        holder.tv_show_more.setVisibility(View.GONE);
 
-                  Intent intent = new Intent(context, CommentsScreen.class);
-                  intent.putExtra("news_id", globalClass.getSingle_top_news_id());
-                  context.startActivity(intent);
+        if(commentData.getList_sub_comment().size() > 0){
 
-              }
-        });
+            Log.d(TAG, "sub comment size : "+commentData.getList_sub_comment().size());
 
-         if(commentData.getList_sub_comment().size() > 0){
-
-              Log.d(TAG, "sub comment size : "+commentData.getList_sub_comment().size());
-
-              if (commentData.getList_sub_comment().size() > 2){
-                  holder.tv_show_more.setVisibility(View.VISIBLE);
-
-                  ArrayList<SubCommentData> listSubComment = new ArrayList<>();
-                  listSubComment.add(commentData.getList_sub_comment().get(0));
-                  listSubComment.add(commentData.getList_sub_comment().get(1));
-
-                  setSubComment(holder.recycler_sub_comments, listSubComment);
-
-              } else {
-                  holder.tv_show_more.setVisibility(View.GONE);
-                  setSubComment(holder.recycler_sub_comments, commentData.getList_sub_comment());
-              }
-
-              holder.rl_sublist.setVisibility(View.VISIBLE);
-
-             holder.img_comment_fill.setVisibility(View.VISIBLE);
-             holder.img_comment.setVisibility(View.GONE);
+            setSubComment(holder.recycler_sub_comments, commentData.getList_sub_comment());
+            holder.rl_sublist.setVisibility(View.VISIBLE);
+            holder.img_comment_fill.setVisibility(View.VISIBLE);
+            holder.img_comment.setVisibility(View.GONE);
 
          } else {
 

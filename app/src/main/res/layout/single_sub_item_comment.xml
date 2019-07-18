@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:text="@string/name"
+            android:textColor="@color/black"
             android:textSize="13sp"/>
 
         <TextView

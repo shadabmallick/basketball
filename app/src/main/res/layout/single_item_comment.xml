@@ -2,55 +2,69 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
     android:layout_marginTop="5dp"
-    android:padding="10dp"
-    android:layout_marginBottom="5dp">
+    >
 
 
-    <LinearLayout
-        android:id="@+id/ll_text"
+    <RelativeLayout
+        android:id="@+id/rel_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        android:paddingStart="15dp"
-        android:layout_toRightOf="@+id/profile_image"
+        android:padding="10dp"
+        android:background="@color/light_grey2"
         >
 
-        <TextView
-            android:id="@+id/tv_name"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@mipmap/avatar_gray"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="@string/name"
-            android:textSize="16sp"/>
+            android:orientation="vertical"
+            android:paddingRight="10dp"
+            android:paddingStart="15dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/profile_image"
+            >
 
-        <TextView
-            android:id="@+id/tv_comment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/darker_gray"
-            android:text="@string/player"/>
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/name"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/darker_gray"
+                android:text="@string/player"/>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@mipmap/avatar_gray"
-        />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
 
     <LinearLayout
         android:id="@+id/llmenu"
-        android:layout_below="@+id/profile_image"
+        android:layout_below="@+id/rel_top"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_marginTop="5dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
         >
 
         <TextView
@@ -160,7 +174,7 @@
     <View
         android:id="@+id/view1"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:layout_marginTop="8dp"
         android:layout_below="@+id/llmenu"
         android:background="@color/light_grey"/>
@@ -189,6 +203,7 @@
             android:visibility="visible"
             android:layout_below="@+id/recycler_sub_comments"
             android:layout_alignParentRight="true"
+            android:textColor="@color/blue_new"
             android:padding="10dp"
             />
 

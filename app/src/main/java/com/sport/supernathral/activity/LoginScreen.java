@@ -39,10 +39,21 @@ import com.sport.supernathral.Utils.Shared_Preference;
 
 import org.json.JSONObject;
 
+import java.security.SecureRandom;
+import java.security.Security;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import me.pushy.sdk.Pushy;
 import me.pushy.sdk.util.exceptions.PushyException;
@@ -94,6 +105,13 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
         }catch (PushyException e){
             e.printStackTrace();
         }
+
+        try {
+            doTrustToCertificates();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 
 
     }
@@ -391,148 +409,6 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
 
 
 
-/*
-    private void checkLogin(final String username, final String password) {
-        // Tag used to cancel the request
-        String tag_string_req = "req_login";
-
-        pd.show();
-
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_DEV+LOGIN, new Response.Listener<String>() {
-
-
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "Login Response: " + response.toString());
-
-                pd.dismiss();
-
-                Gson gson = new Gson();
-
-                try {
-
-
-                    JsonObject jobj = gson.fromJson(response, JsonObject.class);
-                    String status = jobj.get("status").getAsString().replaceAll("\"", "");
-                    String message = jobj.get("message").getAsString().replaceAll("\"", "");
-                    int result = Integer.parseInt(status);
-                   // System.out.println(result);
-
-                    Log.d(TAG, "Message: " + message);
-                    Log.d(TAG, "Message: " + result);
-
-                    if(result==1) {
-                        JsonObject data = jobj.getAsJsonObject("data");
-                        String res_user_id = data.get("id").toString().replaceAll("\"", "");
-                        String unique_id = data.get("unique_id").toString().replaceAll("\"", "");
-                        String main_access_group_id = data.get("main_access_group_id").toString().replaceAll("\"", "");
-                        String sub_access_group_id = data.get("sub_access_group_id").toString().replaceAll("\"", "");
-                        String type = data.get("type").toString().replaceAll("\"", "");
-                        String name = data.get("name").toString().replaceAll("\"", "");
-                        String email = data.get("email").toString().replaceAll("\"", "");
-                        String first_login = data.get("first_login").toString().replaceAll("\"", "");
-                        String notification = data.get("notification").toString().replaceAll("\"", "");
-                        String device_type = data.get("device_type").toString().replaceAll("\"", "");
-                        String device_id = data.get("device_id").toString().replaceAll("\"", "");
-                        String latitude = data.get("latitude").toString().replaceAll("\"", "");
-                        String longitude = data.get("longitude").toString().replaceAll("\"", "");
-                        String location = data.get("location").toString().replaceAll("\"", "");
-                        String profile_pic = data.get("profile_pic").toString().replaceAll("\"", "");
-
-                        globalClass.setId(res_user_id);
-                        globalClass.setEmail(email);
-                        globalClass.setFname(name);
-                        globalClass.setUnique_name(unique_id);
-                         globalClass.setLocation(location);
-                         globalClass.setMain_access_group_id(main_access_group_id);
-                         globalClass.setSub_access_group_id(sub_access_group_id);
-                         globalClass.setType(type);
-                         globalClass.setFirst_login(first_login);
-                         globalClass.setNotification(notification);
-                         globalClass.setLatitude(latitude);
-                         globalClass.setLongitude(longitude);
-                        globalClass.setDeviceid(device_type);
-                        globalClass.setDeviceid(device_id);
-
-                        globalClass.setProfil_pic(profile_pic);
-
-
-
-
-                        globalClass.setLogin_status(true);
-
-                        shared_preference.savePrefrence();
-                        FancyToast.makeText(getApplicationContext(), message, FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
-                        Intent intent = new Intent(LoginScreen.this, HomePage.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        finish();
-                        pd.dismiss();
-
-
-                    }
-                    else {
-
-                        FancyToast.makeText(getApplicationContext(), message, FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
-                    }
-
-
-                    Log.d(TAG, "Token \n" + message);
-
-
-                } catch (Exception e) {
-
-                    Toast.makeText(getApplicationContext(), "Incorrect Client ID/Password", Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
-
-                }
-
-
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "DATA NOT FOUND: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        "Connection Error", Toast.LENGTH_LONG).show();
-                pd.dismiss();
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-                // Posting parameters to login url
-                Map<String, String> params = new HashMap<>();
-
-                params.put("email", username);
-                params.put("password", password);
-                params.put("device_type", "android");
-                params.put("device_id", device_id);
-                params.put("latitude", String.valueOf(lati));
-                params.put("longitude", String.valueOf(longi));
-                params.put("location", newAddress);
-                Log.d(TAG, "getParams: "+params);
-
-
-                return params;
-            }
-
-        };
-
-        // Adding request to request queue
-        GlobalClass.getInstance().addToRequestQueue(strReq, tag_string_req);
-        strReq.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 10, 1.0f));
-
-
-
-
-
-    }
-*/
-
 
     @Override
     public void onLocationChanged(Location location) {
@@ -575,5 +451,41 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+
+
+
+    public void doTrustToCertificates() throws Exception {
+        //Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+        TrustManager[] trustAllCerts = new TrustManager[]{
+                new X509TrustManager() {
+                    public X509Certificate[] getAcceptedIssuers() {
+                        return null;
+                    }
+
+                    public void checkServerTrusted(X509Certificate[] certs,
+                                                   String authType) throws CertificateException {
+                        return;
+                    }
+
+                    public void checkClientTrusted(X509Certificate[] certs,
+                                                   String authType) throws CertificateException {
+                        return;
+                    }
+                }
+        };
+
+        SSLContext sc = SSLContext.getInstance("SSL");
+        sc.init(null, trustAllCerts, new SecureRandom());
+        HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+        HostnameVerifier hv = new HostnameVerifier() {
+            public boolean verify(String urlHostName, SSLSession session) {
+                if (!urlHostName.equalsIgnoreCase(session.getPeerHost())) {
+                    System.out.println("Warning: URL host '" + urlHostName + "' is different to SSLSession host '" + session.getPeerHost() + "'.");
+                }
+                return true;
+            }
+        };
+        HttpsURLConnection.setDefaultHostnameVerifier(hv);
     }
 }

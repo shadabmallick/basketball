@@ -13,6 +13,7 @@
             android:layout_height="240dp">
 
             <ImageView
+                android:id="@+id/iv_profile"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@mipmap/icon6"
@@ -163,6 +164,7 @@
                 />
 
             <TextView
+                android:id="@+id/tv_full_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/dark_gray"
@@ -178,8 +180,6 @@
                 android:layout_marginTop="5dp"
                 />
 
-
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -188,6 +188,7 @@
                 />
 
             <TextView
+                android:id="@+id/tv_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/dark_gray"
@@ -212,6 +213,7 @@
                 />
 
             <TextView
+                android:id="@+id/tv_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/dark_gray"
@@ -236,6 +238,7 @@
                 />
 
             <TextView
+                android:id="@+id/tv_designation2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/dark_gray"

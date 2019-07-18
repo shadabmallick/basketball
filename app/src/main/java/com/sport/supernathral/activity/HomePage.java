@@ -226,8 +226,6 @@ public class HomePage extends AppCompatActivity {
 
     }
 
-                        /*User Profile*/
-
     private void Profile() {
         // Tag used to cancel the request
         String tag_string_req = "forget_password";
@@ -669,8 +667,8 @@ public class HomePage extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
 
                 params.put("location",location);
-                params.put("main_access_group_id",main_access_group_id);
-                params.put("sub_access_group_id",sub_access_group_id);
+                params.put("main_access_group_id", main_access_group_id);
+                params.put("sub_access_group_id", sub_access_group_id);
 
 
                 Log.d(TAG, " param3: "+params);

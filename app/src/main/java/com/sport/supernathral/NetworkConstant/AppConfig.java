@@ -11,8 +11,9 @@ public class AppConfig
     private static String BASE_URL = "http://lab-3.sketchdemos.com/P1159_Basketball/api/";
 
     // live
-    public static String LIVE_URL = "https://www.supernahtralsports.com/api/";
+    ///public static String LIVE_URL = "https://www.supernahtralsports.com/api/";
 
+    public static String LIVE_URL = "http://lab-3.sketchdemos.com/P1159_Basketball/api/";
 
 
     public static final String REGISTER           = LIVE_URL + "registration";
@@ -28,7 +29,7 @@ public class AppConfig
     public static final String POST_USER_CHAT     = LIVE_URL + "post_user_chat";
     public static final String FORGOT_PASSWORD     = LIVE_URL + "forgotPassword";
     public static final String RESET_PASSWORD     = LIVE_URL + "resetPassword";
-    public static final String USER_PROFILE     = LIVE_URL + "user_profile";
+    public static final String USER_PROFILE       = LIVE_URL + "user_profile";
     public static final String USER_PROFILE_UPDATE     = LIVE_URL + "user_profile_update";
     public static final String CHANGE_PASSWORD     = LIVE_URL + "changePassword";
     public static final String UPDATE_NOTIFICATION     = LIVE_URL + "update_user_notification";
@@ -43,6 +44,8 @@ public class AppConfig
     public static final String post_news_comment                = LIVE_URL + "post_news_comment";
     public static final String post_news_comment_on_comment     = LIVE_URL + "post_news_comment_on_comment";
     public static final String post_news_like_on_comment     = LIVE_URL + "post_news_like_on_comment";
+    public static final String news_comment_delete     = LIVE_URL + "news_comment_delete";
+    public static final String user_profile     = LIVE_URL + "user_profile";
 
 
   /*  public static final String CHAT_USER_LIST     = BASE_URL + "chat_list";
