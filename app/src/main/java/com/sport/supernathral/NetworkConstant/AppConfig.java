@@ -46,6 +46,12 @@ public class AppConfig
     public static final String post_news_like_on_comment     = LIVE_URL + "post_news_like_on_comment";
     public static final String news_comment_delete     = LIVE_URL + "news_comment_delete";
     public static final String user_profile     = LIVE_URL + "user_profile";
+    public static final String group_details     = LIVE_URL + "group_details";
+    public static final String group_chat_list     = LIVE_URL + "group_chat_list";
+    public static final String update_group     = LIVE_URL + "update_group";
+    public static final String add_group_member     = LIVE_URL + "add_group_member";
+    public static final String delete_group_member     = LIVE_URL + "delete_group_member";
+    public static final String group_delete     = LIVE_URL + "group_delete";
 
 
   /*  public static final String CHAT_USER_LIST     = BASE_URL + "chat_list";

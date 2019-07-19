@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.sport.supernathral.DataModel.ChatListData;
 import com.sport.supernathral.R;
+import com.sport.supernathral.Utils.Common;
 import com.sport.supernathral.activity.SingleProfileInfo;
 import com.squareup.picasso.Picasso;
 
@@ -86,17 +87,27 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ItemView
         holder.tv_user_name.setText(chatListData.getUser_name());
 
 
-        if (chatListData.getMessage_type().equals("image")){
-            holder.tv_last_image.setVisibility(View.VISIBLE);
-            holder.tv_last_message.setVisibility(View.GONE);
+        holder.tv_last_image.setVisibility(View.GONE);
+        holder.tv_last_seen.setVisibility(View.GONE);
+        holder.tv_last_message.setVisibility(View.VISIBLE);
+
+
+        if (chatListData.getChat_type().equals("User")){
+
+            if (Common.player.equals(chatListData.getUser_type())){
+                holder.tv_last_message.setText("Player");
+            }else if (Common.parent.equals(chatListData.getUser_type())){
+                holder.tv_last_message.setText("Parent");
+            }else if (Common.trainer.equals(chatListData.getUser_type())){
+                holder.tv_last_message.setText("Trainer");
+            }
+
+        }else if (chatListData.getChat_type().equals("Group")){
+            holder.tv_last_message.setText("Group");
         }else {
-            holder.tv_last_message.setText(chatListData.getMessage());
-            holder.tv_last_image.setVisibility(View.GONE);
-            holder.tv_last_message.setVisibility(View.VISIBLE);
+            holder.tv_last_message.setText("");
         }
 
-
-        holder.tv_last_seen.setVisibility(View.GONE);
 
 
         holder.rel_main.setOnClickListener(new View.OnClickListener() {

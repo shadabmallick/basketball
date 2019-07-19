@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.sport.supernathral.AdapterClass.UserSelectionAdapter;
+import com.sport.supernathral.DataModel.MembersData;
 import com.sport.supernathral.R;
 
 import java.util.ArrayList;
@@ -58,11 +59,11 @@ public class GroupUserSelection extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (adapter != null && adapter.getSelectedUsers().size() > 0){
+                if (adapter != null && adapter.getSelectedUserIds().size() > 0){
 
                     Intent intent =
                             new Intent(getApplicationContext(), GroupCreate.class);
-                    intent.putExtra("data", adapter.getSelectedUsers());
+                    intent.putExtra("data", adapter.getSelectedUserIds());
                     startActivity(intent);
 
                 }else {
@@ -77,18 +78,13 @@ public class GroupUserSelection extends AppCompatActivity {
 
         recycler_user.setLayoutManager(new LinearLayoutManager(this));
 
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("A");
-        arrayList.add("A");
-        arrayList.add("A");
-        arrayList.add("A");
-        arrayList.add("A");
-        arrayList.add("A");
-        arrayList.add("A");
-        arrayList.add("A");
-        arrayList.add("A");
-        arrayList.add("A");
-        arrayList.add("A");
+        ArrayList<MembersData> arrayList = new ArrayList<>();
+
+        arrayList.add(new MembersData());
+        arrayList.add(new MembersData());
+        arrayList.add(new MembersData());
+        arrayList.add(new MembersData());
+        arrayList.add(new MembersData());
 
         adapter = new UserSelectionAdapter(GroupUserSelection.this,
                 arrayList);

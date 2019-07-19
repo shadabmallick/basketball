@@ -143,7 +143,7 @@ public class Shared_Preference {
 
 
 
-            type= globalclass.getType();
+            type = globalclass.getType();
             editor.putString(PREF_type,type);
 
             switch_notify= globalclass.getNotify();
@@ -211,11 +211,6 @@ public class Shared_Preference {
             pref_ship_full_address = globalclass.getShipping_full_address();
             editor.putString(PREF_ship_full_address, pref_ship_full_address);*/
 
-
-
-
-
-
             editor.commit();
 
         }else{
@@ -278,27 +273,20 @@ public class Shared_Preference {
             globalclass.setLogin_from(login_from);
 
 
-
-
             unique_name=sharedPreferences.getString(PREF_unique_name,"");
             globalclass.setUnique_name(unique_name);
-
 
 
             main_access_group_id=sharedPreferences.getString(PREF_main_access_group_id,"");
             globalclass.setUnique_name(main_access_group_id);
 
 
-
             sub_access_group_id=sharedPreferences.getString(PREF_sub_access_group_id,"");
             globalclass.setSub_access_group_id(sub_access_group_id);
 
 
-
             type=sharedPreferences.getString(PREF_type,"");
             globalclass.setType(type);
-
-
 
 
             first_login=sharedPreferences.getString(PREF_first_login,"");
@@ -320,6 +308,21 @@ public class Shared_Preference {
 
             location=sharedPreferences.getString(PREF_location,"");
             globalclass.setLocation(location);
+
+
+            if (Common.player.equals(globalclass.getType())){
+                globalclass.setPlayer(true);
+                globalclass.setParent(false);
+                globalclass.setTrainer(false);
+            }else if (Common.parent.equals(globalclass.getType())){
+                globalclass.setPlayer(false);
+                globalclass.setParent(true);
+                globalclass.setTrainer(false);
+            }else if (Common.trainer.equals(globalclass.getType())){
+                globalclass.setPlayer(false);
+                globalclass.setParent(false);
+                globalclass.setTrainer(true);
+            }
 
         }
     }

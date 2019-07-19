@@ -29,7 +29,6 @@ import android.widget.RelativeLayout;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.sport.supernathral.AdapterClass.GroupUserAdapter;
-import com.sport.supernathral.AdapterClass.UserSelectionAdapter;
 import com.sport.supernathral.R;
 
 import java.io.File;
