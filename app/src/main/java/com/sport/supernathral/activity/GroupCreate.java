@@ -392,7 +392,6 @@ public class GroupCreate extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-
         }
 
         Log.d(TAG ,"create_group_chat- " + url);
@@ -432,6 +431,7 @@ public class GroupCreate extends AppCompatActivity {
                             }
 
                             startActivity(intent);
+                            finish();
                         }
 
                         progressDialog.dismiss();
