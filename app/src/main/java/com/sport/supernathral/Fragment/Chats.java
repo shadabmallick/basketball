@@ -83,6 +83,13 @@ public class Chats extends Fragment implements AdapterChat.onItemClickListner{
         globalClass = (GlobalClass) getActivity().getApplicationContext();
 
 
+        if (globalClass.isTrainer()){
+            rel_create_group.setVisibility(View.VISIBLE);
+        }else {
+            rel_create_group.setVisibility(View.GONE);
+        }
+
+
         rel_create_group.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
