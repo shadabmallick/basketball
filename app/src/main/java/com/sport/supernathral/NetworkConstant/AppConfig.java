@@ -52,6 +52,7 @@ public class AppConfig
     public static final String add_group_member     = LIVE_URL + "add_group_member";
     public static final String delete_group_member     = LIVE_URL + "delete_group_member";
     public static final String group_delete     = LIVE_URL + "group_delete";
+    public static final String create_group_chat     = LIVE_URL + "create_group_chat";
 
 
   /*  public static final String CHAT_USER_LIST     = BASE_URL + "chat_list";

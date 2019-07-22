@@ -157,12 +157,19 @@ public class GroupProfileInfo extends AppCompatActivity
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
-            chatListData = (ChatListData) bundle.getSerializable("info");
 
-            if (chatListData != null){
+            String from = bundle.getString("from", "");
+            if (from.equals("chat")){
 
-                getGroupProfileInfo(chatListData.getReceiver_id());
+                getGroupProfileInfo(bundle.getString("id"));
 
+            }else {
+                chatListData = (ChatListData) bundle.getSerializable("info");
+                if (chatListData != null){
+
+                    getGroupProfileInfo(chatListData.getReceiver_id());
+
+                }
             }
 
         }

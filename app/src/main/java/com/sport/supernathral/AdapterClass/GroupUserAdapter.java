@@ -9,7 +9,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.sport.supernathral.DataModel.MembersData;
 import com.sport.supernathral.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -19,7 +21,7 @@ public class GroupUserAdapter extends
         RecyclerView.Adapter<GroupUserAdapter.ItemViewHolder> {
 
     private Context context;
-    private ArrayList<String> arrayList;
+    private ArrayList<MembersData> arrayList;
 
 
 
@@ -42,7 +44,7 @@ public class GroupUserAdapter extends
     }
 
 
-    public GroupUserAdapter(Context context, ArrayList<String> itemList){
+    public GroupUserAdapter(Context context, ArrayList<MembersData> itemList){
         this.context = context;
         this.arrayList=itemList;
 
@@ -61,8 +63,16 @@ public class GroupUserAdapter extends
     @Override
     public void onBindViewHolder(ItemViewHolder holder, final int position) {
 
-        // user type = Coach/Teachers  ,  Students/Players
+        MembersData membersData = arrayList.get(position);
 
+        if (!membersData.getUser_image().isEmpty()){
+            Picasso.with(context)
+                    .load(membersData.getUser_image())
+                    .placeholder(R.mipmap.profile_placeholder)
+                    .into(holder.profile_image);
+        }
+
+        holder.tv_user_name.setText(membersData.getUser_name());
 
 
         holder.iv_cancel.setOnClickListener(new View.OnClickListener() {
@@ -85,12 +95,18 @@ public class GroupUserAdapter extends
 
 
 
-    public ArrayList<String> getSelectedUsers(){
+    public String getSelectedUserIds(){
 
-        ArrayList<String> arrayList1 = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        String result = "";
+        for (int i = 0; i < arrayList.size(); i++){
+            sb.append(arrayList.get(i).getId()).append(",");
 
+        }
 
-        return arrayList1;
+        result = sb.deleteCharAt(sb.length() - 1).toString();
+
+        return result;
 
     }
 

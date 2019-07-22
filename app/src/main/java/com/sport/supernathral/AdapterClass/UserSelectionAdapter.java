@@ -129,13 +129,13 @@ public class UserSelectionAdapter extends
 
 
 
-    public ArrayList<String> getSelectedUserIds(){
+    public ArrayList<MembersData> getSelectedUsers(){
 
-        ArrayList<String> arrayList1 = new ArrayList<>();
+        ArrayList<MembersData> arrayList1 = new ArrayList<>();
 
         for (int i = 0; i < arrayList.size(); i++){
             if (arr_selection.get(i)){
-                arrayList1.add(arrayList.get(i).getId());
+                arrayList1.add(arrayList.get(i));
             }
         }
 

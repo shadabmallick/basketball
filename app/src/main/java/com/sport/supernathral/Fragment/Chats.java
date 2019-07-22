@@ -88,7 +88,7 @@ public class Chats extends Fragment implements AdapterChat.onItemClickListner{
             public void onClick(View v) {
 
                 Intent intent = new Intent(getActivity(), GroupUserSelection.class);
-                //startActivity(intent);
+                startActivity(intent);
 
             }
         });

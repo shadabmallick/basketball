@@ -254,6 +254,18 @@ public class ChatGroup extends AppCompatActivity
             }
         });
 
+        tv_details.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(ChatGroup.this, GroupProfileInfo.class);
+                intent.putExtra("id", chatListData.getReceiver_id());
+                intent.putExtra("from", "chat");
+                startActivity(intent);
+
+            }
+        });
+
 
     }
 
