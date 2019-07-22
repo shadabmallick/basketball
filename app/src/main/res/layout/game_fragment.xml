@@ -30,7 +30,7 @@
                  android:textSize="20sp"
                  android:textStyle="bold"
                  android:textColor="@color/black"
-                 android:text="Foregoing"
+                 android:text="ForeGoing"
                  />
 
          </RelativeLayout>

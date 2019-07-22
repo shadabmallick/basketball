@@ -30,7 +30,7 @@ public class GameAdapterNew extends RecyclerView.Adapter<GameAdapterNew.ItemView
     }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder{
-        TextView action, desc,dismiss,tv_team1,tv_team2,tv_time,tv_day,tv_date;
+        TextView action, desc,dismiss,tv_team1,tv_team2,tv_time,tv_day,tv_date,tv_game_name;
         CircleImageView iv_team1,iv_team2;
         //  ImageView iv_track, iv_complain;
         GameAdapterNew.onItemClickListner listner;
@@ -45,6 +45,7 @@ public class GameAdapterNew extends RecyclerView.Adapter<GameAdapterNew.ItemView
             iv_team1=itemView.findViewById(R.id.iv_team1);
             tv_date=itemView.findViewById(R.id.tv_date);
             iv_team2=itemView.findViewById(R.id.iv_team2);
+            tv_game_name=itemView.findViewById(R.id.tv_game_name);
 
             this.listner = listner;
         }
@@ -77,6 +78,7 @@ public class GameAdapterNew extends RecyclerView.Adapter<GameAdapterNew.ItemView
         holder.tv_time.setText(arrayList.get(position).get("time"));
         holder.tv_date.setText(arrayList.get(position).get("date"));
         holder.tv_day.setText(arrayList.get(position).get("day"));
+        holder.tv_game_name.setText(arrayList.get(position).get("match_type"));
 
         Picasso.with(context).load(arrayList.get(position).get("team_image")).into(holder.iv_team1);
         Picasso.with(context).load(arrayList.get(position).get("team2_image")).into(holder.iv_team2);
@@ -86,7 +88,15 @@ public class GameAdapterNew extends RecyclerView.Adapter<GameAdapterNew.ItemView
             @Override
             public void onClick(View v) {
                 Intent NewsSublist=new Intent(context, GameListActivity.class);
-                NewsSublist.putExtra("game_id",arrayList.get(position).get("game_id"));
+                NewsSublist.putExtra("game_id",arrayList.get(position).get("id"));
+                NewsSublist.putExtra("team_1_name",arrayList.get(position).get("team1_name"));
+                NewsSublist.putExtra("team_2_name",arrayList.get(position).get("team2_name"));
+                NewsSublist.putExtra("team_1_image",arrayList.get(position).get("team_image"));
+                NewsSublist.putExtra("team_2_image",arrayList.get(position).get("team2_image"));
+                NewsSublist.putExtra("live_score_team_A",arrayList.get(position).get("live_score_team_A"));
+                NewsSublist.putExtra("live_score_team_B",arrayList.get(position).get("live_score_team_B"));
+                NewsSublist.putExtra("match_type",arrayList.get(position).get("match_type"));
+
                 NewsSublist.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
 

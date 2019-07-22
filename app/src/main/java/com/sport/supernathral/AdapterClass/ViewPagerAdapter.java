@@ -1,6 +1,7 @@
 package com.sport.supernathral.AdapterClass;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.sport.supernathral.R;
+import com.sport.supernathral.activity.ShowImages;
+import com.sport.supernathral.activity.ShowVideo;
 
 import java.util.ArrayList;
 
@@ -37,7 +40,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, final int position) {
+    public Object instantiateItem(final ViewGroup container, final int position) {
         View itemView = layoutInflater.inflate(R.layout.viewpager_single, container, false);
 
         ImageView imageView = itemView.findViewById(R.id.imageView);
@@ -46,7 +49,15 @@ public class ViewPagerAdapter extends PagerAdapter {
         Glide.with(context).load(images.get(position))
                 .placeholder(R.mipmap.image_black)
                 .into(imageView);
-
+       itemView.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent image = new Intent(context, ShowImages.class);
+               image.putExtra("data",images);
+               image.putExtra("type","image");
+               context.startActivity(image);
+           }
+       });
 
         container.addView(itemView);
 

@@ -47,6 +47,8 @@ public class GameFragment extends Fragment {
     ImageView img_header;
     LinearLayout llnews;
     ArrayList<HashMap<String,String>> gameList;
+    ArrayList<HashMap<String,String>> gameList1;
+    ArrayList<HashMap<String,String>> gameList2;
     GameAdapterNew gameListAdapter;
     LinearLayout llchat ;
     LinearLayout ll_games;
@@ -89,6 +91,8 @@ public class GameFragment extends Fragment {
         ll_event =view. findViewById(R.id.ll_event);
         ll_profile =view. findViewById(R.id.ll_profile);
         gameList=new ArrayList<>();
+        gameList1=new ArrayList<>();
+        gameList2=new ArrayList<>();
         GameList();
 
         }
@@ -152,7 +156,7 @@ public class GameFragment extends Fragment {
 
                 if (response != null){
                     pd.dismiss();
-
+                    gameList.clear();
                     try {
 
                         JSONObject main_object = new JSONObject(response);
@@ -168,7 +172,9 @@ public class GameFragment extends Fragment {
 
 
                             JSONArray news_data=main_object.getJSONArray("past_match");
-
+                            if(news_data.length()==0){
+                                recycle_game.removeAllViews();
+                            }
 
                             for (int i = 0; i < news_data.length(); i++) {
                                 JSONObject item = news_data.getJSONObject(i);
@@ -226,13 +232,9 @@ public class GameFragment extends Fragment {
                                 hashMap.put("team_image", team_image);
                                 hashMap.put("team2_image", team2_image);
                                 hashMap.put("team2_id", team2_id);
+                                hashMap.put("match_type", match_type);
 
 
-
-
-
-
-                                //  globalClass.setFolderanme(folder_name);
 
                                 gameList.add(hashMap);
                                 Log.d(TAG, "Hashmap " + hashMap);
@@ -243,7 +245,152 @@ public class GameFragment extends Fragment {
                             recycle_game.setAdapter(gameListAdapter);
                             gameListAdapter.notifyDataSetChanged();
 
+                            JSONArray ongoing_match=main_object.getJSONArray("ongoing_match");
+                            if(ongoing_match.length()==0){
+                                recycle_game1.removeAllViews();
+                            }
 
+                            for (int i = 0; i < ongoing_match.length(); i++) {
+                                JSONObject item = ongoing_match.getJSONObject(i);
+                                String id = item.get("id").toString().replaceAll("\"", "");
+                                String match_id = item.get("match_id").toString().replaceAll("\"", "");
+                                String teamA = item.get("teamA").toString().replaceAll("\"", "");
+                                String teamB = item.get("teamB").toString().replaceAll("\"", "");
+                                String date_and_time = item.get("date_and_time").toString().replaceAll("\"", "");
+                                String day = item.get("day").toString().replaceAll("\"", "");
+                                JSONObject match=item.getJSONObject("match");
+                                String match_sub_id = match.get("id").toString().replaceAll("\"", "");
+                                String image = match.get("image").toString().replaceAll("\"", "");
+                                String name = match.get("name").toString().replaceAll("\"", "");
+                                String match_start_date = match.get("match_start_date").toString().replaceAll("\"", "");
+                                String match_end_date = match.get("match_end_date").toString().replaceAll("\"", "");
+                                String match_venue = match.get("match_venue").toString().replaceAll("\"", "");
+                                String match_address = match.get("match_address").toString().replaceAll("\"", "");
+                                String match_city = match.get("match_city").toString().replaceAll("\"", "");
+                                String match_state = match.get("match_state").toString().replaceAll("\"", "");
+                                String match_pincode = match.get("match_pincode").toString().replaceAll("\"", "");
+                                String match_desc = match.get("match_desc").toString().replaceAll("\"", "");
+                                String match_contact_name = match.get("match_contact_name").toString().replaceAll("\"", "");
+                                String match_contact_designation = match.get("match_contact_designation").toString().replaceAll("\"", "");
+                                String match_contact_email = match.get("match_contact_email").toString().replaceAll("\"", "");
+                                String match_contact_phone = match.get("match_contact_phone").toString().replaceAll("\"", "");
+                                String type = match.get("type").toString().replaceAll("\"", "");
+                                String delete_flag = match.get("delete_flag").toString().replaceAll("\"", "");
+                                String is_active = match.get("is_active").toString().replaceAll("\"", "");
+                                String entry_date = match.get("entry_date").toString().replaceAll("\"", "");
+                                String modified_date = match.get("modified_date").toString().replaceAll("\"", "");
+                                String match_image = match.get("match_image").toString().replaceAll("\"", "");
+                                String match_type = match.get("match_type").toString().replaceAll("\"", "");
+                                String arr[] = date_and_time.split(" ", 2);
+                                String firstWord = arr[0];   //the
+                                String lastWord = match_start_date.substring(match_start_date.lastIndexOf(" ")+1);
+                                JSONObject teamA_details=item.getJSONObject("teamA_details");
+                                String team_id = teamA_details.get("id").toString().replaceAll("\"", "");
+                                String team1_name = teamA_details.get("name").toString().replaceAll("\"", "");
+                                String team_image = teamA_details.get("image").toString().replaceAll("\"", "");
+                                JSONObject teamB_details=item.getJSONObject("teamB_details");
+
+                                String team2_image = teamB_details.get("image").toString().replaceAll("\"", "");
+                                String team2_id = teamB_details.get("id").toString().replaceAll("\"", "");
+                                String team2_name = teamB_details.get("name").toString().replaceAll("\"", "");
+
+                                HashMap<String, String> hashMap = new HashMap<>();
+                                hashMap.put("id", id);
+                                hashMap.put("match_id", match_id);
+                                hashMap.put("team_id", team_id);
+                                hashMap.put("date", firstWord);
+                                hashMap.put("time", lastWord);
+                                hashMap.put("day", day);
+                                hashMap.put("team1_name", team1_name);
+                                hashMap.put("team2_name", team2_name);
+                                hashMap.put("team_image", team_image);
+                                hashMap.put("team2_image", team2_image);
+                                hashMap.put("team2_id", team2_id);
+                                hashMap.put("match_type", match_type);
+
+
+
+                                gameList1.add(hashMap);
+                                Log.d(TAG, "Hashmap " + hashMap);
+
+                            }
+                            gameListAdapter
+                                    = new GameAdapterNew(getActivity(), gameList1);
+                            recycle_game1.setAdapter(gameListAdapter);
+                            gameListAdapter.notifyDataSetChanged();
+                            JSONArray upcoming_match=main_object.getJSONArray("upcoming_match");
+                            if(upcoming_match.length()==0){
+                                recycle_game2.removeAllViews();
+                            }
+
+                            for (int i = 0; i < upcoming_match.length(); i++) {
+                                JSONObject item = upcoming_match.getJSONObject(i);
+                                String id = item.get("id").toString().replaceAll("\"", "");
+                                String match_id = item.get("match_id").toString().replaceAll("\"", "");
+                                String teamA = item.get("teamA").toString().replaceAll("\"", "");
+                                String teamB = item.get("teamB").toString().replaceAll("\"", "");
+                                String date_and_time = item.get("date_and_time").toString().replaceAll("\"", "");
+                                String day = item.get("day").toString().replaceAll("\"", "");
+                                JSONObject match=item.getJSONObject("match");
+                                String match_sub_id = match.get("id").toString().replaceAll("\"", "");
+                                String image = match.get("image").toString().replaceAll("\"", "");
+                                String name = match.get("name").toString().replaceAll("\"", "");
+                                String match_start_date = match.get("match_start_date").toString().replaceAll("\"", "");
+                                String match_end_date = match.get("match_end_date").toString().replaceAll("\"", "");
+                                String match_venue = match.get("match_venue").toString().replaceAll("\"", "");
+                                String match_address = match.get("match_address").toString().replaceAll("\"", "");
+                                String match_city = match.get("match_city").toString().replaceAll("\"", "");
+                                String match_state = match.get("match_state").toString().replaceAll("\"", "");
+                                String match_pincode = match.get("match_pincode").toString().replaceAll("\"", "");
+                                String match_desc = match.get("match_desc").toString().replaceAll("\"", "");
+                                String match_contact_name = match.get("match_contact_name").toString().replaceAll("\"", "");
+                                String match_contact_designation = match.get("match_contact_designation").toString().replaceAll("\"", "");
+                                String match_contact_email = match.get("match_contact_email").toString().replaceAll("\"", "");
+                                String match_contact_phone = match.get("match_contact_phone").toString().replaceAll("\"", "");
+                                String type = match.get("type").toString().replaceAll("\"", "");
+                                String delete_flag = match.get("delete_flag").toString().replaceAll("\"", "");
+                                String is_active = match.get("is_active").toString().replaceAll("\"", "");
+                                String entry_date = match.get("entry_date").toString().replaceAll("\"", "");
+                                String modified_date = match.get("modified_date").toString().replaceAll("\"", "");
+                                String match_image = match.get("match_image").toString().replaceAll("\"", "");
+                                String match_type = match.get("match_type").toString().replaceAll("\"", "");
+                                String arr[] = date_and_time.split(" ", 2);
+                                String firstWord = arr[0];   //the
+                                String lastWord = match_start_date.substring(match_start_date.lastIndexOf(" ")+1);
+                                JSONObject teamA_details=item.getJSONObject("teamA_details");
+                                String team_id = teamA_details.get("id").toString().replaceAll("\"", "");
+                                String team1_name = teamA_details.get("name").toString().replaceAll("\"", "");
+                                String team_image = teamA_details.get("image").toString().replaceAll("\"", "");
+                                JSONObject teamB_details=item.getJSONObject("teamB_details");
+
+                                String team2_image = teamB_details.get("image").toString().replaceAll("\"", "");
+                                String team2_id = teamB_details.get("id").toString().replaceAll("\"", "");
+                                String team2_name = teamB_details.get("name").toString().replaceAll("\"", "");
+
+                                HashMap<String, String> hashMap = new HashMap<>();
+                                hashMap.put("id", id);
+                                hashMap.put("match_id", match_id);
+                                hashMap.put("team_id", team_id);
+                                hashMap.put("date", firstWord);
+                                hashMap.put("time", lastWord);
+                                hashMap.put("day", day);
+                                hashMap.put("team1_name", team1_name);
+                                hashMap.put("team2_name", team2_name);
+                                hashMap.put("team_image", team_image);
+                                hashMap.put("team2_image", team2_image);
+                                hashMap.put("team2_id", team2_id);
+                                hashMap.put("match_type", match_type);
+
+
+
+                                gameList2.add(hashMap);
+                                Log.d(TAG, "Hashmap " + hashMap);
+
+                            }
+                            gameListAdapter
+                                    = new GameAdapterNew(getActivity(), gameList2);
+                            recycle_game2.setAdapter(gameListAdapter);
+                            gameListAdapter.notifyDataSetChanged();
 
                         }else {
 

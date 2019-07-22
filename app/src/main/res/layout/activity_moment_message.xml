@@ -52,6 +52,7 @@
             android:layout_height="150dp">
 
            <EditText
+               android:id="@+id/edt_moment"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_margin="20dp"
@@ -91,6 +92,8 @@
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:layout_marginTop="15dp"
+            android:layout_gravity="center"
+            android:gravity="center"
             >
 
             <TextView
@@ -103,11 +106,17 @@
                 android:padding="10dp"
                 />
 
-            <com.sport.supernathral.Utils.ScalableVideoView
-                android:id="@+id/video_view"
+            <VideoView
+
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_below="@+id/tv_cancel"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:focusable="false"
+                android:layout_marginTop="70dp"
+                android:focusableInTouchMode="false"
+                android:id="@+id/video_view"
                 />
 
         </RelativeLayout>

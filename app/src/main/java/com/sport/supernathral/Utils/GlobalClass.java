@@ -306,18 +306,21 @@ public class GlobalClass extends Application {
 
 
 
+    //// new on busketball ..
+    private String single_top_news_id;
+
+    public String getSingle_top_news_id() {
+        return single_top_news_id;
+    }
+
+    public void setSingle_top_news_id(String single_top_news_id) {
+        this.single_top_news_id = single_top_news_id;
+    }
 
 
 
 
-
-
-
-
-
-
-
-
+    /////////////////////////////////
 
     public String getCurrency_symbol() {
         return currency_symbol;

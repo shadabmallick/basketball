@@ -58,11 +58,14 @@ public class HomePage extends AppCompatActivity {
     Shared_Preference preference;
     ArrayList<HashMap<String,String>> newsdata;
     ArrayList<HashMap<String,String>> newsdata_search;
+    ArrayList<HashMap<String,String>> gamedata_search;
     ProgressDialog pd;
     String playerid,location,main_access_group_id,sub_access_group_id;
     NewsAdapter newsAdapter;
     TextView heading_text,comment,like;
     EditText edt_search;
+    String single_top_news_id;
+    GameAdapter gameAdapter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +96,7 @@ public class HomePage extends AppCompatActivity {
         edt_search = findViewById(R.id.edt_search);
         newsdata=new ArrayList<>();
         newsdata_search=new ArrayList<>();
+        gamedata_search=new ArrayList<>();
         Profile();
 
         recycle_game.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -152,7 +156,7 @@ public class HomePage extends AppCompatActivity {
         img_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent searchPLayer=new Intent(HomePage.this,SearchPlayer.class);
+                Intent searchPLayer = new Intent(HomePage.this,SearchPlayer.class);
                 startActivity(searchPLayer);
 
             }
@@ -160,7 +164,8 @@ public class HomePage extends AppCompatActivity {
         img_top.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent newsPage=new Intent(HomePage.this,NewsSublist.class);
+                Intent newsPage = new Intent(HomePage.this,NewsSublist.class);
+                newsPage.putExtra("id", single_top_news_id);
                 startActivity(newsPage);
             }
         });
@@ -229,8 +234,6 @@ public class HomePage extends AppCompatActivity {
         });
 
     }
-
-                        /*User Profile*/
 
     private void Profile() {
         // Tag used to cancel the request
@@ -538,7 +541,7 @@ public class HomePage extends AppCompatActivity {
 
                         if (status == 1){
 
-                                 rl_homescreen.setVisibility(View.VISIBLE);
+                            rl_homescreen.setVisibility(View.VISIBLE);
 
                             JSONObject news_one = main_object.getJSONObject("news_one");
 
@@ -558,7 +561,11 @@ public class HomePage extends AppCompatActivity {
                             final String modified_date = news_one.get("modified_date").toString().replaceAll("\"", "");
                             final String news_like = news_one.get("news_like").toString().replaceAll("\"", "");
                             final String news_comment = news_one.get("news_comment").toString().replaceAll("\"", "");
-                            Picasso.with(getApplicationContext()).load(file_name).into(img_top);
+
+                            single_top_news_id = id;
+                            Picasso.with(getApplicationContext())
+                                    .load(file_name)
+                                    .into(img_top);
                              heading_text.setText(short_content);
                              like.setText(news_like);
                              comment.setText(news_comment);
@@ -627,7 +634,56 @@ public class HomePage extends AppCompatActivity {
                                 recycle_news.setAdapter(newsAdapter);
                                 newsAdapter.notifyDataSetChanged();
                             }
+                            JSONArray ongoing_game=main_object.getJSONArray("ongoing_game");
+                            if(ongoing_game.length()==0){
+                                recycle_news.removeAllViews();
+                            }
+                            else {
+                                for (int i = 0; i < ongoing_game.length(); i++) {
+                                    JSONObject item = ongoing_game.getJSONObject(i);
+                                    String game_id = item.get("id").toString().replaceAll("\"", "");
+                                    String match_id = item.get("match_id").toString().replaceAll("\"", "");
+                                    String teamA = item.get("teamA").toString().replaceAll("\"", "");
+                                    String teamB = item.get("teamB").toString().replaceAll("\"", "");
+                                    String date_and_time = item.get("date_and_time").toString().replaceAll("\"", "");
+                                    String match_name = item.get("match_name").toString().replaceAll("\"", "");
+                                    String image = item.get("image").toString().replaceAll("\"", "");
+                                    String match_type = item.get("match_type").toString().replaceAll("\"", "");
+                                    String team_1_name = item.get("team_1_name").toString().replaceAll("\"", "");
+                                    String team_1_image = item.get("team_1_image").toString().replaceAll("\"", "");
+                                    String team_2_name = item.get("team_2_name").toString().replaceAll("\"", "");
+                                    String team_2_image = item.get("team_2_image").toString().replaceAll("\"", "");
+                                    String live_score_team_A = item.get("live_score_team_A").toString().replaceAll("\"", "");
+                                    String live_score_team_B = item.get("live_score_team_B").toString().replaceAll("\"", "");
 
+
+                                    HashMap<String, String> hashMap = new HashMap<>();
+                                    hashMap.put("game_id", game_id);
+                                    hashMap.put("match_id", match_id);
+                                    hashMap.put("teamA", teamA);
+                                    hashMap.put("teamB", teamB);
+                                    hashMap.put("date_and_time", date_and_time);
+                                    hashMap.put("match_name", match_name);
+                                    hashMap.put("image", image);
+                                    hashMap.put("match_type", match_type);
+                                    hashMap.put("team_1_name", team_1_name);
+                                    hashMap.put("team_1_image", team_1_image);
+                                    hashMap.put("team_2_name", team_2_name);
+                                    hashMap.put("team_2_image", team_2_image);
+                                    hashMap.put("live_score_team_A", live_score_team_A);
+                                    hashMap.put("live_score_team_B", live_score_team_B);
+
+
+                                    //  globalClass.setFolderanme(folder_name);
+
+                                    gamedata_search.add(hashMap);
+                                    Log.d(TAG, "Hashmap " + hashMap);
+
+                                }
+                                gameAdapter = new GameAdapter(HomePage.this,gamedata_search);
+                                recycle_game.setAdapter(gameAdapter);
+                               // newsAdapter.notifyDataSetChanged();
+                            }
 
                         }else {
 
@@ -669,8 +725,8 @@ public class HomePage extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
 
                 params.put("location",location);
-                params.put("main_access_group_id",main_access_group_id);
-                params.put("sub_access_group_id",sub_access_group_id);
+                params.put("main_access_group_id", main_access_group_id);
+                params.put("sub_access_group_id", sub_access_group_id);
 
 
                 Log.d(TAG, " param3: "+params);
@@ -684,7 +740,8 @@ public class HomePage extends AppCompatActivity {
         strReq.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 10, 1.0f));
 
     }
-    private void NewsSearch(final String location) {
+
+    private void NewsSearch(final String search_text) {
 
 
         String tag_string_req = "forget_password";
@@ -735,17 +792,21 @@ public class HomePage extends AppCompatActivity {
                             final String modified_date = news_one.get("modified_date").toString().replaceAll("\"", "");
                             final String news_like = news_one.get("news_like").toString().replaceAll("\"", "");
                             final String news_comment = news_one.get("news_comment").toString().replaceAll("\"", "");
-                            Picasso.with(getApplicationContext()).load(file_name).into(img_top);
+
+                            single_top_news_id = id;
+
+                            Picasso.with(getApplicationContext())
+                                    .load(file_name)
+                                    .into(img_top);
                             heading_text.setText(short_content);
                             like.setText(news_like);
                             comment.setText(news_comment);
-                            JSONArray product=main_object.getJSONArray("ongoing_game");
+                            JSONArray ongoing_game=main_object.getJSONArray("ongoing_game");
 
-                            if(product.length()==0){
+                            if(ongoing_game.length()==0){
                                 recycle_game.removeAllViews();
-                            }
-                            else {
-                                for (int i = 0; i < product.length(); i++) {
+                            } else {
+                                for (int i = 0; i < ongoing_game.length(); i++) {
 
                                 }
                             }
@@ -753,8 +814,7 @@ public class HomePage extends AppCompatActivity {
                             JSONArray news_data=main_object.getJSONArray("news_data");
                             if(news_data.length()==0){
                                 recycle_news.removeAllViews();
-                            }
-                            else {
+                            } else {
                                 for (int i = 0; i < news_data.length(); i++) {
                                     JSONObject item = news_data.getJSONObject(i);
                                     String news_id = item.get("id").toString().replaceAll("\"", "");
@@ -800,12 +860,59 @@ public class HomePage extends AppCompatActivity {
                                     Log.d(TAG, "Hashmap " + hashMap);
 
                                 }
-                                newsAdapter = new NewsAdapter(HomePage.this,newsdata_search);
+                                newsAdapter = new NewsAdapter(HomePage.this, newsdata_search);
                                 recycle_news.setAdapter(newsAdapter);
                                 newsAdapter.notifyDataSetChanged();
                             }
+                            JSONArray ongoing_game1=main_object.getJSONArray("ongoing_game");
+                            if(ongoing_game1.length()==0){
+                                recycle_news.removeAllViews();
+                            }
+                            else {
+                                for (int i = 0; i < ongoing_game1.length(); i++) {
+                                    JSONObject item = ongoing_game1.getJSONObject(i);
+                                    String game_id = item.get("id").toString().replaceAll("\"", "");
+                                    String match_id = item.get("match_id").toString().replaceAll("\"", "");
+                                    String teamA = item.get("teamA").toString().replaceAll("\"", "");
+                                    String teamB = item.get("teamB").toString().replaceAll("\"", "");
+                                    String date_and_time = item.get("date_and_time").toString().replaceAll("\"", "");
+                                    String match_name = item.get("match_name").toString().replaceAll("\"", "");
+                                    String image = item.get("image").toString().replaceAll("\"", "");
+                                    String match_type = item.get("match_type").toString().replaceAll("\"", "");
+                                    String team_1_name = item.get("team_1_name").toString().replaceAll("\"", "");
+                                    String team_1_image = item.get("team_1_image").toString().replaceAll("\"", "");
+                                    String team_2_name = item.get("team_2_name").toString().replaceAll("\"", "");
+                                    String team_2_image = item.get("team_2_image").toString().replaceAll("\"", "");
+                                    String live_score_team_A = item.get("live_score_team_A").toString().replaceAll("\"", "");
+                                    String live_score_team_B = item.get("live_score_team_B").toString().replaceAll("\"", "");
 
 
+                                    HashMap<String, String> hashMap = new HashMap<>();
+                                    hashMap.put("game_id", game_id);
+                                    hashMap.put("match_id", match_id);
+                                    hashMap.put("teamA", teamA);
+                                    hashMap.put("teamB", teamB);
+                                    hashMap.put("date_and_time", date_and_time);
+                                    hashMap.put("match_name", match_name);
+                                    hashMap.put("image", image);
+                                    hashMap.put("match_type", match_type);
+                                    hashMap.put("team_1_name", team_1_name);
+                                    hashMap.put("team_1_image", team_1_image);
+                                    hashMap.put("team_2_name", team_2_name);
+                                    hashMap.put("team_2_image", team_2_image);
+                                    hashMap.put("live_score_team_A", live_score_team_A);
+                                    hashMap.put("live_score_team_B", live_score_team_B);
+
+
+                                    //  globalClass.setFolderanme(folder_name);
+
+                                    gamedata_search.add(hashMap);
+                                    Log.d(TAG, "Hashmap " + hashMap);
+
+                                }
+                                gameAdapter = new GameAdapter(HomePage.this, gamedata_search);
+                                recycle_game.setAdapter(gameAdapter);
+                            }
                         }else {
 
                             rl_homescreen.setVisibility(View.GONE);
@@ -845,9 +952,9 @@ public class HomePage extends AppCompatActivity {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<>();
 
-                params.put("location",location);
-                params.put("main_access_group_id","0");
-                params.put("sub_access_group_id","0");
+                params.put("location", search_text);
+                params.put("main_access_group_id", "0");
+                params.put("sub_access_group_id", "0");
 
 
                 Log.d(TAG, " param3: "+params);

@@ -17,6 +17,7 @@ public class SubCommentData {
     private String user_image;
     private String moment_comment_like_count;
     private String moment_comment_sub_count;
+    private String news_id;
 
     public String getId() {
         return id;
@@ -122,5 +123,11 @@ public class SubCommentData {
         this.moment_comment_sub_count = moment_comment_sub_count;
     }
 
+    public String getNews_id() {
+        return news_id;
+    }
 
+    public void setNews_id(String news_id) {
+        this.news_id = news_id;
+    }
 }

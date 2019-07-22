@@ -11,7 +11,9 @@ public class AppConfig
     private static String BASE_URL = "http://lab-3.sketchdemos.com/P1159_Basketball/api/";
 
     // live
-    public static String LIVE_URL = "https://www.supernahtralsports.com/api/";
+    ///public static String LIVE_URL = "https://www.supernahtralsports.com/api/";
+
+    public static String LIVE_URL = "http://lab-3.sketchdemos.com/P1159_Basketball/api/";
 
 
 
@@ -19,6 +21,10 @@ public class AppConfig
     public static final String LOGIN              = BASE_URL + "login";
 
     public static final String ABOUT_US           = BASE_URL + "about";
+
+
+
+
 
 
 
@@ -52,16 +58,26 @@ public class AppConfig
     public static final String GET_PLAYER_ATTENDENCE     = BASE_URL + "get_player_attendance";
     public static final String ADD_PLAYER_ATTENDENCE     = BASE_URL + "add_player_attendance";
     public static final String ADD_ATTENDENCE     = BASE_URL + "add_attendance";
+    public static final String POST_MOMENT_COMMENT     = BASE_URL + "post_moment_comment";
+    public static final String POST_MOMENT_LIKE     = BASE_URL + "post_moment_like";
+    public static final String POST_MOMENT_DELETE     = BASE_URL + "moment_delete";
 
 
-  /*  public static final String CHAT_USER_LIST     = BASE_URL + "chat_list";
-    public static final String CHAT_MSG_LIST      = BASE_URL + "get_user_chat";
-    public static final String POST_USER_CHAT     = BASE_URL + "post_user_chat";
-    public static final String FORGOT_PASSWORD    = BASE_URL + "forgotPassword";
-    public static final String RESET_PASSWORD     = BASE_URL + "resetPassword";
-    public static final String USER_PROFILE       = BASE_URL + "user_profile";*/
+
+
+    public static final String post_news_comment                = LIVE_URL + "post_news_comment";
+    public static final String post_news_comment_on_comment     = LIVE_URL + "post_news_comment_on_comment";
+    public static final String post_news_like_on_comment     = LIVE_URL + "post_news_like_on_comment";
+    public static final String news_comment_delete     = LIVE_URL + "news_comment_delete";
+    public static final String user_profile     = LIVE_URL + "user_profile";
+
+
+
+
     public static final String MOMENT             = BASE_URL + "moment";
-    public static final String NEWS_COMMENT             = BASE_URL + "news_comment";
+    public static final String NEWS_COMMENT       = BASE_URL + "news_comment";
+    public static final String GAMEDETAILS       = BASE_URL + "game_details";
+    public static final String ADDMOMENT       = BASE_URL + "add_moment";
 
 
 

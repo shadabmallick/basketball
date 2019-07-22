@@ -7,8 +7,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_comment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/footer_section"
         >
     </android.support.v7.widget.RecyclerView>
 
@@ -19,16 +19,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:minHeight="48dp"
         >
 
         <EditText
             android:id="@+id/message_text"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
             android:layout_weight="1"
             android:inputType="textMultiLine"
             android:minLines="1"
+            android:padding="10dp"
             android:background="@android:color/transparent"
             android:gravity="center"
             android:hint="@string/write_message"
