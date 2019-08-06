@@ -1,6 +1,7 @@
 package com.sport.supernathral.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -143,6 +145,8 @@ public class SearchPlayer extends AppCompatActivity {
                                     hashMap.put("user_type", user_type);
                                     newsdata_search.add(hashMap);
                                     Log.d(TAG, "Hashmap " + hashMap);
+                                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                                    imm.hideSoftInputFromWindow(edt_search.getWindowToken(), 0);
 
                                 }
                             notificationListAdapter   = new PlayerAdapter(SearchPlayer.this,newsdata_search);
@@ -204,6 +208,12 @@ public class SearchPlayer extends AppCompatActivity {
         GlobalClass.getInstance().addToRequestQueue(strReq, tag_string_req);
         strReq.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 10, 1.0f));
 
+    }
+    @Override
+    protected void onPause() {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(edt_search.getWindowToken(), 0);
+        super.onPause();
     }
 
 

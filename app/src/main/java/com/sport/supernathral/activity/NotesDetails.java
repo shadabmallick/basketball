@@ -25,9 +25,10 @@ public class NotesDetails extends AppCompatActivity {
     GlobalClass globalClass;
     Shared_Preference preference;
     ProgressDialog pd;
-    TextView tv_about;
+    TextView tv_about,tv_date,tv_notes;
     Toolbar toolbar;
     LinearLayout ll_txt_about;
+    String note,date;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,12 +39,18 @@ public class NotesDetails extends AppCompatActivity {
         pd = new ProgressDialog(NotesDetails.this);
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.setMessage("Loading...");
+        note=getIntent().getStringExtra("note");
+        date=getIntent().getStringExtra("date");
         initView();
+        tv_date.setText(date);
+        tv_notes.setText(note);
 
     }
     public void initView(){
         toolbar = findViewById(R.id.toolbar);
         ll_txt_about = findViewById(R.id.ll_txt_about);
+        tv_date = findViewById(R.id.tv_date);
+        tv_notes = findViewById(R.id.tv_notes);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);

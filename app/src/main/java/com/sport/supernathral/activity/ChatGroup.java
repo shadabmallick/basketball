@@ -106,8 +106,7 @@ public class ChatGroup extends AppCompatActivity
         setContentView(R.layout.chat_group_screen);
         intViews();
 
-        this.registerReceiver(mMessageReceiver,
-                new IntentFilter(Common.Key_GroupNoti));
+        this.registerReceiver(mMessageReceiver, new IntentFilter(Common.Key_GroupNoti));
 
     }
 
@@ -269,7 +268,6 @@ public class ChatGroup extends AppCompatActivity
 
     }
 
-
     private void getChatList(final String sender_id, final String receiver_id,
                              final String chat_type) {
 
@@ -348,28 +346,21 @@ public class ChatGroup extends AppCompatActivity
                                 chatData.setIs_me(false);
                             }
 
-                            chatListDataArrayList.add(chatData);
 
+                            chatListDataArrayList.add(chatData);
                         }
 
-
+                        chatGroupAdapter = new ChatGroupAdapter(ChatGroup.this,
+                                chatListDataArrayList, ChatGroup.this);
+                        recycler_chat.setAdapter(chatGroupAdapter);
+                        chatGroupAdapter.notifyDataSetChanged();
                     }
 
-                    chatGroupAdapter = new ChatGroupAdapter(ChatGroup.this,
-                            chatListDataArrayList, ChatGroup.this);
-                    recycler_chat.setAdapter(chatGroupAdapter);
-                    chatGroupAdapter.notifyDataSetChanged();
 
                     pd.dismiss();
 
                 } catch (Exception e) {
-
-                    /*FancyToast.makeText(getApplicationContext(),
-                            "Data Connection", FancyToast.LENGTH_LONG,
-                            FancyToast.WARNING, false).show();*/
-
                     e.printStackTrace();
-
                 }
 
 
@@ -408,9 +399,23 @@ public class ChatGroup extends AppCompatActivity
     }
 
 
+    private void setGroupChatData(ChatData chatData){
 
-    private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
-    private static DateFormat dateOnlyformat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        chatListDataArrayList.add(chatData);
+
+        chatGroupAdapter = new ChatGroupAdapter(ChatGroup.this,
+                chatListDataArrayList, ChatGroup.this);
+        recycler_chat.setAdapter(chatGroupAdapter);
+        chatGroupAdapter.notifyDataSetChanged();
+
+
+    }
+
+
+    private static DateFormat dateFormat =
+            new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+    private static DateFormat dateOnlyformat =
+            new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
     public void sendTextMessage() {
 
         Date today = Calendar.getInstance().getTime();
@@ -473,7 +478,8 @@ public class ChatGroup extends AppCompatActivity
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
         switch (requestCode) {
             case REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS:
                 if (permissions.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED ||
@@ -533,7 +539,6 @@ public class ChatGroup extends AppCompatActivity
         alertDialog.show();
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -566,7 +571,6 @@ public class ChatGroup extends AppCompatActivity
 
     }
 
-
     private String getRealPathFromURI(Uri contentURI) {
         String result = "";
         try {
@@ -583,7 +587,6 @@ public class ChatGroup extends AppCompatActivity
         }
         return result;
     }
-
 
     public void sendImage(Bitmap bitmap) {
 
@@ -648,7 +651,6 @@ public class ChatGroup extends AppCompatActivity
         postChat(chatData);
     }
 
-
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
         int width = image.getWidth();
         int height = image.getHeight();
@@ -672,7 +674,6 @@ public class ChatGroup extends AppCompatActivity
         }
 
     }
-
 
     private void postChat(final ChatData chatData) {
 
@@ -739,7 +740,6 @@ public class ChatGroup extends AppCompatActivity
 
     }
 
-
     @Override
     public void onItemClick(ChatData chatData) {
 
@@ -760,7 +760,47 @@ public class ChatGroup extends AppCompatActivity
             //do other stuff here
             Log.d(TAG, "Message = "+message);
 
-           // setChatData(message);
+
+            try {
+                JSONObject object = new JSONObject(message);
+
+                ChatData chatData = new ChatData();
+                chatData.setId(object.optString("id"));
+                chatData.setType(object.optString("type"));
+                chatData.setSender_id(object.optString("sender_id"));
+                chatData.setReceiver_id(object.optString("receiver_id"));
+                chatData.setMessage(object.optString("message"));
+                chatData.setMessage_type(object.optString("message_type"));
+                chatData.setDatetime(object.optString("datetime"));
+                chatData.setDelete_flag(object.optString("delete_flag"));
+                chatData.setIs_active(object.optString("is_active"));
+                chatData.setEntry_date(object.optString("entry_date"));
+                chatData.setModified_date(object.optString("modified_date"));
+                chatData.setReceiver_name(object.optString("receiver_name"));
+                chatData.setReceiver_image(object.optString("receiver_image"));
+                chatData.setSender_name(object.optString("sender_name"));
+                chatData.setSender_image(object.optString("sender_image"));
+
+                if (object.optString("message_type").equals("3")){
+                    chatData.setImage_from("web");
+                }else {
+                    chatData.setImage_from("");
+                }
+
+
+                if (globalClass.getId()
+                        .equals(object.optString("sender_id"))){
+                    chatData.setIs_me(true);
+                }else {
+                    chatData.setIs_me(false);
+                }
+
+
+                setGroupChatData(chatData);
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
 
         }
 

@@ -9,16 +9,16 @@
         android:layout_height="match_parent">
 
 
-        <ScrollView
+        <!--<ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent">-->
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_margin="20dp">
+               >
 
 
 
@@ -26,12 +26,29 @@
                     android:id="@+id/img_header"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/icon3"/>
+                    android:layout_margin="15dp"/>
+
+                <pl.droidsonroids.gif.GifImageView
+                    android:id="@+id/gif"
+                    android:visibility="gone"
+                    android:layout_margin="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+
+                    />
+                <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/exo_player_view"
+                    android:visibility="gone"
+                    android:layout_margin="15dp">
+
+                </com.google.android.exoplayer2.ui.SimpleExoPlayerView>
 
                 <im.delight.android.webview.AdvancedWebView
                     android:id="@+id/webView"
 
-                    android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
@@ -48,7 +65,7 @@
 
 
 
-        </ScrollView>
+       <!-- </ScrollView>-->
 
 
 

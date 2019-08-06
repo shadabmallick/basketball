@@ -103,8 +103,7 @@ public class ChatSingle extends AppCompatActivity
         setContentView(R.layout.chat_single_screen);
         intViews();
 
-        this.registerReceiver(mMessageReceiver,
-                new IntentFilter(Common.Key_SingleChatNoti));
+        this.registerReceiver(mMessageReceiver, new IntentFilter(Common.Key_SingleChatNoti));
 
     }
 
@@ -302,26 +301,17 @@ public class ChatSingle extends AppCompatActivity
 
                         }
 
-
+                        chatSingleAdapter = new ChatSingleAdapter(ChatSingle.this,
+                                chatListDataArrayList, ChatSingle.this);
+                        recycler_chat.setAdapter(chatSingleAdapter);
+                        chatSingleAdapter.notifyDataSetChanged();
                     }
-
-                    chatSingleAdapter = new ChatSingleAdapter(ChatSingle.this,
-                            chatListDataArrayList, ChatSingle.this);
-                    recycler_chat.setAdapter(chatSingleAdapter);
-                    chatSingleAdapter.notifyDataSetChanged();
 
                     pd.dismiss();
 
                 } catch (Exception e) {
-
-                    /*FancyToast.makeText(getApplicationContext(),
-                            "Data Connection", FancyToast.LENGTH_LONG,
-                            FancyToast.WARNING, false).show();*/
-
                     e.printStackTrace();
-
                 }
-
 
             }
         }, new Response.ErrorListener() {
@@ -358,6 +348,26 @@ public class ChatSingle extends AppCompatActivity
     }
 
 
+    private void setChatData(ChatData chatData){
+
+        try {
+
+            chatListDataArrayList.add(chatData);
+            chatSingleAdapter = new ChatSingleAdapter(ChatSingle.this,
+                    chatListDataArrayList, ChatSingle.this);
+            recycler_chat.setAdapter(chatSingleAdapter);
+            chatSingleAdapter.notifyDataSetChanged();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
+
 
     private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
     private static DateFormat dateOnlyformat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -390,7 +400,6 @@ public class ChatSingle extends AppCompatActivity
             postChat(chatData);
         }
     }
-
 
 
     private boolean checkPermission() {
@@ -516,7 +525,6 @@ public class ChatSingle extends AppCompatActivity
 
     }
 
-
     private String getRealPathFromURI(Uri contentURI) {
         String result = "";
         try {
@@ -533,7 +541,6 @@ public class ChatSingle extends AppCompatActivity
         }
         return result;
     }
-
 
     public void sendImage(Bitmap bitmap) {
 
@@ -713,7 +720,47 @@ public class ChatSingle extends AppCompatActivity
             //do other stuff here
             Log.d(TAG, "Message = "+message);
 
-           // setChatData(message);
+            try {
+                JSONObject object = new JSONObject(message);
+
+                ChatData chatData = new ChatData();
+                chatData.setId(object.optString("id"));
+                chatData.setType(object.optString("type"));
+                chatData.setSender_id(object.optString("sender_id"));
+                chatData.setReceiver_id(object.optString("receiver_id"));
+                chatData.setMessage(object.optString("message"));
+                chatData.setMessage_type(object.optString("message_type"));
+                chatData.setDatetime(object.optString("datetime"));
+                chatData.setDelete_flag(object.optString("delete_flag"));
+                chatData.setIs_active(object.optString("is_active"));
+                chatData.setEntry_date(object.optString("entry_date"));
+                chatData.setModified_date(object.optString("modified_date"));
+                chatData.setReceiver_name(object.optString("receiver_name"));
+                chatData.setReceiver_image(object.optString("receiver_image"));
+                chatData.setSender_name(object.optString("sender_name"));
+                chatData.setSender_image(object.optString("sender_image"));
+
+                if (object.optString("message_type").equals("3")){
+                    chatData.setImage_from("web");
+                }else {
+                    chatData.setImage_from("");
+                }
+
+
+                if (globalClass.getId()
+                        .equals(object.optString("sender_id"))){
+                    chatData.setIs_me(true);
+                }else {
+                    chatData.setIs_me(false);
+                }
+
+
+                setChatData(chatData);
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
 
         }
 

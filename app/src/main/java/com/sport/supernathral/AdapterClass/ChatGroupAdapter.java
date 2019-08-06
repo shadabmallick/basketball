@@ -42,7 +42,7 @@ public class ChatGroupAdapter extends RecyclerView.Adapter<ChatGroupAdapter.Item
 
     public class ItemViewHolder extends RecyclerView.ViewHolder{
         TextView textView1, textView2, textView1Date, textView2Date,
-                textView1ImgDate, textView2ImgDate, textView2_name;
+                textView1ImgDate, textView2ImgDate, textView2_name, imageView2_name;
         RelativeLayout relMy1, relMy2, relimgView1, relimgView2;
         LinearLayout linMsg1, linMsg2;
         RoundedImageView imageView11, imageView22;
@@ -60,6 +60,7 @@ public class ChatGroupAdapter extends RecyclerView.Adapter<ChatGroupAdapter.Item
             textView1ImgDate = itemView.findViewById(R.id.textView1ImgDate);
             textView2ImgDate = itemView.findViewById(R.id.textView2ImgDate);
             textView2_name = itemView.findViewById(R.id.textView2_name);
+            imageView2_name = itemView.findViewById(R.id.imageView2_name);
 
             relMy1 = itemView.findViewById(R.id.relMy1);
             relMy2 = itemView.findViewById(R.id.relMy2);
@@ -231,8 +232,10 @@ public class ChatGroupAdapter extends RecyclerView.Adapter<ChatGroupAdapter.Item
 
                 viewHolder.relimgView1.setVisibility(View.VISIBLE);
                 viewHolder.bubble_image1.setVisibility(View.VISIBLE);
+
                 viewHolder.linMsg1.setVisibility(View.GONE);
                 viewHolder.bubble_msg1.setVisibility(View.GONE);
+
                 viewHolder.textView1ImgDate.setText(chatData.getDatetime());
 
 
@@ -259,11 +262,12 @@ public class ChatGroupAdapter extends RecyclerView.Adapter<ChatGroupAdapter.Item
 
                 viewHolder.relimgView2.setVisibility(View.VISIBLE);
                 viewHolder.bubble_image2.setVisibility(View.VISIBLE);
+
                 viewHolder.linMsg2.setVisibility(View.GONE);
                 viewHolder.bubble_msg2.setVisibility(View.GONE);
 
                 viewHolder.textView2ImgDate.setText(chatData.getDatetime());
-                viewHolder.textView2_name.setText(chatData.getSender_name());
+                viewHolder.imageView2_name.setText(chatData.getSender_name());
 
             }
 
@@ -306,5 +310,6 @@ public class ChatGroupAdapter extends RecyclerView.Adapter<ChatGroupAdapter.Item
     public int getItemCount() {
         return arrayList.size();
     }
+
 
 }

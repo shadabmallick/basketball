@@ -1,9 +1,14 @@
 package com.sport.supernathral.activity;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -64,6 +69,9 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
+        Pushy.listen(this);
+        checkPermission1();
+
         globalClass = (GlobalClass) getApplicationContext();
         shared_preference = new Shared_Preference(SignUp.this);
         shared_preference.loadPrefrence();
@@ -73,14 +81,26 @@ public class SignUp extends AppCompatActivity {
         initViews();
 
 
+
         try {
             deviceToken = Pushy.register(getApplicationContext());
         }catch (PushyException e){
             e.printStackTrace();
         }
 
+        new RegisterForPushNotificationsAsync().execute();
 
 
+    }
+
+    private void checkPermission1(){
+        if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, new String[]
+                    {Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+        }
     }
 
 
@@ -296,7 +316,7 @@ public class SignUp extends AppCompatActivity {
                         globalClass.setEmail(email);
                         globalClass.setFname(name);
                         globalClass.setDeviceid(device_id);
-                           globalClass.setType(user_type);
+                        globalClass.setType(user_type);
                         globalClass.setLogin_status(true);
 
                         shared_preference.savePrefrence();
@@ -311,11 +331,6 @@ public class SignUp extends AppCompatActivity {
                     {
                         FancyToast.makeText(getApplicationContext(), message, FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
                     }
-
-                    //  JsonObject obj3 = jobj1.get("profileDetails").getAsJsonObject();
-
-                    Log.d(TAG, "Token \n" + message);
-
 
                 } catch (Exception e) {
 
@@ -332,7 +347,8 @@ public class SignUp extends AppCompatActivity {
 
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "DATA NOT FOUND: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),"Registration Error", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),
+                        "Registration Error", Toast.LENGTH_LONG).show();
                 pd.dismiss();
             }
         }) {
@@ -347,6 +363,7 @@ public class SignUp extends AppCompatActivity {
                 params.put("email", user_email);
                 params.put("device_type", "android");
                 params.put("device_id", device_id);
+                params.put("device_token", deviceToken);
 
                 params.put("user_type", tv_selected.getText().toString().trim());
 
@@ -377,6 +394,30 @@ public class SignUp extends AppCompatActivity {
     }
     private static boolean isValidEmail(String email) {
         return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+
+
+    public class RegisterForPushNotificationsAsync extends AsyncTask<Void, Void, Exception> {
+        protected Exception doInBackground(Void... params) {
+            try {
+                String token = Pushy.register(getApplicationContext());
+                deviceToken = token;
+                Log.d("MyApp", "Pushy >> device token: " + deviceToken);
+            }
+            catch (Exception exc) {
+                return exc;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Exception exc) {
+            // Failed?
+            if (exc != null) {
+                return;
+            }
+        }
     }
 
 

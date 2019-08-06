@@ -59,6 +59,7 @@
                     android:layout_height="250dp"
                     android:src="@mipmap/avatar_gray"
                     android:background="@color/white"
+                    android:scaleType="centerCrop"
                     />
 
 

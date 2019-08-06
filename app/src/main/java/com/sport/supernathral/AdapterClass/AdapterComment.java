@@ -25,9 +25,11 @@ import com.shashank.sony.fancytoastlib.FancyToast;
 import com.sport.supernathral.DataModel.CommentData;
 import com.sport.supernathral.DataModel.SubCommentData;
 import com.sport.supernathral.R;
+import com.sport.supernathral.Utils.Common;
 import com.sport.supernathral.Utils.GlobalClass;
 import com.sport.supernathral.Utils.Shared_Preference;
 import com.sport.supernathral.activity.CommentsScreen;
+import com.sport.supernathral.activity.GameCommentScreen;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -50,6 +52,7 @@ public class AdapterComment extends
     private ProgressDialog pd;
     private GlobalClass globalClass;
     private Shared_Preference preference;
+    private String  from;
 
 
     // for like
@@ -67,6 +70,9 @@ public class AdapterComment extends
     public interface onItemClickListnerComment{
         void onItemClickComment(String id, String type);
     }
+
+    //for report
+
 
     public void setmListnerComment(onItemClickListnerComment mListner) {
         this.mListnerComment = mListner;
@@ -87,7 +93,7 @@ public class AdapterComment extends
     // for report
     private onItemClickListnerReport mListnerReport;
     public interface onItemClickListnerReport{
-        void onItemClickReport(String id);
+        void onItemClickReport(String news_id);
     }
 
     public void setmListnerReport(onItemClickListnerReport mListner) {
@@ -130,10 +136,12 @@ public class AdapterComment extends
     }
 
 
-    public AdapterComment(Context context, ArrayList<CommentData> listComment){
+    public AdapterComment(Context context, ArrayList<CommentData> listComment,String from){
 
         this.context = context;
         this.listComment = listComment;
+        this.from = from;
+
 
         globalClass = ((GlobalClass) context.getApplicationContext());
         preference = new Shared_Preference(context);
@@ -230,9 +238,19 @@ public class AdapterComment extends
               @Override
               public void onClick(View v) {
 
-                  Intent intent = new Intent(context, CommentsScreen.class);
-                  intent.putExtra("news_id", globalClass.getSingle_top_news_id());
-                  context.startActivity(intent);
+                  if(from.equals(Common.game)){
+                      Intent intent = new Intent(context, GameCommentScreen.class);
+                      intent.putExtra("game_id", globalClass.getGame_id());
+                      context.startActivity(intent);
+                  }
+                  else {
+                      Intent intent = new Intent(context, CommentsScreen.class);
+                      intent.putExtra("news_id", globalClass.getSingle_top_news_id());
+                      context.startActivity(intent);
+                  }
+
+
+
 
               }
         });

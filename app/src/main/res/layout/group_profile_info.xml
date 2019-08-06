@@ -89,6 +89,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
                         android:padding="5dp"
+                        android:textColor="@color/black"
                         android:autofillHints="@string/type_group_name"
                         android:hint="@string/type_group_name"
                         android:background="@android:color/transparent"

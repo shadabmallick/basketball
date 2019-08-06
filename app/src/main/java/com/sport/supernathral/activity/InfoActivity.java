@@ -42,11 +42,12 @@ public class InfoActivity extends AppCompatActivity {
     Shared_Preference preference;
     ProgressDialog pd;
     TextView tv_name,tv_designation,tv_full_name,tv_email,tv_birth
-            ,tv_description,tv_notes,tv_sponsor,tv_statistics;
+            ,tv_description,tv_notes,tv_sponsor,tv_statistics,
+    primary_name,primary_mail,primary_phone,secondary_name,secondary_mail,secondary_phone;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info);
+        setContentView(R.layout.info_frag);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -81,6 +82,13 @@ public class InfoActivity extends AppCompatActivity {
         tv_notes = findViewById(R.id.tv_notes);
         tv_sponsor = findViewById(R.id.tv_sponsor);
         tv_statistics = findViewById(R.id.tv_statistics);
+        primary_mail = findViewById(R.id.primary_email);
+        primary_name = findViewById(R.id.primary_contact_name);
+        primary_phone = findViewById(R.id.primary_contact_phone);
+        secondary_name = findViewById(R.id.secondary_contact_name);
+        secondary_mail = findViewById(R.id.secondary_contact_name_email);
+        secondary_phone = findViewById(R.id.secondary_contact_phone);
+
         player_id =  getIntent().getStringExtra("player_id");
         getPlayerInfo();
     }
@@ -169,8 +177,12 @@ public class InfoActivity extends AppCompatActivity {
                             final String modified_date = data.get("modified_date").toString().replaceAll("\"", "");
                             final String statistics = data.get("statistics").toString().replaceAll("\"", "");
 
-                            Picasso.with(getApplicationContext()).load(image).placeholder(R.mipmap.profile_placeholder).into(profile_image);
-                            tv_name.setText(name);
+                            if (!image.isEmpty()) {
+                                Picasso.with(getApplicationContext())
+                                        .load(image)
+                                        .placeholder(R.mipmap.avatar_gray)
+                                        .into(profile_image);
+                            }                            tv_name.setText(name);
                             if((type.equals("Students/Players"))){
                                 tv_designation.setText("Player");
                             }
@@ -185,6 +197,12 @@ public class InfoActivity extends AppCompatActivity {
                             tv_notes.setText(notes);
                            // tv_sponsor.setText();
                             tv_statistics.setText(statistics);
+                            primary_mail.setText(primary_contact_email);
+                            primary_name.setText(primary_contact_name);
+                            primary_phone.setText(primary_contact_phone);
+                            secondary_mail.setText(secondary_contact_email);
+                            secondary_phone.setText(secondary_contact_phone);
+                            secondary_name.setText(secondary_contact_name);
 
 
 

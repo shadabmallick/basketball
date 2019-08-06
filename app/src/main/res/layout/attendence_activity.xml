@@ -17,6 +17,7 @@
         android:paddingBottom="10dp"
         android:layout_marginLeft="100dp">
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/name"
@@ -55,6 +56,7 @@
         android:layout_marginTop="20dp">
 
         <ImageView
+            android:id="@+id/img_present"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@mipmap/checked"
@@ -63,6 +65,7 @@
             android:background="@drawable/circular_shadow"/>
 
         <TextView
+            android:id="@+id/tv_present"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:textSize="14dp"
@@ -71,6 +74,7 @@
             android:layout_height="wrap_content"
             android:text="1"/>
         <ImageView
+            android:id="@+id/img_late"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@mipmap/late"
@@ -80,6 +84,7 @@
             android:background="@drawable/circular_shadow"/>
 
         <TextView
+            android:id="@+id/tv_late"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:textSize="14dp"
@@ -88,6 +93,7 @@
             android:layout_height="wrap_content"
             android:text="0"/>
         <ImageView
+            android:id="@+id/img_absent"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@mipmap/absent"
@@ -97,6 +103,7 @@
             android:background="@drawable/circular_shadow"/>
 
         <TextView
+            android:id="@+id/tv_absent"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:textSize="14dp"
@@ -105,6 +112,7 @@
             android:layout_height="wrap_content"
             android:text="0"/>
         <ImageView
+            android:id="@+id/img_excuse"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@mipmap/excuse"
@@ -117,6 +125,7 @@
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:textSize="14dp"
+            android:id="@+id/tv_excuse"
             android:layout_marginLeft="10dp"
             android:textColor="@android:color/black"
             android:layout_height="wrap_content"

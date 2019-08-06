@@ -349,7 +349,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:background="@mipmap/button_bg"
                 android:padding="15dp"
                 >
@@ -363,7 +363,28 @@
 
 
 
+
             </LinearLayout>
+            <TextView
+                android:id="@+id/primary_contact_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+               />
+            <TextView
+                android:id="@+id/primary_email"
+                android:padding="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+               />
+            <TextView
+                android:id="@+id/primary_contact_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                 android:padding="15dp"
+               />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -384,11 +405,31 @@
 
             </LinearLayout>
             <TextView
+                android:id="@+id/secondary_contact_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+
+
+              />
+            <TextView
+                android:id="@+id/secondary_contact_name_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+               />
+            <TextView
+                android:id="@+id/secondary_contact_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+               />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
 
-                android:textColor="@android:color/white"
-                android:text="@string/primary_contact"/>
+               />
 
 
         </LinearLayout>

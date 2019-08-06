@@ -161,10 +161,16 @@ public class GroupProfileInfo extends AppCompatActivity
             String from = bundle.getString("from", "");
             if (from.equals("chat")){
 
+                chatListData = new ChatListData();
+
+                chatListData.setReceiver_id(bundle.getString("id"));
+
                 getGroupProfileInfo(bundle.getString("id"));
 
             }else {
+
                 chatListData = (ChatListData) bundle.getSerializable("info");
+
                 if (chatListData != null){
 
                     getGroupProfileInfo(chatListData.getReceiver_id());
@@ -224,7 +230,7 @@ public class GroupProfileInfo extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 edt_group_name.setEnabled(true);
-                edt_group_name.setText(edt_group_name.length());
+                edt_group_name.setSelection(edt_group_name.length());
             }
         });
         rel_add_more.setOnClickListener(new View.OnClickListener() {
@@ -367,7 +373,6 @@ public class GroupProfileInfo extends AppCompatActivity
         recycler_members.setAdapter(groupMembersAdapter);
 
     }
-
 
 
     private boolean checkPermission() {

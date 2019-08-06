@@ -510,6 +510,10 @@ public class EditProfile extends AppCompatActivity implements LocationListener {
                             globalClass.setDeviceid(device_id);
                             globalClass.setProfil_pic(image);
                             sharedpreference.savePrefrence();
+                              Intent profile=new Intent(EditProfile.this,ProfileScreen.class);
+                            profile.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            profile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(profile);
 
                             FancyToast.makeText(getApplicationContext(), message, FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
 

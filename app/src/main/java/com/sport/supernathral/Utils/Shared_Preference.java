@@ -222,6 +222,11 @@ public class Shared_Preference {
 
     }
 
+
+    public boolean isLogin(){
+        return sharedPreferences.getBoolean(PREF_logInStatus, false);
+    }
+
     public void loadPrefrence() {
         pref_logInStatus = sharedPreferences.getBoolean(PREF_logInStatus, false);
         globalclass.setLogin_status(pref_logInStatus);

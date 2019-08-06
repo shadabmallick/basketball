@@ -19,8 +19,9 @@
 
         <com.daasuu.bl.BubbleLayout
             android:id="@+id/bubble_msg1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="150dp"
             android:padding="5dp"
             app:bl_arrowDirection="right"
             app:bl_arrowHeight="12dp"
@@ -149,15 +150,16 @@
 
         <com.daasuu.bl.BubbleLayout
             android:id="@+id/bubble_msg2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="150dp"
             android:padding="5dp"
             app:bl_arrowDirection="left"
             app:bl_arrowHeight="12dp"
             app:bl_arrowPosition="16dp"
             app:bl_arrowWidth="8dp"
             app:bl_cornersRadius="10dp"
-            app:bl_bubbleColor="@color/light_grey"
+            app:bl_bubbleColor="@color/light_grey2"
             >
 
             <LinearLayout
@@ -185,6 +187,7 @@
                     android:linksClickable="true"
                     android:paddingRight="5dp"
                     android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
                     android:id="@+id/textView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -212,22 +215,35 @@
             android:id="@+id/bubble_image2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="5dp"
             android:padding="5dp"
             app:bl_arrowDirection="left"
             app:bl_arrowHeight="12dp"
             app:bl_arrowPosition="16dp"
             app:bl_arrowWidth="8dp"
             app:bl_cornersRadius="10dp"
-            app:bl_bubbleColor="@color/light_grey"
+            app:bl_bubbleColor="@color/light_grey2"
             >
 
             <RelativeLayout
                 android:id="@+id/relimgView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:visibility="visible"
                 >
+
+                <TextView
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
+                    android:id="@+id/imageView2_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:text="Sourav"
+                    />
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -236,6 +252,8 @@
                     android:layout_height="150dp"
                     android:background="@color/white"
                     app:riv_corner_radius="4dip"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/imageView2_name"
                     />
 
                 <ImageView

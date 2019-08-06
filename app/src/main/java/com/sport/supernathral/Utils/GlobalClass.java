@@ -110,6 +110,16 @@ public class GlobalClass extends MultiDexApplication {
         isParent = parent;
     }
 
+    public int getGpa() {
+        return gpa;
+    }
+
+    public void setGpa(int gpa) {
+        this.gpa = gpa;
+    }
+
+    int gpa;
+
     public String getUnique_name() {
         return unique_name;
     }
@@ -245,6 +255,16 @@ public class GlobalClass extends MultiDexApplication {
     String discount_type = "";
     String discount_id = "";
     String discount_amount = "";
+
+    public String getGame_id() {
+        return game_id;
+    }
+
+    public void setGame_id(String game_id) {
+        this.game_id = game_id;
+    }
+
+    String game_id;
     String slot_to_deliver = "";
 
     public String getNotify() {

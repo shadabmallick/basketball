@@ -2,6 +2,8 @@ package com.sport.supernathral.Fragment;
 
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -10,14 +12,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.VideoView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
+import com.google.android.exoplayer2.extractor.ExtractorsFactory;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelector;
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.google.android.exoplayer2.upstream.BandwidthMeter;
+import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.sport.supernathral.AdapterClass.AdapterChat;
+import com.sport.supernathral.NetworkConstant.AppConfig;
 import com.sport.supernathral.R;
 import com.sport.supernathral.Utils.GlobalClass;
 import com.sport.supernathral.Utils.Shared_Preference;
@@ -31,9 +48,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import im.delight.android.webview.AdvancedWebView;
+import pl.droidsonroids.gif.GifImageView;
 
-import static com.sport.supernathral.NetworkConstant.AppConfig.NEWS;
-import static com.sport.supernathral.NetworkConstant.AppConfig.NEWS_DETAIlS;
 
 public class ResumeActivity extends Fragment implements AdvancedWebView.Listener {
 
@@ -41,10 +57,15 @@ public class ResumeActivity extends Fragment implements AdvancedWebView.Listener
     AdvancedWebView webView;
     GlobalClass globalClass;
     Shared_Preference preference;
-    String TAG="product";
+    String TAG="product",id;
     AdapterChat adapterChat;
     ArrayList<String> newsList;
     ImageView img_header;
+    GifImageView gifImageView;
+    SimpleExoPlayerView exoPlayerView;
+    SimpleExoPlayer exoPlayer;
+    MediaPlayer mediaPlayer = new MediaPlayer();
+
     ArrayList<HashMap<String,String>> list_names;
     ProgressDialog pd;
 
@@ -58,6 +79,7 @@ public class ResumeActivity extends Fragment implements AdvancedWebView.Listener
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
         pd.setMessage("Loading...");
+        id=getArguments().getString("news_id");
         initialisation(view);
         function();
 
@@ -68,8 +90,13 @@ public class ResumeActivity extends Fragment implements AdvancedWebView.Listener
 
     private void initialisation(View view) {
         webView =  view.findViewById(R.id.webView);
+        exoPlayerView = view.findViewById(R.id.exo_player_view);
+        gifImageView =  view.findViewById(R.id.gif);
         webView.setListener(getActivity(), this);
         img_header=view.findViewById(R.id.img_header);
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setSupportZoom(true);
+        webView.getSettings().setJavaScriptEnabled(true);
         //rv_category = view.findViewById(R.id.recycler_chat);
 
     }
@@ -78,12 +105,12 @@ public class ResumeActivity extends Fragment implements AdvancedWebView.Listener
         // Tag used to cancel the request
         String tag_string_req = "req_login";
         //String details = "https://www.supernahtralsports.com/api/news_details";
-
+       // String details = "https://www.supernahtralsports.com/api/news_details";
 
         pd.show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                NEWS_DETAIlS, new Response.Listener<String>() {
+            AppConfig.NEWS_DETAIlS, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -114,7 +141,7 @@ public class ResumeActivity extends Fragment implements AdvancedWebView.Listener
                             String location = data.get("location").toString().replaceAll("\"", "");
                             String main_access_group_id = data.get("main_access_group_id").toString().replaceAll("\"", "");
                             String sub_access_group_id = data.get("sub_access_group_id").toString().replaceAll("\"", "");
-                            String file_type = data.get("file_type").toString().replaceAll("\"", "");
+                            String file_type = data.optString("file_type");
                             String file_name = data.optString("file_name");
                             String delete_flag = data.get("delete_flag").toString().replaceAll("\"", "");
                             String is_active = data.get("is_active").toString().replaceAll("\"", "");
@@ -128,6 +155,63 @@ public class ResumeActivity extends Fragment implements AdvancedWebView.Listener
                                     .load(file_name)
                                    .into(img_header);
                             webView.loadHtml(content);
+                            webView.loadHtml(content);
+
+                            if(file_type.equals("Image")){
+                                exoPlayerView.setVisibility(View.GONE);
+                                gifImageView.setVisibility(View.GONE);
+                                img_header.setVisibility(View.VISIBLE);
+
+                                if(!file_name.isEmpty()) {
+                                    Picasso.with(getActivity())
+                                            .load(file_name)
+                                            .into(img_header);
+
+                                }
+                            }
+                            else if(file_type.equals("Video")){
+
+                                exoPlayerView.setVisibility(View.VISIBLE);
+                                gifImageView.setVisibility(View.GONE);
+                                img_header.setVisibility(View.GONE);
+
+                                if(!file_name.isEmpty()){
+                                    try {
+
+
+                                        BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
+                                        TrackSelector trackSelector = new DefaultTrackSelector(new AdaptiveTrackSelection.Factory(bandwidthMeter));
+                                        exoPlayer = ExoPlayerFactory.newSimpleInstance(getActivity(), trackSelector);
+
+                                        Uri videoURI = Uri.parse(file_name);
+
+                                        DefaultHttpDataSourceFactory dataSourceFactory = new DefaultHttpDataSourceFactory("exoplayer_video");
+                                        ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
+                                        MediaSource mediaSource = new ExtractorMediaSource(videoURI, dataSourceFactory, extractorsFactory, null, null);
+
+                                        exoPlayerView.setPlayer(exoPlayer);
+                                        exoPlayer.prepare(mediaSource);
+                                        exoPlayer.setPlayWhenReady(true);
+                                    }catch (Exception e){
+                                        Log.e("MainAcvtivity"," exoplayer error "+ e.toString());
+                                    }
+                                }
+                            }
+                            else if(file_type.equals("Gif")){
+                                exoPlayerView.setVisibility(View.GONE);
+                                gifImageView.setVisibility(View.VISIBLE);
+                                img_header.setVisibility(View.GONE);
+                                if(!file_name.isEmpty()) {
+                                    Picasso.with(getActivity())
+                                            .load(file_name)
+                                            .into(gifImageView);
+
+
+                                }
+
+                            }
+
+
 
                         }else {
 
@@ -165,7 +249,7 @@ public class ResumeActivity extends Fragment implements AdvancedWebView.Listener
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<>();
 
-                params.put("news_id", "17");
+                params.put("news_id", id);
 
                 Log.d(TAG, "login param: "+params);
                 return params;
@@ -177,8 +261,8 @@ public class ResumeActivity extends Fragment implements AdvancedWebView.Listener
         GlobalClass.getInstance().addToRequestQueue(strReq, tag_string_req);
         strReq.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 10, 1.0f));
 
-    }
 
+    }
 
     @Override
     public void onPageStarted(String url, Bitmap favicon) {

@@ -97,7 +97,7 @@ public class MomentsActivity extends AppCompatActivity {
 
 
 
-    private void getMOMENTList() {
+    public void getMOMENTList() {
         // Tag used to cancel the request
 
         progressDialog.show();

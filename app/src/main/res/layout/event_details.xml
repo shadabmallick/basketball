@@ -60,13 +60,29 @@
 
 
                 <ImageView
+                    android:id="@+id/top_img"
                     android:layout_width="match_parent"
-                   android:layout_height="150dp"
-                    android:src="@mipmap/icon4"/>
+                    android:layout_height="159dp"
+                    android:src="@mipmap/icon4" />
                 <ImageView
+                    android:id="@+id/complete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/completed"
+                    android:layout_marginBottom="20dp"/>
+                <ImageView
+                    android:id="@+id/ongoing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ongoing"
+                    android:visibility="gone"
+                    android:layout_marginBottom="20dp"/>
+                <ImageView
+                    android:id="@+id/upcoming"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/upcoming"
+                    android:visibility="gone"
                     android:layout_marginBottom="20dp"/>
 
 
@@ -150,7 +166,7 @@
 
                     <TextView
                         android:id="@+id/tv_end_date_text"
-                        android:text="@string/start_date"
+                        android:text="@string/end_date"
                         android:textStyle="bold"
                         android:gravity="right"
                         android:paddingLeft="10dp"
@@ -264,7 +280,7 @@
                     android:paddingLeft="10dp"
                     android:textColor="@android:color/black"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     />
                 <TextView
                     android:id="@+id/tv_description"

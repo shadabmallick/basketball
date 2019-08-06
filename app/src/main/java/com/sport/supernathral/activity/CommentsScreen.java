@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.sport.supernathral.NetworkConstant.AppConfig.GAMEComment;
 import static com.sport.supernathral.NetworkConstant.AppConfig.NEWS_COMMENT;
 import static com.sport.supernathral.NetworkConstant.AppConfig.news_comment_delete;
 import static com.sport.supernathral.NetworkConstant.AppConfig.post_news_comment;
@@ -64,7 +65,7 @@ public class CommentsScreen extends AppCompatActivity implements
     ArrayList<CommentData> listComment;
     ProgressDialog pd;
 
-    String comment_type = "", comment_id;
+    String comment_type = "", comment_id,from;
 
 
     @Override
@@ -95,6 +96,7 @@ public class CommentsScreen extends AppCompatActivity implements
 
         preference = new Shared_Preference(this);
         globalClass = (GlobalClass) getApplicationContext();
+         from=getIntent().getStringExtra("from");
 
         function();
 
@@ -415,7 +417,6 @@ public class CommentsScreen extends AppCompatActivity implements
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<>();
 
-                //params.put("news_id", globalClass.getSingle_top_news_id());
                 params.put("news_id", globalClass.getSingle_top_news_id());
                 params.put("user_id", globalClass.getId());
                 params.put("comment", comment);

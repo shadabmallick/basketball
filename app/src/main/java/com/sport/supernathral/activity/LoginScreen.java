@@ -11,10 +11,13 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
@@ -34,11 +37,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.sport.supernathral.R;
+import com.sport.supernathral.Utils.Common;
 import com.sport.supernathral.Utils.GlobalClass;
 import com.sport.supernathral.Utils.Shared_Preference;
 
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.security.SecureRandom;
 import java.security.Security;
 import java.security.cert.CertificateException;
@@ -87,7 +92,8 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-
+        Pushy.listen(this);
+        checkPermission1();
         marshmallowGPSPremissionCheck();
 
         globalClass = (GlobalClass) getApplicationContext();
@@ -106,6 +112,10 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
             e.printStackTrace();
         }
 
+        new RegisterForPushNotificationsAsync().execute();
+
+
+
         try {
             doTrustToCertificates();
         }catch (Exception e){
@@ -116,6 +126,15 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
 
     }
 
+    private void checkPermission1(){
+        if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, new String[]
+                    {Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+        }
+    }
 
     public void initViews() {
 
@@ -238,6 +257,7 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
         }
         return true;
     }
+
     void getLocation() {
         try {
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -251,6 +271,7 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
             e.printStackTrace();
         }
     }
+
     private void marshmallowGPSPremissionCheck() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
                 && LoginScreen.this.checkSelfPermission(
@@ -268,6 +289,7 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
 
 
     }
+
     private void login(final String user_email, final String password) {
         // Tag used to cancel the request
         String tag_string_req = "req_login";
@@ -305,21 +327,21 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
                             JSONObject data = main_object.getJSONObject("data");
 
 
-                            String res_user_id = data.get("id").toString().replaceAll("\"", "");
-                            String unique_id = data.get("unique_id").toString().replaceAll("\"", "");
-                            String main_access_group_id = data.get("main_access_group_id").toString().replaceAll("\"", "");
-                            String sub_access_group_id = data.get("sub_access_group_id").toString().replaceAll("\"", "");
-                            String type = data.get("type").toString().replaceAll("\"", "");
-                            String name = data.get("name").toString().replaceAll("\"", "");
-                            String email = data.get("email").toString().replaceAll("\"", "");
-                            String first_login = data.get("first_login").toString().replaceAll("\"", "");
-                            String notification = data.get("notification").toString().replaceAll("\"", "");
-                            String device_type = data.get("device_type").toString().replaceAll("\"", "");
-                            String device_id = data.get("device_id").toString().replaceAll("\"", "");
-                            String latitude = data.get("latitude").toString().replaceAll("\"", "");
-                            String longitude = data.get("longitude").toString().replaceAll("\"", "");
-                            String location = data.get("location").toString().replaceAll("\"", "");
-                            String profile_pic = data.get("profile_pic").toString().replaceAll("\"", "");
+                            String res_user_id = data.optString("id");
+                            String unique_id = data.optString("unique_id");
+                            String main_access_group_id = data.optString("main_access_group_id");
+                            String sub_access_group_id = data.optString("sub_access_group_id");
+                            String type = data.optString("type");
+                            String name = data.optString("name");
+                            String email = data.optString("email");
+                            String first_login = data.optString("first_login");
+                            String notification = data.optString("notification");
+                            String device_type = data.optString("device_type");
+                            String device_id = data.optString("device_id");
+                            String latitude = data.optString("latitude");
+                            String longitude = data.optString("longitude");
+                            String location = data.optString("location");
+                            String profile_pic = data.optString("profile_pic");
 
                             globalClass.setId(res_user_id);
                             globalClass.setEmail(email);
@@ -338,7 +360,7 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
 
                             globalClass.setProfil_pic(profile_pic);
 
-
+                            Log.d(TAG, "onResponse: "+globalClass.getMain_access_group_id());
 
 
                             globalClass.setLogin_status(true);
@@ -393,6 +415,7 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
                 params.put("latitude", String.valueOf(lati));
                 params.put("longitude", String.valueOf(longi));
                 params.put("location", newAddress);
+                params.put("device_token", deviceToken);
 
                 Log.d(TAG, "login param: "+params);
                 return params;
@@ -405,8 +428,6 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
         strReq.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 10, 1.0f));
 
     }
-
-
 
 
 
@@ -453,8 +474,6 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
 
     }
 
-
-
     public void doTrustToCertificates() throws Exception {
         //Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
         TrustManager[] trustAllCerts = new TrustManager[]{
@@ -487,5 +506,31 @@ public class LoginScreen extends AppCompatActivity implements LocationListener {
             }
         };
         HttpsURLConnection.setDefaultHostnameVerifier(hv);
+    }
+
+
+
+
+
+    public class RegisterForPushNotificationsAsync extends AsyncTask<Void, Void, Exception> {
+        protected Exception doInBackground(Void... params) {
+            try {
+                String token = Pushy.register(getApplicationContext());
+                deviceToken = token;
+                Log.d("MyApp", "Pushy >> device token: " + deviceToken);
+            }
+            catch (Exception exc) {
+                return exc;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Exception exc) {
+            // Failed?
+            if (exc != null) {
+                return;
+            }
+        }
     }
 }

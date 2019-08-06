@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/chart"
+        android:layout_below="@+id/appbarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="250dp" />
+
+    <LinearLayout
+        android:id="@+id/ll_txt"
+        android:layout_below="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rank"
+            android:layout_marginLeft="40dp"
+            android:textSize="14dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GPA"
+            android:layout_marginLeft="60dp"
+            android:textSize="14dp"/>
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/ll_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="10dp">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:text="Average"/>
+                    <TextView
+                        android:id="@+id/tv_average"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:gravity="right"/>
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="10dp">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:text="Goal"/>
+                    <TextView
+                        android:id="@+id/tv_goal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+
+                        android:gravity="right"/>
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:textSize="18dp"
+
+                    android:layout_margin="10dp">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:textSize="18dp"
+
+                        android:layout_height="wrap_content"
+                        android:text="Goal Average"/>
+                    <TextView
+                        android:id="@+id/tv_goal_average"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+
+                        android:gravity="right"/>
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:textSize="18dp"
+
+                    android:layout_margin="10dp">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:textSize="18dp"
+
+                        android:layout_height="wrap_content"
+                        android:text="Number of Activities"/>
+                    <TextView
+                        android:id="@+id/tv_no_activity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+
+                        android:gravity="right"/>
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:textSize="18dp"
+
+                    android:layout_margin="10dp">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:textSize="18dp"
+
+                        android:layout_height="wrap_content"
+                        android:text="Presence"/>
+                    <TextView
+                        android:id="@+id/tv_presence"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+
+                        android:gravity="right"/>
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:textSize="18dp"
+
+                    android:layout_margin="10dp">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:textSize="18dp"
+
+                        android:layout_height="wrap_content"
+                        android:text="Tardies"/>
+                    <TextView
+                        android:id="@+id/tv_tardies"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+
+                        android:gravity="right"/>
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:textSize="18dp"
+
+                    android:layout_margin="10dp">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:textSize="18dp"
+
+                        android:layout_height="wrap_content"
+                        android:text="Absent"/>
+                    <TextView
+                        android:id="@+id/tv_absent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+
+                        android:gravity="right"/>
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:textSize="18dp"
+
+                    android:layout_margin="10dp">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:textSize="18dp"
+
+                        android:layout_height="wrap_content"
+                        android:text="Practice"/>
+                    <TextView
+                        android:id="@+id/tv_practice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+
+                        android:gravity="right"/>
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:textSize="18dp"
+
+                    android:layout_margin="10dp">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:textSize="18dp"
+
+                        android:layout_height="wrap_content"
+                        android:text="Skill Set"/>
+                    <TextView
+                        android:id="@+id/tv_skill"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+
+                        android:gravity="right"/>
+
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </LinearLayout>
+</RelativeLayout>
