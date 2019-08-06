@@ -82,7 +82,12 @@ public class Chats extends Fragment implements AdapterChat.onItemClickListner{
         preference = new Shared_Preference(getActivity());
         globalClass = (GlobalClass) getActivity().getApplicationContext();
 
-        getChatUserList(globalClass.getId());
+
+        if (globalClass.isTrainer()){
+            rel_create_group.setVisibility(View.VISIBLE);
+        }else {
+            rel_create_group.setVisibility(View.GONE);
+        }
 
 
         rel_create_group.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +100,13 @@ public class Chats extends Fragment implements AdapterChat.onItemClickListner{
             }
         });
 
+    }
+
+
+    @Override
+    public void onResume() {
+        getChatUserList(globalClass.getId());
+        super.onResume();
     }
 
 

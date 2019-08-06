@@ -11,6 +11,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sport.supernathral.R;
+import com.sport.supernathral.Utils.GlobalClass;
+import com.sport.supernathral.activity.AttendanceActivity;
+import com.sport.supernathral.activity.AttendenceParent;
+import com.sport.supernathral.activity.AttendenceStudentList;
 import com.sport.supernathral.activity.InfoActivity;
 import com.sport.supernathral.activity.NotesActivity;
 import com.sport.supernathral.activity.PlayerInfo;
@@ -33,6 +37,7 @@ public class AdpterStudentList extends
     private Context context;
     ArrayList<HashMap<String,String>> arrayList;
     private String from;
+    GlobalClass globalClass;
 
 
     AdpterStudentList.onItemClickListner mListner;
@@ -67,6 +72,7 @@ public class AdpterStudentList extends
         this.context = context;
         this.arrayList=itemList;
         this.from=from;
+        globalClass=(GlobalClass)context.getApplicationContext();
 
         Log.d(TAG, "from: "+from);
 
@@ -142,6 +148,16 @@ public class AdpterStudentList extends
              else if(from.equals("Schedule")){
                  Intent intent = new Intent(context, ScheduleActvity.class);
                  intent.putExtra("team_id",arrayList.get(position).get("team_id"));
+                 intent.putExtra("main_access_group_id",arrayList.get(position).get("main_access_group_id"));
+                 intent.putExtra("sub_access_group_id",arrayList.get(position).get("sub_access_group_id"));
+
+                 context.startActivity(intent);
+
+
+             }
+             else if(from.equals("Attendance")){
+                 Intent intent = new Intent(context, AttendenceParent.class);
+                 intent.putExtra("player_id",arrayList.get(position).get("player_id"));
 
                  context.startActivity(intent);
 

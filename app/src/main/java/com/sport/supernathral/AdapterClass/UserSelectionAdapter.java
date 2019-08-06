@@ -11,7 +11,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sport.supernathral.DataModel.ChatListData;
+import com.sport.supernathral.DataModel.MembersData;
 import com.sport.supernathral.R;
+import com.sport.supernathral.Utils.Common;
 import com.sport.supernathral.activity.ChatImageFull;
 import com.squareup.picasso.Picasso;
 
@@ -23,7 +25,7 @@ public class UserSelectionAdapter extends
         RecyclerView.Adapter<UserSelectionAdapter.ItemViewHolder> {
 
     private Context context;
-    private ArrayList<String> arrayList;
+    private ArrayList<MembersData> arrayList;
     private ArrayList<Boolean> arr_selection;
 
 
@@ -47,7 +49,7 @@ public class UserSelectionAdapter extends
     }
 
 
-    public UserSelectionAdapter(Context context, ArrayList<String> itemList){
+    public UserSelectionAdapter(Context context, ArrayList<MembersData> itemList){
         this.context = context;
         this.arrayList=itemList;
 
@@ -58,12 +60,10 @@ public class UserSelectionAdapter extends
 
     private void setInitData(){
         arr_selection = new ArrayList<>();
-        for (String s : arrayList){
+        for (MembersData data : arrayList){
             arr_selection.add(false);
         }
     }
-
-
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -77,7 +77,24 @@ public class UserSelectionAdapter extends
     @Override
     public void onBindViewHolder(ItemViewHolder holder, final int position) {
 
-        // user type = Coach/Teachers  ,  Students/Players
+        MembersData membersData = arrayList.get(position);
+
+        if (!membersData.getUser_image().isEmpty()){
+            Picasso.with(context)
+                    .load(membersData.getUser_image())
+                    .placeholder(R.mipmap.profile_placeholder)
+                    .into(holder.profile_image);
+        }
+
+        holder.tv_user_name.setText(membersData.getUser_name());
+        if (Common.player.equals(membersData.getUser_type())){
+            holder.tv_designation.setText("Player");
+        }else if (Common.parent.equals(membersData.getUser_type())){
+            holder.tv_designation.setText("Parent");
+        }else if (Common.trainer.equals(membersData.getUser_type())){
+            holder.tv_designation.setText("Trainer");
+        }
+
 
 
         holder.rel_main.setOnClickListener(new View.OnClickListener() {
@@ -112,9 +129,9 @@ public class UserSelectionAdapter extends
 
 
 
-    public ArrayList<String> getSelectedUsers(){
+    public ArrayList<MembersData> getSelectedUsers(){
 
-        ArrayList<String> arrayList1 = new ArrayList<>();
+        ArrayList<MembersData> arrayList1 = new ArrayList<>();
 
         for (int i = 0; i < arrayList.size(); i++){
             if (arr_selection.get(i)){
@@ -124,6 +141,21 @@ public class UserSelectionAdapter extends
 
         return arrayList1;
 
+    }
+
+    public String getIds(){
+
+        StringBuilder sb = new StringBuilder();
+        String result = "";
+        for (int i = 0; i < arrayList.size(); i++){
+            if (arr_selection.get(i)){
+                sb.append(arrayList.get(i).getId()).append(",");
+            }
+        }
+
+        result = sb.deleteCharAt(sb.length() - 1).toString();
+
+        return result;
     }
 
 

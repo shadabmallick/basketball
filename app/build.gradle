@@ -8,6 +8,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -50,5 +51,7 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer-hls:r2.4.0'
     implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:r2.4.0'
     implementation 'com.google.android.exoplayer:exoplayer-ui:r2.4.0'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
     implementation project(path: ':k4l-video-trimmer')
+    implementation 'com.android.support:multidex:1.0.3'
 }

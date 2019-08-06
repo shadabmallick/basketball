@@ -1,9 +1,9 @@
 package com.sport.supernathral.Utils;
 
-import android.app.Application;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.multidex.MultiDexApplication;
 import android.text.TextUtils;
 
 import com.android.volley.Request;
@@ -26,7 +26,7 @@ import javax.net.ssl.X509TrustManager;
  * Created by Shadab Mallick on 05/03/19.
  */
 
-public class GlobalClass extends Application {
+public class GlobalClass extends MultiDexApplication {
 
     String TAG = "app";
 
@@ -82,6 +82,33 @@ public class GlobalClass extends Application {
     String latitude;
     String longitude;
     String location;
+    boolean isTrainer;
+    boolean isPlayer;
+    boolean isParent;
+
+    public boolean isTrainer() {
+        return isTrainer;
+    }
+
+    public void setTrainer(boolean trainer) {
+        isTrainer = trainer;
+    }
+
+    public boolean isPlayer() {
+        return isPlayer;
+    }
+
+    public void setPlayer(boolean player) {
+        isPlayer = player;
+    }
+
+    public boolean isParent() {
+        return isParent;
+    }
+
+    public void setParent(boolean parent) {
+        isParent = parent;
+    }
 
     public int getGpa() {
         return gpa;
@@ -228,6 +255,16 @@ public class GlobalClass extends Application {
     String discount_type = "";
     String discount_id = "";
     String discount_amount = "";
+
+    public String getGame_id() {
+        return game_id;
+    }
+
+    public void setGame_id(String game_id) {
+        this.game_id = game_id;
+    }
+
+    String game_id;
     String slot_to_deliver = "";
 
     public String getNotify() {

@@ -28,7 +28,7 @@
                     android:id="@+id/iv_user"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:src="@mipmap/avatar_gray"
+                    android:src="@mipmap/profile_placeholder"
                     app:civ_border_width="1dp"
                     app:civ_border_color="@color/white"
                     android:layout_centerVertical="true"

@@ -3,6 +3,7 @@ package com.sport.supernathral.activity;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,8 +18,10 @@ import android.view.Window;
 import android.view.WindowManager;
 
 
+import com.sport.supernathral.Fragment.CommentGame;
 import com.sport.supernathral.Fragment.Comments;
 import com.sport.supernathral.Fragment.ResumeActivity;
+import com.sport.supernathral.Fragment.ScoreGame;
 import com.sport.supernathral.R;
 import com.sport.supernathral.Utils.GlobalClass;
 
@@ -31,6 +34,8 @@ public class NewsSublist extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     GlobalClass globalClass;
+
+    String from="",id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +50,7 @@ public class NewsSublist extends AppCompatActivity {
             window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(),
                     R.color.deep_yellow));
         }
-
+          id=getIntent().getStringExtra("id");
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -62,29 +67,48 @@ public class NewsSublist extends AppCompatActivity {
         if (bundle != null){
             String single_top_news_id = bundle.getString("id");
             globalClass.setSingle_top_news_id(single_top_news_id);
+
+            from = bundle.getString("from","");
         }
 
 
-
-
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
 
-     //   initFooterItems();
+
 
 
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager(final ViewPager viewPager) {
+        Bundle bundle = new Bundle();
+
+        bundle.putString("news_id", id);
+        ResumeActivity scoreGame = new ResumeActivity();
+        scoreGame.setArguments(bundle);
         NewsSublist.ViewPagerAdapter adapter = new NewsSublist.ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ResumeActivity(), "Resume");
+        adapter.addFragment(scoreGame, "Resume");
         adapter.addFragment(new Comments(), "Comments");
 
         viewPager.setAdapter(adapter);
+
+
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                if (from.equals("home comment")){
+                    viewPager.setCurrentItem(1);
+                }
+
+            }
+        }, 1000);
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

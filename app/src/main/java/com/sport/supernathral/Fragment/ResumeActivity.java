@@ -2,6 +2,8 @@ package com.sport.supernathral.Fragment;
 
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -10,14 +12,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.VideoView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.exoplayer2.ExoPlayer;
+import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
+import com.google.android.exoplayer2.extractor.ExtractorsFactory;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelector;
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.google.android.exoplayer2.upstream.BandwidthMeter;
+import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.sport.supernathral.AdapterClass.AdapterChat;
+import com.sport.supernathral.NetworkConstant.AppConfig;
 import com.sport.supernathral.R;
 import com.sport.supernathral.Utils.GlobalClass;
 import com.sport.supernathral.Utils.Shared_Preference;
@@ -31,6 +49,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import im.delight.android.webview.AdvancedWebView;
+import pl.droidsonroids.gif.GifImageView;
 
 public class ResumeActivity extends Fragment implements AdvancedWebView.Listener {
 
@@ -38,46 +57,14 @@ public class ResumeActivity extends Fragment implements AdvancedWebView.Listener
     AdvancedWebView webView;
     GlobalClass globalClass;
     Shared_Preference preference;
-    String TAG="product";
+    String TAG="product",id;
     AdapterChat adapterChat;
     ArrayList<String> newsList;
     ImageView img_header;
-    String htmltag="<p><span style=\"font-size:16px\">U14 Wildcats&nbsp; Boys played like champions in the with the Title on the line. The Wildcats started the day trailing T-Sky early before changing gears and looking like a well oiled machine the rest of the tournament before dropping a very competitive championship game to an AIDI team that have not faced a challenger like these Wildcats all season. They made a couple big shots down the stretch to earn the title.</span></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560356997_IMG_7531.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560356902_IMG_7528.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560356927_IMG_7529.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560356963_IMG_7530.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357337_IMG_7532.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357181_IMG_7533.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357111_IMG_7534.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357024_IMG_7535.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357469_IMG_7536.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357492_IMG_7537.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357549_IMG_7538.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357568_IMG_7539.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357696_IMG_7540.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357669_IMG_7541.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357634_IMG_7542.jpg\" style=\"height:200px; width:300px\" />\n" +
-            "    <img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560356725_IMB_gNw0UL.PNG\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560356874_IMG_2785.JPG\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560167375_U14.JPG\" style=\"height:200px; width:300px\" /></p>";
+    GifImageView gifImageView;
+    SimpleExoPlayerView exoPlayerView;
+    SimpleExoPlayer exoPlayer;
+    MediaPlayer mediaPlayer = new MediaPlayer();
 
     ArrayList<HashMap<String,String>> list_names;
     ProgressDialog pd;
@@ -92,6 +79,7 @@ public class ResumeActivity extends Fragment implements AdvancedWebView.Listener
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
         pd.setMessage("Loading...");
+        id=getArguments().getString("news_id");
         initialisation(view);
         function();
 
@@ -102,8 +90,13 @@ public class ResumeActivity extends Fragment implements AdvancedWebView.Listener
 
     private void initialisation(View view) {
         webView =  view.findViewById(R.id.webView);
+        exoPlayerView = view.findViewById(R.id.exo_player_view);
+        gifImageView =  view.findViewById(R.id.gif);
         webView.setListener(getActivity(), this);
         img_header=view.findViewById(R.id.img_header);
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setSupportZoom(true);
+        webView.getSettings().setJavaScriptEnabled(true);
         //rv_category = view.findViewById(R.id.recycler_chat);
 
     }
@@ -111,13 +104,13 @@ public class ResumeActivity extends Fragment implements AdvancedWebView.Listener
     private void function() {
         // Tag used to cancel the request
         String tag_string_req = "req_login";
-        String details = "https://www.supernahtralsports.com/api/news_details";
+       // String details = "https://www.supernahtralsports.com/api/news_details";
 
 
         pd.show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                details, new Response.Listener<String>() {
+                AppConfig.NEWS_DETAIlS, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -142,14 +135,14 @@ public class ResumeActivity extends Fragment implements AdvancedWebView.Listener
 
                             String id = data.get("id").toString().replaceAll("\"", "");
                             String star = data.get("star").toString().replaceAll("\"", "");
-                            String content = data.get("content").toString().replaceAll("\"", "");
+                            String content = data.optString("content");
                             String heading = data.get("heading").toString().replaceAll("\"", "");
                             String short_content = data.get("short_content").toString().replaceAll("\"", "");
                             String location = data.get("location").toString().replaceAll("\"", "");
                             String main_access_group_id = data.get("main_access_group_id").toString().replaceAll("\"", "");
                             String sub_access_group_id = data.get("sub_access_group_id").toString().replaceAll("\"", "");
                             String file_type = data.get("file_type").toString().replaceAll("\"", "");
-                            String file_name = data.get("file_name").toString().replaceAll("\"", "");
+                            String file_name = data.optString("file_name");
                             String delete_flag = data.get("delete_flag").toString().replaceAll("\"", "");
                             String is_active = data.get("is_active").toString().replaceAll("\"", "");
                             String entry_date = data.get("entry_date").toString().replaceAll("\"", "");
@@ -157,15 +150,64 @@ public class ResumeActivity extends Fragment implements AdvancedWebView.Listener
                             String news_like_count = data.get("news_like_count").toString().replaceAll("\"", "");
                             String news_comment_count = data.get("news_comment_count").toString().replaceAll("\"", "");
                             JSONArray subComment=data.getJSONArray("news_comment");
-                          //  String description1 = (Html.fromHtml(content)).toString().replaceAll("\n", "");
-                            String text = content.replace("\\", "");
-                            Picasso.with(getActivity())
-                                    .load(file_name)
-                                   .into(img_header);
-                            Log.d(TAG, "onResponse: "+text);
+                            webView.loadHtml(content);
 
-                            webView.loadData(htmltag, "text/html; mi", "UTF-8");
-                          //  webView.loadHtml(content);
+                            if(file_type.equals("Image")){
+                                exoPlayerView.setVisibility(View.GONE);
+                                gifImageView.setVisibility(View.GONE);
+                                img_header.setVisibility(View.VISIBLE);
+
+                                if(!file_name.isEmpty()) {
+                                    Picasso.with(getActivity())
+                                            .load(file_name)
+                                            .into(img_header);
+
+                                }
+                            }
+                            else if(file_type.equals("Video")){
+
+                                exoPlayerView.setVisibility(View.VISIBLE);
+                                gifImageView.setVisibility(View.GONE);
+                                img_header.setVisibility(View.GONE);
+
+                                if(!file_name.isEmpty()){
+                                    try {
+
+
+                                        BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
+                                        TrackSelector trackSelector = new DefaultTrackSelector(new AdaptiveTrackSelection.Factory(bandwidthMeter));
+                                        exoPlayer = ExoPlayerFactory.newSimpleInstance(getActivity(), trackSelector);
+
+                                        Uri videoURI = Uri.parse(file_name);
+
+                                        DefaultHttpDataSourceFactory dataSourceFactory = new DefaultHttpDataSourceFactory("exoplayer_video");
+                                        ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
+                                        MediaSource mediaSource = new ExtractorMediaSource(videoURI, dataSourceFactory, extractorsFactory, null, null);
+
+                                        exoPlayerView.setPlayer(exoPlayer);
+                                        exoPlayer.prepare(mediaSource);
+                                        exoPlayer.setPlayWhenReady(true);
+                                    }catch (Exception e){
+                                        Log.e("MainAcvtivity"," exoplayer error "+ e.toString());
+                                    }
+                                }
+                            }
+                            else if(file_type.equals("Gif")){
+                                exoPlayerView.setVisibility(View.GONE);
+                                gifImageView.setVisibility(View.VISIBLE);
+                                img_header.setVisibility(View.GONE);
+                                if(!file_name.isEmpty()) {
+                                    Picasso.with(getActivity())
+                                            .load(file_name)
+                                            .into(gifImageView);
+
+
+                                }
+
+                            }
+
+
+
 
 
                         }else {
@@ -204,7 +246,7 @@ public class ResumeActivity extends Fragment implements AdvancedWebView.Listener
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<>();
 
-                params.put("news_id", "17");
+                params.put("news_id", id);
 
 
                 Log.d(TAG, "login param: "+params);

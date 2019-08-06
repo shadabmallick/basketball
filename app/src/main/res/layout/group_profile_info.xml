@@ -20,10 +20,11 @@
                 android:layout_height="240dp">
 
                 <ImageView
+                    android:id="@+id/group_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@mipmap/icon6"
-                    android:scaleType="fitXY"
+                    android:background="@color/dark_gray"
+                    android:src="@mipmap/avatar_gray"
                     />
 
                 <RelativeLayout
@@ -244,6 +245,7 @@
                     android:textStyle="bold"
                     android:background="@android:color/transparent"                     android:text="Group1"
                     />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

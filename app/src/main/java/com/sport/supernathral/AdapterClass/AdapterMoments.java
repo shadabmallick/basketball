@@ -68,6 +68,7 @@ public class AdapterMoments extends RecyclerView.Adapter<AdapterMoments.ItemView
     private ArrayList<MomentData> listMoments;
     GlobalClass globalClass;
     EditText message_text;
+    TextView tv_yes,tv_no;
     ImageView send;
     ProgressDialog pd;
 Shared_Preference preference;
@@ -80,7 +81,7 @@ Shared_Preference preference;
     public class ItemViewHolder extends RecyclerView.ViewHolder{
         CircleImageView profile_image;
         TextView tv_name, tv_date, tv_like_no, tv_comment_no, tv_report,tv_content;
-        ImageView iv_delete, iv_like, img_comment;
+        ImageView iv_delete, iv_like, iv_unlike,img_comment;
         VideoView videoView;
         ViewPager viewPager;
         TabLayout tab_layout;
@@ -107,6 +108,7 @@ Shared_Preference preference;
             rel_videoview = itemView.findViewById(R.id.rel_videoview);
             progressBar = itemView.findViewById(R.id.progressBar);
             tv_content = itemView.findViewById(R.id.tv_content);
+            iv_unlike = itemView.findViewById(R.id.iv_unlike);
 
 
 
@@ -140,7 +142,7 @@ Shared_Preference preference;
     }
 
     @Override
-    public void onBindViewHolder(AdapterMoments.ItemViewHolder holder, final int position) {
+    public void onBindViewHolder(final AdapterMoments.ItemViewHolder holder, final int position) {
 
         final MomentData momentData = listMoments.get(position);
 
@@ -157,6 +159,13 @@ Shared_Preference preference;
          holder.iv_delete.setVisibility(View.GONE);
      }
 
+        if (Integer.parseInt(momentData.getMoment_like_count()) == 0){
+            holder.iv_like.setVisibility(View.GONE);
+            holder.iv_unlike.setVisibility(View.VISIBLE);
+        }else {
+            holder.iv_like.setVisibility(View.VISIBLE);
+            holder.iv_unlike.setVisibility(View.GONE);
+        }
         holder.tv_name.setText(momentData.getUser_name());
         holder.tv_content.setText(momentData.getContent());
         holder.tv_like_no.setText(momentData.getMoment_like_count());
@@ -176,8 +185,20 @@ Shared_Preference preference;
             @Override
             public void onClick(View v) {
                 MomentLike(momentData.getId());
+                holder.iv_like.setVisibility(View.GONE);
+                holder.iv_unlike.setVisibility(View.VISIBLE);
             }
         });
+
+        holder.iv_unlike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MomentLike(momentData.getId());
+                holder.iv_like.setVisibility(View.GONE);
+                holder.iv_unlike.setVisibility(View.VISIBLE);
+            }
+        });
+
         holder.iv_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -197,6 +218,12 @@ Shared_Preference preference;
                 context.startActivity(image_video);
 
 
+            }
+        });
+        holder.tv_report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReportDialog(momentData.getId());
             }
         });
         holder.img_comment.setOnClickListener(new View.OnClickListener() {
@@ -226,6 +253,39 @@ Shared_Preference preference;
                alertDialog.dismiss();
            }
        });
+
+        alertDialog.show();
+    }
+    public void ReportDialog(final String momnetid) {
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View dialogView = inflater.inflate(R.layout.dialog_news_report, null);
+        dialogBuilder.setView(dialogView);
+        final AlertDialog alertDialog = dialogBuilder.create();
+
+        tv_yes=dialogView.findViewById(R.id.tv_yes);
+        tv_no=dialogView.findViewById(R.id.tv_no);
+
+        tv_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                MomentReport(momnetid);
+                alertDialog.dismiss();
+            }
+        });
+
+        tv_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                alertDialog.dismiss();
+            }
+        });
+
+
 
         alertDialog.show();
     }
@@ -476,6 +536,84 @@ Shared_Preference preference;
                 10, 1.0f));
 
     }
+
+
+    private void MomentReport(final String moment_id) {
+        // Tag used to cancel the request
+
+        pd.show();
+
+        listMoments = new ArrayList<>();
+
+        String tag_string_req = "MOMENT";
+
+        String url = AppConfig.REPORT_MOMENT;
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                url, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "CHAT_LIST Response: " + response);
+
+                try {
+
+                    JSONObject main_object = new JSONObject(response);
+
+                    int status = main_object.optInt("status");
+                    String message = main_object.optString("message");
+
+                    if (status == 1) {
+
+                        ((MomentsActivity)context).getMOMENTList();
+
+
+
+                    }
+
+
+
+                    pd.dismiss();
+
+                } catch (Exception e) {
+
+                    FancyToast.makeText(context,
+                            "Data Connection", FancyToast.LENGTH_LONG,
+                            FancyToast.WARNING, false).show();
+                    e.printStackTrace();
+
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "DATA NOT FOUND: " + error.getMessage());
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<>();
+                params.put("user_id",globalClass.getId());
+                params.put("moment_id",moment_id);
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        GlobalClass.getInstance().addToRequestQueue(strReq, tag_string_req);
+        strReq.setRetryPolicy(new DefaultRetryPolicy(20 * 1000,
+                10, 1.0f));
+
+    }
+
 
     private void setViewPager(ItemViewHolder holder, ArrayList<String> list){
 

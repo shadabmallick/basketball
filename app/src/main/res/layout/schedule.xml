@@ -6,10 +6,13 @@
 
 
     <RelativeLayout
+        android:id="@+id/rl_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appbarLayout">
 
         <LinearLayout
+            android:id="@+id/ll_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -26,16 +29,18 @@
                     android:text="@string/from"
                     android:layout_marginTop="20dp"
 
-                   />
+                    />
 
 
                 <LinearLayout
+                    android:id="@+id/ll_start_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/dialog_holo_light_frame"
                     android:layout_marginLeft="10dp">
 
                     <TextView
+                        android:id="@+id/start_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/start_date"
@@ -72,12 +77,14 @@
 
 
                 <LinearLayout
+                    android:id="@+id/ll_end_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/dialog_holo_light_frame"
                     android:layout_marginLeft="29dp">
 
                     <TextView
+                        android:id="@+id/end_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/end_date"
@@ -107,6 +114,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/ll_find_schedule"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:drawable/dialog_holo_light_frame"
@@ -138,6 +146,11 @@
 
 
         </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:layout_below="@+id/ll_main"
+            android:id="@+id/recycle_schedule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
 
     </RelativeLayout>

@@ -21,14 +21,6 @@ public class AppConfig
     public static final String LOGIN              = BASE_URL + "login";
 
     public static final String ABOUT_US           = BASE_URL + "about";
-
-
-
-
-
-
-
-
     public static final String CHAT_USER_LIST     = BASE_URL + "chat_list";
     public static final String CHAT_MSG_LIST      = BASE_URL + "get_user_chat";
     public static final String POST_USER_CHAT     = BASE_URL + "post_user_chat";
@@ -61,19 +53,27 @@ public class AppConfig
     public static final String POST_MOMENT_COMMENT     = BASE_URL + "post_moment_comment";
     public static final String POST_MOMENT_LIKE     = BASE_URL + "post_moment_like";
     public static final String POST_MOMENT_DELETE     = BASE_URL + "moment_delete";
-
-
-
-
-    public static final String post_news_comment                = LIVE_URL + "post_news_comment";
-    public static final String post_news_comment_on_comment     = LIVE_URL + "post_news_comment_on_comment";
-    public static final String post_news_like_on_comment     = LIVE_URL + "post_news_like_on_comment";
-    public static final String news_comment_delete     = LIVE_URL + "news_comment_delete";
-    public static final String user_profile     = LIVE_URL + "user_profile";
-
-
-
-
+    public static final String REPORT_MOMENT     = BASE_URL + "report_moment";
+    public static final String POST_NEWS_LIKE     = BASE_URL + "post_news_like";
+    public static final String post_news_comment                = BASE_URL + "post_news_comment";
+    public static final String post_game_comment                = BASE_URL + "post_game_comment";
+    public static final String post_news_comment_on_comment     = BASE_URL + "post_news_comment_on_comment";
+    public static final String post_game_comment_on_comment     = BASE_URL + "post_game_comment_on_comment";
+    public static final String post_news_like_on_comment     = BASE_URL + "post_news_like_on_comment";
+    public static final String post_game_comment_like     = BASE_URL + "post_game_comment_like";
+    public static final String news_comment_delete     = BASE_URL + "news_comment_delete";
+    public static final String game_comment_delete     = BASE_URL + "game_comment_delete";
+    public static final String user_profile     = BASE_URL + "user_profile";
+    public static final String group_details     = BASE_URL + "group_details";
+    public static final String group_chat_list     = BASE_URL + "group_chat_list";
+    public static final String update_group     = BASE_URL + "update_group";
+    public static final String add_group_member     = BASE_URL + "add_group_member";
+    public static final String delete_group_member     = BASE_URL + "delete_group_member";
+    public static final String group_delete     = BASE_URL + "group_delete";
+    public static final String create_group_chat     = BASE_URL + "create_group_chat";
+    public static final String GAMEComment     = BASE_URL + "game_comment";
+    public static final String NEWSREPORT     = BASE_URL + "report_news";
+    public static final String GAMEREPORT     = BASE_URL + "report_game";
     public static final String MOMENT             = BASE_URL + "moment";
     public static final String NEWS_COMMENT       = BASE_URL + "news_comment";
     public static final String GAMEDETAILS       = BASE_URL + "game_details";

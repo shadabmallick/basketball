@@ -1,17 +1,15 @@
-package com.sport.supernathral.activity;
+package com.sport.supernathral.Fragment;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,7 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.shashank.sony.fancytoastlib.FancyToast;
-import com.sport.supernathral.AdapterClass.AdapterMainComment;
+import com.sport.supernathral.AdapterClass.AdapterComment;
 import com.sport.supernathral.DataModel.CommentData;
 import com.sport.supernathral.DataModel.SubCommentData;
 import com.sport.supernathral.R;
@@ -38,67 +36,67 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.sport.supernathral.NetworkConstant.AppConfig.GAMEComment;
+import static com.sport.supernathral.NetworkConstant.AppConfig.GAMEREPORT;
+import static com.sport.supernathral.NetworkConstant.AppConfig.NEWSREPORT;
 import static com.sport.supernathral.NetworkConstant.AppConfig.NEWS_COMMENT;
+import static com.sport.supernathral.NetworkConstant.AppConfig.game_comment_delete;
 import static com.sport.supernathral.NetworkConstant.AppConfig.news_comment_delete;
+import static com.sport.supernathral.NetworkConstant.AppConfig.post_game_comment;
+import static com.sport.supernathral.NetworkConstant.AppConfig.post_game_comment_like;
+import static com.sport.supernathral.NetworkConstant.AppConfig.post_game_comment_on_comment;
 import static com.sport.supernathral.NetworkConstant.AppConfig.post_news_comment;
 import static com.sport.supernathral.NetworkConstant.AppConfig.post_news_comment_on_comment;
 import static com.sport.supernathral.NetworkConstant.AppConfig.post_news_like_on_comment;
 
-public class CommentsScreen extends AppCompatActivity implements
-        AdapterMainComment.onItemClickListnerLike,
-        AdapterMainComment.onItemClickListnerComment,
-        AdapterMainComment.onItemClickListnerDelete,
-        AdapterMainComment.onItemClickListnerReport{
+public class CommentGame extends Fragment implements
+        AdapterComment.onItemClickListnerLike,
+        AdapterComment.onItemClickListnerComment,
+        AdapterComment.onItemClickListnerDelete,
+        AdapterComment.onItemClickListnerReport{
 
 
     RecyclerView rv_category;
     EditText message_text;
     ImageView send_button;
-    Toolbar toolbar;
+
 
     String TAG="product";
-    AdapterMainComment adapterComment;
+    AdapterComment adapterComment;
     ArrayList<String> newsList;
     Shared_Preference preference;
     GlobalClass globalClass;
 
     ArrayList<CommentData> listComment;
     ProgressDialog pd;
+    String game_id;
 
-    String comment_type = "", comment_id,from;
-
+    String comment_type = "", comment_id;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_comment);
-        initialisation();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.frag_comment, container, false);
+
+        initialisation(view);
+
+
+
+        return view;
     }
 
+    private void initialisation(View view) {
 
-    private void initialisation() {
-
-        pd = new ProgressDialog(this);
+        pd = new ProgressDialog(getActivity());
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        pd.setMessage(getResources().getString(R.string.loading));
+        pd.setMessage(getActivity().getResources().getString(R.string.loading));
+        rv_category = view.findViewById(R.id.recycler_comment);
+        message_text = view.findViewById(R.id.message_text);
+        send_button = view.findViewById(R.id.send_button);
 
-        rv_category = findViewById(R.id.recycler_comment);
-        message_text = findViewById(R.id.message_text);
-        send_button = findViewById(R.id.send_button);
-        toolbar = findViewById(R.id.toolbar);
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.mipmap.back_black);
-
-        preference = new Shared_Preference(this);
-        globalClass = (GlobalClass) getApplicationContext();
-         from=getIntent().getStringExtra("from");
-
-        function();
+        preference = new Shared_Preference(getActivity());
+        globalClass = (GlobalClass) getActivity().getApplicationContext();
+        game_id=getArguments().getString("game_id");
+        rv_category.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
 
@@ -106,10 +104,10 @@ public class CommentsScreen extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
 
-                String message = getResources().getString(R.string.typemessage);
+                String message = getActivity().getResources().getString(R.string.typemessage);
 
                 if (message_text.getText().toString().trim().isEmpty()){
-                    FancyToast.makeText(getApplicationContext(), message,
+                    FancyToast.makeText(getActivity(), message,
                             FancyToast.LENGTH_LONG, FancyToast.ERROR, false)
                             .show();
                 }else {
@@ -131,17 +129,13 @@ public class CommentsScreen extends AppCompatActivity implements
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
-        }
-        return true;
+    public void onResume() {
+        function();
+        super.onResume();
     }
 
     private void function() {
-        rv_category.setLayoutManager(new LinearLayoutManager(this));
+
         CommentList();
 
     }
@@ -155,7 +149,7 @@ public class CommentsScreen extends AppCompatActivity implements
         pd.show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                NEWS_COMMENT, new Response.Listener<String>() {
+                GAMEComment, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -180,7 +174,7 @@ public class CommentsScreen extends AppCompatActivity implements
                                 JSONObject item = news_data.getJSONObject(i);
 
                                 String id = item.get("id").toString().replaceAll("\"", "");
-                                String news_id = item.get("news_id").toString().replaceAll("\"", "");
+                                String match_id = item.get("match_id").toString().replaceAll("\"", "");
                                 String user_id = item.get("user_id").toString().replaceAll("\"", "");
                                 String comment = item.get("comment").toString().replaceAll("\"", "");
                                 String comment_id = item.get("comment_id").toString().replaceAll("\"", "");
@@ -190,13 +184,13 @@ public class CommentsScreen extends AppCompatActivity implements
                                 String modified_date = item.get("modified_date").toString().replaceAll("\"", "");
                                 String user_name = item.get("user_name").toString().replaceAll("\"", "");
                                 String user_image = item.get("user_image").toString().replaceAll("\"", "");
-                                String news_comment_like = item.get("news_comment_like").toString().replaceAll("\"", "");
-                                String news_comment_sub_count = item.get("news_comment_sub_count").toString().replaceAll("\"", "");
+                                String news_comment_like = item.get("match_comment_like").toString().replaceAll("\"", "");
+                                String news_comment_sub_count = item.get("match_comment_sub_count").toString().replaceAll("\"", "");
 
 
                                 CommentData commentData = new CommentData();
                                 commentData.setId(id);
-                                commentData.setNews_id(news_id);
+                                commentData.setNews_id(match_id);
                                 commentData.setUser_id(user_id);
                                 commentData.setComment(comment);
                                 commentData.setComment_id(comment_id);
@@ -211,12 +205,12 @@ public class CommentsScreen extends AppCompatActivity implements
 
 
                                 ArrayList<SubCommentData> listSubComment = new ArrayList<>();
-                                JSONArray news_comment_sub=item.getJSONArray("news_comment_sub");
+                                JSONArray news_comment_sub=item.getJSONArray("match_comment_sub");
                                 for (int j = 0; j < news_comment_sub.length(); j++) {
                                     JSONObject item_comment = news_comment_sub.getJSONObject(j);
 
                                     String sub_id = item_comment.get("id").toString().replaceAll("\"", "");
-                                    String sub_news_id = item_comment.get("news_id").toString().replaceAll("\"", "");
+                                    String sub_match_id = item_comment.get("match_id").toString().replaceAll("\"", "");
                                     String sub_user_id = item_comment.get("user_id").toString().replaceAll("\"", "");
                                     String sub_comment = item_comment.get("comment").toString().replaceAll("\"", "");
                                     String sub_comment_id = item_comment.get("comment_id").toString().replaceAll("\"", "");
@@ -226,13 +220,13 @@ public class CommentsScreen extends AppCompatActivity implements
                                     String sub_modified_date = item_comment.get("modified_date").toString().replaceAll("\"", "");
                                     String sub_user_name = item_comment.get("user_name").toString().replaceAll("\"", "");
                                     String sub_user_image = item_comment.get("user_image").toString().replaceAll("\"", "");
-                                    String sub_news_comment_like = item_comment.get("news_sub_comment_like").toString().replaceAll("\"", "");
-                                   // String sub_news_comment_sub_count = item_comment.get("news_comment_sub_count").toString().replaceAll("\"", "");
+                                    String sub_news_comment_like = item_comment.get("match_sub_comment_like").toString().replaceAll("\"", "");
+                                    // String sub_news_comment_sub_count = item_comment.get("news_comment_sub_count").toString().replaceAll("\"", "");
 
 
                                     SubCommentData subCommentData = new SubCommentData();
                                     subCommentData.setId(sub_id);
-                                    subCommentData.setNews_id(sub_news_id);
+                                    subCommentData.setNews_id(sub_match_id);
                                     subCommentData.setUser_id(sub_user_id);
                                     subCommentData.setComment(sub_comment);
                                     subCommentData.setComment_id(sub_comment_id);
@@ -243,7 +237,7 @@ public class CommentsScreen extends AppCompatActivity implements
                                     subCommentData.setUser_name(sub_user_name);
                                     subCommentData.setUser_image(sub_user_image);
                                     subCommentData.setMoment_comment_like_count(sub_news_comment_like);
-                                   // subCommentData.setMoment_comment_sub_count(sub_news_comment_sub_count);
+                                    // subCommentData.setMoment_comment_sub_count(sub_news_comment_sub_count);
 
                                     listSubComment.add(subCommentData);
 
@@ -260,7 +254,7 @@ public class CommentsScreen extends AppCompatActivity implements
 
                         }else {
 
-                            FancyToast.makeText(getApplicationContext(), message,
+                            FancyToast.makeText(getActivity(), message,
                                     FancyToast.LENGTH_LONG, FancyToast.ERROR, false)
                                     .show();
                         }
@@ -268,7 +262,7 @@ public class CommentsScreen extends AppCompatActivity implements
 
                     } catch (Exception e) {
 
-                        FancyToast.makeText(getApplicationContext(), "Connection error",
+                        FancyToast.makeText(getActivity(), "Connection error",
                                 FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
                         e.printStackTrace();
 
@@ -294,7 +288,7 @@ public class CommentsScreen extends AppCompatActivity implements
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<>();
 
-                params.put("news_id", globalClass.getSingle_top_news_id());
+                params.put("game_id", game_id);
                 //params.put("news_id", "7");
 
                 Log.d(TAG, "get comment: "+params);
@@ -311,7 +305,7 @@ public class CommentsScreen extends AppCompatActivity implements
 
     private void setAdapterComment(){
 
-        adapterComment   = new AdapterMainComment(CommentsScreen.this, listComment);
+        adapterComment   = new AdapterComment(getActivity(), listComment,Common.game);
         rv_category.setAdapter(adapterComment);
         adapterComment.notifyDataSetChanged();
         adapterComment.setmListnerLike(this);
@@ -336,8 +330,8 @@ public class CommentsScreen extends AppCompatActivity implements
 
         if (comment_type.equals("sub_comment")){
             message_text.requestFocus();
-            Common.showSoftKeyboard(message_text, CommentsScreen.this);
-            message_text.setHint(getResources().getString(R.string.typemessage_oncomment));
+            Common.showSoftKeyboard(message_text, getActivity());
+            message_text.setHint(getActivity().getResources().getString(R.string.typemessage_oncomment));
         }
 
     }
@@ -360,7 +354,7 @@ public class CommentsScreen extends AppCompatActivity implements
         pd.show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                post_news_comment, new Response.Listener<String>() {
+                post_game_comment, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -383,7 +377,7 @@ public class CommentsScreen extends AppCompatActivity implements
 
                         }else {
 
-                            FancyToast.makeText(getApplicationContext(), message,
+                            FancyToast.makeText(getActivity(), message,
                                     FancyToast.LENGTH_LONG, FancyToast.ERROR, false)
                                     .show();
                         }
@@ -391,86 +385,7 @@ public class CommentsScreen extends AppCompatActivity implements
 
                     } catch (Exception e) {
 
-                        FancyToast.makeText(getApplicationContext(), "Connection error",
-                                FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
-                        e.printStackTrace();
-
-                    }
-
-                }
-
-            }
-
-
-        }, new Response.ErrorListener() {
-
-            @Override
-
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "DATA NOT FOUND: " + error.getMessage());
-                pd.dismiss();
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-                // Posting parameters to login url
-                Map<String, String> params = new HashMap<>();
-
-                params.put("news_id", globalClass.getSingle_top_news_id());
-                params.put("user_id", globalClass.getId());
-                params.put("comment", comment);
-
-                Log.d(TAG, "get comment: "+params);
-                return params;
-            }
-
-        };
-
-        // Adding request to request queue
-        GlobalClass.getInstance().addToRequestQueue(strReq, tag_string_req);
-        strReq.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 10, 1.0f));
-
-    }
-
-    private void postSubComment(final String comment) {
-        String tag_string_req = "comment";
-
-        pd.show();
-
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                post_news_comment_on_comment, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "comment: " + response.toString());
-
-                if (response != null){
-                    pd.dismiss();
-
-                    try {
-
-                        JSONObject main_object = new JSONObject(response);
-
-                        int status = main_object.optInt("status");
-                        String message = main_object.optString("message");
-                        Log.d(TAG, "status: "+status);
-
-                        if (status == 1){
-
-                            CommentList();
-
-                        }else {
-
-                            FancyToast.makeText(getApplicationContext(), message,
-                                    FancyToast.LENGTH_LONG, FancyToast.ERROR, false)
-                                    .show();
-                        }
-
-
-                    } catch (Exception e) {
-
-                        FancyToast.makeText(getApplicationContext(), "Connection error",
+                        FancyToast.makeText(getActivity(), "Connection error",
                                 FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
                         e.printStackTrace();
 
@@ -497,7 +412,87 @@ public class CommentsScreen extends AppCompatActivity implements
                 Map<String, String> params = new HashMap<>();
 
                 //params.put("news_id", globalClass.getSingle_top_news_id());
-                params.put("news_id", globalClass.getSingle_top_news_id());
+                params.put("game_id", game_id);
+                params.put("user_id", globalClass.getId());
+                params.put("comment", comment);
+
+                Log.d(TAG, "get comment: "+params);
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        GlobalClass.getInstance().addToRequestQueue(strReq, tag_string_req);
+        strReq.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 10, 1.0f));
+
+    }
+
+    private void postSubComment(final String comment) {
+        String tag_string_req = "comment";
+
+        pd.show();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                post_game_comment_on_comment, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "comment: " + response.toString());
+
+                if (response != null){
+                    pd.dismiss();
+
+                    try {
+
+                        JSONObject main_object = new JSONObject(response);
+
+                        int status = main_object.optInt("status");
+                        String message = main_object.optString("message");
+                        Log.d(TAG, "status: "+status);
+
+                        if (status == 1){
+
+                            CommentList();
+
+                        }else {
+
+                            FancyToast.makeText(getActivity(), message,
+                                    FancyToast.LENGTH_LONG, FancyToast.ERROR, false)
+                                    .show();
+                        }
+
+
+                    } catch (Exception e) {
+
+                        FancyToast.makeText(getActivity(), "Connection error",
+                                FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
+                        e.printStackTrace();
+
+                    }
+
+                }
+
+            }
+
+
+        }, new Response.ErrorListener() {
+
+            @Override
+
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "DATA NOT FOUND: " + error.getMessage());
+                pd.dismiss();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<>();
+
+                //params.put("news_id", globalClass.getSingle_top_news_id());
+                params.put("game_id", game_id);
                 params.put("user_id", globalClass.getId());
                 params.put("comment_id", comment_id);
                 params.put("comment", comment);
@@ -520,7 +515,7 @@ public class CommentsScreen extends AppCompatActivity implements
         pd.show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                post_news_like_on_comment, new Response.Listener<String>() {
+                post_game_comment_like, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -542,7 +537,7 @@ public class CommentsScreen extends AppCompatActivity implements
 
                         }else {
 
-                            FancyToast.makeText(getApplicationContext(), message,
+                            FancyToast.makeText(getActivity(), message,
                                     FancyToast.LENGTH_LONG, FancyToast.ERROR, false)
                                     .show();
                         }
@@ -550,7 +545,7 @@ public class CommentsScreen extends AppCompatActivity implements
 
                     } catch (Exception e) {
 
-                        FancyToast.makeText(getApplicationContext(), "Connection error",
+                        FancyToast.makeText(getActivity(), "Connection error",
                                 FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
                         e.printStackTrace();
 
@@ -577,7 +572,7 @@ public class CommentsScreen extends AppCompatActivity implements
                 Map<String, String> params = new HashMap<>();
 
                 //params.put("news_id", globalClass.getSingle_top_news_id());
-                params.put("news_id", globalClass.getSingle_top_news_id());
+                params.put("game_id", game_id);
                 params.put("user_id", globalClass.getId());
                 params.put("comment_id", com_id);
 
@@ -599,7 +594,7 @@ public class CommentsScreen extends AppCompatActivity implements
         pd.show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                news_comment_delete, new Response.Listener<String>() {
+                game_comment_delete, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -621,7 +616,7 @@ public class CommentsScreen extends AppCompatActivity implements
 
                         }else {
 
-                            FancyToast.makeText(getApplicationContext(), message,
+                            FancyToast.makeText(getActivity(), message,
                                     FancyToast.LENGTH_LONG, FancyToast.ERROR, false)
                                     .show();
                         }
@@ -629,7 +624,7 @@ public class CommentsScreen extends AppCompatActivity implements
 
                     } catch (Exception e) {
 
-                        FancyToast.makeText(getApplicationContext(), "Connection error",
+                        FancyToast.makeText(getActivity(), "Connection error",
                                 FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
                         e.printStackTrace();
 
@@ -656,7 +651,7 @@ public class CommentsScreen extends AppCompatActivity implements
                 Map<String, String> params = new HashMap<>();
 
                 //params.put("news_id", globalClass.getSingle_top_news_id());
-                params.put("news_id", globalClass.getSingle_top_news_id());
+                params.put("game_id", game_id);
                 params.put("user_id", globalClass.getId());
                 params.put("news_comment_id", com_id);
 
@@ -673,8 +668,8 @@ public class CommentsScreen extends AppCompatActivity implements
     }
 
 
-    private void reportDialog(String comm_id){
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CommentsScreen.this);
+    private void reportDialog(final String game_id){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_news_report, null);
         dialogBuilder.setView(dialogView);
@@ -693,7 +688,8 @@ public class CommentsScreen extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
 
-
+                ReportGame(game_id);
+                alertDialog.dismiss();
 
             }
         });
@@ -706,6 +702,87 @@ public class CommentsScreen extends AppCompatActivity implements
             }
         });
 
+
+    }
+    private void ReportGame(final String id) {
+        String tag_string_req = "report";
+
+        pd.show();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                GAMEREPORT, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "delete: " + response.toString());
+
+                if (response != null){
+                    pd.dismiss();
+
+                    try {
+                        JSONObject main_object = new JSONObject(response);
+
+                        int status = main_object.optInt("status");
+                        String message = main_object.optString("message");
+                        Log.d(TAG, "status: "+status);
+
+                        if (status == 1){
+                            FancyToast.makeText(getActivity(), message,
+                                    FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false)
+                                    .show();
+
+                            // CommentList();
+
+                        }else {
+
+                            FancyToast.makeText(getActivity(), message,
+                                    FancyToast.LENGTH_LONG, FancyToast.ERROR, false)
+                                    .show();
+                        }
+
+
+                    } catch (Exception e) {
+
+                        FancyToast.makeText(getActivity(), "Connection error",
+                                FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
+                        e.printStackTrace();
+
+                    }
+
+                }
+
+            }
+
+
+        }, new Response.ErrorListener() {
+
+            @Override
+
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "DATA NOT FOUND: " + error.getMessage());
+                pd.dismiss();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<>();
+
+                //params.put("news_id", globalClass.getSingle_top_news_id());
+                params.put("game_id", id);
+                params.put("user_id", globalClass.getId());
+
+
+                Log.d(TAG, "game report: "+params);
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        GlobalClass.getInstance().addToRequestQueue(strReq, tag_string_req);
+        strReq.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 10, 1.0f));
 
     }
 

@@ -218,8 +218,8 @@ public class Event extends Fragment {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<>();
 
-                params.put("main_access_group_id",main_access_group_id);
-                params.put("sub_access_group_id",sub_access_group_id);
+                params.put("main_access_group_id",globalClass.getMain_access_group_id());
+                params.put("sub_access_group_id",globalClass.getSub_access_group_id());
                 Log.d(TAG, " player_id: "+params);
                 return params;
             }

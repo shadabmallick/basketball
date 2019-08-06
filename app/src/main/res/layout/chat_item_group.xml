@@ -157,7 +157,7 @@
             app:bl_arrowPosition="16dp"
             app:bl_arrowWidth="8dp"
             app:bl_cornersRadius="10dp"
-            app:bl_bubbleColor="@color/light_grey"
+            app:bl_bubbleColor="@color/light_grey2"
             >
 
             <LinearLayout
@@ -219,7 +219,7 @@
             app:bl_arrowPosition="16dp"
             app:bl_arrowWidth="8dp"
             app:bl_cornersRadius="10dp"
-            app:bl_bubbleColor="@color/light_grey"
+            app:bl_bubbleColor="@color/light_grey2"
             >
 
             <RelativeLayout

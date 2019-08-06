@@ -16,8 +16,8 @@
                 android:id="@+id/iv_profile"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@mipmap/icon6"
-                android:scaleType="fitXY"
+                android:background="@color/dark_gray"
+                android:src="@mipmap/avatar_gray"
                 />
 
             <RelativeLayout
@@ -53,7 +53,7 @@
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:text="Alex"
+                    android:text=""
                     />
                 <TextView
                     android:id="@+id/tv_designation"
@@ -62,7 +62,7 @@
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    android:text="Trainer"
+                    android:text=""
                     />
 
 
@@ -128,7 +128,7 @@
                 android:id="@+id/iv_user"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@mipmap/icon_parents"
+                android:src="@mipmap/avatar_gray"
                 app:civ_border_width="2dp"
                 app:civ_border_color="@color/white"
                 android:layout_marginLeft="40dp"
@@ -170,7 +170,7 @@
                 android:textColor="@color/dark_gray"
                 android:textSize="16sp"
                 android:layout_marginTop="5dp"
-                android:text="Alex"
+                android:text=""
                 />
 
             <View
@@ -194,7 +194,7 @@
                 android:textColor="@color/dark_gray"
                 android:textSize="16sp"
                 android:layout_marginTop="5dp"
-                android:text="Beijing"
+                android:text=""
                 />
 
             <View
@@ -219,7 +219,7 @@
                 android:textColor="@color/dark_gray"
                 android:textSize="16sp"
                 android:layout_marginTop="5dp"
-                android:text="alex@outlook.com"
+                android:text=""
                 />
 
             <View
@@ -244,7 +244,7 @@
                 android:textColor="@color/dark_gray"
                 android:textSize="16sp"
                 android:layout_marginTop="5dp"
-                android:text="Trainer"
+                android:text=""
                 />
 
             <View

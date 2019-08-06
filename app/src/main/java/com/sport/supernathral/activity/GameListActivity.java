@@ -15,9 +15,11 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.sport.supernathral.Fragment.CommentGame;
 import com.sport.supernathral.Fragment.Comments;
 import com.sport.supernathral.Fragment.ScoreGame;
 import com.sport.supernathral.R;
+import com.sport.supernathral.Utils.GlobalClass;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,7 @@ public class GameListActivity extends AppCompatActivity {
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
+    GlobalClass globalClass;
     String id,game_id,team_1_name,team_2_name,team_1_image,team_2_image,live_score_team_A,live_score_team_B,match_type;
 
 
@@ -41,6 +44,7 @@ public class GameListActivity extends AppCompatActivity {
             window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(),
                     R.color.deep_yellow));
         }
+        globalClass=(GlobalClass)getApplicationContext();
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -67,7 +71,7 @@ public class GameListActivity extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-
+        globalClass.setGame_id(game_id);
 
 
 
@@ -90,7 +94,7 @@ public class GameListActivity extends AppCompatActivity {
         ScoreGame scoreGame = new ScoreGame();
         scoreGame.setArguments(bundle);
 
-        Comments comments = new Comments();
+        CommentGame comments = new CommentGame();
         comments.setArguments(bundle);
 
         adapter.addFragment(scoreGame,"Score");

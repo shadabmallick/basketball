@@ -3,6 +3,7 @@ package com.sport.supernathral.activity;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -27,18 +28,35 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.sport.supernathral.AdapterClass.GroupUserAdapter;
-import com.sport.supernathral.AdapterClass.UserSelectionAdapter;
+import com.sport.supernathral.DataModel.MembersData;
+import com.sport.supernathral.NetworkConstant.AppConfig;
 import com.sport.supernathral.R;
+import com.sport.supernathral.Utils.GlobalClass;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import cz.msebera.android.httpclient.Header;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class GroupCreate extends AppCompatActivity {
@@ -57,6 +75,9 @@ public class GroupCreate extends AppCompatActivity {
     private static final int CAMERA_REQUEST = 1888;
     public static final int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 333;
 
+    ArrayList<MembersData> membersDataArrayList;
+    ProgressDialog progressDialog;
+    GlobalClass globalClass;
 
     String TAG = "group create";
 
@@ -79,6 +100,12 @@ public class GroupCreate extends AppCompatActivity {
         edt_group_name = findViewById(R.id.edt_group_name);
         iv_image = findViewById(R.id.iv_image);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage(getResources().getString(R.string.loading));
+
+        globalClass = (GlobalClass) getApplicationContext();
+
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -94,9 +121,9 @@ public class GroupCreate extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
 
-            ArrayList<String> list = (ArrayList<String>) bundle.getSerializable("data");
+            membersDataArrayList = (ArrayList<MembersData>) bundle.getSerializable("data");
 
-            groupUserAdapter = new GroupUserAdapter(this, list);
+            groupUserAdapter = new GroupUserAdapter(this, membersDataArrayList);
             recycler_user.setAdapter(groupUserAdapter);
         }
 
@@ -115,7 +142,9 @@ public class GroupCreate extends AppCompatActivity {
 
                 }else {
 
-                    Intent intent = new Intent(GroupCreate.this,
+                    createGroup();
+
+                   /* Intent intent = new Intent(GroupCreate.this,
                             ChatGroup.class);
                     intent.putExtra("from", "create");
                     intent.putExtra("id", "8");
@@ -125,7 +154,7 @@ public class GroupCreate extends AppCompatActivity {
                         intent.putExtra("photo", p_image1.getAbsolutePath());
                     }
 
-                    startActivity(intent);
+                    startActivity(intent);*/
 
                 }
 
@@ -341,6 +370,91 @@ public class GroupCreate extends AppCompatActivity {
     }
 
 
+    public void createGroup(){
+
+        progressDialog.show();
+
+        String url = AppConfig.create_group_chat;
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+
+        params.put("user_id", globalClass.getId());
+        params.put("member_list", groupUserAdapter.getSelectedUserIds());
+        params.put("group_name", edt_group_name.getText().toString());
+
+        if (p_image1 != null){
+
+            try{
+
+                params.put("group_image", p_image1);
+
+            }catch (FileNotFoundException e){
+                e.printStackTrace();
+            }
+
+        }
+
+        Log.d(TAG ,"create_group_chat- " + url);
+        Log.d(TAG ,"create_group_chat- " + params.toString());
+
+        int DEFAULT_TIMEOUT = 30 * 1000;
+        client.setMaxRetriesAndTimeout(5 , DEFAULT_TIMEOUT);
+
+        client.post(url, params, new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                Log.d(TAG, "create_group_chat- " + response.toString());
+
+                if (response != null) {
+                    try {
+
+                        int status = response.optInt("status");
+                        String message = response.optString("message");
+
+                        if (status == 1){
+
+                            String receiver_id = response.optString("receiver_id");
+                            String chat_type = response.optString("chat_type");
+
+
+
+                            Intent intent = new Intent(GroupCreate.this,
+                                    ChatGroup.class);
+                            intent.putExtra("from", "create");
+                            intent.putExtra("id", receiver_id);
+                            intent.putExtra("name", edt_group_name.getText().toString());
+
+                            if (p_image1 != null){
+                                intent.putExtra("photo", p_image1.getAbsolutePath());
+                            }
+
+                            startActivity(intent);
+                            finish();
+                        }
+
+                        progressDialog.dismiss();
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
+                Log.d(TAG, "create_group_chat- " + res);
+
+                progressDialog.dismiss();
+
+            }
+
+
+        });
+
+    }
 
 
 

@@ -58,7 +58,7 @@ public class ScheduleActvity extends AppCompatActivity {
     AdapterSchedule adapterSchedule;
     LinearLayout ll_start_date;
     Calendar myCalendar = Calendar.getInstance();
-    String access_date,end_date_str;
+    String access_date,end_date_str,sub_access_group_id,main_access_group_id;
 
     String from,team_id,today,newDate;
     private int mYear, mMonth, mDay, mHour, mMinute,mSecond;
@@ -75,6 +75,9 @@ public class ScheduleActvity extends AppCompatActivity {
         pd.setMessage("Loading...");
         from=getIntent().getStringExtra("from");
         team_id=getIntent().getStringExtra("team_id");
+        team_id=getIntent().getStringExtra("team_id");
+        sub_access_group_id=getIntent().getStringExtra("sub_access_group_id");
+        main_access_group_id=getIntent().getStringExtra("main_access_group_id");
         Date date = new Date();
         today= new SimpleDateFormat("yyyy-MM-dd").format(date);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -105,7 +108,14 @@ public class ScheduleActvity extends AppCompatActivity {
         ll_find_schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ScheduleList();
+
+
+                if(globalClass.getType().equals("Coach/Teachers")){
+                    ScheduleList();
+                }
+                else {
+                    ScheduleListOnLoad();
+                }
             }
         });
         ll_start_date.setOnClickListener(new View.OnClickListener() {
@@ -503,7 +513,8 @@ public class ScheduleActvity extends AppCompatActivity {
 
                 params.put("start_date",today);
                 params.put("end_date",newDate);
-                params.put("team_id",team_id);
+                params.put("main_access_group_id",main_access_group_id);
+                params.put("sub_access_group_id",sub_access_group_id);
 
 
 

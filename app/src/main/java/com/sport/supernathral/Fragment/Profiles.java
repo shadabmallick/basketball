@@ -70,10 +70,15 @@ public class Profiles extends Fragment implements ProfileAdapter.onItemClickList
         recycler_profile.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-        getChatList(globalClass.getId());
+
 
     }
 
+    @Override
+    public void onResume() {
+        getChatList(globalClass.getId());
+        super.onResume();
+    }
 
     private void getChatList(final String user_id) {
         // Tag used to cancel the request

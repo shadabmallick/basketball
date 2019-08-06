@@ -102,7 +102,9 @@ public class GamesMain extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar_title = toolbar.findViewById(R.id.toolbar_title);
         toolbar_title.setText("Games");
-        Picasso.with(getApplicationContext()).load(globalClass.getProfil_pic()).into(iv_user);
+        if(!globalClass.getProfil_pic().isEmpty()) {
+            Picasso.with(getApplicationContext()).load(globalClass.getProfil_pic()).into(iv_user);
+        }
         tv_name.setText(globalClass.getFname());
         if(globalClass.getType().equals("Students/Players")){
             tv_designation.setText("Players");
@@ -110,6 +112,9 @@ public class GamesMain extends AppCompatActivity
         }
         else if(globalClass.getType().equals("Coach/Teachers")){
             tv_designation.setText("Trainer");
+        }
+        else if(globalClass.getType().equals("Parent")){
+            tv_designation.setText("Parent");
         }
 
 
@@ -325,23 +330,79 @@ public class GamesMain extends AppCompatActivity
                 break;
 
             case 2:
-                toolbar_title.setText(getResources().getString(R.string.schedule));
-                Bundle bundle_schedule = new Bundle();
-                bundle_schedule.putString("from", getResources().getString(R.string.schedule));
-                bundle_schedule.putString("main_access_group_id", main_access_group_id);
-                bundle_schedule.putString("sub_access_group_id", sub_access_group_id);
-                ScheduleUserwise scchedule_list = new ScheduleUserwise();
-                scchedule_list.setArguments( bundle_schedule);
+                if(globalClass.getType().equals("Students/Players")){
 
-                transactFragment(scchedule_list);
+                    toolbar_title.setText(getResources().getString(R.string.schedule));
+                    Bundle bundle_schedule = new Bundle();
+                    bundle_schedule.putString("from", getResources().getString(R.string.schedule));
+                    bundle_schedule.putString("main_access_group_id", main_access_group_id);
+                    bundle_schedule.putString("sub_access_group_id", sub_access_group_id);
+                    Schedule scchedule_list = new Schedule();
+                    scchedule_list.setArguments(bundle_schedule);
+
+                    transactFragment(scchedule_list);
 
 
+                }
+                else if(globalClass.getType().equals("Coach/Teachers")){
+                    toolbar_title.setText(getResources().getString(R.string.schedule));
+                    Bundle bundle_schedule = new Bundle();
+                    bundle_schedule.putString("from", getResources().getString(R.string.schedule));
+                    bundle_schedule.putString("main_access_group_id", main_access_group_id);
+                    bundle_schedule.putString("sub_access_group_id", sub_access_group_id);
+                    ScheduleUserwise scchedule_list = new ScheduleUserwise();
+                    scchedule_list.setArguments(bundle_schedule);
+
+                    transactFragment(scchedule_list);
+
+                }
+                else if(globalClass.getType().equals("Parent")){
+                    toolbar_title.setText(getResources().getString(R.string.schedule));
+                    Bundle bundle_schedule = new Bundle();
+                    bundle_schedule.putString("from", getResources().getString(R.string.schedule));
+                    bundle_schedule.putString("main_access_group_id", main_access_group_id);
+                    bundle_schedule.putString("sub_access_group_id", sub_access_group_id);
+                    ScheduleUserwise scchedule_list = new ScheduleUserwise();
+                    scchedule_list.setArguments(bundle_schedule);
+
+                    transactFragment(scchedule_list);
+
+                }
                 break;
 
             case 3:
-                toolbar_title.setText(getResources().getString(R.string.attendance));
 
-                transactFragment(new Team());
+                if(globalClass.getType().equals("Students/Players")){
+
+                    toolbar_title.setText(getResources().getString(R.string.attendance));
+
+
+                    Bundle bundle_student_list = new Bundle();
+                    bundle_student_list.putString("from", getResources().getString(R.string.student_list));
+                    Attendence student_list = new Attendence();
+                    student_list.setArguments(bundle_student_list);
+
+                    transactFragment(student_list);
+
+
+                }
+                else if(globalClass.getType().equals("Coach/Teachers")){
+                    toolbar_title.setText(getResources().getString(R.string.attendance));
+
+                    transactFragment(new Team());
+                }
+                else if(globalClass.getType().equals("Parent")){
+                    toolbar_title.setText(getResources().getString(R.string.attendance));
+                    Bundle bundle_schedule = new Bundle();
+                    bundle_schedule.putString("from", getResources().getString(R.string.attendance));
+                    bundle_schedule.putString("main_access_group_id", main_access_group_id);
+                    bundle_schedule.putString("sub_access_group_id", sub_access_group_id);
+                    StudentList student_list = new StudentList();
+                    student_list.setArguments(bundle_schedule);
+
+                    transactFragment(student_list);
+
+                }
 
                 break;
 
@@ -349,12 +410,18 @@ public class GamesMain extends AppCompatActivity
 
                 if(globalClass.getType().equals("Students/Players")){
 
-                    Intent skill=new Intent(GamesMain.this,SkillActivity.class);
-                    startActivity(skill);
+                    toolbar_title.setText(getResources().getString(R.string.skill_set));
+
+                    Bundle bundle_student_list = new Bundle();
+                    bundle_student_list.putString("from", getResources().getString(R.string.student_list));
+                    SkillSet student_list = new SkillSet();
+                    student_list.setArguments(bundle_student_list);
+
+                    transactFragment(student_list);
 
 
                 }
-                else {
+                else if(globalClass.getType().equals("Coach/Teachers")){
                     toolbar_title.setText(getResources().getString(R.string.student_list));
 
                     Bundle bundle_student_list = new Bundle();
@@ -364,18 +431,37 @@ public class GamesMain extends AppCompatActivity
 
                     transactFragment(student_list);
                 }
+                else if(globalClass.getType().equals("Parent")){
+                    toolbar_title.setText(getResources().getString(R.string.student_list));
+                    Bundle bundle_schedule = new Bundle();
+                    bundle_schedule.putString("from", getResources().getString(R.string.student_list));
+                    bundle_schedule.putString("main_access_group_id", main_access_group_id);
+                    bundle_schedule.putString("sub_access_group_id", sub_access_group_id);
+                    StudentList student_list = new StudentList();
+                    student_list.setArguments(bundle_schedule);
+
+                    transactFragment(student_list);
+
+                }
 
                 break;
 
             case 5:
                 if(globalClass.getType().equals("Students/Players")){
 
-                    Intent skill=new Intent(GamesMain.this,SkillActivity.class);
-                    startActivity(skill);
+
+                    toolbar_title.setText(getResources().getString(R.string.info));
+
+                    Bundle bundle_info = new Bundle();
+                    bundle_info.putString("from", getResources().getString(R.string.info));
+                    Info info = new Info();
+                    info.setArguments(bundle_info);
+
+                    transactFragment(info);
 
 
                 }
-                else {
+                else if(globalClass.getType().equals("Coach/Teachers")){
 
                     toolbar_title.setText(getResources().getString(R.string.info));
 
@@ -386,44 +472,135 @@ public class GamesMain extends AppCompatActivity
 
                     transactFragment(info);
                 }
+                else if(globalClass.getType().equals("Parent")){
+                    toolbar_title.setText(getResources().getString(R.string.student_list));
+                    Bundle bundle_schedule = new Bundle();
+                    bundle_schedule.putString("from", getResources().getString(R.string.info));
+                    bundle_schedule.putString("main_access_group_id", main_access_group_id);
+                    bundle_schedule.putString("sub_access_group_id", sub_access_group_id);
+                    StudentList student_list = new StudentList();
+                    student_list.setArguments(bundle_schedule);
+
+                    transactFragment(student_list);
+
+                }
                 break;
 
             case 6:
+                if(globalClass.getType().equals("Students/Players")){
 
-                toolbar_title.setText(getResources().getString(R.string.statistics));
 
-                Bundle bundle_statistics = new Bundle();
-                bundle_statistics.putString("from", getResources().getString(R.string.statistics));
-                Team_All statistics = new Team_All();
-                statistics.setArguments(bundle_statistics);
+                    toolbar_title.setText(getResources().getString(R.string.info));
 
-                transactFragment(statistics);
+                    Bundle bundle_info = new Bundle();
+                    bundle_info.putString("from", getResources().getString(R.string.info));
+                    Statistics info = new Statistics();
+                    info.setArguments(bundle_info);
 
+                    transactFragment(info);
+
+
+                }
+                else if(globalClass.getType().equals("Coach/Teachers")){
+
+                    toolbar_title.setText(getResources().getString(R.string.statistics));
+
+                    Bundle bundle_statistics = new Bundle();
+                    bundle_statistics.putString("from", getResources().getString(R.string.statistics));
+                    Team_All statistics = new Team_All();
+                    statistics.setArguments(bundle_statistics);
+
+                    transactFragment(statistics);
+                }
+                else if(globalClass.getType().equals("Parent")){
+                    toolbar_title.setText(getResources().getString(R.string.student_list));
+                    Bundle bundle_schedule = new Bundle();
+                    bundle_schedule.putString("from", getResources().getString(R.string.statistics));
+                    bundle_schedule.putString("main_access_group_id", main_access_group_id);
+                    bundle_schedule.putString("sub_access_group_id", sub_access_group_id);
+                    StudentList student_list = new StudentList();
+                    student_list.setArguments(bundle_schedule);
+
+                    transactFragment(student_list);
+
+                }
                 break;
 
             case 7:
+                if(globalClass.getType().equals("Students/Players")){
 
-                toolbar_title.setText(getResources().getString(R.string.sponsor));
 
-                Bundle bundle = new Bundle();
-                bundle.putString("from", getResources().getString(R.string.sponsor));
-                Team_All team_all = new Team_All();
-                team_all.setArguments(bundle);
+                    toolbar_title.setText(getResources().getString(R.string.sponsor));
 
-                transactFragment(team_all);
+                    Bundle bundle_info = new Bundle();
+                    bundle_info.putString("from", getResources().getString(R.string.sponsor));
+                    Sponsor info = new Sponsor();
+                    info.setArguments(bundle_info);
 
+                    transactFragment(info);
+
+
+                }
+                else if(globalClass.getType().equals("Coach/Teachers")) {
+                    toolbar_title.setText(getResources().getString(R.string.sponsor));
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("from", getResources().getString(R.string.sponsor));
+                    Team_All team_all = new Team_All();
+                    team_all.setArguments(bundle);
+
+                    transactFragment(team_all);
+                }
+                else if(globalClass.getType().equals("Parent")){
+                    toolbar_title.setText(getResources().getString(R.string.student_list));
+                    Bundle bundle_schedule = new Bundle();
+                    bundle_schedule.putString("from", getResources().getString(R.string.sponsor));
+                    bundle_schedule.putString("main_access_group_id", main_access_group_id);
+                    bundle_schedule.putString("sub_access_group_id", sub_access_group_id);
+                    StudentList student_list = new StudentList();
+                    student_list.setArguments(bundle_schedule);
+
+                    transactFragment(student_list);
+
+                }
                 break;
 
             case 8:
+                if(globalClass.getType().equals("Students/Players")){
 
-                toolbar_title.setText(getResources().getString(R.string.notes));
-                Bundle bundle_notes = new Bundle();
-                bundle_notes.putString("from", getResources().getString(R.string.notes));
-                Team_All team_all_notes = new Team_All();
-                team_all_notes.setArguments(bundle_notes);
 
-                transactFragment(team_all_notes);
+                    toolbar_title.setText(getResources().getString(R.string.notes));
 
+                    Bundle bundle_info = new Bundle();
+                    bundle_info.putString("from", getResources().getString(R.string.notes));
+                    Notes info = new Notes();
+                    info.setArguments(bundle_info);
+
+                    transactFragment(info);
+
+
+                }
+                else if(globalClass.getType().equals("Coach/Teachers")) {
+                    toolbar_title.setText(getResources().getString(R.string.notes));
+                    Bundle bundle_notes = new Bundle();
+                    bundle_notes.putString("from", getResources().getString(R.string.notes));
+                    Team_All team_all_notes = new Team_All();
+                    team_all_notes.setArguments(bundle_notes);
+
+                    transactFragment(team_all_notes);
+                }
+                else if(globalClass.getType().equals("Parent")){
+                    toolbar_title.setText(getResources().getString(R.string.student_list));
+                    Bundle bundle_schedule = new Bundle();
+                    bundle_schedule.putString("from", getResources().getString(R.string.notes));
+                    bundle_schedule.putString("main_access_group_id", main_access_group_id);
+                    bundle_schedule.putString("sub_access_group_id", sub_access_group_id);
+                    StudentList student_list = new StudentList();
+                    student_list.setArguments(bundle_schedule);
+
+                    transactFragment(student_list);
+
+                }
                 break;
 
         }

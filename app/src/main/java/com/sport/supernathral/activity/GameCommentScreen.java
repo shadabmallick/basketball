@@ -22,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.shashank.sony.fancytoastlib.FancyToast;
+import com.sport.supernathral.AdapterClass.AdapterComment;
 import com.sport.supernathral.AdapterClass.AdapterMainComment;
 import com.sport.supernathral.DataModel.CommentData;
 import com.sport.supernathral.DataModel.SubCommentData;
@@ -38,17 +39,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.sport.supernathral.NetworkConstant.AppConfig.GAMEComment;
-import static com.sport.supernathral.NetworkConstant.AppConfig.NEWS_COMMENT;
+
+import static com.sport.supernathral.NetworkConstant.AppConfig.game_comment_delete;
 import static com.sport.supernathral.NetworkConstant.AppConfig.news_comment_delete;
+import static com.sport.supernathral.NetworkConstant.AppConfig.post_game_comment;
+import static com.sport.supernathral.NetworkConstant.AppConfig.post_game_comment_like;
+import static com.sport.supernathral.NetworkConstant.AppConfig.post_game_comment_on_comment;
 import static com.sport.supernathral.NetworkConstant.AppConfig.post_news_comment;
 import static com.sport.supernathral.NetworkConstant.AppConfig.post_news_comment_on_comment;
 import static com.sport.supernathral.NetworkConstant.AppConfig.post_news_like_on_comment;
 
-public class CommentsScreen extends AppCompatActivity implements
-        AdapterMainComment.onItemClickListnerLike,
-        AdapterMainComment.onItemClickListnerComment,
-        AdapterMainComment.onItemClickListnerDelete,
-        AdapterMainComment.onItemClickListnerReport{
+public class GameCommentScreen extends AppCompatActivity implements
+        AdapterComment.onItemClickListnerLike,
+        AdapterComment.onItemClickListnerComment,
+        AdapterComment.onItemClickListnerDelete,
+        AdapterComment.onItemClickListnerReport{
 
 
     RecyclerView rv_category;
@@ -57,7 +62,7 @@ public class CommentsScreen extends AppCompatActivity implements
     Toolbar toolbar;
 
     String TAG="product";
-    AdapterMainComment adapterComment;
+    AdapterComment adapterComment;
     ArrayList<String> newsList;
     Shared_Preference preference;
     GlobalClass globalClass;
@@ -96,7 +101,7 @@ public class CommentsScreen extends AppCompatActivity implements
 
         preference = new Shared_Preference(this);
         globalClass = (GlobalClass) getApplicationContext();
-         from=getIntent().getStringExtra("from");
+        from=getIntent().getStringExtra("from");
 
         function();
 
@@ -155,7 +160,7 @@ public class CommentsScreen extends AppCompatActivity implements
         pd.show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                NEWS_COMMENT, new Response.Listener<String>() {
+                GAMEComment, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -180,7 +185,7 @@ public class CommentsScreen extends AppCompatActivity implements
                                 JSONObject item = news_data.getJSONObject(i);
 
                                 String id = item.get("id").toString().replaceAll("\"", "");
-                                String news_id = item.get("news_id").toString().replaceAll("\"", "");
+                                String match_id = item.get("match_id").toString().replaceAll("\"", "");
                                 String user_id = item.get("user_id").toString().replaceAll("\"", "");
                                 String comment = item.get("comment").toString().replaceAll("\"", "");
                                 String comment_id = item.get("comment_id").toString().replaceAll("\"", "");
@@ -190,13 +195,13 @@ public class CommentsScreen extends AppCompatActivity implements
                                 String modified_date = item.get("modified_date").toString().replaceAll("\"", "");
                                 String user_name = item.get("user_name").toString().replaceAll("\"", "");
                                 String user_image = item.get("user_image").toString().replaceAll("\"", "");
-                                String news_comment_like = item.get("news_comment_like").toString().replaceAll("\"", "");
-                                String news_comment_sub_count = item.get("news_comment_sub_count").toString().replaceAll("\"", "");
+                                String news_comment_like = item.get("match_comment_like").toString().replaceAll("\"", "");
+                                String news_comment_sub_count = item.get("match_comment_sub_count").toString().replaceAll("\"", "");
 
 
                                 CommentData commentData = new CommentData();
                                 commentData.setId(id);
-                                commentData.setNews_id(news_id);
+                                commentData.setNews_id(match_id);
                                 commentData.setUser_id(user_id);
                                 commentData.setComment(comment);
                                 commentData.setComment_id(comment_id);
@@ -211,12 +216,12 @@ public class CommentsScreen extends AppCompatActivity implements
 
 
                                 ArrayList<SubCommentData> listSubComment = new ArrayList<>();
-                                JSONArray news_comment_sub=item.getJSONArray("news_comment_sub");
+                                JSONArray news_comment_sub=item.getJSONArray("match_comment_sub");
                                 for (int j = 0; j < news_comment_sub.length(); j++) {
                                     JSONObject item_comment = news_comment_sub.getJSONObject(j);
 
                                     String sub_id = item_comment.get("id").toString().replaceAll("\"", "");
-                                    String sub_news_id = item_comment.get("news_id").toString().replaceAll("\"", "");
+                                    String sub_match_id = item_comment.get("match_id").toString().replaceAll("\"", "");
                                     String sub_user_id = item_comment.get("user_id").toString().replaceAll("\"", "");
                                     String sub_comment = item_comment.get("comment").toString().replaceAll("\"", "");
                                     String sub_comment_id = item_comment.get("comment_id").toString().replaceAll("\"", "");
@@ -226,13 +231,12 @@ public class CommentsScreen extends AppCompatActivity implements
                                     String sub_modified_date = item_comment.get("modified_date").toString().replaceAll("\"", "");
                                     String sub_user_name = item_comment.get("user_name").toString().replaceAll("\"", "");
                                     String sub_user_image = item_comment.get("user_image").toString().replaceAll("\"", "");
-                                    String sub_news_comment_like = item_comment.get("news_sub_comment_like").toString().replaceAll("\"", "");
-                                   // String sub_news_comment_sub_count = item_comment.get("news_comment_sub_count").toString().replaceAll("\"", "");
-
+                                    String sub_news_comment_like = item_comment.get("match_sub_comment_like").toString().replaceAll("\"", "");
+                                    // String sub_news_comment_sub_count = item_comment.get("news_comment_sub_count").toString().replaceAll("\"", "");
 
                                     SubCommentData subCommentData = new SubCommentData();
                                     subCommentData.setId(sub_id);
-                                    subCommentData.setNews_id(sub_news_id);
+                                    subCommentData.setNews_id(sub_match_id);
                                     subCommentData.setUser_id(sub_user_id);
                                     subCommentData.setComment(sub_comment);
                                     subCommentData.setComment_id(sub_comment_id);
@@ -243,7 +247,7 @@ public class CommentsScreen extends AppCompatActivity implements
                                     subCommentData.setUser_name(sub_user_name);
                                     subCommentData.setUser_image(sub_user_image);
                                     subCommentData.setMoment_comment_like_count(sub_news_comment_like);
-                                   // subCommentData.setMoment_comment_sub_count(sub_news_comment_sub_count);
+                                    // subCommentData.setMoment_comment_sub_count(sub_news_comment_sub_count);
 
                                     listSubComment.add(subCommentData);
 
@@ -294,7 +298,7 @@ public class CommentsScreen extends AppCompatActivity implements
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<>();
 
-                params.put("news_id", globalClass.getSingle_top_news_id());
+                params.put("game_id", globalClass.getGame_id());
                 //params.put("news_id", "7");
 
                 Log.d(TAG, "get comment: "+params);
@@ -311,7 +315,7 @@ public class CommentsScreen extends AppCompatActivity implements
 
     private void setAdapterComment(){
 
-        adapterComment   = new AdapterMainComment(CommentsScreen.this, listComment);
+        adapterComment   = new AdapterComment(GameCommentScreen.this, listComment,from);
         rv_category.setAdapter(adapterComment);
         adapterComment.notifyDataSetChanged();
         adapterComment.setmListnerLike(this);
@@ -336,7 +340,7 @@ public class CommentsScreen extends AppCompatActivity implements
 
         if (comment_type.equals("sub_comment")){
             message_text.requestFocus();
-            Common.showSoftKeyboard(message_text, CommentsScreen.this);
+            Common.showSoftKeyboard(message_text, GameCommentScreen.this);
             message_text.setHint(getResources().getString(R.string.typemessage_oncomment));
         }
 
@@ -360,7 +364,7 @@ public class CommentsScreen extends AppCompatActivity implements
         pd.show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                post_news_comment, new Response.Listener<String>() {
+                post_game_comment, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -417,7 +421,7 @@ public class CommentsScreen extends AppCompatActivity implements
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<>();
 
-                params.put("news_id", globalClass.getSingle_top_news_id());
+                params.put("game_id", globalClass.getGame_id());
                 params.put("user_id", globalClass.getId());
                 params.put("comment", comment);
 
@@ -439,7 +443,7 @@ public class CommentsScreen extends AppCompatActivity implements
         pd.show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                post_news_comment_on_comment, new Response.Listener<String>() {
+                post_game_comment_on_comment, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -497,7 +501,7 @@ public class CommentsScreen extends AppCompatActivity implements
                 Map<String, String> params = new HashMap<>();
 
                 //params.put("news_id", globalClass.getSingle_top_news_id());
-                params.put("news_id", globalClass.getSingle_top_news_id());
+                params.put("game_id", globalClass.getGame_id());
                 params.put("user_id", globalClass.getId());
                 params.put("comment_id", comment_id);
                 params.put("comment", comment);
@@ -520,7 +524,7 @@ public class CommentsScreen extends AppCompatActivity implements
         pd.show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                post_news_like_on_comment, new Response.Listener<String>() {
+                post_game_comment_like, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -577,7 +581,7 @@ public class CommentsScreen extends AppCompatActivity implements
                 Map<String, String> params = new HashMap<>();
 
                 //params.put("news_id", globalClass.getSingle_top_news_id());
-                params.put("news_id", globalClass.getSingle_top_news_id());
+                params.put("game_id", globalClass.getGame_id());
                 params.put("user_id", globalClass.getId());
                 params.put("comment_id", com_id);
 
@@ -599,7 +603,7 @@ public class CommentsScreen extends AppCompatActivity implements
         pd.show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                news_comment_delete, new Response.Listener<String>() {
+                game_comment_delete, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -656,7 +660,7 @@ public class CommentsScreen extends AppCompatActivity implements
                 Map<String, String> params = new HashMap<>();
 
                 //params.put("news_id", globalClass.getSingle_top_news_id());
-                params.put("news_id", globalClass.getSingle_top_news_id());
+                params.put("game_id", globalClass.getGame_id());
                 params.put("user_id", globalClass.getId());
                 params.put("news_comment_id", com_id);
 
@@ -674,7 +678,7 @@ public class CommentsScreen extends AppCompatActivity implements
 
 
     private void reportDialog(String comm_id){
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CommentsScreen.this);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(GameCommentScreen.this);
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_news_report, null);
         dialogBuilder.setView(dialogView);

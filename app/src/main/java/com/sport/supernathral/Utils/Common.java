@@ -11,6 +11,12 @@ public class Common {
     public static final String Key_GroupNoti = "Key_GroupNoti";
 
 
+    public static final String player = "Students/Players";
+    public static final String trainer = "Coach/Teachers";
+    public static final String parent = "Parent";
+    public static final String game = "game";
+    public static final String news = "news";
+
 
 
 

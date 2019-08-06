@@ -77,7 +77,7 @@
         <activity
             android:name=".activity.GamesMain"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
+            android:windowSoftInputMode="adjustPan|stateHidden|stateAlwaysHidden"/>
 
         <activity
             android:name=".activity.EventScreen"
@@ -117,7 +117,8 @@
         <activity
             android:name=".activity.MomentsActivity"
             android:theme="@style/MyTheme"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
+
+            android:windowSoftInputMode="adjustPan|stateHidden|stateAlwaysHidden" />
 
         <activity
             android:name=".activity.Sponsor"
@@ -127,7 +128,7 @@
         <activity
             android:name=".activity.SearchPlayer"
             android:theme="@style/MyTheme"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
+            android:windowSoftInputMode="adjustPan|stateHidden|stateAlwaysHidden" />
 
         <activity
             android:name=".activity.NewsSublist"
@@ -255,6 +256,14 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activity.ShowImages"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.AttendenceParent"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.GameCommentScreen"
             android:theme="@style/MyTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 
