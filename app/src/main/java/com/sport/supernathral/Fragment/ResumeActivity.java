@@ -32,6 +32,9 @@ import java.util.Map;
 
 import im.delight.android.webview.AdvancedWebView;
 
+import static com.sport.supernathral.NetworkConstant.AppConfig.NEWS;
+import static com.sport.supernathral.NetworkConstant.AppConfig.NEWS_DETAIlS;
+
 public class ResumeActivity extends Fragment implements AdvancedWebView.Listener {
 
     RecyclerView rv_category;
@@ -42,43 +45,6 @@ public class ResumeActivity extends Fragment implements AdvancedWebView.Listener
     AdapterChat adapterChat;
     ArrayList<String> newsList;
     ImageView img_header;
-    String htmltag="<p><span style=\"font-size:16px\">U14 Wildcats&nbsp; Boys played like champions in the with the Title on the line. The Wildcats started the day trailing T-Sky early before changing gears and looking like a well oiled machine the rest of the tournament before dropping a very competitive championship game to an AIDI team that have not faced a challenger like these Wildcats all season. They made a couple big shots down the stretch to earn the title.</span></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560356997_IMG_7531.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560356902_IMG_7528.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560356927_IMG_7529.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560356963_IMG_7530.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357337_IMG_7532.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357181_IMG_7533.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357111_IMG_7534.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357024_IMG_7535.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357469_IMG_7536.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357492_IMG_7537.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357549_IMG_7538.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357568_IMG_7539.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357696_IMG_7540.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357669_IMG_7541.jpg\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560357634_IMG_7542.jpg\" style=\"height:200px; width:300px\" />\n" +
-            "    <img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560356725_IMB_gNw0UL.PNG\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560356874_IMG_2785.JPG\" style=\"height:200px; width:300px\" /></p>\n" +
-            "\n" +
-            "<p><img alt=\"\" src=\"https://www.supernahtralsports.com/uploads/file_upload/1560167375_U14.JPG\" style=\"height:200px; width:300px\" /></p>";
-
     ArrayList<HashMap<String,String>> list_names;
     ProgressDialog pd;
 
@@ -111,17 +77,17 @@ public class ResumeActivity extends Fragment implements AdvancedWebView.Listener
     private void function() {
         // Tag used to cancel the request
         String tag_string_req = "req_login";
-        String details = "https://www.supernahtralsports.com/api/news_details";
+        //String details = "https://www.supernahtralsports.com/api/news_details";
 
 
         pd.show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                details, new Response.Listener<String>() {
+                NEWS_DETAIlS, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Login Response: " + response.toString());
+                Log.d(TAG, "NEWS_DETAIlS Response: " + response.toString());
 
                 if (response != null){
                     pd.dismiss();
@@ -142,14 +108,14 @@ public class ResumeActivity extends Fragment implements AdvancedWebView.Listener
 
                             String id = data.get("id").toString().replaceAll("\"", "");
                             String star = data.get("star").toString().replaceAll("\"", "");
-                            String content = data.get("content").toString().replaceAll("\"", "");
+                            String content = data.optString("content");
                             String heading = data.get("heading").toString().replaceAll("\"", "");
                             String short_content = data.get("short_content").toString().replaceAll("\"", "");
                             String location = data.get("location").toString().replaceAll("\"", "");
                             String main_access_group_id = data.get("main_access_group_id").toString().replaceAll("\"", "");
                             String sub_access_group_id = data.get("sub_access_group_id").toString().replaceAll("\"", "");
                             String file_type = data.get("file_type").toString().replaceAll("\"", "");
-                            String file_name = data.get("file_name").toString().replaceAll("\"", "");
+                            String file_name = data.optString("file_name");
                             String delete_flag = data.get("delete_flag").toString().replaceAll("\"", "");
                             String is_active = data.get("is_active").toString().replaceAll("\"", "");
                             String entry_date = data.get("entry_date").toString().replaceAll("\"", "");
@@ -157,16 +123,11 @@ public class ResumeActivity extends Fragment implements AdvancedWebView.Listener
                             String news_like_count = data.get("news_like_count").toString().replaceAll("\"", "");
                             String news_comment_count = data.get("news_comment_count").toString().replaceAll("\"", "");
                             JSONArray subComment=data.getJSONArray("news_comment");
-                          //  String description1 = (Html.fromHtml(content)).toString().replaceAll("\n", "");
-                            String text = content.replace("\\", "");
+
                             Picasso.with(getActivity())
                                     .load(file_name)
                                    .into(img_header);
-                            Log.d(TAG, "onResponse: "+text);
-
-                            webView.loadData(htmltag, "text/html; mi", "UTF-8");
-                          //  webView.loadHtml(content);
-
+                            webView.loadHtml(content);
 
                         }else {
 
@@ -205,7 +166,6 @@ public class ResumeActivity extends Fragment implements AdvancedWebView.Listener
                 Map<String, String> params = new HashMap<>();
 
                 params.put("news_id", "17");
-
 
                 Log.d(TAG, "login param: "+params);
                 return params;
