@@ -353,6 +353,7 @@ public class GroupProfileInfo extends AppCompatActivity
                 Map<String, String> params = new HashMap<>();
                 params.put("group_id", group_id);
 
+                Log.d(TAG, "group_id: " + group_id);
                 return params;
             }
 
