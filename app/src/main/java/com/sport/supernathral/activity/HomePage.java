@@ -14,11 +14,9 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,8 +29,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import com.sport.supernathral.AdapterClass.GameAdapter;
 import com.sport.supernathral.AdapterClass.NewsAdapter;
@@ -49,10 +45,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static android.support.constraint.Constraints.TAG;
 import static com.sport.supernathral.NetworkConstant.AppConfig.GET_PLAYER_INFO;
 import static com.sport.supernathral.NetworkConstant.AppConfig.NEWS;
-import static com.sport.supernathral.NetworkConstant.AppConfig.NEWS_SEARCH;
 import static com.sport.supernathral.NetworkConstant.AppConfig.USER_PROFILE;
 
 public class HomePage extends AppCompatActivity {

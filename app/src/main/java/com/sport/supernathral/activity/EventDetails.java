@@ -1,5 +1,6 @@
 package com.sport.supernathral.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +23,7 @@ public class EventDetails extends AppCompatActivity {
     String newString;
     TextView tv_title,tv_date_start,tv_date_end,tv_time,tv_venue,tv_address,tv_description,
             tv_contact_person,tv_contact_email,tv_phone_end;
-    ImageView top_img,ongoing,upcoming,complete;
+    ImageView top_img,ongoing,upcoming,complete, iv_location;
     String name,event_start_date,event_end_date,event_venue,image,main_access_group_id,
             event_address,event_city,event_state,event_pincode,event_desc,event_contact_name,
             event_contact_designation,event_contact_email,event_contact_phone,
@@ -31,6 +32,7 @@ public class EventDetails extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.event_details);
+
         name=getIntent().getStringExtra("name");
         event_start_date=getIntent().getStringExtra("event_start_date");
         event_end_date=getIntent().getStringExtra("event_end_date");
@@ -50,8 +52,8 @@ public class EventDetails extends AppCompatActivity {
         delete_flag=getIntent().getStringExtra("delete_flag");
         is_active=getIntent().getStringExtra("is_active");
         entry_date=getIntent().getStringExtra("entry_date");
-        modified_date=getIntent().getStringExtra("modified_date");
-        eventType=getIntent().getStringExtra("eventType");
+        modified_date= getIntent().getStringExtra("modified_date");
+        eventType= getIntent().getStringExtra("eventType");
 
         initView();
     }
@@ -72,6 +74,9 @@ public class EventDetails extends AppCompatActivity {
         tv_contact_person = findViewById(R.id.tv_contact_person);
         tv_contact_email = findViewById(R.id.tv_contact_email);
         tv_phone_end = findViewById(R.id.tv_phone_end);
+        iv_location = findViewById(R.id.iv_location);
+
+
         try {
             date = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(event_start_date);
 
@@ -120,7 +125,24 @@ public class EventDetails extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.mipmap.back_black);
-      //  tv_about=findViewById(R.id.about_us);
+
+
+
+        iv_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(EventDetails.this, BingMapActivity.class);
+                intent.putExtra("event_venue", event_venue);
+                intent.putExtra("event_address", event_address);
+                intent.putExtra("event_venue_chinese", getIntent().getStringExtra("event_venue_chinese"));
+                intent.putExtra("event_address_chinese", getIntent().getStringExtra("event_address_chinese"));
+                startActivity(intent);
+
+            }
+        });
+
+
 
     }
     @Override

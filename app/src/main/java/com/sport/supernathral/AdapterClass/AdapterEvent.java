@@ -110,6 +110,7 @@ public class AdapterEvent extends RecyclerView.Adapter<AdapterEvent.ItemViewHold
         holder.rl_next .setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     Intent event=new Intent(context, EventDetails.class);
                     event.putExtra("name",arrayList.get(position).get("name"));
                     event.putExtra("event_start_date",arrayList.get(position).get("event_start_date"));
@@ -131,6 +132,12 @@ public class AdapterEvent extends RecyclerView.Adapter<AdapterEvent.ItemViewHold
                     event.putExtra("entry_date",arrayList.get(position).get("entry_date"));
                     event.putExtra("modified_date",arrayList.get(position).get("modified_date"));
                     event.putExtra("eventType",arrayList.get(position).get("eventType"));
+
+                    event.putExtra("event_venue_chinese",arrayList.get(position).get("event_venue_chinese"));
+                    event.putExtra("event_address_chinese",arrayList.get(position).get("event_address_chinese"));
+                    event.putExtra("event_city_chinese",arrayList.get(position).get("event_city_chinese"));
+                    event.putExtra("event_state_chinese",arrayList.get(position).get("event_state_chinese"));
+                    event.putExtra("event_pincode_chinese",arrayList.get(position).get("event_pincode_chinese"));
 
 
                     context.startActivity(event);

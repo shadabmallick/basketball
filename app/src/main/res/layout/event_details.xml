@@ -242,6 +242,7 @@
                     />
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -255,6 +256,7 @@
                     android:textColor="@android:color/black"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_toLeftOf="@+id/iv_location"
                     />
                 <TextView
                     android:id="@+id/tv_address"
@@ -264,7 +266,18 @@
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
                     android:layout_height="match_parent"
+                    android:layout_toLeftOf="@+id/iv_location"
                     android:text="bejing"
+                    />
+
+                <ImageView
+                    android:id="@+id/iv_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/location"
+                    android:layout_margin="10dp"
                     />
 
             </RelativeLayout>

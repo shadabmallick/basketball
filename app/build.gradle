@@ -18,6 +18,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -53,6 +58,8 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
     implementation project(path: ':k4l-video-trimmer')
     implementation 'com.android.support:multidex:1.0.3'
+
+    implementation 'com.microsoft.maps:maps-sdk:0.2.0'
 
     implementation 'me.pushy:sdk:1.0.49'
 }

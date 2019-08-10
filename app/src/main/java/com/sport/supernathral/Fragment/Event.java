@@ -76,9 +76,7 @@ public class Event extends Fragment {
         img_header = view.findViewById(R.id.img_header);
         recycle_event = view.findViewById(R.id.recycle_event);
 
-        //rv_category = view.findViewById(R.id.recycler_chat);
         event_array = new ArrayList<>();
-
 
         recycle_event.setLayoutManager(new LinearLayoutManager(getActivity()));
         EventList();
@@ -97,7 +95,7 @@ public class Event extends Fragment {
 
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Login Response: " + response.toString());
+                Log.d(TAG, "EventList Response: " + response.toString());
 
                 if (response != null){
                     pd.dismiss();
@@ -113,11 +111,7 @@ public class Event extends Fragment {
 
                         if (status == 1){
 
-
-
-
-                            JSONArray news_data=main_object.getJSONArray("all_event");
-
+                            JSONArray news_data = main_object.getJSONArray("all_event");
 
                             for (int i = 0; i < news_data.length(); i++) {
                                 JSONObject item = news_data.getJSONObject(i);
@@ -143,6 +137,11 @@ public class Event extends Fragment {
                                 String entry_date = item.get("entry_date").toString().replaceAll("\"", "");
                                 String modified_date = item.get("modified_date").toString().replaceAll("\"", "");
                                 String eventType = item.get("eventType").toString().replaceAll("\"", "");
+                                String event_venue_chinese = item.optString("event_venue_chinese");
+                                String event_address_chinese = item.optString("event_address_chinese");
+                                String event_city_chinese = item.optString("event_city_chinese");
+                                String event_state_chinese = item.optString("event_state_chinese");
+                                String event_pincode_chinese = item.optString("event_pincode_chinese");
 
 
 
@@ -169,23 +168,26 @@ public class Event extends Fragment {
                                 hashMap.put("entry_date", entry_date);
                                 hashMap.put("modified_date", modified_date);
                                 hashMap.put("eventType", eventType);
+
+                                hashMap.put("event_venue_chinese", event_venue_chinese);
+                                hashMap.put("event_address_chinese", event_address_chinese);
+                                hashMap.put("event_city_chinese", event_city_chinese);
+                                hashMap.put("event_state_chinese", event_state_chinese);
+                                hashMap.put("event_pincode_chinese", event_pincode_chinese);
+
                                 event_array.add(hashMap);
-                                Log.d(TAG, "Hashmap " + hashMap);
+
+                              //  Log.d(TAG, "Hashmap " + hashMap);
 
                             }
-                            adapterEvent
-                                    = new AdapterEvent(getActivity(), event_array);
+                            adapterEvent = new AdapterEvent(getActivity(), event_array);
                             recycle_event.setAdapter(adapterEvent);
 
-
-
                         }else {
-
 
                             FancyToast.makeText(getActivity(), message,
                                     FancyToast.LENGTH_LONG, FancyToast.ERROR, false)
                                     .show();
-
 
                         }
 
@@ -220,7 +222,7 @@ public class Event extends Fragment {
 
                 params.put("main_access_group_id",globalClass.getMain_access_group_id());
                 params.put("sub_access_group_id",globalClass.getSub_access_group_id());
-                Log.d(TAG, " player_id: "+params);
+                Log.d(TAG, "params: "+params);
                 return params;
             }
 

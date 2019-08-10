@@ -277,6 +277,14 @@
 
 
         <activity
+            android:name=".activity.BingMapActivity"
+            android:theme="@style/MyTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
+
+
+
+        <activity
             android:name=".activity.MomentMessage"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:windowSoftInputMode="adjustPan|stateHidden" /> <activity
