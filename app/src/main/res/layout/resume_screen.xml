@@ -25,7 +25,7 @@
                 <ImageView
                     android:id="@+id/img_header"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="150dp"
                     android:layout_margin="15dp"/>
 
                 <pl.droidsonroids.gif.GifImageView
@@ -33,13 +33,13 @@
                     android:visibility="gone"
                     android:layout_margin="15dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="150dp"
 
 
                     />
                 <com.google.android.exoplayer2.ui.SimpleExoPlayerView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="15dp"
                     android:id="@+id/exo_player_view"
                     android:visibility="gone"
                     android:layout_margin="15dp">

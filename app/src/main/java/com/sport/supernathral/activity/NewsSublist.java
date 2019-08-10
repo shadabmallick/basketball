@@ -12,6 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import android.view.Window;
@@ -29,12 +30,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NewsSublist extends AppCompatActivity {
-
+    String TAG="NewsSublist";
     Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     GlobalClass globalClass;
-
+    String single_top_news_id;
     String from="",id;
 
     @Override
@@ -51,6 +52,7 @@ public class NewsSublist extends AppCompatActivity {
                     R.color.deep_yellow));
         }
           id=getIntent().getStringExtra("id");
+        Log.d(TAG, "onCreate: "+id);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -65,7 +67,7 @@ public class NewsSublist extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
-            String single_top_news_id = bundle.getString("id");
+            single_top_news_id = bundle.getString("id");
             globalClass.setSingle_top_news_id(single_top_news_id);
 
             from = bundle.getString("from","");
@@ -87,8 +89,9 @@ public class NewsSublist extends AppCompatActivity {
     private void setupViewPager(final ViewPager viewPager) {
         Bundle bundle = new Bundle();
 
-        bundle.putString("news_id", id);
+        bundle.putString("news_id", single_top_news_id);
         ResumeActivity scoreGame = new ResumeActivity();
+        Log.d(TAG, "setupViewPager: "+single_top_news_id);
         scoreGame.setArguments(bundle);
         NewsSublist.ViewPagerAdapter adapter = new NewsSublist.ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(scoreGame, "Resume");

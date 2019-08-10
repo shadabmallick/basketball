@@ -78,8 +78,10 @@ public class ShowVideo  extends AppCompatActivity {
       //  String frameVideo = "<html><body>Youtube video .. <br> <iframe width=\"320\" height=\"315\" src=\"https://www.youtube.com/embed/lY2H2ZP56K4\" frameborder=\"0\" allowfullscreen></iframe></body></html>";
 
         Log.d(TAG, "brochure_file: " + myList);
+     if(!myList.isEmpty()){
+         data = myList.get(0);
+     }
 
-      data = myList.get(0);
         Log.d(TAG, "onCreate: "+data);
 
         view.setWebViewClient(new AppWebViewClients());

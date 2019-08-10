@@ -38,6 +38,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.sport.supernathral.NetworkConstant.AppConfig.GAMEComment;
+import static com.sport.supernathral.NetworkConstant.AppConfig.GAMEREPORT;
+import static com.sport.supernathral.NetworkConstant.AppConfig.NEWSREPORT;
 import static com.sport.supernathral.NetworkConstant.AppConfig.NEWS_COMMENT;
 import static com.sport.supernathral.NetworkConstant.AppConfig.news_comment_delete;
 import static com.sport.supernathral.NetworkConstant.AppConfig.post_news_comment;
@@ -65,7 +67,7 @@ public class CommentsScreen extends AppCompatActivity implements
     ArrayList<CommentData> listComment;
     ProgressDialog pd;
 
-    String comment_type = "", comment_id,from;
+    String comment_type = "", comment_id,from,news_id;
 
 
     @Override
@@ -97,6 +99,7 @@ public class CommentsScreen extends AppCompatActivity implements
         preference = new Shared_Preference(this);
         globalClass = (GlobalClass) getApplicationContext();
          from=getIntent().getStringExtra("from");
+         news_id=getIntent().getStringExtra("news_id");
 
         function();
 
@@ -693,7 +696,8 @@ public class CommentsScreen extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
 
-
+                ReportGame(news_id);
+                alertDialog.dismiss();
 
             }
         });
@@ -706,6 +710,87 @@ public class CommentsScreen extends AppCompatActivity implements
             }
         });
 
+
+    }
+    private void ReportGame(final String id) {
+        String tag_string_req = "report";
+
+        pd.show();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                NEWSREPORT, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "delete: " + response.toString());
+
+                if (response != null){
+                    pd.dismiss();
+
+                    try {
+                        JSONObject main_object = new JSONObject(response);
+
+                        int status = main_object.optInt("status");
+                        String message = main_object.optString("message");
+                        Log.d(TAG, "status: "+status);
+
+                        if (status == 1){
+                            FancyToast.makeText(getApplicationContext(), message,
+                                    FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false)
+                                    .show();
+
+                            // CommentList();
+
+                        }else {
+
+                            FancyToast.makeText(getApplicationContext(), message,
+                                    FancyToast.LENGTH_LONG, FancyToast.ERROR, false)
+                                    .show();
+                        }
+
+
+                    } catch (Exception e) {
+
+                        FancyToast.makeText(getApplicationContext(), "Connection error",
+                                FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
+                        e.printStackTrace();
+
+                    }
+
+                }
+
+            }
+
+
+        }, new Response.ErrorListener() {
+
+            @Override
+
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "DATA NOT FOUND: " + error.getMessage());
+                pd.dismiss();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<>();
+
+                //params.put("news_id", globalClass.getSingle_top_news_id());
+                params.put("news_id", id);
+                params.put("user_id", globalClass.getId());
+
+
+                Log.d(TAG, "game report: "+params);
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        GlobalClass.getInstance().addToRequestQueue(strReq, tag_string_req);
+        strReq.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 10, 1.0f));
 
     }
 

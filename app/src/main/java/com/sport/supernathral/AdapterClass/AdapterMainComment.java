@@ -234,7 +234,8 @@ public class AdapterMainComment extends
     }
 
 
-    private void setSubComment(RecyclerView recyclerView, ArrayList<SubCommentData> itemList){
+    private void setSubComment(RecyclerView recyclerView,
+                               ArrayList<SubCommentData> itemList){
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         AdapterSubComment adapterSubComment = new AdapterSubComment(context, itemList);
         //Log.d(TAG, "setSubComment: "+itemList);

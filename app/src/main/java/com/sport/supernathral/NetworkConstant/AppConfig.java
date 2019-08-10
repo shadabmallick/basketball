@@ -78,6 +78,7 @@ public class AppConfig
     public static final String NEWS_COMMENT       = BASE_URL + "news_comment";
     public static final String GAMEDETAILS       = BASE_URL + "game_details";
     public static final String ADDMOMENT       = BASE_URL + "add_moment";
+    public static final String MOMENTCOMMENTLIST       = BASE_URL + "moment_comment_list";
 
 
 

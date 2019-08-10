@@ -9,6 +9,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -44,6 +45,8 @@ import com.sport.supernathral.Utils.GlobalClass;
 import com.sport.supernathral.Utils.ScalableVideoView;
 import com.sport.supernathral.Utils.Shared_Preference;
 import com.sport.supernathral.activity.ChangePassword;
+import com.sport.supernathral.activity.GameCommentScreen;
+import com.sport.supernathral.activity.MomentCommentList;
 import com.sport.supernathral.activity.MomentMessage;
 import com.sport.supernathral.activity.MomentsActivity;
 import com.sport.supernathral.activity.ShowVideo;
@@ -71,7 +74,7 @@ public class AdapterMoments extends RecyclerView.Adapter<AdapterMoments.ItemView
     TextView tv_yes,tv_no;
     ImageView send;
     ProgressDialog pd;
-Shared_Preference preference;
+    Shared_Preference preference;
 
     AdapterMoments.onItemClickListner mListner;
     public interface onItemClickListner{
@@ -80,13 +83,15 @@ Shared_Preference preference;
 
     public class ItemViewHolder extends RecyclerView.ViewHolder{
         CircleImageView profile_image;
-        TextView tv_name, tv_date, tv_like_no, tv_comment_no, tv_report,tv_content;
-        ImageView iv_delete, iv_like, iv_unlike,img_comment;
+        TextView tv_name, tv_date, tv_like_no, tv_comment_no,
+                tv_report,tv_content, tv_show_more;
+        ImageView iv_delete, iv_like, iv_unlike,img_comment, img_comment_fill;
         VideoView videoView;
         ViewPager viewPager;
         TabLayout tab_layout;
-        RelativeLayout rel_viewpager, rel_videoview;
+        RelativeLayout rel_viewpager, rel_videoview, rl_sublist;
         ProgressBar progressBar;
+        RecyclerView recyclerView;
         AdapterMoments.onItemClickListner listner;
 
         public ItemViewHolder(View itemView, AdapterMoments.onItemClickListner listner) {
@@ -101,6 +106,7 @@ Shared_Preference preference;
             iv_delete = itemView.findViewById(R.id.iv_delete);
             iv_like = itemView.findViewById(R.id.iv_like);
             img_comment = itemView.findViewById(R.id.img_comment);
+            img_comment_fill = itemView.findViewById(R.id.img_comment_fill);
             videoView = itemView.findViewById(R.id.videoView);
             tab_layout = itemView.findViewById(R.id.tab_layout);
             viewPager = itemView.findViewById(R.id.viewPager);
@@ -109,8 +115,11 @@ Shared_Preference preference;
             progressBar = itemView.findViewById(R.id.progressBar);
             tv_content = itemView.findViewById(R.id.tv_content);
             iv_unlike = itemView.findViewById(R.id.iv_unlike);
+            tv_show_more = itemView.findViewById(R.id.tv_show_more);
+            rl_sublist = itemView.findViewById(R.id.rl_sublist);
+            recyclerView = itemView.findViewById(R.id.recycler_sub_comments);
 
-
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
             this.listner = listner;
         }
@@ -126,6 +135,8 @@ Shared_Preference preference;
         pd = new ProgressDialog(context);
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.setMessage("Loading...");
+
+
     }
 
     @Override
@@ -145,6 +156,7 @@ Shared_Preference preference;
     public void onBindViewHolder(final AdapterMoments.ItemViewHolder holder, final int position) {
 
         final MomentData momentData = listMoments.get(position);
+        Log.d(TAG, "onBindViewHolder: "+momentData.toString());
 
         if (!momentData.getUser_image().isEmpty()){
             Picasso.with(context)
@@ -233,6 +245,76 @@ Shared_Preference preference;
             SelectCommentDialog(momentData.getId());
             }
         });
+        holder.img_comment_fill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                SelectCommentDialog(momentData.getId());
+            }
+        });
+
+
+
+
+
+        holder.tv_show_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, MomentCommentList.class);
+                intent.putExtra("moment_id", momentData.getId());
+              //  intent.putExtra("moment_id",listMoments.get(position). );
+
+                intent.putExtra("from", "moment");
+                context.startActivity(intent);
+
+
+            }
+        });
+
+
+        if(momentData.getList_comment().size() > 0){
+
+            Log.d(TAG, "sub comment size : "
+                    +momentData.getList_comment().size());
+
+            if (momentData.getList_comment().size() > 2){
+                holder.tv_show_more.setVisibility(View.VISIBLE);
+
+                ArrayList<CommentData> listComment = new ArrayList<>();
+                listComment.add(momentData.getList_comment().get(0));
+                listComment.add(momentData.getList_comment().get(1));
+
+                setSubComment(holder.recyclerView, listComment);
+
+            } else {
+                holder.tv_show_more.setVisibility(View.GONE);
+                setSubComment(holder.recyclerView, momentData.getList_comment());
+            }
+
+            holder.rl_sublist.setVisibility(View.VISIBLE);
+
+            holder.img_comment_fill.setVisibility(View.VISIBLE);
+            holder.img_comment.setVisibility(View.GONE);
+
+        } else {
+
+            holder.rl_sublist.setVisibility(View.GONE);
+            holder.img_comment_fill.setVisibility(View.GONE);
+            holder.img_comment.setVisibility(View.VISIBLE);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
     }
     public void SelectCommentDialog(final String momnetid) {
 
@@ -636,10 +718,10 @@ Shared_Preference preference;
                 MediaController mediacontroller = new MediaController(
                         context);
                 mediacontroller.setAnchorView(null);
-                //Uri video = Uri.parse(VideoURL);
+                Uri video = Uri.parse(VideoURL);
                 holder.videoView.setMediaController(null);
                 //holder.videoView.setVideoURI(video);
-                holder.videoView.setVideoPath(VideoURL);
+                holder.videoView.setVideoURI(video);
 
             } catch (Exception e) {
                 Log.e("Error", e.getMessage());
@@ -665,5 +747,14 @@ Shared_Preference preference;
 
     }
 
+    private void setSubComment(RecyclerView recyclerView,
+                               ArrayList<CommentData> listComment){
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        AdapterCommentMoment adapterSubComment =
+                new AdapterCommentMoment(context, listComment);
+        //Log.d(TAG, "setSubComment: "+itemList);
+        recyclerView.setAdapter(adapterSubComment);
+
+    }
 
 }

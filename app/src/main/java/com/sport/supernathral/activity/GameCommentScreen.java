@@ -40,6 +40,7 @@ import java.util.Map;
 
 import static com.sport.supernathral.NetworkConstant.AppConfig.GAMEComment;
 
+import static com.sport.supernathral.NetworkConstant.AppConfig.GAMEREPORT;
 import static com.sport.supernathral.NetworkConstant.AppConfig.game_comment_delete;
 import static com.sport.supernathral.NetworkConstant.AppConfig.news_comment_delete;
 import static com.sport.supernathral.NetworkConstant.AppConfig.post_game_comment;
@@ -50,10 +51,10 @@ import static com.sport.supernathral.NetworkConstant.AppConfig.post_news_comment
 import static com.sport.supernathral.NetworkConstant.AppConfig.post_news_like_on_comment;
 
 public class GameCommentScreen extends AppCompatActivity implements
-        AdapterComment.onItemClickListnerLike,
-        AdapterComment.onItemClickListnerComment,
-        AdapterComment.onItemClickListnerDelete,
-        AdapterComment.onItemClickListnerReport{
+        AdapterMainComment.onItemClickListnerLike,
+        AdapterMainComment.onItemClickListnerComment,
+        AdapterMainComment.onItemClickListnerDelete,
+        AdapterMainComment.onItemClickListnerReport{
 
 
     RecyclerView rv_category;
@@ -62,7 +63,7 @@ public class GameCommentScreen extends AppCompatActivity implements
     Toolbar toolbar;
 
     String TAG="product";
-    AdapterComment adapterComment;
+    AdapterMainComment adapterMainComment;
     ArrayList<String> newsList;
     Shared_Preference preference;
     GlobalClass globalClass;
@@ -70,7 +71,7 @@ public class GameCommentScreen extends AppCompatActivity implements
     ArrayList<CommentData> listComment;
     ProgressDialog pd;
 
-    String comment_type = "", comment_id,from;
+    String comment_type = "", comment_id,from,game_id;
 
 
     @Override
@@ -102,6 +103,7 @@ public class GameCommentScreen extends AppCompatActivity implements
         preference = new Shared_Preference(this);
         globalClass = (GlobalClass) getApplicationContext();
         from=getIntent().getStringExtra("from");
+        game_id=getIntent().getStringExtra("game_id");
 
         function();
 
@@ -315,13 +317,13 @@ public class GameCommentScreen extends AppCompatActivity implements
 
     private void setAdapterComment(){
 
-        adapterComment   = new AdapterComment(GameCommentScreen.this, listComment,from);
-        rv_category.setAdapter(adapterComment);
-        adapterComment.notifyDataSetChanged();
-        adapterComment.setmListnerLike(this);
-        adapterComment.setmListnerComment(this);
-        adapterComment.setmListnerDelete(this);
-        adapterComment.setmListnerReport(this);
+        adapterMainComment   = new AdapterMainComment(GameCommentScreen.this, listComment);
+        rv_category.setAdapter(adapterMainComment);
+        adapterMainComment.notifyDataSetChanged();
+        adapterMainComment.setmListnerLike(this);
+        adapterMainComment.setmListnerComment(this);
+        adapterMainComment.setmListnerDelete(this);
+        adapterMainComment.setmListnerReport(this);
 
     }
 
@@ -660,9 +662,9 @@ public class GameCommentScreen extends AppCompatActivity implements
                 Map<String, String> params = new HashMap<>();
 
                 //params.put("news_id", globalClass.getSingle_top_news_id());
-                params.put("game_id", globalClass.getGame_id());
+              //  params.put("game_id", globalClass.getGame_id());
                 params.put("user_id", globalClass.getId());
-                params.put("news_comment_id", com_id);
+                params.put("game_comment_id", com_id);
 
                 Log.d(TAG, "param like: "+params);
                 return params;
@@ -697,7 +699,8 @@ public class GameCommentScreen extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
 
-
+                ReportGame(game_id);
+                alertDialog.dismiss();
 
             }
         });
@@ -710,6 +713,87 @@ public class GameCommentScreen extends AppCompatActivity implements
             }
         });
 
+
+    }
+    private void ReportGame(final String id) {
+        String tag_string_req = "report";
+
+        pd.show();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                GAMEREPORT, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "delete: " + response.toString());
+
+                if (response != null){
+                    pd.dismiss();
+
+                    try {
+                        JSONObject main_object = new JSONObject(response);
+
+                        int status = main_object.optInt("status");
+                        String message = main_object.optString("message");
+                        Log.d(TAG, "status: "+status);
+
+                        if (status == 1){
+                            FancyToast.makeText(getApplicationContext(), message,
+                                    FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false)
+                                    .show();
+
+                            // CommentList();
+
+                        }else {
+
+                            FancyToast.makeText(getApplicationContext(), message,
+                                    FancyToast.LENGTH_LONG, FancyToast.ERROR, false)
+                                    .show();
+                        }
+
+
+                    } catch (Exception e) {
+
+                        FancyToast.makeText(getApplicationContext(), "Connection error",
+                                FancyToast.LENGTH_LONG, FancyToast.WARNING, false).show();
+                        e.printStackTrace();
+
+                    }
+
+                }
+
+            }
+
+
+        }, new Response.ErrorListener() {
+
+            @Override
+
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "DATA NOT FOUND: " + error.getMessage());
+                pd.dismiss();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<>();
+
+                //params.put("news_id", globalClass.getSingle_top_news_id());
+                params.put("game_id", id);
+                params.put("user_id", globalClass.getId());
+
+
+                Log.d(TAG, "game report: "+params);
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        GlobalClass.getInstance().addToRequestQueue(strReq, tag_string_req);
+        strReq.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 10, 1.0f));
 
     }
 

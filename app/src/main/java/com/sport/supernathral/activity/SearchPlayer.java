@@ -83,9 +83,14 @@ public class SearchPlayer extends AppCompatActivity {
         rl_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ll_main.setVisibility(View.GONE);
-                recycleList.setVisibility(View.VISIBLE);
-                NewsSearch(edt_search.getText().toString().trim());
+
+                if(edt_search.getText().length()>0){
+                    ll_main.setVisibility(View.GONE);
+                    recycleList.setVisibility(View.VISIBLE);
+                    NewsSearch(edt_search.getText().toString().trim());
+                }
+
+
             }
         });
         img_search.setOnClickListener(new View.OnClickListener() {

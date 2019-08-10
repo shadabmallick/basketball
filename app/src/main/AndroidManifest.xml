@@ -47,7 +47,8 @@
 
         <activity
             android:name=".activity.Splash2"
-            android:theme="@style/MyTheme">
+            android:theme="@style/MyTheme"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
@@ -63,7 +64,8 @@
 
         <activity
             android:name=".activity.LoginScreen"
-            android:theme="@style/MyTheme">
+            android:theme="@style/MyTheme"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
@@ -72,7 +74,8 @@
         <activity
             android:name=".activity.HomePage"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            />
 
         <activity
             android:name=".activity.ChatScreen"
@@ -275,6 +278,9 @@
 
         <activity
             android:name=".activity.MomentMessage"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:windowSoftInputMode="adjustPan|stateHidden" /> <activity
+            android:name=".activity.MomentCommentList"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 

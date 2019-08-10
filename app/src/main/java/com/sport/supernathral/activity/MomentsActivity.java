@@ -14,8 +14,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.VideoView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -47,7 +49,7 @@ public class MomentsActivity extends AppCompatActivity {
     AdapterMoments adapterMoments;
     ImageView img_add;
     ProgressDialog progressDialog;
-
+    private View currentFocusedLayout, oldFocusedLayout;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -202,10 +204,11 @@ public class MomentsActivity extends AppCompatActivity {
 
                                 commentData.setList_sub_comment(listSubComments);
 
-
                                 listComments.add(commentData);
+
                             }
 
+                            momentData.setList_comment(listComments);
 
                             listMoments.add(momentData);
                         }

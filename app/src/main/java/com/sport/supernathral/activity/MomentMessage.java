@@ -528,7 +528,8 @@ public class MomentMessage extends AppCompatActivity {
 
 
                             FancyToast.makeText(getApplicationContext(), message, FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
-
+                            Intent moment=new Intent(MomentMessage.this,MomentsActivity.class);
+                            startActivity(moment);
 
 
 

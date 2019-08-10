@@ -243,6 +243,12 @@ public class ProfileScreen extends AppCompatActivity {
                                 txt_type.setText("Trainer");
 
                             }
+                            else if(type.equals("Students/Players")){
+                                txt_type.setText("Student");
+                            }
+                            else {
+                                txt_type.setText("Parent");
+                            }
                             tv_general.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {

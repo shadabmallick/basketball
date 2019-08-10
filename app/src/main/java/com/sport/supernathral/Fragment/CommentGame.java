@@ -651,11 +651,11 @@ public class CommentGame extends Fragment implements
                 Map<String, String> params = new HashMap<>();
 
                 //params.put("news_id", globalClass.getSingle_top_news_id());
-                params.put("game_id", game_id);
+               // params.put("game_id", game_id);
                 params.put("user_id", globalClass.getId());
-                params.put("news_comment_id", com_id);
+                params.put("game_comment_id", com_id);
 
-                Log.d(TAG, "param like: "+params);
+                Log.d(TAG, "param Delete: "+params);
                 return params;
             }
 

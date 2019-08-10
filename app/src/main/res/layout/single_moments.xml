@@ -41,12 +41,6 @@
         >
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"
-            android:textSize="20dp"
-            android:textStyle="bold"/>
-        <TextView
             android:id="@+id/tv_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,7 +55,7 @@
     <RelativeLayout
         android:id="@+id/rel_middle"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/ll_message"
         >
@@ -71,14 +65,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"
-            android:background="@color/dark_gray"
+            android:background="@color/black"
             >
-            <VideoView
-                android:id="@+id/videoView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                />
+<!--
+            <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/exo_player_view"
+                android:visibility="gone"
+                android:layout_marginTop="30dp">
+
+            </com.google.android.exoplayer2.ui.SimpleExoPlayerView>
+-->
+
+                        <VideoView
+                            android:id="@+id/videoView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerHorizontal="true"
+                            />
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -175,15 +180,32 @@
             android:gravity="center"
             android:singleLine="true" />
 
-        <ImageView
-            android:id="@+id/img_comment"
+        <RelativeLayout
+            android:id="@+id/rel_comment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="10"
-            android:src="@mipmap/chat_black"
-            android:tint="@color/light_grey"
-            android:gravity="center"
-            />
+            >
+            <ImageView
+                android:id="@+id/img_comment"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_weight="10"
+                android:src="@mipmap/chat_black_2"
+                android:tint="@color/light_grey"
+                android:layout_centerInParent="true"
+                />
+
+            <ImageView
+                android:id="@+id/img_comment_fill"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_weight="10"
+                android:src="@mipmap/chat"
+                android:layout_centerInParent="true"
+                />
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tv_comment_no"
@@ -205,6 +227,37 @@
 
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_sublist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:visibility="visible"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/llmenu">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_sub_comments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/tv_show_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/show_more"
+            android:visibility="visible"
+            android:layout_below="@+id/recycler_sub_comments"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/blue_new"
+            android:padding="10dp"
+            />
+
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

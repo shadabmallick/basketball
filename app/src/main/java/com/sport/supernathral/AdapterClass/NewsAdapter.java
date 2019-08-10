@@ -80,6 +80,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ItemViewHolder
             @Override
             public void onClick(View v) {
                 Intent NewsSublist=new Intent(context, NewsSublist.class);
+                NewsSublist.putExtra("id",arrayList.get(position).get("news_id"));
                 NewsSublist.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 context.startActivity(NewsSublist);

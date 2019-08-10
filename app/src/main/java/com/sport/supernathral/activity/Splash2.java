@@ -36,6 +36,7 @@ public class Splash2 extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent = new Intent(Splash2.this, SignUp.class);
+
                 startActivity(intent);
 
             }
